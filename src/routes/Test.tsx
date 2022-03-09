@@ -1,27 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-
-type Greeting = {
-    id: number
-    content: string
-}
+import { useEffect, useState } from 'react'
+import GreetingPrompt from '../components/GreetingPrompt'
+import { Greeting } from '../entities/Greeting'
+import api from '../networking/api'
 
 const Test = () => {
     const [greeting, setGreeting] = useState<Greeting>()
 
     useEffect(() => {
-        axios
-            .get('http://localhost:8080/Housemate Richard')
-            .then(response => {
-                const responseGreeting = response.data as Greeting
-                setGreeting(responseGreeting)
-            })
-            .catch(() => {
-                setGreeting({ id: 0, content: 'Nobody is here...' })
-            })
+        api.greeting.getGreeting('Saunah').then(newValue => setGreeting(newValue))
     }, [])
 
-    return <p className="text-3xl font-semibold ">{greeting?.content}</p>
+    return <GreetingPrompt greeting={greeting} />
 }
 
 export default Test
