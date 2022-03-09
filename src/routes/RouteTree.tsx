@@ -1,7 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import App from './App'
-import Home from './Home'
-import Test from './Test'
+import App from './views/App'
+import Home from './views/app/Home'
+import GreetingView from './views/app/GreetingView'
+import { routes, routeParams } from './routes'
 
 const RouteTree = () => {
     return (
@@ -9,7 +10,7 @@ const RouteTree = () => {
             <Routes>
                 <Route path="/" element={<App />}>
                     <Route index element={<Home />} />
-                    <Route path="test" element={<Test />} />
+                    <Route path={routes.greeting(`:${routeParams.user}`)} element={<GreetingView />} />
                 </Route>
             </Routes>
         </BrowserRouter>
