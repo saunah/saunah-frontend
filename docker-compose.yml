@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+    saunah-frontend:
+        container_name: saunah-frontend
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - '8888:80'
