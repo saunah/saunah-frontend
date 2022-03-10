@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 export type Greeting = {
     id: number
     content: string
