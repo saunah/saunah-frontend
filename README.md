@@ -25,6 +25,6 @@ REACT_APP_API_BASE_URL=http://localhost:8080
 
 The most important tools which are used in this project are [Typescript](https://www.typescriptlang.org/), [React](https://reactjs.org/), [React Router](https://reactrouter.com/docs/en/v6) and [Tailwind CSS](https://tailwindcss.com/). We only work with functional components and avoid the use of class components _(See [Difference between functional and class components](https://www.geeksforgeeks.org/differences-between-functional-components-and-class-components-in-react/#:~:text=A%20functional%20component%20is%20just,method%20used%20in%20functional%20components.))_. Consider the following tutorials/documentations to get started:
 
--   Core Concepts of [Tailwind CSS](https://tailwindcss.com/docs/utility-first)
+-   Core concepts of [Tailwind CSS](https://tailwindcss.com/docs/utility-first)
 -   Get startet with [React](https://reactjs.org/docs/getting-started.html)
 -   Use functional components with [React-Hooks](https://reactjs.org/docs/hooks-intro.html)
