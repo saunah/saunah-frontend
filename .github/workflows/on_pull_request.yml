@@ -10,4 +10,4 @@ jobs:
   
   build:
     needs: lint
-    uses: saunah/saunah-frontend/.github/workflows/build.yml@feature/improve-workflows
+    uses: saunah/saunah-frontend/.github/workflows/build.yml@main
