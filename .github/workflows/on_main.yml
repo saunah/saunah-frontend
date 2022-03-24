@@ -1,9 +1,7 @@
 name: On Main
 
-on: 
-  workflow_dispatch: push
+on: push
     
-
 jobs:
   lint:
     uses: ./.github/workflows/lint.yml
