@@ -1,0 +1,17 @@
+name: On Main
+
+on: 
+  push:
+    branches: main
+
+jobs:
+  lint:
+    uses: saunah/saunah-frontend/.github/workflows/lint.yml@main
+  
+  build:
+    needs: lint
+    uses: saunah/saunah-frontend/.github/workflows/build.yml@main
+
+  deploy:
+    needs: build
+    uses: saunah/saunah-frontend/.github/workflows/deploy.yml@main

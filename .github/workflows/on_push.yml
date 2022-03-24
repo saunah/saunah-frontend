@@ -1,4 +1,4 @@
-name: Push Pipeline
+name: On Push
 
 on: push
 jobs:
