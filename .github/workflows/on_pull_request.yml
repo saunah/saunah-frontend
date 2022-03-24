@@ -5,7 +5,9 @@ on:
     branches: main
 
 jobs:
-  on_pull_request:
-    steps:
-      - uses: ./.github/workflows/lint.yml
-      - uses: ./.github/workflows/build.yml
+  lint:
+    uses: ./.github/workflows/lint.yml
+  
+  build:
+    needs: lint
+    uses: ./.github/workflows/build.yml
