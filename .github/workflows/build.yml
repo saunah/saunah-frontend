@@ -8,7 +8,7 @@ on:
 
 jobs: 
   lint: 
-    uses: saunah/saunah-frontend/.github/workflows/lint.yml
+    uses: saunah/saunah-frontend/.github/workflows/lint.yml@v1
 
   build:
     runs-on: ubuntu-latest
