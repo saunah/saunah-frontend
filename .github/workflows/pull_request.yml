@@ -2,7 +2,8 @@ name: Pull Request Pipeline
 
 on: 
   pull_request:
-    branches: main
+    branches: 
+      - main
 jobs:
   lint:
     uses: saunah/saunah-frontend/.github/workflows/lint.yml@main
