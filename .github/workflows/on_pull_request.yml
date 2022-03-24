@@ -7,5 +7,5 @@ on:
 jobs:
   on_pull_request:
     steps:
-      uses: ./.github/workflows/lint.yml
-      uses: ./.github/workflows/build.yml
+      - uses: ./.github/workflows/lint.yml
+      - uses: ./.github/workflows/build.yml
