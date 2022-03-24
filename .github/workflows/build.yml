@@ -1,15 +1,10 @@
 name: Build & Test
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-jobs: 
+on: workflow_call
+jobs:
   build:
+    needs: lint
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v2
@@ -31,5 +26,3 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run test
-
-  
