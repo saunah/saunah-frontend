@@ -4,7 +4,7 @@ on: push
     
 jobs: 
   lint: 
-    uses: saunah/saunah-frontend/.github/workflows/lint.yml@v1
+    uses: saunah/saunah-frontend/.github/workflows/lint.yml@feature/add-docker-container
 
   build:
     needs: lint
