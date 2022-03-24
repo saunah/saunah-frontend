@@ -1,0 +1,14 @@
+name: Pull Request Pipeline
+
+on: 
+  pull_request:
+    branches: main
+jobs:
+  lint:
+    uses: saunah/saunah-frontend/.github/workflows/lint.yml@main
+  build:
+    needs: lint
+    uses: saunah/saunah-frontend/.github/workflows/build.yml@main
+
+
+  
