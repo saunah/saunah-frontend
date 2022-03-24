@@ -1,8 +1,8 @@
 name: Deployment
 
-on: push
+on: workflow_call
 jobs:
-  lint:
+  deploy:
     runs-on: ubuntu-latest
     steps:
     - run: echo "Hello Deployment"
