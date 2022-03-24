@@ -3,4 +3,4 @@ name: On Push
 on: push
 jobs:
   lint:
-    uses: saunah/saunah-frontend/.github/workflows/lint.yml@main
+    uses: ./.github/workflows/lint.yml@main

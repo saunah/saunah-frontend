@@ -6,12 +6,12 @@ on:
 
 jobs:
   lint:
-    uses: saunah/saunah-frontend/.github/workflows/lint.yml@main
+    uses: ./.github/workflows/lint.yml
   
   build:
     needs: lint
-    uses: saunah/saunah-frontend/.github/workflows/build.yml@main
+    uses: ./.github/workflows/build.yml
 
   deploy:
     needs: build
-    uses: saunah/saunah-frontend/.github/workflows/deploy.yml@main
+    uses: ./.github/workflows/deploy.yml
