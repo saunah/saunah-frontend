@@ -1,7 +1,11 @@
 name: Build & Test
 
-on: push
-    
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 jobs: 
   lint: 
     uses: saunah/saunah-frontend/.github/workflows/lint.yml@feature/add-docker-container
