@@ -4,6 +4,3 @@ on: push
 jobs:
   lint:
     uses: saunah/saunah-frontend/.github/workflows/lint.yml@main
-
-
-  
