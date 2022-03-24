@@ -1,7 +1,9 @@
 name: On Main
 
-on: push
-    
+on: 
+  push:
+    branches: main
+
 jobs:
   lint:
     uses: ./.github/workflows/lint.yml
