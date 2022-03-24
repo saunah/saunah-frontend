@@ -7,8 +7,8 @@ on:
     branches: main
 
 jobs: 
-  lint: 
-    uses: saunah/saunah-frontend/.github/workflows/lint.yml@feature/add-docker-container
+  # lint: 
+  #   uses: saunah/saunah-frontend/.github/workflows/lint.yml@feature/add-docker-container
 
   build:
     needs: lint
