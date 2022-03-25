@@ -3,20 +3,20 @@ name: Deploy
 on: workflow_call
 jobs:
   setup:
-  runs-on: ubuntu-latest
-  outputs:
-    containerTag: ${{ steps.setConfigs.outputs.containerTag }}
-  steps:
-  - uses: actions/checkout@v2
-  - name: Set Tag Output Variable
-    id: setConfigs
-    run: |
-      if [ "${{ github.ref_type }}" == "tag" ]
-      then
-        echo "::set-output name=containerTag::${{ github.ref_name }}"
-      else
-        echo "::set-output name=containerTag::$(echo ${{ github.sha }} | cut -c 1-7)"
-      fi
+    runs-on: ubuntu-latest
+    outputs:
+      containerTag: ${{ steps.setConfigs.outputs.containerTag }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set Tag Output Variable
+      id: setConfigs
+      run: |
+        if [ "${{ github.ref_type }}" == "tag" ]
+        then
+          echo "::set-output name=containerTag::${{ github.ref_name }}"
+        else
+          echo "::set-output name=containerTag::$(echo ${{ github.sha }} | cut -c 1-7)"
+        fi
   
   container:
     needs: setup
