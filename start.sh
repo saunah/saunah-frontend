@@ -8,11 +8,10 @@ for file in $JSFOLDER
 do
     for var in $ENV_VARS
     do
-        key=$(echo \#\#\#${var%%=*}\#\#\# | perl -ne 'print substr(quotemeta($_), 0, -2)') 
-        value=$(echo ${var##*=} | perl -ne 'print substr(quotemeta($_), 0, -2)')
+        key=$(echo \#\#\#${var%%=*}\#\#\# | sed 's/[^^\\]/[&]/g; s/\^/\\^/g; s/\\/\\\\/g') 
+        value=$(echo ${var##*=} | sed 's/[&/\]/\\&/g')
 
-        expr=s\/$key\/$value\/g
-        sed -i "" -e $expr $file
+        sed -i '' -e s/$key/$value/g $file
     done
 done
 nginx -g 'daemon off;'
