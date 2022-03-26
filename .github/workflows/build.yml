@@ -1,4 +1,4 @@
-name: Build & Test
+name: Lint, Build & Test
 
 on: workflow_call
 jobs:
@@ -11,16 +11,6 @@ jobs:
         node-version: '17'
         cache: 'npm'
     - run: npm ci
+    - run: npm run lint
     - run: npm run build
-
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '17'
-        cache: 'npm'
-    - run: npm ci
     - run: npm run test
