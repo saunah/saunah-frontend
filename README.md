@@ -32,3 +32,12 @@ The most important tools which are used in this project are [Typescript](https:/
 -   Core concepts of [Tailwind CSS](https://tailwindcss.com/docs/utility-first)
 -   Get startet with [React](https://reactjs.org/docs/getting-started.html)
 -   Use functional components with [React-Hooks](https://reactjs.org/docs/hooks-intro.html)
+
+## About Enviornments
+
+The environment variables, which should be set on build time can be specified in the corresponding .env files. If a env-var should be configurable on the docker-container, it should be put into the `.env` in the following format: A env var called `REACT_APP_TEST_VAR` should be set to `###REACT_APP_TEST_VAR###`. These environment variables will be taken from the environment on run-time of the container.
+
+### Limitations
+
+1. Be aware that only env-vars with the prefix `REACT_APP_` will be replaced.
+2. Make sure your env-vars don't contain a `,`. If they do, they can't be replaced.
