@@ -6,7 +6,6 @@ on: push
 
 jobs:
   build:
-    needs: lint
     uses: ./.github/workflows/build.yml
 
   deploy:
