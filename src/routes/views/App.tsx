@@ -10,8 +10,8 @@ function App() {
             </div>
             <Outlet />
             <div>
+                <span> REACT_APP_API_BASE_URL: {process.env.REACT_APP_API_BASE_URL || '-'} </span>
                 <span> REACT_APP_TEST_VAR: {process.env.REACT_APP_TEST_VAR || '-'} </span>
-                <p> Hello from your parent... </p>
             </div>
         </div>
     )
