@@ -1,9 +1,0 @@
-name: On Push
-
-on: 
-  push:
-    branches-ignore: main
-
-jobs:
-  lint:
-    uses: ./.github/workflows/build.yml

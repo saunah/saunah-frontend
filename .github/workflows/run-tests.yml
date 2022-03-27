@@ -1,0 +1,13 @@
+# This workflow tests the SauNah frontend application.
+
+name: Test SauNah frontend
+
+on:
+  push:
+    branches-ignore:
+      - 'main'
+
+jobs:
+  build:
+    name: Lint, Build & Test with npm
+    uses: ./.github/workflows/build.yml
