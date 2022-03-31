@@ -7,7 +7,7 @@ name: Build, Test & Deploy
 on:
   push:
     branches:
-      - 'feature/improve-workflows'
+      - 'main'
     tags:
       - v*
 
