@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "saunah-frontend.fullname" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "saunah-frontend.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: sn-front-po
+      protocol: TCP
+      name: sn-front-svc
+  selector:
+    {{- include "saunah-frontend.selectorLabels" . | nindent 4 }}
