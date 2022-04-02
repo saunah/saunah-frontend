@@ -1,4 +1,4 @@
-import { Greeting } from '../entities/Greeting'
+import { Greeting } from '../../entities/Greeting'
 
 const GreetingPrompt = (props: { greeting?: Greeting; onClick?: () => void }) => {
     return (

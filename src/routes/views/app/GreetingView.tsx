@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import GreetingPrompt from '../../../components/GreetingPrompt'
+import GreetingPrompt from '../../../components/example/GreetingPrompt'
 import { Greeting } from '../../../entities/Greeting'
 import api from '../../../networking/api'
 import { routeParams } from '../../routes'
