@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import { Greeting } from '../entities/Greeting'
+import { Greeting } from '../../entities/Greeting'
 import GreetingPrompt from './GreetingPrompt'
 
 /**
