@@ -7,6 +7,7 @@ function App() {
             <div className="space-x-4">
                 <Link to={routes.home}> Home </Link>
                 <Link to={routes.greeting('saunah')}> Greeting </Link>
+                <Link to={routes.login}> Login </Link>
             </div>
             <Outlet />
             <div>
