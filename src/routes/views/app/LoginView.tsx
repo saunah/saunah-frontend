@@ -1,7 +1,7 @@
 import InputField from '../../../components/InputField'
 import InputFieldPassword from '../../../components/InputFieldPassword'
 import Button from '../../../components/Button'
-import { Link, Outlet } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { routes } from '../../routes'
 
 const LoginView = () => {
