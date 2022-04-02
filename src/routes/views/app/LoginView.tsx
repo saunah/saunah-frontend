@@ -8,7 +8,7 @@ const LoginView = () => {
     return (
         <div>
             <InputField titel="Username" placeholder="Username" />
-            <InputFieldPassword titel="**********" placeholder="******" />
+            <InputFieldPassword titel="Password" placeholder="******" />
             <div className="flex items-center justify-between">
                 <Button input="Login" />
                 <Link
