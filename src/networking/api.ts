@@ -1,4 +1,4 @@
-import greeting from './requests/greeting'
+import greeting from './api/greeting'
 import { readonly } from '../utils/object'
 
 const api = {
