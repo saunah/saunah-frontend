@@ -4,6 +4,12 @@ import { act } from 'react-dom/test-utils'
 import { Greeting } from '../entities/Greeting'
 import { mockGreetingAPI } from '../networking/api'
 
+/*
+ * This is an example for hook-testing.
+ * The api which the hook will uses has to be mocked.
+ * Then the behaviour of the hook can be tested.
+ */
+
 const defaultMock = () => ({
     get: jest.fn(async (name: string) => ({ id: 3, content: `Hello ${name}!` })),
     save: jest.fn(async (greeting: Greeting) => ({ id: 10101, content: greeting.content })),

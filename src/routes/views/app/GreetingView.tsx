@@ -14,12 +14,7 @@ const GreetingView = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    return (
-        <div>
-            Hallo
-            <GreetingPrompt greeting={greetings[0]} />
-        </div>
-    )
+    return <GreetingPrompt greeting={greetings[0]} />
 }
 
 export default GreetingView

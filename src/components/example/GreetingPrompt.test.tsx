@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { Greeting } from '../../entities/Greeting'
 import GreetingPrompt from './GreetingPrompt'
 
-/**
+/*
  * This is an example of a unit test.
  * The component does not do api-calls on it's own, so it can be controlled completely via it's props.
  * We should try to use this form of testing for all components if possible.
