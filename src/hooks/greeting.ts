@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react'
 import { Greeting } from '../entities/Greeting'
 import api from '../networking/api'
-import { GreetingAPI } from '../networking/api/greeting'
 
 export type GreetingState = {
     greetings: Greeting[]
@@ -10,11 +9,11 @@ export type GreetingState = {
     save(greeting: Greeting): Promise<void>
 }
 
-export function useGreeting(greetingApi: GreetingAPI = api.greeting): GreetingState {
+export function useGreeting(): GreetingState {
     const [greetings, setGreetings] = useState<Greeting[]>([])
 
     const fetch = async (user: string) => {
-        const greeting = await greetingApi.get(user)
+        const greeting = await api.greeting.get(user)
         setGreetings([...greetings, greeting])
     }
 
@@ -26,7 +25,7 @@ export function useGreeting(greetingApi: GreetingAPI = api.greeting): GreetingSt
     )
 
     const save = async (greeting: Greeting) => {
-        const newGreeting = await greetingApi.save(greeting)
+        const newGreeting = await api.greeting.save(greeting)
         setGreetings([...greetings, newGreeting])
     }
 

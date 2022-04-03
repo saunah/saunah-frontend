@@ -12,10 +12,11 @@ const GreetingView = () => {
         const user = params[routeParams.user] || 'unknown'
         fetch(user)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [params])
+    }, [])
 
     return (
         <div>
+            Hallo
             <GreetingPrompt greeting={greetings[0]} />
         </div>
     )
