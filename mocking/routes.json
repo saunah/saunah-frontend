@@ -1,4 +1,0 @@
-{
-    "/saunas/:id/users": "/users",
-    "/greeting/:name": "/greeting"
-}

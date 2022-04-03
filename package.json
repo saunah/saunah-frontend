@@ -22,8 +22,6 @@
         "start": "react-scripts start",
         "lint": "eslint . --max-warnings=0",
         "build": "react-scripts build",
-        "test-server": "json-server mocking/index.js -r mocking/routes.json -p 3001",
-        "test-with-server": "json-server mocking/index.js -r mocking/routes.json -p 3001 -q & react-scripts test --watchAll=false; kill -9 $!",
         "test": "react-scripts test"
     },
     "browserslist": {
@@ -43,7 +41,6 @@
         "autoprefixer": "^10.4.2",
         "eslint": "^8.10.0",
         "eslint-config-prettier": "^8.5.0",
-        "json-server": "^0.17.0",
         "postcss": "^8.4.8",
         "tailwindcss": "^3.0.23"
     }
