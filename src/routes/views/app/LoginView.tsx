@@ -10,7 +10,9 @@ const LoginView = () => {
             <InputField titel="Username" placeholder="Username" />
             <InputFieldPassword titel="Password" placeholder="******" />
             <div className="flex items-center justify-between">
-                <Button input="Login" />
+                <Button color="yellow" onClick={() => console.log('Login!')}>
+                    Click me
+                </Button>
                 <Link
                     to={routes.home}
                     className="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker"

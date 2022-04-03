@@ -1,11 +1,25 @@
-const Button = (props: { input?: string }) => {
+import { ReactNode } from 'react'
+
+export type ButtonProps = {
+    title?: string
+    type?: 'button' | 'submit' | 'reset'
+    color?: string
+    disabled?: boolean
+    onClick?: () => void
+    children?: ReactNode
+}
+
+const Button = (props: ButtonProps) => {
+    const color = props.color || 'gray'
+    const classes =
+        `py-2 px-4 text-sm font-medium rounded-md text-${color}-900 ` +
+        (props.disabled ? `bg-${color}-100 cursor-default` : `bg-${color}-200 hover:bg-${color}-300`)
+
     return (
         <div>
-            <button
-                className="bg-amber-100 hover:text-gray-500 text-amber-500 font-bold py-2 px-4 rounded"
-                type="button"
-            >
-                <p>{props.input}</p>
+            <button className={classes} type={props.type || 'button'} onClick={props.onClick}>
+                {/* We display the children <Button> children </Button>, if no exist we display the title.*/}
+                {props.children || props.title}
             </button>
         </div>
     )
