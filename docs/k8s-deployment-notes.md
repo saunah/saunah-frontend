@@ -16,6 +16,8 @@ where `minikube` is the name of the context to switch to.
 
 Make also sure that the namespace is set in the kubeconfig file (found in `~/.kube/config`)
 
+A sample kubeconfig file can be found in [`kubeconfig-example`](./kubeconfig-example). Modify it accordingly, rename it to `config` and place it at `~/.kube/config`.
+
 ## Deploying the Frontend
 
 To deploy the frontend, run
