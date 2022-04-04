@@ -37,6 +37,7 @@
         ]
     },
     "devDependencies": {
+        "@testing-library/react-hooks": "^7.0.2",
         "autoprefixer": "^10.4.2",
         "eslint": "^8.10.0",
         "eslint-config-prettier": "^8.5.0",
