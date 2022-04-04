@@ -12,7 +12,11 @@ export function useAuth() {
     return React.useContext(AuthContext)
 }
 
-const AuthProvider = (props: { children?: ReactNode }) => {
+export type AuthProviderProps = {
+    children?: ReactNode
+}
+
+const AuthProvider = (props: AuthProviderProps) => {
     const [isAuthenticated, setAuthenticated] = useState<boolean>(false)
 
     const login = async () => {
