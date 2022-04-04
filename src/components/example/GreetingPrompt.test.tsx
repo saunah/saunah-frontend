@@ -29,7 +29,7 @@ test('displays no greeting correctly', () => {
 test('click event is handled correctly', () => {
     const onClick = jest.fn()
     render(<GreetingPrompt onClick={onClick} />)
-    const button = screen.getByText('Click me!')
+    const button = screen.getByTestId('button1')
     expect(button).toBeInTheDocument()
     fireEvent.click(button)
     expect(onClick).toHaveBeenCalledTimes(1)
