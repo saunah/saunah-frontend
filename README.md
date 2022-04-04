@@ -33,7 +33,7 @@ The most important tools which are used in this project are [Typescript](https:/
 -   Get startet with [React](https://reactjs.org/docs/getting-started.html)
 -   Use functional components with [React-Hooks](https://reactjs.org/docs/hooks-intro.html)
 
-## 🫱🏾‍🫲🏼 Contributing
+## 🤝🏼 Contributing
 
 If you'd like to contribute take a look at our [Contribution Guidelines](docs/CONTRIBUTING.md)
 
