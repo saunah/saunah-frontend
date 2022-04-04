@@ -33,13 +33,9 @@ The most important tools which are used in this project are [Typescript](https:/
 -   Get startet with [React](https://reactjs.org/docs/getting-started.html)
 -   Use functional components with [React-Hooks](https://reactjs.org/docs/hooks-intro.html)
 
-## 📝 Testing strategy
+## 🤝🏼 Contributing
 
-The app is tested by different types of unit tests. At the moment there are no integration tests which would test the app working together with the backend. The following parts of the code have to be unit tested:
-
--   **`Components`**: The components located under `src/components` are completely controlled via their props. They should not perform API calls or similar things on their own. Every component has to be unit testet, applying the different props and checking if it behaves as expected.
--   **`Hooks`**: Hooks (`src/hooks`) encapsulate the business logic of the application by talking to the API and storing relevant data. They have to be unit tested by mocking the API.
--   **`Views`** The views located under `src/routes/views` are the top-level components of the application. They use hooks to fetch the relevant data for the page and pass the data to their child components. They also have to be unit tested by mocking the API.
+If you'd like to contribute take a look at our [Contribution Guidelines](docs/CONTRIBUTING.md)
 
 ## 🌱 About Enviornments variables
 
