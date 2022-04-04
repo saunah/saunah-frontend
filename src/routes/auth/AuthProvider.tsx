@@ -2,7 +2,7 @@ import React, { ReactNode, useState } from 'react'
 
 export type AuthState = {
     isAuthenticated: boolean
-    login: () => void
+    login: () => Promise<void>
     logout: () => void
 }
 
@@ -12,11 +12,16 @@ export function useAuth() {
     return React.useContext(AuthContext)
 }
 
-const AuthProvider = (props: { children: ReactNode }) => {
+const AuthProvider = (props: { children?: ReactNode }) => {
     const [isAuthenticated, setAuthenticated] = useState<boolean>(false)
 
-    const login = () => {
-        setTimeout(() => setAuthenticated(true), 500)
+    const login = async () => {
+        return new Promise<void>(resolve => {
+            setTimeout(() => {
+                setAuthenticated(true)
+                resolve()
+            }, 500)
+        })
     }
 
     const logout = () => {
