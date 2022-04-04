@@ -3,14 +3,13 @@ import { useParams } from 'react-router-dom'
 import GreetingPrompt from '../../../components/GreetingPrompt'
 import { Greeting } from '../../../entities/Greeting'
 import api from '../../../networking/api'
-import { routeParams } from '../../routes'
 
 const GreetingView = () => {
     const [greeting, setGreeting] = useState<Greeting>()
     const params = useParams()
 
     useEffect(() => {
-        const user = params[routeParams.user]
+        const user = params['greetingId']
         if (user) api.greeting.getGreeting(user).then(newValue => setGreeting(newValue))
     }, [params])
 
