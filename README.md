@@ -51,6 +51,10 @@ After that, an update for the deployment of the application on the staging Kuber
 
 If a tag is added to a commit which starts with `v`, the application is being deployed to the production Kubernetes environment. Please make sure that tags are only set on the `main` branch and only if it has been successfully tested on the staging environment. Version numbers should follow [Semantic Versioning](https://semver.org/). The production backend is available at [https://saunah.k8s.init-lab.ch](https://saunah.k8s.init-lab.ch).
 
+## 👌🏼 Definition of Done
+
+The Definition of Done is automatically applied as the pull-request template. It can be found in [docs/pull_request_template.md](./docs/pull_request_template.md).
+
 ## 📚 Further Documentation
 
 Fother documentation can be found in [docs/README.md](./docs/README.md).
