@@ -24,7 +24,7 @@ const AuthProvider = (props: AuthProviderProps) => {
             setTimeout(() => {
                 setAuthenticated(true)
                 resolve()
-            }, 500)
+            }, 100)
         })
     }
 
