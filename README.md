@@ -1,4 +1,4 @@
-# 🛁🔥 Saunah Frontend
+# 🛁🔥 SauNah Frontend
 
 Saunah Frontend is a React, Typescript and Tailwind based webapp for the Saunah platform.
 
