@@ -3,8 +3,6 @@ import { act } from 'react-dom/test-utils'
 
 import AuthProvider, { AuthProviderProps, useAuth } from './AuthProvider'
 
-const wrapper = (props: AuthProviderProps) => <AuthProvider {...props} />
-
 describe('<AuthProvider>', () => {
     test('has correct initial state', () => {
         const { result } = renderHook(useAuth, { wrapper })
@@ -26,3 +24,5 @@ describe('<AuthProvider>', () => {
         expect(result.current.isAuthenticated).toBe(false)
     })
 })
+
+const wrapper = (props: AuthProviderProps) => <AuthProvider {...props} />

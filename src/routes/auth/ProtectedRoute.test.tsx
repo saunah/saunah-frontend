@@ -5,71 +5,6 @@ import { render, screen, waitFor } from '@testing-library/react'
 import { AuthContext, AuthState } from './AuthProvider'
 import ProtectedRoute from './ProtectedRoute'
 
-const defaultAuthState = (isAuthenticated?: boolean): AuthState => {
-    return {
-        isAuthenticated: isAuthenticated || false,
-        login: () => Promise.resolve(),
-        logout: () => {},
-    }
-}
-
-const createWrapper = (isAuthenticated?: boolean) => (props: { children: ReactNode }) =>
-    (
-        <MemoryRouter initialEntries={['/']}>
-            <Link to="/unprotected" data-testid="link-u" />
-            <Link to="/unprotected/child-unprotected" data-testid="link-u-u" />
-            <Link to="/unprotected/child-protected" data-testid="link-u-p" />
-            <Link to="/protected" data-testid="link-p" />
-            <Link to="/protected/child-unprotected" data-testid="link-p-u" />
-            <Link to="/protected/child-protected" data-testid="link-p-p" />
-            <AuthContext.Provider value={defaultAuthState(isAuthenticated)}>{props.children}</AuthContext.Provider>
-        </MemoryRouter>
-    )
-
-const TestRoutes = () => (
-    <Routes>
-        <Route index element={<span data-testid="parent"> home </span>} />
-        <Route
-            path="/unprotected"
-            element={
-                <span data-testid="parent">
-                    parent-unprotected <Outlet />
-                </span>
-            }
-        >
-            <Route path="child-unprotected" element={<span data-testid="child"> child-unprotected </span>} />
-            <Route
-                path="child-protected"
-                element={
-                    <ProtectedRoute>
-                        <span data-testid="child">child-protected</span>
-                    </ProtectedRoute>
-                }
-            />
-        </Route>
-        <Route
-            path="/protected"
-            element={
-                <ProtectedRoute>
-                    <span data-testid="parent">
-                        parent-protected <Outlet />
-                    </span>
-                </ProtectedRoute>
-            }
-        >
-            <Route path="child-unprotected" element={<span data-testid="child"> child-unprotected </span>} />
-            <Route
-                path="child-protected"
-                element={
-                    <ProtectedRoute>
-                        <span data-testid="child">child-protected</span>
-                    </ProtectedRoute>
-                }
-            />
-        </Route>
-    </Routes>
-)
-
 describe('<ProtectedRoute>', () => {
     afterEach(() => {})
 
@@ -134,3 +69,68 @@ describe('<ProtectedRoute>', () => {
         expect(screen.getByTestId('child')).toHaveTextContent('child-unprotected')
     })
 })
+
+const defaultAuthState = (isAuthenticated?: boolean): AuthState => {
+    return {
+        isAuthenticated: isAuthenticated || false,
+        login: () => Promise.resolve(),
+        logout: () => {},
+    }
+}
+
+const createWrapper = (isAuthenticated?: boolean) => (props: { children: ReactNode }) =>
+    (
+        <MemoryRouter initialEntries={['/']}>
+            <Link to="/unprotected" data-testid="link-u" />
+            <Link to="/unprotected/child-unprotected" data-testid="link-u-u" />
+            <Link to="/unprotected/child-protected" data-testid="link-u-p" />
+            <Link to="/protected" data-testid="link-p" />
+            <Link to="/protected/child-unprotected" data-testid="link-p-u" />
+            <Link to="/protected/child-protected" data-testid="link-p-p" />
+            <AuthContext.Provider value={defaultAuthState(isAuthenticated)}>{props.children}</AuthContext.Provider>
+        </MemoryRouter>
+    )
+
+const TestRoutes = () => (
+    <Routes>
+        <Route index element={<span data-testid="parent"> home </span>} />
+        <Route
+            path="/unprotected"
+            element={
+                <span data-testid="parent">
+                    parent-unprotected <Outlet />
+                </span>
+            }
+        >
+            <Route path="child-unprotected" element={<span data-testid="child"> child-unprotected </span>} />
+            <Route
+                path="child-protected"
+                element={
+                    <ProtectedRoute>
+                        <span data-testid="child">child-protected</span>
+                    </ProtectedRoute>
+                }
+            />
+        </Route>
+        <Route
+            path="/protected"
+            element={
+                <ProtectedRoute>
+                    <span data-testid="parent">
+                        parent-protected <Outlet />
+                    </span>
+                </ProtectedRoute>
+            }
+        >
+            <Route path="child-unprotected" element={<span data-testid="child"> child-unprotected </span>} />
+            <Route
+                path="child-protected"
+                element={
+                    <ProtectedRoute>
+                        <span data-testid="child">child-protected</span>
+                    </ProtectedRoute>
+                }
+            />
+        </Route>
+    </Routes>
+)
