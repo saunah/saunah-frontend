@@ -59,7 +59,7 @@ kubectl get pv
 ...
 ```
 
-## Removing other resources
+## Removing Other Resources
 
 To remove other resources, run
 

@@ -37,7 +37,7 @@ The most important tools which are used in this project are [Typescript](https:/
 
 If you'd like to contribute take a look at our [Contribution Guidelines](docs/CONTRIBUTING.md)
 
-## 🌱 About Enviornments variables
+## 🌱 About Enviornments Variables
 
 The environment variables, which should be set on build time can be specified in the corresponding .env files. If a env-var should be configurable on the docker-container, it should be put into the `.env` in the following format: A env var called `REACT_APP_TEST_VAR` should be set to `###REACT_APP_TEST_VAR###`. These environment variables will be taken from the environment on run-time of the container.
 
