@@ -9,3 +9,5 @@ export const routes = readonly({
 export const routeParams = readonly({
     user: 'user',
 })
+
+export default routes
