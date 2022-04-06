@@ -47,7 +47,7 @@ Be aware that only env-vars with the prefix `REACT_APP_` will be replaced.
 
 Continuous Integration / Delivery of the application is done using Github Actions.
 
-On every push, the project will be linted, built and tested inside the build pipeline. The outcome can be shown in the Github Actions tab on [github.com](https://github.com/saunah/saunah-backend/actions).
+On every push, the project will be linted, built and tested inside the build pipeline. The outcome can be shown in the Github Actions tab on [github.com](https://github.com/saunah/saunah-frontend/actions).
 
 On pushes to the `main` branch (eg. via Pull-Request), the application will be packaged as a Docker Container and uploaded to the GitHub Package Registry ([ghcr.io](https://ghcr.io)), in addition to running the tests. The uploaded container will have the tag of the commit SHA which triggered the build (eg. `a58b51a`).
 
