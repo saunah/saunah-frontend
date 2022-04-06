@@ -3,6 +3,7 @@ import Button from './Button'
 import routes from '../routes/routes'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import { Credentials } from '../entities/Credentials'
 
 export type InputFieldProps = {
     username?: string
@@ -10,21 +11,28 @@ export type InputFieldProps = {
 }
 
 const LoginForm = (props: InputFieldProps) => {
-    const [{ username, password }, setCredentials] = useState({
-        username: props.username,
-        password: props.password,
+    const [credentials, setCredentials] = useState<Credentials>({
+        username: '',
+        password: '',
     })
-    function handleCredentials(event: any) {
-        setCredentials(event.target.username)
-        setCredentials(event.target.password)
-        console.log(event.target.username)
-        console.log(event.target.password)
-    }
 
     return (
         <div>
-            <InputField title="Username" placeholder="Username" color="yellow" />
-            <InputField title="Password" placeholder="****************" type="password" color="yellow" />
+            <InputField
+                title="Username"
+                placeholder="Username"
+                color="yellow"
+                value={credentials.username}
+                onChange={username => setCredentials({ ...credentials, username })}
+            />
+            <InputField
+                title="Password"
+                placeholder="****************"
+                type="password"
+                color="yellow"
+                value={credentials.password}
+                onChange={password => setCredentials({ ...credentials, password })}
+            />
             <div className="flex items-center justify-between">
                 <Button color="yellow" onClick={() => console.log('Login!')}>
                     Click me
@@ -36,6 +44,8 @@ const LoginForm = (props: InputFieldProps) => {
                     Forgot Password?
                 </Link>
             </div>
+            username: {credentials.username} <br />
+            password: {credentials.password}
         </div>
     )
 }

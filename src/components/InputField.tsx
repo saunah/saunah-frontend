@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode } from 'react'
 
 export type InputFieldProps = {
     title?: string
@@ -7,6 +7,8 @@ export type InputFieldProps = {
     color?: string
     disabled?: boolean
     children?: ReactNode
+    value?: string
+    onChange?: (newValue: string) => void
 }
 
 const InputField = (props: InputFieldProps) => {
@@ -15,12 +17,6 @@ const InputField = (props: InputFieldProps) => {
     const classes =
         `shadow appearance-none border rounded w-full py-2 px-4 text-${color}-900` +
         (props.disabled ? `bg-${color}-100 cursor-default` : `bg-${color}-200 hover:bg-${color}-300`)
-    const [value, setValue] = useState('')
-
-    function handleChange(event: any) {
-        setValue(event.target.value)
-        console.log(event.target.value)
-    }
 
     return (
         <div className="mb-4">
@@ -30,8 +26,8 @@ const InputField = (props: InputFieldProps) => {
                 id="InputField"
                 type={props.type || 'text'}
                 placeholder={props.placeholder}
-                value={value}
-                onChange={handleChange}
+                value={props.value}
+                onChange={event => props.onChange?.(event.target.value)}
             />
         </div>
     )
