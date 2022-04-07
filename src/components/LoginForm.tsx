@@ -1,6 +1,5 @@
 import InputField from './InputField'
 import Button from './Button'
-import routes from '../routes/routes'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { Credentials } from '../entities/Credentials'
@@ -38,7 +37,7 @@ const LoginForm = (props: InputFieldProps) => {
                     Click me
                 </Button>
                 <Link
-                    to={routes.home} //change when we know where the link needs to go
+                    to="/" //change when we know where the link needs to go
                     className={`inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker`}
                 >
                     Forgot Password?

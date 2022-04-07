@@ -1,20 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import GreetingPrompt from '../../../components/GreetingPrompt'
-import { Greeting } from '../../../entities/Greeting'
-import api from '../../../networking/api'
-import { routeParams } from '../../routes'
+import GreetingPrompt from '../../../components/example/GreetingPrompt'
+import { useGreeting } from '../../../hooks/greeting'
 
 const GreetingView = () => {
-    const [greeting, setGreeting] = useState<Greeting>()
+    const { greetings, fetch } = useGreeting()
     const params = useParams()
 
     useEffect(() => {
-        const user = params[routeParams.user]
-        if (user) api.greeting.getGreeting(user).then(newValue => setGreeting(newValue))
-    }, [params])
+        const user = params['greetingId'] || 'unknown'
+        fetch(user)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
-    return <GreetingPrompt greeting={greeting} />
+    return <GreetingPrompt greeting={greetings[0]} />
 }
 
 export default GreetingView
