@@ -17,7 +17,7 @@ const Button = (props: ButtonProps) => {
 
     return (
         <div>
-            <button className={classes} type={props.type || 'button'} onClick={props.onClick}>
+            <button className={classes} data-testid='mainButton' type={props.type || 'button'} onClick={props.onClick}>
                 {/* We display the children <Button> children </Button>, if no exist we display the title.*/}
                 {props.children || props.title}
             </button>
