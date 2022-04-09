@@ -16,12 +16,15 @@ const Button = (props: ButtonProps) => {
         (props.disabled ? `bg-${color}-100 cursor-default` : `bg-${color}-200 hover:bg-${color}-300`)
 
     return (
-        <div>
-            <button className={classes} type={props.type || 'button'} onClick={props.onClick}>
-                {/* We display the children <Button> children </Button>, if no exist we display the title.*/}
-                {props.children || props.title}
-            </button>
-        </div>
+        <button
+            className={classes}
+            type={props.type || 'button'}
+            onClick={props.onClick}
+            disabled={props.disabled}
+            data-testid="button"
+        >
+            {props.children || props.title}
+        </button>
     )
 }
 
