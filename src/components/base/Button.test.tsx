@@ -8,7 +8,7 @@ describe('<Button>', () => {
         expect(button).toHaveTextContent('Test Title')
     })
 
-    test('shows children insted of title', () => {
+    test('shows children instead of title', () => {
         render(<Button title="Test Title"> Test Child </Button>)
         const button = screen.getByTestId('button')
         expect(button).toHaveTextContent('Test Child')
