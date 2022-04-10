@@ -14,14 +14,12 @@ const Checkbox = (props: CheckboxProps) => {
     const color = props.color || 'blue'
 
     const sharedClasses = (props.disabled ? 'cursor-default' : 'cursor-pointer') + ' h-5 w-5 rounded '
-    const checkboxClasses =
-        sharedClasses +
-        'border ' +
-        (props.value
-            ? props.disabled
-                ? `bg-${color}-300 border-${color}-300`
-                : `bg-${color}-500 border-${color}-500`
-            : ' border-gray-300 ' + (props.disabled ? 'bg-gray-200' : 'bg-white'))
+    let checkboxClasses = sharedClasses + 'border '
+    if (props.value) {
+        checkboxClasses += props.disabled
+            ? `bg-${color}-300 border-${color}-300`
+            : `bg-${color}-500 border-${color}-500`
+    } else checkboxClasses += ' border-gray-300 ' + (props.disabled ? 'bg-gray-200' : 'bg-white')
 
     return (
         <div className="inline-block">
