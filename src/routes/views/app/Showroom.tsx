@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Button from '../../../components/base/Button'
 import Checkbox from '../../../components/base/Checkbox'
+import CheckboxLabel from '../../../components/base/CheckboxLabel'
 import Input from '../../../components/base/Input'
 
 const Showroom = () => {
@@ -12,11 +13,26 @@ const Showroom = () => {
             <Input name="Name" placeholder="Maybe Frank?" disabled={true} />
             <Input name="Falsy Name" error={true} placeholder="Seems so wrong" />
             <div className="flex space-x-2">
-                <Checkbox color="purple" value={checked} onChange={setChecked} />
-                <Checkbox color="purple" disabled={true} value={checked} onChange={setChecked} />
-                <Checkbox color="blue" disabled={false} value={checked} onChange={setChecked} />
+                <Checkbox color="blue" value={checked} onChange={setChecked} />
                 <Checkbox color="blue" disabled={true} value={checked} onChange={setChecked} />
+                <Checkbox color="red" disabled={false} value={checked} onChange={setChecked} />
+                <Checkbox color="red" disabled={true} value={checked} onChange={setChecked} />
             </div>
+            <CheckboxLabel
+                label="I will pay saunah a lot of money"
+                details="Seriously a lot, like 1000 francs"
+                color="blue"
+                value={checked}
+                onChange={setChecked}
+            />
+            <CheckboxLabel
+                label="I will book 15 saunas a year."
+                details="Maybe even more, just at least 15"
+                color="blue"
+                value={checked}
+                disabled={true}
+                onChange={setChecked}
+            />
         </div>
     )
 }
