@@ -28,15 +28,20 @@ const Checkbox = (props: CheckboxProps) => {
             <div
                 className={'relative ' + sharedClasses}
                 onClick={() => !props.disabled && props.onChange?.(!props.value)}
+                data-testid="checkbox-wrapper"
             >
                 <input
                     type="checkbox"
                     className={checkboxClasses}
                     checked={props.value}
                     disabled={props.disabled}
+                    onClick={event => event.stopPropagation()}
                     onChange={() => props.onChange?.(!props.value)}
+                    data-testid="checkbox"
                 />
-                {props.value && <CheckIcon className="absolute top-0.5 left-0.5 h-4 w-4 text-white" />}
+                {props.value && (
+                    <CheckIcon className="absolute top-0.5 left-0.5 h-4 w-4 text-white" data-testid="check-icon" />
+                )}
             </div>
         </div>
     )
