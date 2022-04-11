@@ -1,0 +1,100 @@
+import { Menu, Transition } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/solid'
+import { Link } from 'react-router-dom'
+
+export type DropdownProps = {
+    title?: string
+    /**
+     * The item array is of dimension 2.
+     * The first dimension is interpreted as groups of the items
+     * and the second dimension as the contents of the groups.
+     */
+    items?: DropdownItem[][]
+    /**
+     * Shows the dropdown panel right-aligned, if set to true.
+     * Default is left-aligned.
+     */
+    rightAligned?: boolean
+    disabled?: boolean
+}
+
+/**
+ * Represents one selectable item of the dropdown.
+ */
+export type DropdownItem = {
+    label: string
+    route?: string
+    disabled?: boolean
+    onClick?: () => void
+}
+
+/**
+ * A dropdown which consits of a button and a floating panel
+ * with all the dropdown options. The panel is hidden by default
+ * and shown when th dropdown button is clicked.
+ */
+const Dropdown = (props: DropdownProps) => {
+    return (
+        <Menu as="div" className="relative z-10 inline-block text-left">
+            <Menu.Button
+                disabled={props.disabled}
+                className={
+                    'inline-flex justify-center w-full rounded-md border bg-white border-gray-300 px-4 py-2 text-sm font-medium ' +
+                    (props.disabled ? 'text-gray-300 cursor-default' : 'text-gray-700 hover:bg-gray-100')
+                }
+            >
+                {props.title}
+                <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" />
+            </Menu.Button>
+
+            <Transition
+                enter-active-class="transition ease-out duration-100"
+                enter-from-class="transform opacity-0 scale-95"
+                enter-to-class="transform opacity-100 scale-100"
+                leave-active-class="transition ease-in duration-75"
+                leave-from-class="transform opacity-100 scale-100"
+                leave-to-class="transform opacity-0 scale-95"
+            >
+                <Menu.Items
+                    className={
+                        'absolute w-56 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none ' +
+                        (props.rightAligned ? 'origin-top-right right-0' : '  origin-top-left left-0')
+                    }
+                >
+                    <div className="divide-y divide-gray-200">
+                        {props.items?.map(group => (
+                            <div className="py-1">
+                                {group.map(item => (
+                                    <Menu.Item disabled={item.disabled}>
+                                        {({ active }) => {
+                                            const baseClasses = 'block w-full px-4 py-2 text-sm text-left '
+                                            const activeClasses = active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
+
+                                            return item.disabled ? (
+                                                <span className={baseClasses + 'text-gray-300'}>{item.label}</span>
+                                            ) : item.route ? (
+                                                <Link to={item.route} className={baseClasses + activeClasses}>
+                                                    {item.label}
+                                                </Link>
+                                            ) : (
+                                                <button
+                                                    type="button"
+                                                    onClick={item.onClick}
+                                                    className={baseClasses + activeClasses}
+                                                >
+                                                    {item.label}
+                                                </button>
+                                            )
+                                        }}
+                                    </Menu.Item>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
+                </Menu.Items>
+            </Transition>
+        </Menu>
+    )
+}
+
+export default Dropdown

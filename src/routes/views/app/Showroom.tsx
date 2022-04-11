@@ -3,6 +3,7 @@ import Alert from '../../../components/base/Alert'
 import Button from '../../../components/base/Button'
 import Checkbox from '../../../components/base/Checkbox'
 import CheckboxLabel from '../../../components/base/CheckboxLabel'
+import Dropdown from '../../../components/base/Dropdown'
 import Input from '../../../components/base/Input'
 
 const Showroom = () => {
@@ -36,6 +37,16 @@ const Showroom = () => {
             />
             <Alert text="This was successful" variant="success" />
             <Alert text="This was an error" variant="error" />
+            <Dropdown
+                title="Dropdown"
+                items={[
+                    [{ label: 'Item 1' }, { label: 'Item 2' }],
+                    [
+                        { label: 'Greeting', route: '/greeting/1' },
+                        { label: 'Home', route: '/' },
+                    ],
+                ]}
+            />
         </div>
     )
 }
