@@ -6,6 +6,10 @@ import CheckboxLabel from '../../../components/base/CheckboxLabel'
 import Dropdown from '../../../components/base/Dropdown'
 import Input from '../../../components/base/Input'
 
+/**
+ * The showroom is a little demo view, which shows all base components on one glance.
+ * This can be removed later, when the components are in use.
+ */
 const Showroom = () => {
     const [checked, setChecked] = useState(false)
 
