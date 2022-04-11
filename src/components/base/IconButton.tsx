@@ -9,6 +9,9 @@ export type IconButtonProps = {
     onClick?: () => void
 }
 
+/**
+ * A clickable button with an icon. It does not contain text, only an icon.
+ */
 const IconButton = (props: IconButtonProps) => {
     const color = props.color || 'gray'
     const size = props.size || 5

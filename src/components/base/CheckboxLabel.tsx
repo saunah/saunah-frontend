@@ -5,6 +5,9 @@ export type CheckboxLabelProps = CheckboxProps & {
     details?: string
 }
 
+/**
+ * A CheckboxLabel consists of a checkbox with a label and a description.
+ */
 const CheckboxLabel = (props: CheckboxLabelProps) => {
     const toggle = () => {
         if (!props.disabled) props.onChange?.(!props.value)

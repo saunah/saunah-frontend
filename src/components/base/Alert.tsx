@@ -11,6 +11,10 @@ export type AlertProps = {
     onDismiss?: () => void
 }
 
+/**
+ * A alert component which has different style variants,
+ * displays a text and has a dismiss button.
+ */
 const Alert = (props: AlertProps) => {
     const variant = props.variant || 'success'
     const style = VARIANTS[variant]

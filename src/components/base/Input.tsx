@@ -11,6 +11,9 @@ export type InputProps = {
     onChange?: (newValue: string) => void
 }
 
+/**
+ * A styled input component based on the html input
+ */
 const Input = (props: InputProps) => {
     const autoComplete = props.autoComplete || 'off'
     const type = props.type || 'text'

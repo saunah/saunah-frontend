@@ -9,6 +9,9 @@ export type CheckboxProps = {
     onChange?: (newValue: boolean) => void
 }
 
+/**
+ * A styled checkbox component based on the html checkbox.
+ */
 const Checkbox = (props: CheckboxProps) => {
     // TODO: Change to primary color
     const color = props.color || 'blue'

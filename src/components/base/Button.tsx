@@ -9,6 +9,9 @@ export type ButtonProps = {
     children?: ReactNode
 }
 
+/**
+ * A styled button component based on the html button.
+ */
 const Button = (props: ButtonProps) => {
     const color = props.color || 'gray'
     const classes =
