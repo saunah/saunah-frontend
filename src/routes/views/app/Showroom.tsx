@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Alert from '../../../components/base/Alert'
 import Button from '../../../components/base/Button'
 import Checkbox from '../../../components/base/Checkbox'
 import CheckboxLabel from '../../../components/base/CheckboxLabel'
@@ -8,7 +9,7 @@ const Showroom = () => {
     const [checked, setChecked] = useState(false)
 
     return (
-        <div className="space-y-2">
+        <div className="space-y-2 w-96">
             <Button color="blue" title="Click me" />
             <Input name="Name" placeholder="Maybe Frank?" disabled={true} />
             <Input name="Falsy Name" error={true} placeholder="Seems so wrong" />
@@ -33,6 +34,8 @@ const Showroom = () => {
                 disabled={true}
                 onChange={setChecked}
             />
+            <Alert text="This was successful" variant="success" />
+            <Alert text="This was an error" variant="error" />
         </div>
     )
 }
