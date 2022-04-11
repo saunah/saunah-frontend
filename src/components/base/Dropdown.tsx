@@ -42,6 +42,7 @@ const Dropdown = (props: DropdownProps) => {
                     'inline-flex justify-center w-full rounded-md border bg-white border-gray-300 px-4 py-2 text-sm font-medium ' +
                     (props.disabled ? 'text-gray-300 cursor-default' : 'text-gray-700 hover:bg-gray-100')
                 }
+                data-testid="dropdown-button"
             >
                 {props.title}
                 <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" />
@@ -56,35 +57,54 @@ const Dropdown = (props: DropdownProps) => {
                 leave-to-class="transform opacity-0 scale-95"
             >
                 <Menu.Items
+                    as="div"
                     className={
                         'absolute w-56 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none ' +
                         (props.rightAligned ? 'origin-top-right right-0' : '  origin-top-left left-0')
                     }
+                    data-testid="dropdown-panel"
                 >
                     <div className="divide-y divide-gray-200">
-                        {props.items?.map(group => (
-                            <div className="py-1">
-                                {group.map(item => (
-                                    <Menu.Item disabled={item.disabled}>
+                        {props.items?.map((group, groupIndex) => (
+                            <div className="py-1" key={`group-${groupIndex}`}>
+                                {group.map((item, itemIndex) => (
+                                    <Menu.Item disabled={item.disabled} key={`group-${groupIndex}-item-${itemIndex}`}>
                                         {({ active }) => {
                                             const baseClasses = 'block w-full px-4 py-2 text-sm text-left '
                                             const activeClasses = active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
+                                            const testId = `dropdown-item-${groupIndex}-${itemIndex}`
 
-                                            return item.disabled ? (
-                                                <span className={baseClasses + 'text-gray-300'}>{item.label}</span>
-                                            ) : item.route ? (
-                                                <Link to={item.route} className={baseClasses + activeClasses}>
-                                                    {item.label}
-                                                </Link>
-                                            ) : (
-                                                <button
-                                                    type="button"
-                                                    onClick={item.onClick}
-                                                    className={baseClasses + activeClasses}
-                                                >
-                                                    {item.label}
-                                                </button>
-                                            )
+                                            if (item.disabled) {
+                                                return (
+                                                    <span
+                                                        className={baseClasses + 'text-gray-300'}
+                                                        data-testid={testId}
+                                                    >
+                                                        {item.label}
+                                                    </span>
+                                                )
+                                            } else if (item.route) {
+                                                return (
+                                                    <Link
+                                                        to={item.route}
+                                                        className={baseClasses + activeClasses}
+                                                        data-testid={testId}
+                                                    >
+                                                        {item.label}
+                                                    </Link>
+                                                )
+                                            } else {
+                                                return (
+                                                    <button
+                                                        type="button"
+                                                        onClick={item.onClick}
+                                                        className={baseClasses + activeClasses}
+                                                        data-testid={testId}
+                                                    >
+                                                        {item.label}
+                                                    </button>
+                                                )
+                                            }
                                         }}
                                     </Menu.Item>
                                 ))}
