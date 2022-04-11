@@ -12,7 +12,7 @@ export type AlertProps = {
 }
 
 /**
- * A alert component which has different style variants,
+ * An alert component which has different style variants,
  * displays a text and has a dismiss button.
  */
 const Alert = (props: AlertProps) => {

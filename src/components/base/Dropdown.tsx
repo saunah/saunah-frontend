@@ -31,7 +31,7 @@ export type DropdownItem = {
 /**
  * A dropdown which consits of a button and a floating panel
  * with all the dropdown options. The panel is hidden by default
- * and shown when th dropdown button is clicked.
+ * and shown when the dropdown button is clicked.
  */
 const Dropdown = (props: DropdownProps) => {
     return (
