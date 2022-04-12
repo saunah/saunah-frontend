@@ -1,28 +1,32 @@
 import React from 'react'
+// TODO : Sauna Bilder anpassen
 
-// TODO : Inputs via Props importieren
-const piclink : string = 'https://www.asvz.ch/sites/default/files/styles/hero_lg_2x/public/sport/images/mood/Innenansicht%20Sauna_Fotograf%20Jan%20Sobotkiewicz.jpg?h=74328444&itok=sJjDj5NF'
-const saunaType : string = "Sauna One"
-const saunaText : string = "Lorem ipsum dolor sit amet consectetur"
+type Props ={
+  name : string,
+  imgLink : string,
+  description : string,
+  refLink : string,
+  alt? : string
+}
 
-const SaunaImage = () => {
+const SaunaImage = (props:Props) => {
   return (
     <div className="space-y-25 w-70">
-            <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">{saunaType}</h2>
-            <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+            <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">{props.name}</h2>
+            <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 xl:gap-x-8">
                 <img 
-                    src={piclink}
-                    alt={"saunaOnePicture"}
+                    src={"https://u.profitroom.pl/2018-hotel-burgblick-com/thumb/1650x600/uploads/Sauna/pool-3001209_1920.jpg"}
+                    alt={props.alt}
                 />
             </div>
             <div className="mt-4 flex justify-between">
                  <div>
                    <h3 className="text-sm text-gray-700">
-                     <a href={"link"}>
+                     <a href={props.refLink}>
                          {"LINK"}
                      </a>
                    </h3>
-                   <p className="mt-1 text-sm text-gray-500">{saunaText}</p>
+                   <p className="mt-1 text-sm text-gray-500">{props.description}</p>
                  </div>
             </div>
     </div>
