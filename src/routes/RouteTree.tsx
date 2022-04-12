@@ -5,6 +5,7 @@ import Showroom from './views/app/Showroom'
 import GreetingView from './views/app/GreetingView'
 import AuthProvider from './auth/AuthProvider'
 import ProtectedRoute from './auth/ProtectedRoute'
+import RegisterView from './views/app/RegisterView'
 
 const RouteTree = () => {
     return (
@@ -16,6 +17,7 @@ const RouteTree = () => {
                         <Route path="/greeting/:greetingId" element={<GreetingView />} />
                         <Route path="/showroom" element={<Showroom />} />
                         <Route path="/protected" element={<ProtectedRoute element={<div> Protected Route </div>} />} />
+                        <Route path="/register" element={<RegisterView />} />
                     </Route>
                 </Routes>
             </AuthProvider>
