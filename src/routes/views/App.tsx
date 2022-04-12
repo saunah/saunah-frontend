@@ -11,6 +11,7 @@ function App() {
                     <Link to="/"> Home </Link>
                     <Link to="/greeting/1"> Greeting </Link>
                     <Link to="/protected"> Protected </Link>
+                    <Link to="/Overview"> Overview</Link>
                     <Link to="/showroom">Components Showroom</Link>
                 </div>
                 <div className="flex space-x-4">
