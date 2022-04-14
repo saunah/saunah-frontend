@@ -1,5 +1,5 @@
 import React from 'react'
-export type SaunaImageProps ={
+export type SaunaCardProps ={
   name : string,
   imgLink : string,
   description : string,
@@ -7,7 +7,7 @@ export type SaunaImageProps ={
   alt? : string
 }
 
-const SaunaImage = (props:SaunaImageProps) => {
+const SaunaCard = (props:SaunaCardProps) => {
   return (
     <div className="grid gap-4">
             <h2 className="text-2xl font-extrabold text-gray-900">{props.name}</h2>
@@ -31,4 +31,4 @@ const SaunaImage = (props:SaunaImageProps) => {
   )
 }
 
-export default SaunaImage
+export default SaunaCard
