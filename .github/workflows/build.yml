@@ -1,12 +1,19 @@
-name: Lint, Build & Test
+name: Lint, Build, Test & Analyse
 
-on: workflow_call
+on:
+  workflow_call:
+    secrets:
+      SONAR_TOKEN:
+        required: true
+
 jobs:
   build:
-    name: Lint, Build & Test with npm
+    name: Lint, Build, Test & Analyse
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
       - uses: actions/setup-node@v2
         with:
           node-version: '17'
@@ -14,4 +21,9 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run build
-      - run: npm run test
+      - run: npm run test -- --coverage
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

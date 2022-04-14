@@ -61,4 +61,4 @@ The Definition of Done is automatically applied as the pull-request template. It
 
 ## 📚 Further Documentation
 
-Fother documentation can be found in [docs/README.md](./docs/README.md).
+Further documentation can be found in [docs/README.md](./docs/README.md).
