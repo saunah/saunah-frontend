@@ -9,5 +9,7 @@ on:
 
 jobs:
   build:
-    name: Lint, Build & Test with npm
+    name: Lint, Build, Test & Analyse
     uses: ./.github/workflows/build.yml
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

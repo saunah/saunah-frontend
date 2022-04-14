@@ -2,7 +2,7 @@
 # deploys it to ghcr.io and then deploys the application to a kubernetes
 # cluster.
 
-name: Build, Test & Deploy
+name: Build, Test, Analyse & Deploy
 
 on:
   push:
@@ -19,9 +19,11 @@ jobs:
       deploymentEnv: auto
 
   build:
-    name: Lint, Build & Test with npm
+    name: Lint, Build, Test & Analyse
     needs: [values]
     uses: ./.github/workflows/build.yml
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   container:
     name: Create and Publish Container
