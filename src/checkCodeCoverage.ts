@@ -1,4 +1,8 @@
-const checkCodeCoverageMethodOne = () => {}
-const checkCodeCoverageMethodTwo = () => {}
+const checkCodeCoverageMethodOne = () => {
+    checkCodeCoverageMethodTwo()
+}
+const checkCodeCoverageMethodTwo = () => {
+    checkCodeCoverageMethodOne()
+}
 
 export default checkCodeCoverageMethodOne
