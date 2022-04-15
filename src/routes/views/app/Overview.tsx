@@ -1,5 +1,5 @@
 import React from 'react'
-import SaunaCard, { SaunaCardProps } from '../../../components/saunas/SaunaCard'
+import SaunaCard from '../../../components/saunas/SaunaCard'
 import { Sauna } from '../../../entities/Sauna'
 
 const imgLink1 = "https://u.profitroom.pl/2018-hotel-burgblick-com/thumb/1650x600/uploads/Sauna/pool-3001209_1920.jpg"
