@@ -1,30 +1,28 @@
 import React from 'react'
+import { Sauna } from '../../entities/Sauna'
+
 export type SaunaCardProps ={
-  name : string,
-  imgLink : string,
-  description : string,
-  refLink : string,
-  alt? : string
+  sauna : Sauna,
 }
 
 const SaunaCard = (props:SaunaCardProps) => {
   return (
     <div className="grid gap-4">
-            <h2 className="text-2xl font-extrabold text-gray-900">{props.name}</h2>
+            <h2 className="text-2xl font-extrabold text-gray-900">{props.sauna.name}</h2>
             <div>
                 <img 
-                    src={props.imgLink}
-                    alt={props.alt}
+                    src={props.sauna.imgLink}
+                    alt={"props.alt"}
                 />
             </div>
             <div>
                  <div>
                    <h3 className="text-sm text-gray-700">
-                     <a href={props.refLink}>
+                     <a href={"props.sauna.refLink"}>
                          {"LINK"}
                      </a>
                    </h3>
-                   <p className="text-gray-500">{props.description}</p>
+                   <p className="text-gray-500">{props.sauna.description}</p>
                  </div>
             </div>
     </div>
