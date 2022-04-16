@@ -8,6 +8,7 @@ export type InputFieldProps = {
     password?: string
 
     //use english or german?
+    repeatPassword?: string
     name?: string
     vorname?: string
     mail?: string
@@ -28,13 +29,14 @@ const RegisterForm = (_props: InputFieldProps) => {
         ort: '',
         plz: '',
         password: '',
+        repeatPassword: '',
     })
-    const classes = `py-2 px-4 text-sm font-medium`
+    const classes = 'ml-13 mr-13 grid gap-x-6 gap-y-2 sm:grid-cols-1 md:grid-cols-2'
 
     return (
-        <div>
-            <div className="py-2 px-4 flex items-center justify-between p5">
-                <div className={classes}>
+        <div className="grid gap-4">
+            <div className={classes}>
+                <div>
                     <InputField
                         name="Name"
                         placeholder="Name"
@@ -78,9 +80,9 @@ const RegisterForm = (_props: InputFieldProps) => {
                         name="Password"
                         placeholder="****************"
                         type="password"
-                        value={credentials.password}
-                        onChange={password => setCredentials({ ...credentials, password })}
-                        //how to see if its the same password?
+                        value={credentials.repeatPassword}
+                        onChange={repeatPassword => setCredentials({ ...credentials, repeatPassword })}
+                        //how to see if it's the same password?
                     />
                     <InputField
                         name="Telefon"
@@ -96,7 +98,7 @@ const RegisterForm = (_props: InputFieldProps) => {
                     />
                 </div>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="ml-20 mr-20 grid gap-x-8 gap-y-3 grid-cols-2">
                 <Button onClick={() => console.log('Cancel?!')}>Cancel</Button>
                 <Button onClick={() => console.log('Register!')}>Register</Button>
             </div>
@@ -107,7 +109,8 @@ const RegisterForm = (_props: InputFieldProps) => {
             strasse: {credentials.strasse} <br />
             ort: {credentials.ort} <br />
             plz: {credentials.plz} <br />
-            password: {credentials.password}
+            password: {credentials.password} <br />
+            repeatPassword: {credentials.repeatPassword}
         </div>
     )
 }
