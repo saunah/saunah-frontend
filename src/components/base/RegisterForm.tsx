@@ -7,27 +7,26 @@ export type InputFieldProps = {
     username?: string
     password?: string
 
-    //use english or german?
     repeatPassword?: string
     name?: string
-    vorname?: string
-    mail?: string
-    telefon?: string
-    strasse?: string
-    ort?: string
-    plz?: string
+    firstname?: string
+    email?: string
+    telephone?: string
+    street?: string
+    place?: string
+    zip?: string
 }
 
 const RegisterForm = (_props: InputFieldProps) => {
     const [credentials, setCredentials] = useState<Credentials>({
         username: '',
         name: '',
-        vorname: '',
-        mail: '',
-        telefon: '',
-        strasse: '',
-        ort: '',
-        plz: '',
+        firstname: '',
+        email: '',
+        telephone: '',
+        street: '',
+        place: '',
+        zip: '',
         password: '',
         repeatPassword: '',
     })
@@ -46,26 +45,26 @@ const RegisterForm = (_props: InputFieldProps) => {
                     <InputField
                         name="Vorname"
                         placeholder="Vorname"
-                        value={credentials.vorname}
-                        onChange={vorname => setCredentials({ ...credentials, vorname })}
+                        value={credentials.firstname}
+                        onChange={firstname => setCredentials({ ...credentials, firstname })}
                     />
                     <InputField
                         name="Mail"
                         placeholder="Mail"
-                        value={credentials.mail}
-                        onChange={mail => setCredentials({ ...credentials, mail })}
+                        value={credentials.email}
+                        onChange={email => setCredentials({ ...credentials, email })}
                     />
                     <InputField
                         name="Ort"
                         placeholder="Ort"
-                        value={credentials.ort}
-                        onChange={ort => setCredentials({ ...credentials, ort })}
+                        value={credentials.place}
+                        onChange={place => setCredentials({ ...credentials, place })}
                     />
                     <InputField
                         name="Strasse"
                         placeholder="Strasse"
-                        value={credentials.strasse}
-                        onChange={strasse => setCredentials({ ...credentials, strasse })}
+                        value={credentials.street}
+                        onChange={street => setCredentials({ ...credentials, street })}
                     />
                 </div>
                 <div>
@@ -75,6 +74,7 @@ const RegisterForm = (_props: InputFieldProps) => {
                         type="password"
                         value={credentials.password}
                         onChange={password => setCredentials({ ...credentials, password })}
+                        //how to check if password is valid?
                     />
                     <InputField
                         name="Password"
@@ -87,14 +87,14 @@ const RegisterForm = (_props: InputFieldProps) => {
                     <InputField
                         name="Telefon"
                         placeholder="Telefon"
-                        value={credentials.telefon}
-                        onChange={telefon => setCredentials({ ...credentials, telefon })}
+                        value={credentials.telephone}
+                        onChange={telephone => setCredentials({ ...credentials, telephone })}
                     />
                     <InputField
                         name="PLZ"
                         placeholder="PLZ"
-                        value={credentials.plz}
-                        onChange={plz => setCredentials({ ...credentials, plz })}
+                        value={credentials.zip}
+                        onChange={zip => setCredentials({ ...credentials, zip })}
                     />
                 </div>
             </div>
@@ -103,12 +103,12 @@ const RegisterForm = (_props: InputFieldProps) => {
                 <Button onClick={() => console.log('Register!')}>Register</Button>
             </div>
             name: {credentials.name} <br />
-            vorname: {credentials.vorname} <br />
-            mail: {credentials.mail} <br />
-            telefon: {credentials.telefon} <br />
-            strasse: {credentials.strasse} <br />
-            ort: {credentials.ort} <br />
-            plz: {credentials.plz} <br />
+            vorname: {credentials.firstname} <br />
+            mail: {credentials.email} <br />
+            telefon: {credentials.telephone} <br />
+            strasse: {credentials.street} <br />
+            ort: {credentials.place} <br />
+            plz: {credentials.zip} <br />
             password: {credentials.password} <br />
             repeatPassword: {credentials.repeatPassword}
         </div>

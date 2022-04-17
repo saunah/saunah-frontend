@@ -3,10 +3,10 @@ export type Credentials = {
     password: string
     repeatPassword: string
     name: string
-    vorname: string
-    mail: string
-    telefon: string
-    ort: string
-    strasse: string
-    plz: string
+    firstname: string
+    email: string
+    telephone: string
+    place: string
+    street: string
+    zip: string
 }
