@@ -1,5 +1,5 @@
 import React, { ReactNode, useReducer } from 'react'
-import { Alert, AlertDuration, ControlledAlert } from './Alert'
+import { Alert, AlertDuration, ControlledAlert } from '../../entities/Alert'
 import { removeId } from '../../utils/identifiable'
 import { Transition } from '@headlessui/react'
 import AlertComponent from '../../components/base/Alert'
