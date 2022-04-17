@@ -53,13 +53,14 @@ const AlertProvider = (props: AlertProviderProps) => {
                     leave-to-class="opacity-0"
                 >
                     {state.alerts.map(alert => (
-                        <AlertComponent
-                            key={alert.id}
-                            variant={alert.variant}
-                            text={alert.id}
-                            onDismiss={() => alert.remove()}
-                            className="mt-2 transition-all ease-in-out duration-300"
-                        />
+                        <template data-testid={alert.id} key={alert.id}>
+                            <AlertComponent
+                                variant={alert.variant}
+                                text={alert.text}
+                                onDismiss={() => alert.remove()}
+                                className="mt-2 transition-all ease-in-out duration-300"
+                            />
+                        </template>
                     ))}
                 </Transition>
             </div>
