@@ -1,6 +1,6 @@
 import { CheckCircleIcon, InformationCircleIcon, ExclamationIcon, XIcon } from '@heroicons/react/solid'
 import { ReactNode, SVGProps } from 'react'
-import { AlertVariant } from '../../routes/alert/Alert'
+import { AlertVariant } from '../../entities/Alert'
 import IconButton from './IconButton'
 
 export type AlertProps = {

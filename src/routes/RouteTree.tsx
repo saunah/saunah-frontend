@@ -3,9 +3,9 @@ import App from './views/App'
 import Home from './views/app/Home'
 import Showroom from './views/app/Showroom'
 import GreetingView from './views/app/GreetingView'
-import AuthProvider from './auth/AuthProvider'
-import AlertProvider from './alert/AlertProvider'
-import ProtectedRoute from './auth/ProtectedRoute'
+import AuthProvider from './shared/AuthProvider'
+import AlertProvider from './shared/AlertProvider'
+import ProtectedRoute from './shared/ProtectedRoute'
 
 const RouteTree = () => {
     return (
