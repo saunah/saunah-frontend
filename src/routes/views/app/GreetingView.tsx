@@ -14,9 +14,7 @@ const GreetingView = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const { success } = useAlert()
-
-    return <GreetingPrompt greeting={greetings[0]} onClick={() => success('Sehr nicely done!')} />
+    return <GreetingPrompt greeting={greetings[0]} />
 }
 
 export default GreetingView
