@@ -1,7 +1,6 @@
 import React, { ReactNode, useReducer } from 'react'
 import { Alert, AlertDuration, ControlledAlert } from '../../entities/Alert'
 import { removeId } from '../../utils/identifiable'
-import { Transition } from '@headlessui/react'
 import AlertComponent from '../../components/base/Alert'
 
 export type AlertState = {
@@ -43,26 +42,11 @@ const AlertProvider = (props: AlertProviderProps) => {
             {props.children}
 
             <div className="fixed bottom-0 right-0 p-4 w-full sm:w-96 z-50">
-                <Transition
-                    show={true}
-                    enter-active-class="transition transform ease-out duration-300"
-                    enter-from-class="opacity-0 translate-y-2 sm:translate-y-0 sm:translate-x-2"
-                    enter-to-class="opacity-100 translate-y-0 sm:translate-x-0"
-                    leave-active-class="transition ease-in duration-200"
-                    leave-from-class="opacity-100"
-                    leave-to-class="opacity-0"
-                >
-                    {state.alerts.map(alert => (
-                        <template data-testid={alert.id} key={alert.id}>
-                            <AlertComponent
-                                variant={alert.variant}
-                                text={alert.text}
-                                onDismiss={() => alert.remove()}
-                                className="mt-2 transition-all ease-in-out duration-300"
-                            />
-                        </template>
-                    ))}
-                </Transition>
+                {state.alerts.map(alert => (
+                    <div className="mt-2" data-testid={alert.id} key={alert.id}>
+                        <AlertComponent variant={alert.variant} text={alert.text} onDismiss={() => alert.remove()} />
+                    </div>
+                ))}
             </div>
         </AlertContext.Provider>
     )
