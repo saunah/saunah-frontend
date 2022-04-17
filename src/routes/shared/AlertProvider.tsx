@@ -4,14 +4,33 @@ import { removeId } from '../../utils/identifiable'
 import AlertComponent from '../../components/base/Alert'
 
 export type AlertState = {
+    /**
+     * Pushes an alert to the state. It will be presented to the user.
+     */
     push: (alert: Alert) => void
+    /**
+     * Pushes an alert of type `success` to the state. Convenience function which uses `push`.
+     */
     success: (text: string, duration?: AlertDuration) => void
+    /**
+     * Pushes an alert of type `info` to the state. Convenience function which uses `push`.
+     */
     info: (text: string, duration?: AlertDuration) => void
+    /**
+     * Pushes an alert of type `warning` to the state. Convenience function which uses `push`.
+     */
     warning: (text: string, duration?: AlertDuration) => void
+    /**
+     * Pushes an alert of type `error` to the state. Convenience function which uses `push`.
+     */
     error: (text: string, duration?: AlertDuration) => void
 }
 
 export const AlertContext = React.createContext<AlertState>(null!)
+
+/**
+ * This hook provides the functionality to present alerts to the user.
+ */
 export const useAlert = () => React.useContext(AlertContext)
 
 export type AlertProviderProps = {
@@ -19,6 +38,9 @@ export type AlertProviderProps = {
 }
 
 let uniqueId = 1
+/**
+ * The AlertProvider provides the context for alerts, so children can use the `useAlert()` hook.
+ */
 const AlertProvider = (props: AlertProviderProps) => {
     const [state, dispatch] = useReducer(reducer, initialState)
 
