@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import GreetingPrompt from '../../../components/example/GreetingPrompt'
 import { useGreeting } from '../../../hooks/greeting'
-import { useAlert } from '../../alert/AlertProvider'
 
 const GreetingView = () => {
     const { greetings, fetch } = useGreeting()
