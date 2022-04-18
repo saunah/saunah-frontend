@@ -1,24 +1,21 @@
 import { useState } from 'react'
 import RegisterForm from '../../../components/base/RegisterForm'
-import { Credentials } from '../../../entities/Credentials'
+import { User } from '../../../entities/User'
+import api from '../../../networking/api'
 
 const RegisterView = () => {
-    const [credentials, setCredentials] = useState<Credentials>({
-        username: '',
-        name: '',
-        firstname: '',
-        email: '',
-        telephone: '',
-        street: '',
-        place: '',
-        zip: '',
-        password: '',
-        repeatPassword: '',
-    })
+    const [user, setUser] = useState<User.Edit>(User.empty())
+
+    const signupUser = () => {
+        api.user.signup(user).then(() => {
+            // print success message
+            // do other stuff
+        })
+    }
 
     return (
         <div>
-            <RegisterForm credentials={credentials} onChange={setCredentials} />
+            <RegisterForm user={user} onChange={setUser} />
         </div>
     )
 }
