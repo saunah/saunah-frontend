@@ -1,100 +1,76 @@
-import InputField from './Input'
+import Input from './Input'
 import Button from './Button'
-import { useState } from 'react'
 import { Credentials } from '../../entities/Credentials'
 
-export type InputFieldProps = {
-    username?: string
-    password?: string
-
-    repeatPassword?: string
-    name?: string
-    firstname?: string
-    email?: string
-    telephone?: string
-    street?: string
-    place?: string
-    zip?: string
+export type RegisterFormProps = {
+    credentials: Credentials
+    onChange?: (credentials: Credentials) => void
 }
 
-const RegisterForm = (_props: InputFieldProps) => {
-    const [credentials, setCredentials] = useState<Credentials>({
-        username: '',
-        name: '',
-        firstname: '',
-        email: '',
-        telephone: '',
-        street: '',
-        place: '',
-        zip: '',
-        password: '',
-        repeatPassword: '',
-    })
-    const classes = 'ml-13 mr-13 grid gap-x-6 gap-y-2 sm:grid-cols-1 md:grid-cols-2'
-
+const RegisterForm = (props: RegisterFormProps) => {
     return (
         <div className="grid gap-4">
-            <div className={classes}>
+            <div className="ml-13 mr-13 grid gap-x-6 gap-y-2 sm:grid-cols-1 md:grid-cols-2">
                 <div>
-                    <InputField
+                    <Input
                         name="Name"
                         placeholder="Name"
-                        value={credentials.name}
-                        onChange={name => setCredentials({ ...credentials, name })}
+                        value={props.credentials.name}
+                        onChange={name => props.onChange?.({ ...props.credentials, name })}
                     />
-                    <InputField
+                    <Input
                         name="Vorname"
                         placeholder="Vorname"
-                        value={credentials.firstname}
-                        onChange={firstname => setCredentials({ ...credentials, firstname })}
+                        value={props.credentials.firstname}
+                        onChange={firstname => props.onChange?.({ ...props.credentials, firstname })}
                     />
-                    <InputField
+                    <Input
                         name="Mail"
                         placeholder="Mail"
-                        value={credentials.email}
-                        onChange={email => setCredentials({ ...credentials, email })}
+                        value={props.credentials.email}
+                        onChange={email => props.onChange?.({ ...props.credentials, email })}
                     />
-                    <InputField
+                    <Input
                         name="Ort"
                         placeholder="Ort"
-                        value={credentials.place}
-                        onChange={place => setCredentials({ ...credentials, place })}
+                        value={props.credentials.place}
+                        onChange={place => props.onChange?.({ ...props.credentials, place })}
                     />
-                    <InputField
+                    <Input
                         name="Strasse"
                         placeholder="Strasse"
-                        value={credentials.street}
-                        onChange={street => setCredentials({ ...credentials, street })}
+                        value={props.credentials.street}
+                        onChange={street => props.onChange?.({ ...props.credentials, street })}
                     />
                 </div>
                 <div>
-                    <InputField
+                    <Input
                         name="Password"
                         placeholder="****************"
                         type="password"
-                        value={credentials.password}
-                        onChange={password => setCredentials({ ...credentials, password })}
+                        value={props.credentials.password}
+                        onChange={password => props.onChange?.({ ...props.credentials, password })}
                         //how to check if password is valid?
                     />
-                    <InputField
+                    <Input
                         name="Password"
                         placeholder="****************"
                         type="password"
-                        value={credentials.repeatPassword}
-                        onChange={repeatPassword => setCredentials({ ...credentials, repeatPassword })}
+                        value={props.credentials.repeatPassword}
+                        onChange={repeatPassword => props.onChange?.({ ...props.credentials, repeatPassword })}
                         //how to see if it's the same password?
                     />
-                    <InputField
+                    <Input
                         name="Telefon"
                         placeholder="Telefon"
-                        value={credentials.telephone}
-                        onChange={telephone => setCredentials({ ...credentials, telephone })}
+                        value={props.credentials.telephone}
+                        onChange={telephone => props.onChange?.({ ...props.credentials, telephone })}
                     />
-                    <InputField
+                    <Input
                         name="PLZ"
                         placeholder="PLZ"
-                        value={credentials.zip}
-                        onChange={zip => setCredentials({ ...credentials, zip })}
+                        value={props.credentials.zip}
+                        onChange={zip => props.onChange?.({ ...props.credentials, zip })}
                     />
                 </div>
             </div>
@@ -102,15 +78,15 @@ const RegisterForm = (_props: InputFieldProps) => {
                 <Button onClick={() => console.log('Cancel?!')}>Cancel</Button>
                 <Button onClick={() => console.log('Register!')}>Register</Button>
             </div>
-            name: {credentials.name} <br />
-            vorname: {credentials.firstname} <br />
-            mail: {credentials.email} <br />
-            telefon: {credentials.telephone} <br />
-            strasse: {credentials.street} <br />
-            ort: {credentials.place} <br />
-            plz: {credentials.zip} <br />
-            password: {credentials.password} <br />
-            repeatPassword: {credentials.repeatPassword}
+            name: {props.credentials.name} <br />
+            vorname: {props.credentials.firstname} <br />
+            mail: {props.credentials.email} <br />
+            telefon: {props.credentials.telephone} <br />
+            strasse: {props.credentials.street} <br />
+            ort: {props.credentials.place} <br />
+            plz: {props.credentials.zip} <br />
+            password: {props.credentials.password} <br />
+            repeatPassword: {props.credentials.repeatPassword}
         </div>
     )
 }
