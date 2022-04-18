@@ -15,5 +15,5 @@ const AppMenu = (props: AppMenuProps) => {
 export default AppMenu
 
 export type AppMenuProps = {
-    children: ReactNode
+    children?: ReactNode
 }

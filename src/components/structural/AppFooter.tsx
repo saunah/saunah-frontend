@@ -11,5 +11,5 @@ const AppFooter = (props: AppFooterProps) => {
 export default AppFooter
 
 export type AppFooterProps = {
-    children: ReactNode
+    children?: ReactNode
 }

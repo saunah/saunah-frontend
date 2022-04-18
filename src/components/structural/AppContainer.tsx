@@ -12,5 +12,5 @@ const AppContainer = (props: AppContainerProps) => {
 export default AppContainer
 
 export type AppContainerProps = {
-    children: ReactNode
+    children?: ReactNode
 }
