@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
-import { Greeting } from '../../../entities/Greeting'
-import { mockGreetingAPI } from '../../../networking/api'
+import { Greeting } from '../../entities/Greeting'
+import { mockGreetingAPI } from '../../networking/api'
 import GreetingView from './GreetingView'
 
 /*

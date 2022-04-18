@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import App from './views/App'
-import Home from './views/app/Home'
-import Showroom from './views/app/Showroom'
-import GreetingView from './views/app/GreetingView'
-import AuthProvider from './shared/AuthProvider'
+import App from './App'
+import GreetingView from './routes/GreetingView'
+import Home from './routes/Home'
+import Showroom from './routes/Showroom'
 import AlertProvider from './shared/AlertProvider'
+import AuthProvider from './shared/AuthProvider'
 import ProtectedRoute from './shared/ProtectedRoute'
 
 const RouteTree = () => {

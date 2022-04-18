@@ -1,8 +1,8 @@
 import { Link, Outlet } from 'react-router-dom'
-import AppContainer from '../../components/structural/AppContainer'
-import AppMenu from '../../components/structural/AppMenu'
-import AppFooter from '../../components/structural/AppFooter'
-import { useAuth } from '../shared/AuthProvider'
+import AppContainer from '../components/structural/AppContainer'
+import AppFooter from '../components/structural/AppFooter'
+import AppMenu from '../components/structural/AppMenu'
+import { useAuth } from './shared/AuthProvider'
 
 function App() {
     const { isAuthenticated, login, logout } = useAuth()

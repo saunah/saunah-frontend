@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import RouteTree from '../RouteTree'
+import RouteTree from './RouteTree'
 
 test('renders «Home» link', () => {
     render(<RouteTree />)

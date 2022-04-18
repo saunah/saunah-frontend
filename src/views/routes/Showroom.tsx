@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import Alert from '../../../components/base/Alert'
-import Button from '../../../components/base/Button'
-import Checkbox from '../../../components/base/Checkbox'
-import CheckboxLabel from '../../../components/base/CheckboxLabel'
-import Dropdown from '../../../components/base/Dropdown'
-import Input from '../../../components/base/Input'
-import { useAlert } from '../../shared/AlertProvider'
+import Alert from '../../components/base/Alert'
+import Button from '../../components/base/Button'
+import Checkbox from '../../components/base/Checkbox'
+import CheckboxLabel from '../../components/base/CheckboxLabel'
+import Dropdown from '../../components/base/Dropdown'
+import Input from '../../components/base/Input'
+import { useAlert } from '../shared/AlertProvider'
 
 /**
  * The showroom is a little demo view, which shows all base components on one glance.
