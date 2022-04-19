@@ -24,7 +24,7 @@ test('greeting hook fetches correctly', async () => {
     await act(async () => await result.current.fetch('Michael'))
 
     expect(result.current.greetings.length).toBe(1)
-    expect(result.current.greetings[0]).toMatchObject({ id: 3, content: 'Hello Michael!' })
+    expect(result.current.greetings[0]).toMatchObject({ name: 'Michael', content: 'Hello Michael!' })
 })
 
 test('save greeting', async () => {
@@ -37,7 +37,7 @@ test('save greeting', async () => {
 
     expect(mock.save).toBeCalledTimes(1)
     expect(mock.save).toBeCalledWith(newGreeting)
-    expect(result.current.greetings[0]).toMatchObject({ id: 10101, content: newGreeting.content })
+    expect(result.current.greetings[0]).toMatchObject({ name: 'Michael', content: newGreeting.content })
 
     await act(async () => await result.current.save(newGreeting))
 })
