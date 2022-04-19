@@ -3,34 +3,37 @@ import Button from './Button'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { Credentials } from '../entities/Credentials'
+import { InputFieldType } from '../entities/InputFieldType'
 
-export type InputFieldProps = {
-    username?: string
-    password?: string
-}
-
-const LoginForm = (props: InputFieldProps) => {
+const LoginForm = () => {
     const [credentials, setCredentials] = useState<Credentials>({
         username: '',
         password: '',
     })
+    const usernameField : InputFieldType = {
+        title: "Username",
+        placeholder: "Username",
+        type:"input",
+        color: "yellow",
+        value: credentials.username,
+        onChange: username => setCredentials({ ...credentials, username })
+    }
+    const passwordField : InputFieldType = {
+        title:"Password",
+        placeholder:"****************",
+        type:"password",
+        color:"yellow",
+        value: credentials.password,
+        onChange: password => setCredentials({ ...credentials, password }),
+    }
 
     return (
         <div>
             <InputField
-                title="Username"
-                placeholder="Username"
-                color="yellow"
-                value={credentials.username}
-                onChange={username => setCredentials({ ...credentials, username })}
+                values={usernameField}
             />
             <InputField
-                title="Password"
-                placeholder="****************"
-                type="password"
-                color="yellow"
-                value={credentials.password}
-                onChange={password => setCredentials({ ...credentials, password })}
+                values={passwordField}
             />
             <div className="flex items-center justify-between">
                 <Button color="yellow" onClick={() => console.log('Login!')}>
