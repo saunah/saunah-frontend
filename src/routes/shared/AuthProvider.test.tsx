@@ -12,13 +12,13 @@ describe('<AuthProvider>', () => {
     test('updates authentication status after login', async () => {
         const { result } = renderHook(useAuth, { wrapper })
         expect(result.current.isAuthenticated).toBe(false)
-        await act(async () => await result.current.login())
+        await act(async () => result.current.login())
         expect(result.current.isAuthenticated).toBe(true)
     })
 
     test('update authentication status after logout', async () => {
         const { result } = renderHook(useAuth, { wrapper })
-        await act(async () => await result.current.login())
+        await act(async () => result.current.login())
         expect(result.current.isAuthenticated).toBe(true)
         act(() => result.current.logout())
         expect(result.current.isAuthenticated).toBe(false)
