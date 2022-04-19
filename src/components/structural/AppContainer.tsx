@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import './AppContainer.css'
 
 /**
  * This component provides the the wrapper to contain

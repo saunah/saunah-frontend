@@ -1,7 +1,14 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
     content: ['./src/**/*.{js,jsx,ts,tsx}'],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                accent: colors.emerald,
+                content: colors.slate,
+            },
+        },
     },
     plugins: [],
     safelist: [
