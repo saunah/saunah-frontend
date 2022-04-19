@@ -1,5 +1,4 @@
 import { CheckIcon } from '@heroicons/react/solid'
-import React from 'react'
 import './Checkbox.css'
 
 export type CheckboxProps = {
@@ -13,8 +12,7 @@ export type CheckboxProps = {
  * A styled checkbox component based on the html checkbox.
  */
 const Checkbox = (props: CheckboxProps) => {
-    // TODO: Change to primary color
-    const color = props.color || 'blue'
+    const color = props.color || 'accent'
 
     const sharedClasses = (props.disabled ? 'cursor-default' : 'cursor-pointer') + ' h-5 w-5 rounded '
     let checkboxClasses = sharedClasses + 'border '
@@ -22,7 +20,7 @@ const Checkbox = (props: CheckboxProps) => {
         checkboxClasses += props.disabled
             ? `bg-${color}-300 border-${color}-300`
             : `bg-${color}-500 border-${color}-500`
-    } else checkboxClasses += ' border-gray-300 ' + (props.disabled ? 'bg-gray-200' : 'bg-white')
+    } else checkboxClasses += ' border-primary-300 ' + (props.disabled ? 'bg-primary-200' : 'bg-white')
 
     return (
         <div className="inline-block">

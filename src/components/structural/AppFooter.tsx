@@ -5,7 +5,20 @@ import { ReactNode } from 'react'
  * footer of the app.
  */
 const AppFooter = (props: AppFooterProps) => {
-    return <footer>{props.children}</footer>
+    return (
+        <footer className="p-4 w-full bg-primary-100 rounded-3xl">
+            <div className="container w-full mx-auto max-w-screen-xl py-8 flex flex-row flex-1 items-center justify-center">
+                <div className="basis-0 grow">
+                    {/* Left column content */}
+                    {props.children}
+                </div>
+                <div className="basis-0 grow">
+                    {/* Right column content */}
+                    {props.children}
+                </div>
+            </div>
+        </footer>
+    )
 }
 
 export default AppFooter

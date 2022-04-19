@@ -5,6 +5,7 @@ import Checkbox from '../../components/base/Checkbox'
 import CheckboxLabel from '../../components/base/CheckboxLabel'
 import Dropdown from '../../components/base/Dropdown'
 import Input from '../../components/base/Input'
+import PageTitle from '../../components/base/PageTitle'
 import { useAlert } from '../shared/AlertProvider'
 
 /**
@@ -16,44 +17,47 @@ const Showroom = () => {
     const { success } = useAlert()
 
     return (
-        <div className="space-y-2 w-96">
-            <Button color="blue" title="Click me" onClick={() => success('You clicked the button.')} />
-            <Input name="Name" placeholder="Maybe Frank?" disabled={true} />
-            <Input name="Falsy Name" error={true} placeholder="Seems so wrong" />
-            <div className="flex space-x-2">
-                <Checkbox color="blue" value={checked} onChange={setChecked} />
-                <Checkbox color="blue" disabled={true} value={checked} onChange={setChecked} />
-                <Checkbox color="red" disabled={false} value={checked} onChange={setChecked} />
-                <Checkbox color="red" disabled={true} value={checked} onChange={setChecked} />
+        <>
+            <PageTitle>Showroom</PageTitle>
+            <div className="space-y-2">
+                <Button title="Click me" onClick={() => success('You clicked the button.')} />
+                <Input name="Name" placeholder="Maybe Frank?" disabled={true} />
+                <Input name="Falsy Name" error={true} placeholder="Seems so wrong" />
+                <div className="flex space-x-2">
+                    <Checkbox value={checked} onChange={setChecked} />
+                    <Checkbox disabled={true} value={checked} onChange={setChecked} />
+                    <Checkbox color="red" disabled={false} value={checked} onChange={setChecked} />
+                    <Checkbox color="red" disabled={true} value={checked} onChange={setChecked} />
+                </div>
+                <CheckboxLabel
+                    label="I will pay saunah a lot of money"
+                    details="Seriously a lot, like 1000 francs"
+                    color="blue"
+                    value={checked}
+                    onChange={setChecked}
+                />
+                <CheckboxLabel
+                    label="I will book 15 saunas a year."
+                    details="Maybe even more, just at least 15"
+                    color="blue"
+                    value={checked}
+                    disabled={true}
+                    onChange={setChecked}
+                />
+                <Alert text="This was successful" variant="success" />
+                <Alert text="This was an error" variant="error" />
+                <Dropdown
+                    title="Dropdown"
+                    items={[
+                        [{ label: 'Item 1' }, { label: 'Item 2' }],
+                        [
+                            { label: 'Greeting', route: '/greeting/1' },
+                            { label: 'Home', route: '/' },
+                        ],
+                    ]}
+                />
             </div>
-            <CheckboxLabel
-                label="I will pay saunah a lot of money"
-                details="Seriously a lot, like 1000 francs"
-                color="blue"
-                value={checked}
-                onChange={setChecked}
-            />
-            <CheckboxLabel
-                label="I will book 15 saunas a year."
-                details="Maybe even more, just at least 15"
-                color="blue"
-                value={checked}
-                disabled={true}
-                onChange={setChecked}
-            />
-            <Alert text="This was successful" variant="success" />
-            <Alert text="This was an error" variant="error" />
-            <Dropdown
-                title="Dropdown"
-                items={[
-                    [{ label: 'Item 1' }, { label: 'Item 2' }],
-                    [
-                        { label: 'Greeting', route: '/greeting/1' },
-                        { label: 'Home', route: '/' },
-                    ],
-                ]}
-            />
-        </div>
+        </>
     )
 }
 

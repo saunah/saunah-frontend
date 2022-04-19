@@ -7,10 +7,10 @@
  */
 @layer base {
     body {
-        @apply text-content-800 selection:bg-accent-500 selection:text-content-100;
+        @apply text-primary-800 selection:bg-accent-300 selection:text-primary-100;
     }
 
     a {
-        @apply transition ease-in-out duration-200 text-accent-500 hover:text-accent-300;
+        @apply transition ease-in-out duration-200 text-accent-300 hover:text-accent-200;
     }
 }

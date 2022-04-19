@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react'
-import RouteTree from './RouteTree'
+import App from './App'
 
 test('renders «Home» link', () => {
-    render(<RouteTree />)
+    render(<App />)
     const linkElement = screen.getByText('Home')
     expect(linkElement).toBeInTheDocument()
 })

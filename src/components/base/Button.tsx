@@ -13,7 +13,7 @@ export type ButtonProps = {
  * A styled button component based on the html button.
  */
 const Button = (props: ButtonProps) => {
-    const color = props.color || 'gray'
+    const color = props.color || 'accent'
     const classes =
         `py-2 px-4 text-sm font-medium rounded-md text-${color}-900 ` +
         (props.disabled ? `bg-${color}-100 cursor-default` : `bg-${color}-200 hover:bg-${color}-300`)
