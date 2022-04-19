@@ -14,7 +14,7 @@ const AppFooter = (props: AppFooterProps) => {
                 </div>
                 <div className="basis-0 grow">
                     {/* Right column content */}
-                    {props.children}
+                    <span>Right Column</span>
                 </div>
             </div>
         </footer>
