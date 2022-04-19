@@ -2,6 +2,12 @@ import { Link } from 'react-router-dom'
 import AppMenu from '../../components/structural/AppMenu'
 import { useAuth } from './AuthProvider'
 
+/**
+ * Content view for the navigation bar. It uses
+ * the {@link AppMenu} component.
+ * NavinBar depends to be wrapped in {@link AuthProvider}
+ * and {@link BrowserRouter}.
+ */
 const NavigationBar = () => {
     const { isAuthenticated, login, logout } = useAuth()
 
