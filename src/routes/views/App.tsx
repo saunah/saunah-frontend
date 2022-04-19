@@ -1,5 +1,5 @@
 import { Link, Outlet } from 'react-router-dom'
-import { useAuth } from '../auth/AuthProvider'
+import { useAuth } from '../shared/AuthProvider'
 
 function App() {
     const { isAuthenticated, login, logout } = useAuth()

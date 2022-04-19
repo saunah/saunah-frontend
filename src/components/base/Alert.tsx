@@ -1,13 +1,13 @@
 import { CheckCircleIcon, InformationCircleIcon, ExclamationIcon, XIcon } from '@heroicons/react/solid'
 import { ReactNode, SVGProps } from 'react'
+import { AlertVariant } from '../../entities/Alert'
 import IconButton from './IconButton'
-
-export type AlertVariant = 'success' | 'info' | 'warning' | 'error'
 
 export type AlertProps = {
     variant?: AlertVariant
     text?: string
     children?: ReactNode
+    className?: string
     onDismiss?: () => void
 }
 
@@ -20,7 +20,7 @@ const Alert = (props: AlertProps) => {
     const style = VARIANTS[variant]
 
     return (
-        <div className={`rounded-md p-3 bg-${style.color}-50`}>
+        <div className={`rounded-md p-3 bg-${style.color}-50 ${props.className}`}>
             <div className="flex items-center">
                 <div className="flex-shrink-0">{<style.icon className={`h-5 w-5 text-${style.color}-500`} />}</div>
 

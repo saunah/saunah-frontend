@@ -6,8 +6,6 @@ import { AuthContext, AuthState } from './AuthProvider'
 import ProtectedRoute from './ProtectedRoute'
 
 describe('<ProtectedRoute>', () => {
-    afterEach(() => {})
-
     test('shows home route at start', () => {
         render(TestRoutes(), { wrapper: createWrapper() })
         expect(screen.getByTestId('parent')).toHaveTextContent('home')
@@ -74,7 +72,9 @@ const defaultAuthState = (isAuthenticated?: boolean): AuthState => {
     return {
         isAuthenticated: isAuthenticated || false,
         login: () => Promise.resolve(),
-        logout: () => {},
+        logout: () => {
+            // Ignore logout
+        },
     }
 }
 
