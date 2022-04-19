@@ -7,7 +7,11 @@ import './AppContainer.css'
  * and alignment purposes.
  */
 const AppContainer = (props: AppContainerProps) => {
-    return <div className="p-4 min-h-screen flex flex-col justify-between items-center">{props.children}</div>
+    return (
+        <div className="p-4 min-h-screen flex flex-col justify-between items-center" data-testid="app-container">
+            {props.children}
+        </div>
+    )
 }
 
 export default AppContainer
