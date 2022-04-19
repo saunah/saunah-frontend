@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import RegisterForm from '../../../components/base/RegisterForm'
+import RegisterForm from '../../../components/RegisterForm'
 import { User } from '../../../entities/User'
 import api from '../../../networking/api'
 

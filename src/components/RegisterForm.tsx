@@ -1,6 +1,6 @@
-import Input from './Input'
-import Button from './Button'
-import { User } from '../../entities/User'
+import Input from './base/Input'
+import Button from './base/Button'
+import { User } from '../entities/User'
 
 export type RegisterFormProps = {
     user: User.Edit
