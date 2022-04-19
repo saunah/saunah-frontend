@@ -3,14 +3,14 @@ import { Greeting } from '../entities/Greeting'
 import api from '../networking/api'
 
 export type GreetingState = {
-    greetings: Greeting[]
+    greetings: Greeting.Data[]
     fetch: (user: string) => Promise<void>
-    greetingWithId: (id: number) => Greeting[]
-    save(greeting: Greeting): Promise<void>
+    greetingWithId: (id: number) => Greeting.Data[]
+    save(greeting: Greeting.Data): Promise<void>
 }
 
 export function useGreeting(): GreetingState {
-    const [greetings, setGreetings] = useState<Greeting[]>([])
+    const [greetings, setGreetings] = useState<Greeting.Data[]>([])
 
     const fetch = async (user: string) => {
         const greeting = await api.greeting.get(user)
@@ -24,7 +24,7 @@ export function useGreeting(): GreetingState {
         [greetings]
     )
 
-    const save = async (greeting: Greeting) => {
+    const save = async (greeting: Greeting.Edit) => {
         const newGreeting = await api.greeting.save(greeting)
         setGreetings([...greetings, newGreeting])
     }

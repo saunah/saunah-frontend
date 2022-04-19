@@ -9,10 +9,14 @@ import { mockGreetingAPI } from '../networking/api'
  * The api which the hook will uses has to be mocked.
  * Then the behaviour of the hook can be tested.
  */
-
 const defaultMock = () => ({
-    get: jest.fn(async (name: string) => ({ id: 3, content: `Hello ${name}!` })),
-    save: jest.fn(async (greeting: Greeting) => ({ id: 10101, content: greeting.content })),
+    get: jest.fn(async (name: string) => ({ id: 3, content: `Hello ${name}!`, numberOfLikes: 0, date: new Date() })),
+    save: jest.fn(async (greeting: Greeting.Edit) => ({
+        id: 10101,
+        content: greeting.content,
+        numberOfLikes: 0,
+        date: new Date(),
+    })),
 })
 
 test('greeting hook fetches correctly', async () => {
@@ -30,7 +34,7 @@ test('greeting hook fetches correctly', async () => {
 test('save greeting', async () => {
     const mock = mockGreetingAPI(defaultMock())
 
-    const newGreeting: Greeting = { id: 7, content: 'Hoi!' }
+    const newGreeting: Greeting.Data = { id: 7, content: 'Hoi!', numberOfLikes: 0, date: new Date() }
 
     const { result } = renderHook(useGreeting)
     await act(async () => await result.current.save(newGreeting))

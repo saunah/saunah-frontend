@@ -11,8 +11,8 @@ import GreetingView from './GreetingView'
  */
 
 const defaultMock = () => ({
-    get: jest.fn(async (name: string) => ({ id: 0, content: 'Hello test-user' })),
-    save: jest.fn(async (greeting: Greeting) => greeting),
+    get: jest.fn(async (name: string) => ({ id: 0, content: 'Hello test-user', numberOfLikes: 0, date: new Date() })),
+    save: jest.fn(async (greeting: Greeting.Edit) => Promise.reject()),
 })
 
 test('GreetingView shows greeting', async () => {

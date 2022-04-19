@@ -9,9 +9,11 @@ import GreetingPrompt from './GreetingPrompt'
  * Only views should make api-calls, as this is much harder to test.
  */
 
-const testGreeting: Greeting = {
+const testGreeting: Greeting.Data = {
     id: 4,
     content: 'Hello there',
+    numberOfLikes: 1,
+    date: new Date(),
 }
 
 test('displays greeting correctly', () => {
