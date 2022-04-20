@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
 import AlertProvider, { AlertProviderProps, AlertState, useAlert } from './AlertProvider'
 import { useEffect } from 'react'
 import { AlertDuration } from '../../entities/Alert'
@@ -10,11 +10,9 @@ describe('<AlertProvider>', () => {
             hook.success('Success 2', AlertDuration.LONG)
         })
         render(<TestComponent />, { wrapper })
-
         expect(getAlert(1)).toHaveTextContent('Success 1')
         expect(getAlert(2)).toHaveTextContent('Success 2')
-
-        await new Promise(r => setTimeout(r, AlertDuration.SHORT))
+        await act(() => new Promise(r => setTimeout(r, AlertDuration.SHORT)))
         expect(queryAlert(1)).not.toBeInTheDocument()
         expect(queryAlert(2)).toBeInTheDocument()
     })
