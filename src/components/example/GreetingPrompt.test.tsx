@@ -10,7 +10,7 @@ import GreetingPrompt from './GreetingPrompt'
  */
 
 const testGreeting: Greeting = {
-    id: 4,
+    name: 'Michael',
     content: 'Hello there',
 }
 

@@ -2,13 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import reportWebVitals from './reportWebVitals'
-import RouteTree from './routes/RouteTree'
 import axiosConfig from './networking/axiosConfig'
+import App from './views/App'
 
 axiosConfig()
 ReactDOM.render(
     <React.StrictMode>
-        <RouteTree />
+        <App />
     </React.StrictMode>,
     document.getElementById('root')
 )

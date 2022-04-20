@@ -22,13 +22,13 @@ const CheckboxLabel = (props: CheckboxLabelProps) => {
             </div>
             <div className="ml-3 text-sm select-none">
                 <label
-                    className={'font-medium text-gray-700' + cursorClass}
+                    className={'font-medium text-primary-700' + cursorClass}
                     onClick={toggle}
                     data-testid="checkbox-label"
                 >
                     {props.label}
                 </label>
-                <p className={'text-gray-500' + cursorClass} onClick={toggle} data-testid="checkbox-details">
+                <p className={'text-primary-500' + cursorClass} onClick={toggle} data-testid="checkbox-details">
                     {props.details}
                 </p>
             </div>

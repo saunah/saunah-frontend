@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import GreetingPrompt from '../../../components/example/GreetingPrompt'
-import { useGreeting } from '../../../hooks/greeting'
+import GreetingPrompt from '../../components/example/GreetingPrompt'
+import { useGreeting } from '../../hooks/greeting'
 
 const GreetingView = () => {
     const { greetings, fetch } = useGreeting()
