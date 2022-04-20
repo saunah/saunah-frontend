@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link} from 'react-router-dom'
 import { Sauna } from '../../entities/Sauna'
 
 export type SaunaCardProps ={
@@ -16,15 +17,10 @@ const SaunaCard = (props:SaunaCardProps) => {
                 />
             </div>
             <div>
-                 <div>
-                   <h3 className="text-sm text-gray-700">
-                     <a href={"props.sauna.refLink"}>
-                         {"LINK"}
-                     </a>
-                   </h3>
-                   <p className="text-gray-500">{props.sauna.description}</p>
-                 </div>
+                <Link to='/'>LINK</Link>
+                <p className="text-gray-500">{props.sauna.description}</p>
             </div>
+            
     </div>
   )
 }
