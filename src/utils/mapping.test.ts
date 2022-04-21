@@ -14,7 +14,7 @@ describe('mappings', () => {
     })
 
     test('mapInOptional() maps correctly', () => {
-        const mapper = (number: number) => number.toString()
+        const mapper = (someNumber: number) => someNumber.toString()
         let number: number | null | undefined = 0
         expect(mapInOptional(number, mapper)).toBe('0')
         number = 1
@@ -26,9 +26,9 @@ describe('mappings', () => {
     })
 
     test('mapInArray() maps correctly', () => {
-        const mapper = (number: unknown) => {
-            if (typeof number != 'number') throw Error()
-            else return number.toString()
+        const mapper = (someNumber: unknown) => {
+            if (typeof someNumber != 'number') throw Error()
+            else return someNumber.toString()
         }
         let array: unknown = [10, 12, 13]
         expect(mapInArray(array, mapper)).toMatchObject(['10', '12', '13'])
