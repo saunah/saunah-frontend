@@ -4,10 +4,28 @@ import api from '../networking/api'
 import { Id, insert, removeId } from '../utils/identifiable'
 
 export type SaunaState = {
+    /**
+     * All saunas which are currently fetched from the backend
+     */
     saunas: Sauna.Response[]
+    /**
+     * Fetches all saunas from the backend
+     */
     fetchAll: () => Promise<void>
+    /**
+     * Fetches the sauna with the given id from the backend
+     */
     fetch: (saunaId: Id) => Promise<void>
+    /**
+     * Saves the provided sauna to the backend.
+     * If the saunas id is null, the sauna will be created.
+     * If the saunas id is set, and update request is performed.
+     */
     save: (sauna: Sauna.Request) => Promise<void>
+    /**
+     * Removes the sauna from the backend and
+     * the fetched saunas in the frontend.
+     */
     remove: (saunaId: Id) => Promise<void>
 }
 
