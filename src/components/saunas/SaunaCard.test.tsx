@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { Sauna } from '../../entities/Sauna'
 
 const exampleSauna: Sauna.Response = {
+    id: 1,
     name: 'saunaOne',
     description: 'Steam Sauna',
     price: 100000,

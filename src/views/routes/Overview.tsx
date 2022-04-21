@@ -4,6 +4,7 @@ import { Sauna } from '../../entities/Sauna'
 
 // Change Hardcoded SaunaTypes
 const Telta: Sauna.Response = {
+    id: 1,
     name: 'Telta',
     description: 'Dies ist eine Zeltsauna.',
     price: 100000,
@@ -15,6 +16,7 @@ const Telta: Sauna.Response = {
     type: false,
 }
 const Karhu: Sauna.Response = {
+    id: 2,
     name: 'Karhu',
     description: 'Dies ist ein Saunawagen.',
     price: 100000,
@@ -26,6 +28,7 @@ const Karhu: Sauna.Response = {
     type: false,
 }
 const Puola: Sauna.Response = {
+    id: 3,
     name: 'Puola',
     description: 'Dies ist ein Saunawagen.',
     price: 100000,
