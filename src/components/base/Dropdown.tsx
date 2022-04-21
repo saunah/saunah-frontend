@@ -39,8 +39,8 @@ const Dropdown = (props: DropdownProps) => {
             <Menu.Button
                 disabled={props.disabled}
                 className={
-                    'inline-flex justify-center w-full rounded-md border bg-white border-gray-300 px-4 py-2 text-sm font-medium ' +
-                    (props.disabled ? 'text-gray-300 cursor-default' : 'text-gray-700 hover:bg-gray-100')
+                    'inline-flex justify-center w-full rounded-md border bg-white border-primary-300 px-4 py-2 text-sm font-medium ' +
+                    (props.disabled ? 'text-primary-300 cursor-default' : 'text-primary-700 hover:bg-primary-100')
                 }
                 data-testid="dropdown-button"
             >
@@ -64,20 +64,22 @@ const Dropdown = (props: DropdownProps) => {
                     }
                     data-testid="dropdown-panel"
                 >
-                    <div className="divide-y divide-gray-200">
+                    <div className="divide-y divide-primary-200">
                         {props.items?.map((group, groupIndex) => (
                             <div className="py-1" key={`group-${groupIndex}`}>
                                 {group.map((item, itemIndex) => (
                                     <Menu.Item disabled={item.disabled} key={`group-${groupIndex}-item-${itemIndex}`}>
                                         {({ active }) => {
                                             const baseClasses = 'block w-full px-4 py-2 text-sm text-left '
-                                            const activeClasses = active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
+                                            const activeClasses = active
+                                                ? 'bg-primary-100 text-primary-900'
+                                                : 'text-primary-700'
                                             const testId = `dropdown-item-${groupIndex}-${itemIndex}`
 
                                             if (item.disabled) {
                                                 return (
                                                     <span
-                                                        className={baseClasses + 'text-gray-300'}
+                                                        className={baseClasses + 'text-primary-300'}
                                                         data-testid={testId}
                                                     >
                                                         {item.label}
