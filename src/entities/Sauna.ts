@@ -1,7 +1,8 @@
+import { Identifiable, MaybeIdentifiable } from '../utils/identifiable'
 import { emptyBoolean, emptyNumber, emptyString } from '../utils/mapping'
 
 export namespace Sauna {
-    export type Response = {
+    type Base = {
         name: string
         description: string
         price: number
@@ -12,6 +13,8 @@ export namespace Sauna {
         location: string
         type: boolean
     }
+
+    export type Response = Base & Identifiable
 
     export type RemoteResponse = {
         name: string
@@ -25,7 +28,7 @@ export namespace Sauna {
         type: boolean
     }
 
-    export type Request = Response
+    export type Request = Base & MaybeIdentifiable
     export type RemoteRequest = RemoteResponse
 
     /**
@@ -60,7 +63,9 @@ export namespace Sauna {
         if (!isRemoteResponse(sauna))
             throw Error(`Object ${sauna} could not be mapped in. It is not of type RemoteResponse.`)
 
+        // TODO: change to correct id
         return {
+            id: 12,
             name: sauna.name,
             description: sauna.description,
             price: sauna.prize,
@@ -79,6 +84,7 @@ export namespace Sauna {
      */
     export function emptyRequest(): Request {
         return {
+            id: null,
             name: emptyString(),
             description: emptyString(),
             price: emptyNumber(),

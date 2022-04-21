@@ -1,13 +1,14 @@
+import { Id } from '../utils/identifiable'
 import { readonly } from '../utils/object'
 
 const apiRoutes = {
     greeting: (name: string) => `/greeting/${name}`,
     sauna: {
         list: '/saunas',
-        get: (id: number) => `/sauna/${id}`,
+        get: (id: Id) => `/sauna/${id}`,
         add: '/sauna',
-        edit: (id: number) => `/sauna/edit/${id}`,
-        remove: (id: number) => `/sauna/remove/${id}`,
+        edit: (id: Id) => `/sauna/edit/${id}`,
+        remove: (id: Id) => `/sauna/remove/${id}`,
     },
 }
 
