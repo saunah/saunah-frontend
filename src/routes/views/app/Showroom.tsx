@@ -45,13 +45,7 @@ const Showroom = () => {
             <Alert text="This was an error" variant="error" />
             <Dropdown
                 title="Dropdown"
-                items={[
-                    [{ label: 'Item 1' }, { label: 'Item 2' }],
-                    [
-                        { label: 'Greeting', route: '/greeting/1' },
-                        { label: 'Home', route: '/' },
-                    ],
-                ]}
+                items={[[{ label: 'Item 1' }, { label: 'Item 2' }], [{ label: 'Home', route: '/' }]]}
             />
         </div>
     )

@@ -1,7 +1,5 @@
 import { readonly } from '../utils/object'
 
-const apiRoutes = {
-    greeting: (name: string) => `/greeting/${name}`,
-}
+const apiRoutes = {}
 
 export default readonly(apiRoutes)
