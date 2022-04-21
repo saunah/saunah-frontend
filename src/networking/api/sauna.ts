@@ -12,7 +12,7 @@ export type SaunaAPI = DeepReadonly<{
     remove(id: number): Promise<void>
 }>
 
-const sauna: SaunaAPI = {
+const saunaApi: SaunaAPI = {
     async list(): Promise<Sauna.Response[]> {
         const response = await axios.get(apiRoutes.sauna.list)
         return mapInArray(response.data, Sauna.mapIn)
@@ -35,4 +35,4 @@ const sauna: SaunaAPI = {
     },
 }
 
-export default sauna
+export default saunaApi
