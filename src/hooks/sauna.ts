@@ -29,6 +29,9 @@ export type SaunaState = {
     remove: (saunaId: Id) => Promise<void>
 }
 
+/**
+ * This hook provides the api needed to interact with saunas.
+ */
 export function useSauna(): SaunaState {
     const [saunas, setSaunas] = useState<Sauna.Response[]>([])
     const insertSauna = (newSauna: Sauna.Response) => setSaunas(insert(saunas, newSauna))
