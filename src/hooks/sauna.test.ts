@@ -14,8 +14,8 @@ const defaultMock = (mockSaunas?: Sauna.Response[]) => {
             const found = findId(data, id)
             return found ? Promise.resolve(found) : Promise.reject('Not found')
         }),
-        add: jest.fn((sauna: Sauna.Request) => Promise.resolve({ ...sauna, id: 99 })),
-        edit: jest.fn((saunaId: Id, sauna: Sauna.Request) => Promise.resolve({ ...sauna, id: saunaId })),
+        add: jest.fn((sauna: Sauna.Request) => Promise.resolve()),
+        edit: jest.fn((saunaId: Id, sauna: Sauna.Request) => Promise.resolve()),
         remove: jest.fn(() => Promise.resolve()),
     }
 }
@@ -69,16 +69,14 @@ describe('sauna hook', () => {
 
         const { result } = renderHook(useSauna)
         await act(() => result.current.save({ ...sauna1, id: null }))
-        expect(result.current.saunas.length).toBe(1)
-        expect(containsId(result.current.saunas, 99)).toBe(true)
         expect(mock.add).toBeCalledTimes(1)
         expect(mock.edit).toBeCalledTimes(0)
+        expect(mock.list).toBeCalledTimes(1)
 
         await act(() => result.current.save({ ...sauna2 }))
-        expect(result.current.saunas.length).toBe(2)
-        expect(containsId(result.current.saunas, 2)).toBe(true)
         expect(mock.add).toBeCalledTimes(1)
         expect(mock.edit).toBeCalledTimes(1)
+        expect(mock.list).toBeCalledTimes(2)
     })
 
     test('removes saunas correctly', async () => {

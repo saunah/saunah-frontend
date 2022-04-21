@@ -36,8 +36,9 @@ export function useSauna(): SaunaState {
     const fetchAll = async () => setSaunas(await api.sauna.list())
     const fetch = async (saunaId: Id) => insertSauna(await api.sauna.get(saunaId))
     const save = async (sauna: Sauna.Request) => {
-        if (sauna.id != null) insertSauna(await api.sauna.edit(sauna.id, sauna))
-        else insertSauna(await api.sauna.add(sauna))
+        if (sauna.id != null) await api.sauna.edit(sauna.id, sauna)
+        else await api.sauna.add(sauna)
+        fetchAll()
     }
 
     const remove = async (saunaId: Id) => {

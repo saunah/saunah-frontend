@@ -8,8 +8,8 @@ import apiRoutes from '../apiRoutes'
 export type SaunaAPI = DeepReadonly<{
     list(): Promise<Sauna.Response[]>
     get(saunaId: Id): Promise<Sauna.Response>
-    add(sauna: Sauna.Request): Promise<Sauna.Response>
-    edit(saunaId: Id, sauna: Sauna.Request): Promise<Sauna.Response>
+    add(sauna: Sauna.Request): Promise<void>
+    edit(saunaId: Id, sauna: Sauna.Request): Promise<void>
     remove(saunaId: Id): Promise<void>
 }>
 
@@ -22,15 +22,13 @@ const saunaApi: SaunaAPI = {
         const response = await axios.get(apiRoutes.sauna.get(saunaId))
         return Sauna.mapIn(response.data)
     },
-    async add(sauna: Sauna.Request): Promise<Sauna.Response> {
+    async add(sauna: Sauna.Request): Promise<void> {
         const remoteRequest = Sauna.mapOut(sauna)
-        const response = await axios.post(apiRoutes.sauna.add, remoteRequest)
-        return Sauna.mapIn(response.data)
+        await axios.post(apiRoutes.sauna.add, remoteRequest)
     },
-    async edit(saunaId: Id, sauna: Sauna.Request): Promise<Sauna.Response> {
+    async edit(saunaId: Id, sauna: Sauna.Request): Promise<void> {
         const remoteRequest = Sauna.mapOut(sauna)
-        const response = await axios.post(apiRoutes.sauna.edit(saunaId), remoteRequest)
-        return Sauna.mapIn(response.data)
+        await axios.post(apiRoutes.sauna.edit(saunaId), remoteRequest)
     },
     async remove(saunaId: Id): Promise<void> {
         await axios.post(apiRoutes.sauna.remove(saunaId))
