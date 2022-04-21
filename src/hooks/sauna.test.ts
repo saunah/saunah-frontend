@@ -14,8 +14,8 @@ const defaultMock = (mockSaunas?: Sauna.Response[]) => {
             const found = findId(data, id)
             return found ? Promise.resolve(found) : Promise.reject('Not found')
         }),
-        add: jest.fn((sauna: Sauna.Request) => Promise.resolve()),
-        edit: jest.fn((saunaId: Id, sauna: Sauna.Request) => Promise.resolve()),
+        add: jest.fn(() => Promise.resolve()),
+        edit: jest.fn(() => Promise.resolve()),
         remove: jest.fn(() => Promise.resolve()),
     }
 }
