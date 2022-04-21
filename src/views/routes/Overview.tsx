@@ -2,23 +2,39 @@ import React from 'react'
 import SaunaCard from '../../components/saunas/SaunaCard'
 import { Sauna } from '../../entities/Sauna'
 
-const imgLink1 = 'https://u.profitroom.pl/2018-hotel-burgblick-com/thumb/1650x600/uploads/Sauna/pool-3001209_1920.jpg'
-
 // Change Hardcoded SaunaTypes
-const Telta: Sauna = {
+const Telta: Sauna.Response = {
     name: 'Telta',
-    imgLink: imgLink1,
-    description: 'TELTA SAUNA TEXT',
+    description: 'Dies ist eine Zeltsauna.',
+    price: 100000,
+    maxTemp: 100,
+    numberOfPeople: 10,
+    street: 'Hinterstrasse 12',
+    zip: '8400',
+    location: 'Winterthur',
+    type: false,
 }
-const Karhu: Sauna = {
+const Karhu: Sauna.Response = {
     name: 'Karhu',
-    imgLink: imgLink1,
-    description: 'KARHU SAUNA TEXT',
+    description: 'Dies ist ein Saunawagen.',
+    price: 100000,
+    maxTemp: 100,
+    numberOfPeople: 10,
+    street: 'Hinterstrasse 12',
+    zip: '8400',
+    location: 'Winterthur',
+    type: false,
 }
-const Puola: Sauna = {
+const Puola: Sauna.Response = {
     name: 'Puola',
-    imgLink: imgLink1,
-    description: 'PUOLA SAUNA TEXT',
+    description: 'Dies ist ein Saunawagen.',
+    price: 100000,
+    maxTemp: 100,
+    numberOfPeople: 10,
+    street: 'Hinterstrasse 12',
+    zip: '8400',
+    location: 'Winterthur',
+    type: false,
 }
 
 const Overview = () => {
