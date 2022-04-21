@@ -55,9 +55,9 @@ export namespace Sauna {
     /**
      * Maps in an object of type Sauna.RemoteResponse to Sauna.Response.
      * The object to map in has to be of type Sauna.RemoteResponse otherwise the mapping will fail.
-     * @param sauna The object to map in
-     * @throws An error if the object to map in is not of type Sauna.RemoteResponse
-     * @returns The mapped Sauna.Response
+     * @param sauna the object to map in
+     * @throws if the object to map in is not of type Sauna.RemoteResponse
+     * @returns the mapped Sauna.Response
      */
     export function mapIn(sauna: unknown): Response {
         if (!isRemoteResponse(sauna))
@@ -65,7 +65,7 @@ export namespace Sauna {
 
         // TODO: change to correct id
         return {
-            id: 12,
+            id: 99,
             name: sauna.name,
             description: sauna.description,
             price: sauna.prize,
