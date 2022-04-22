@@ -45,7 +45,7 @@ const AlertProvider = (props: AlertProviderProps) => {
     const [state, dispatch] = useReducer(reducer, initialState)
 
     const push = (alert: Alert) => {
-        const id = `alert-${uniqueId++}`
+        const id = uniqueId++
         const remove = () => dispatch({ removeId: id })
         const newAlert: ControlledAlert = { ...alert, id, remove }
         dispatch({ add: newAlert })
@@ -82,7 +82,7 @@ type InternalState = {
 
 type InternalActions = {
     add?: ControlledAlert
-    removeId?: string
+    removeId?: number
 }
 
 const initialState: InternalState = { alerts: [] }

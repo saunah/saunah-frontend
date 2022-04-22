@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Sauna } from '../entities/Sauna'
 import api from '../networking/api'
-import { Id, insert, removeId } from '../utils/identifiable'
+import { insert, removeId } from '../utils/identifiable'
 
 export type SaunaState = {
     /**
@@ -15,7 +15,7 @@ export type SaunaState = {
     /**
      * Fetches the sauna with the given id from the backend
      */
-    fetch: (saunaId: Id) => Promise<void>
+    fetch: (saunaId: number) => Promise<void>
     /**
      * Saves the provided sauna to the backend.
      * If the saunas id is null, the sauna will be created.
@@ -26,7 +26,7 @@ export type SaunaState = {
      * Removes the sauna from the backend and
      * the fetched saunas in the frontend.
      */
-    remove: (saunaId: Id) => Promise<void>
+    remove: (saunaId: number) => Promise<void>
 }
 
 /**
@@ -37,14 +37,14 @@ export function useSauna(): SaunaState {
     const insertSauna = (newSauna: Sauna.Response) => setSaunas(insert(saunas, newSauna))
 
     const fetchAll = async () => setSaunas(await api.sauna.list())
-    const fetch = async (saunaId: Id) => insertSauna(await api.sauna.get(saunaId))
+    const fetch = async (saunaId: number) => insertSauna(await api.sauna.get(saunaId))
     const save = async (sauna: Sauna.Request) => {
         if (sauna.id != null) await api.sauna.edit(sauna.id, sauna)
         else await api.sauna.add(sauna)
         fetchAll()
     }
 
-    const remove = async (saunaId: Id) => {
+    const remove = async (saunaId: number) => {
         await api.sauna.remove(saunaId)
         setSaunas(removeId(saunas, saunaId))
     }

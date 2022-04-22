@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react-hooks'
 import { act } from 'react-dom/test-utils'
 import { Sauna } from '../entities/Sauna'
 import { mockSaunaAPI } from '../networking/api'
-import { containsId, findId, Id } from '../utils/identifiable'
+import { containsId, findId } from '../utils/identifiable'
 import { useSauna } from './sauna'
 
 const defaultMock = (mockSaunas?: Sauna.Response[]) => {
@@ -10,7 +10,7 @@ const defaultMock = (mockSaunas?: Sauna.Response[]) => {
 
     return {
         list: jest.fn(() => Promise.resolve(data)),
-        get: jest.fn((id: Id) => {
+        get: jest.fn((id: number) => {
             const found = findId(data, id)
             return found ? Promise.resolve(found) : Promise.reject('Not found')
         }),
