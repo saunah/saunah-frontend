@@ -9,6 +9,7 @@ export type InputProps = {
     error?: boolean
     disabled?: boolean
     onChange?: (newValue: string) => void
+    ['data-testid']?: string
 }
 
 /**
@@ -28,7 +29,7 @@ const Input = (props: InputProps) => {
               'border-gray-300 focus:border-blue-500 focus:ring-blue-500')
 
     return (
-        <div>
+        <div data-testid={props['data-testid']}>
             <label htmlFor={props.name} className={labelClasses} data-testid="label">
                 {props.name}
             </label>
