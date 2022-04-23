@@ -19,14 +19,13 @@ const Input = (props: InputProps) => {
     const autoComplete = props.autoComplete || 'off'
     const type = props.type || 'text'
 
-    const labelClasses = 'block text-sm font-medium mb-1 ' + (props.disabled ? 'text-gray-300' : 'text-gray-700')
+    const labelClasses = 'block text-sm font-medium mb-1 ' + (props.disabled ? 'text-primary-300' : 'text-primary-700')
     const inputClasses =
         'block w-full rounded-md border focus:outline-none focus:ring-1 transition py-2 pl-4 pr-10 ' +
-        (props.disabled ? 'text-gray-300 placeholder-gray-300 ' : 'text-gray-900 placeholder-gray-400 ') +
+        (props.disabled ? 'text-primary-300 placeholder-primary-300 ' : 'text-primary-900 placeholder-primary-400 ') +
         (props.error
             ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
-            : // TODO: Change blue to primary-color of the app
-              'border-gray-300 focus:border-blue-500 focus:ring-blue-500')
+            : 'border-primary-300 focus:border-accent-500 focus:ring-accent-500')
 
     return (
         <div data-testid={props['data-testid']}>

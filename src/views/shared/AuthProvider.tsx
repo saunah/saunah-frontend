@@ -7,10 +7,7 @@ export type AuthState = {
 }
 
 export const AuthContext = React.createContext<AuthState>(null!)
-
-export function useAuth() {
-    return React.useContext(AuthContext)
-}
+export const useAuth = () => React.useContext(AuthContext)
 
 export type AuthProviderProps = {
     children?: ReactNode
