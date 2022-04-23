@@ -13,7 +13,8 @@ const exampleSauna: Sauna.Response = {
     street: 'Hinterstrasse 12',
     zip: '8400',
     location: 'Winterthur',
-    type: false,
+    type: 'Zeltsauna',
+    mobile: false,
 }
 
 describe('<SaunCard>', () => {

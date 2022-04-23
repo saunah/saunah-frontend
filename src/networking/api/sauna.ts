@@ -1,15 +1,14 @@
 import axios from 'axios'
 import { Sauna } from '../../entities/Sauna'
 import { findId } from '../../utils/identifiable'
-import { mapInArray } from '../../utils/mapping'
 import { DeepReadonly } from '../../utils/object'
 import apiRoutes from '../apiRoutes'
 
 export type SaunaAPI = DeepReadonly<{
     list(): Promise<Sauna.Response[]>
     get(saunaId: number): Promise<Sauna.Response>
-    add(sauna: Sauna.Request): Promise<void>
-    edit(saunaId: number, sauna: Sauna.Request): Promise<void>
+    add(sauna: Sauna.Request): Promise<Sauna.Response>
+    edit(saunaId: number, sauna: Sauna.Request): Promise<Sauna.Response>
     remove(saunaId: number): Promise<void>
 }>
 
@@ -22,13 +21,15 @@ const saunaApi: SaunaAPI = {
         //const response = await axios.get(apiRoutes.sauna.get(saunaId))
         return new Promise(r => setTimeout(() => r(findId(saunas, saunaId)!), 3000)) //Sauna.mapIn(response.data)
     },
-    async add(sauna: Sauna.Request): Promise<void> {
+    async add(sauna: Sauna.Request): Promise<Sauna.Response> {
         const remoteRequest = Sauna.mapOut(sauna)
-        await axios.post(apiRoutes.sauna.add, remoteRequest)
+        const response = await axios.post(apiRoutes.sauna.add, remoteRequest)
+        return Sauna.mapIn(response.data)
     },
-    async edit(saunaId: number, sauna: Sauna.Request): Promise<void> {
+    async edit(saunaId: number, sauna: Sauna.Request): Promise<Sauna.Response> {
         const remoteRequest = Sauna.mapOut(sauna)
-        await axios.post(apiRoutes.sauna.edit(saunaId), remoteRequest)
+        const response = await axios.post(apiRoutes.sauna.edit(saunaId), remoteRequest)
+        return Sauna.mapIn(response.data)
     },
     async remove(saunaId: number): Promise<void> {
         await axios.post(apiRoutes.sauna.remove(saunaId))
@@ -47,7 +48,8 @@ const sauna1: Sauna.Response = {
     street: 'Hinterstrasse 12',
     zip: '8400',
     location: 'Winterthur',
-    type: false,
+    type: 'Zeltsauna',
+    mobile: false,
 }
 
 const sauna2: Sauna.Response = {
@@ -60,7 +62,8 @@ const sauna2: Sauna.Response = {
     street: 'Hinterstrasse 12',
     zip: '8400',
     location: 'Winterthur',
-    type: false,
+    type: 'Zeltsauna',
+    mobile: false,
 }
 
 const sauna3: Sauna.Response = {
@@ -73,7 +76,8 @@ const sauna3: Sauna.Response = {
     street: 'Hinterstrasse 12',
     zip: '8400',
     location: 'Winterthur',
-    type: false,
+    type: 'Zeltsauna',
+    mobile: false,
 }
 
 const saunas = [sauna1, sauna2, sauna3]

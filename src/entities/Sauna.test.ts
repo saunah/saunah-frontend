@@ -1,15 +1,17 @@
 import { Sauna } from './Sauna'
 
 const testRemoteResponse: Sauna.RemoteResponse = {
+    id: 12,
     name: 'Karhu',
     description: 'Nice sauna',
-    prize: 10,
+    price: 10,
     maxTemp: 12,
     numberOfPeople: 100,
     street: 'Hinterstrasse 12',
-    plz: '8400',
+    zip: '8400',
     location: 'Winterthur',
-    type: true,
+    type: 'Zeltsauna',
+    mobile: true,
 }
 
 describe('Sauna', () => {

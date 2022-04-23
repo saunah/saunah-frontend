@@ -13,8 +13,10 @@ const Telta: Sauna.Response = {
     street: 'Hinterstrasse 12',
     zip: '8400',
     location: 'Winterthur',
-    type: false,
+    type: 'Zeltsauna',
+    mobile: false,
 }
+
 const Karhu: Sauna.Response = {
     id: 2,
     name: 'Karhu',
@@ -25,8 +27,10 @@ const Karhu: Sauna.Response = {
     street: 'Hinterstrasse 12',
     zip: '8400',
     location: 'Winterthur',
-    type: false,
+    type: 'Zeltsauna',
+    mobile: false,
 }
+
 const Puola: Sauna.Response = {
     id: 3,
     name: 'Puola',
@@ -37,7 +41,8 @@ const Puola: Sauna.Response = {
     street: 'Hinterstrasse 12',
     zip: '8400',
     location: 'Winterthur',
-    type: false,
+    type: 'Zeltsauna',
+    mobile: false,
 }
 
 const Overview = () => {

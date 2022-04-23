@@ -11,25 +11,28 @@ export namespace Sauna {
         street: string
         zip: string
         location: string
-        type: boolean
+        type: string
+        mobile: boolean
     }
 
-    export type Response = Base & Identifiable
-
-    export type RemoteResponse = {
+    type RemoteBase = {
         name: string
         description: string
-        prize: number
+        price: number
         maxTemp: number
         numberOfPeople: number
         street: string
-        plz: string
+        zip: string
         location: string
-        type: boolean
+        type: string
+        mobile: boolean
     }
 
+    export type Response = Base & Identifiable
+    export type RemoteResponse = RemoteBase & Identifiable
+
     export type Request = Base & MaybeIdentifiable
-    export type RemoteRequest = RemoteResponse
+    export type RemoteRequest = RemoteBase & MaybeIdentifiable
 
     /**
      * Checks if a given object is of type Sauna.RemoteResponse
@@ -42,13 +45,14 @@ export namespace Sauna {
             sauna != null &&
             typeof sauna.name === 'string' &&
             typeof sauna.description === 'string' &&
-            typeof sauna.prize === 'number' &&
+            typeof sauna.price === 'number' &&
             typeof sauna.maxTemp === 'number' &&
             typeof sauna.numberOfPeople === 'number' &&
             typeof sauna.street === 'string' &&
-            typeof sauna.plz === 'string' &&
+            typeof sauna.zip === 'string' &&
             typeof sauna.location === 'string' &&
-            typeof sauna.type === 'boolean'
+            typeof sauna.type === 'string' &&
+            typeof sauna.mobile === 'boolean'
         )
     }
 
@@ -63,18 +67,18 @@ export namespace Sauna {
         if (!isRemoteResponse(sauna))
             throw Error(`Object ${sauna} could not be mapped in. It is not of type RemoteResponse.`)
 
-        // TODO: change to correct id
         return {
-            id: 99,
+            id: sauna.id,
             name: sauna.name,
             description: sauna.description,
-            price: sauna.prize,
+            price: sauna.price,
             maxTemp: sauna.maxTemp,
             numberOfPeople: sauna.numberOfPeople,
             street: sauna.street,
-            zip: sauna.plz,
+            zip: sauna.zip,
             location: sauna.location,
             type: sauna.type,
+            mobile: sauna.mobile,
         }
     }
 
@@ -93,7 +97,8 @@ export namespace Sauna {
             street: emptyString(),
             zip: emptyString(),
             location: emptyString(),
-            type: emptyBoolean(),
+            type: emptyString(),
+            mobile: emptyBoolean(),
         }
     }
 
@@ -113,15 +118,17 @@ export namespace Sauna {
      */
     export function mapOut(sauna: Request): RemoteRequest {
         return {
+            id: sauna.id,
             name: sauna.name,
             description: sauna.description,
-            prize: sauna.price,
+            price: sauna.price,
             maxTemp: sauna.maxTemp,
             numberOfPeople: sauna.numberOfPeople,
             street: sauna.street,
-            plz: sauna.zip,
+            zip: sauna.zip,
             location: sauna.location,
             type: sauna.type,
+            mobile: sauna.mobile,
         }
     }
 }
