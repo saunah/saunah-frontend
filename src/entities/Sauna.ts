@@ -43,6 +43,7 @@ export namespace Sauna {
         const sauna = object as RemoteResponse
         return (
             sauna != null &&
+            typeof sauna.id === 'number' &&
             typeof sauna.name === 'string' &&
             typeof sauna.description === 'string' &&
             typeof sauna.price === 'number' &&
