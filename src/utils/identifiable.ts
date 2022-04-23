@@ -1,6 +1,11 @@
 export type Identifiable = Readonly<{ id: number }>
 export type MaybeIdentifiable = Readonly<{ id: number | null }>
 
+export function parseId(id: string | null | undefined): number | null {
+    if (id != null && !Number.isNaN(id)) return Number.parseInt(id)
+    else return null
+}
+
 function insertSingle<T extends Identifiable>(baseArray: T[], insertItem: T) {
     const index = baseArray.findIndex(item => item.id === insertItem.id)
     index === -1 ? baseArray.push(insertItem) : baseArray.splice(index, 1, insertItem)
