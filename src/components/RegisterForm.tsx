@@ -1,7 +1,6 @@
 import Input from './base/Input'
 import Button from './base/Button'
 import { User } from '../entities/User'
-import { Link } from 'react-router-dom'
 
 export type RegisterFormProps = {
     user: User.Edit

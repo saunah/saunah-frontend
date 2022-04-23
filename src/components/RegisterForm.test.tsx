@@ -1,7 +1,6 @@
 import { render, screen, within, fireEvent } from '@testing-library/react'
 import RegisterForm from './RegisterForm'
 import { User } from '../entities/User'
-import { BrowserRouter } from 'react-router-dom'
 
 const exampleUser: User.Edit = {
     password: 'Password123',
@@ -180,15 +179,6 @@ describe('<RegisterForm>', () => {
         expect(onChange).toBeCalledTimes(1)
         expect(onChange).toBeCalledWith({ ...exampleUser, repeatPassword: 'newPassword789?' })
     })
-
-    /*test('register button onClick event is called', () => {
-        const onClick = jest.fn()
-        render(<RegisterForm user={exampleUser} onSubmit={onClick} />)
-
-        const registerButton = getButton('register-button')
-        fireEvent.click(registerButton)
-        expect(onClick).toBeCalledTimes(1)
-    })*/
 })
 
 const getLabelOfInput = (testId: string) => {
@@ -199,9 +189,4 @@ const getLabelOfInput = (testId: string) => {
 const getFieldOfInput = (testId: string) => {
     const input = screen.getByTestId(testId)
     return within(input).getByTestId('input')
-}
-
-const getButton = (testId: string) => {
-    const button = screen.getByTestId(testId)
-    return within(button).getByTestId('button')
 }
