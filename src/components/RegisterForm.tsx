@@ -1,10 +1,12 @@
 import Input from './base/Input'
 import Button from './base/Button'
 import { User } from '../entities/User'
+import { Link } from 'react-router-dom'
 
 export type RegisterFormProps = {
     user: User.Edit
     onChange?: (user: User.Edit) => void
+    onSubmit?: () => void
 }
 
 const RegisterForm = (props: RegisterFormProps) => {
@@ -13,6 +15,7 @@ const RegisterForm = (props: RegisterFormProps) => {
             <div className="ml-13 mr-13 grid gap-x-6 gap-y-2 sm:grid-cols-1 md:grid-cols-2">
                 <div>
                     <Input
+                        data-testid="name-input"
                         name="Name"
                         placeholder="Name"
                         value={props.user.name}
