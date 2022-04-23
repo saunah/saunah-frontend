@@ -2,20 +2,23 @@ import { useState } from 'react'
 import RegisterForm from '../../components/RegisterForm'
 import { User } from '../../entities/User'
 import api from '../../networking/api'
+import { useAlert } from '../shared/AlertProvider'
 
 const RegisterView = () => {
     const [user, setUser] = useState<User.Edit>(User.empty())
+    const { success } = useAlert()
 
     const signupUser = () => {
         api.user.signup(user).then(() => {
             // print success message
+            success('Registration erfolgreich')
             // do other stuff
         })
     }
 
     return (
         <div>
-            <RegisterForm user={user} onChange={setUser} />
+            <RegisterForm user={user} onChange={setUser} onSubmit={signupUser} />
         </div>
     )
 }

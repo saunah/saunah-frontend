@@ -5,6 +5,7 @@ import Home from './routes/Home'
 import Overview from './routes/Overview'
 import Showroom from './routes/Showroom'
 import ProtectedRoute from './shared/ProtectedRoute'
+import RegisterView from '../views/routes/RegisterView'
 
 const RouteTree = () => {
     return (
@@ -15,6 +16,7 @@ const RouteTree = () => {
                 <Route path="/showroom" element={<Showroom />} />
                 <Route path="/saunas" element={<Overview />} />
                 <Route path="/protected" element={<ProtectedRoute element={<div> Protected Route </div>} />} />
+                <Route path="/register" element={<RegisterView />} />
             </Route>
         </Routes>
     )

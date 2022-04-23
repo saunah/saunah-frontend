@@ -22,24 +22,28 @@ const RegisterForm = (props: RegisterFormProps) => {
                         onChange={name => props.onChange?.({ ...props.user, name })}
                     />
                     <Input
+                        data-testid="firstname-input"
                         name="Vorname"
                         placeholder="Vorname"
                         value={props.user.firstname}
                         onChange={firstname => props.onChange?.({ ...props.user, firstname })}
                     />
                     <Input
+                        data-testid="mail-input"
                         name="Mail"
                         placeholder="Mail"
                         value={props.user.email}
                         onChange={email => props.onChange?.({ ...props.user, email })}
                     />
                     <Input
+                        data-testid="place-input"
                         name="Ort"
                         placeholder="Ort"
                         value={props.user.place}
                         onChange={place => props.onChange?.({ ...props.user, place })}
                     />
                     <Input
+                        data-testid="street-input"
                         name="Strasse"
                         placeholder="Strasse"
                         value={props.user.street}
@@ -48,7 +52,8 @@ const RegisterForm = (props: RegisterFormProps) => {
                 </div>
                 <div>
                     <Input
-                        name="Password"
+                        data-testid="password-input"
+                        name="Passwort"
                         placeholder="****************"
                         type="password"
                         value={props.user.password}
@@ -56,7 +61,8 @@ const RegisterForm = (props: RegisterFormProps) => {
                         //how to check if password is valid?
                     />
                     <Input
-                        name="Password"
+                        data-testid="repeatPassword-input"
+                        name="Passwort"
                         placeholder="****************"
                         type="password"
                         value={props.user.repeatPassword}
@@ -64,12 +70,14 @@ const RegisterForm = (props: RegisterFormProps) => {
                         //how to see if it's the same password?
                     />
                     <Input
+                        data-testid="telephone-input"
                         name="Telefon"
                         placeholder="Telefon"
                         value={props.user.telephone}
                         onChange={telephone => props.onChange?.({ ...props.user, telephone })}
                     />
                     <Input
+                        data-testid="zip-input"
                         name="PLZ"
                         placeholder="PLZ"
                         value={props.user.zip}
@@ -78,8 +86,12 @@ const RegisterForm = (props: RegisterFormProps) => {
                 </div>
             </div>
             <div className="ml-20 mr-20 grid gap-x-8 gap-y-3 grid-cols-2">
-                <Button onClick={() => console.log('Cancel?!')}>Cancel</Button>
-                <Button onClick={() => console.log('Register!')}>Register</Button>
+                <Button data-testid="cancel-button" onClick={() => console.log('Cancel?!')}>
+                    Cancel
+                </Button>
+                <Button data-testid="register-button" onClick={props.onSubmit}>
+                    Register
+                </Button>
             </div>
             name: {props.user.name} <br />
             vorname: {props.user.firstname} <br />

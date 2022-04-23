@@ -17,6 +17,7 @@ const NavigationBar = () => {
             <Link to="/greeting/1">Greeting</Link>
             <Link to="/showroom">Showroom</Link>
             <Link to="/saunas">Saunas</Link>
+            <Link to="/register">Register</Link>
             <button className="text-accent-300" onClick={login}>
                 Login
             </button>

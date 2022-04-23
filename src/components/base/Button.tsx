@@ -7,6 +7,7 @@ export type ButtonProps = {
     disabled?: boolean
     onClick?: () => void
     children?: ReactNode
+    ['data-testid']?: string
 }
 
 /**

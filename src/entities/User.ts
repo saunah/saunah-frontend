@@ -4,7 +4,6 @@ export namespace User {
     // For example a date object is sent to the backend as a string
     // but we will represent it as a date object here in code
     export type Edit = {
-        username: string // is unused
         password: string
         repeatPassword: string
         name: string
@@ -32,7 +31,6 @@ export namespace User {
     // creates an empty user
     export function empty(): Edit {
         return {
-            username: '',
             name: '',
             firstname: '',
             email: '',
