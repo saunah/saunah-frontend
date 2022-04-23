@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import RegisterForm from '../../../components/RegisterForm'
-import { User } from '../../../entities/User'
-import api from '../../../networking/api'
+import RegisterForm from '../../components/RegisterForm'
+import { User } from '../../entities/User'
+import api from '../../networking/api'
 
 const RegisterView = () => {
     const [user, setUser] = useState<User.Edit>(User.empty())
