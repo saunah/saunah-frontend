@@ -25,6 +25,7 @@ const SaunaEditorView = () => {
 
     return (
         <div>
+            <h1 className="font-semibold text-2xl mb-4">{saunaId == null ? 'Sauna erstellen' : 'Sauna bearbeiten'}</h1>
             <SaunaEditor value={sauna} onChange={setSauna} onSubmit={submit} />
         </div>
     )

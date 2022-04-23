@@ -1,4 +1,5 @@
 import { Sauna } from '../../entities/Sauna'
+import Button from '../base/Button'
 import Input from '../base/Input'
 
 export type SaunaEditorProps = {
@@ -51,6 +52,7 @@ const SaunaEditor = (props: SaunaEditorProps) => {
                 value={sauna.location}
                 onChange={newValue => props.onChange?.({ ...sauna, location: newValue })}
             />
+            <Button title="Speichern" onClick={props.onSubmit} />
         </div>
     )
 }
