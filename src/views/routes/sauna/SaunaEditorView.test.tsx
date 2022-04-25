@@ -70,7 +70,7 @@ const wrapper = (startRoute: string) => (props: { children?: ReactNode }) => {
 const defaultMock = () => {
     return {
         list: jest.fn(() => Promise.resolve([sauna1])),
-        get: jest.fn((id: number) => new Promise<Sauna.RemoteResponse>(r => r(sauna1))),
+        get: jest.fn(() => Promise.resolve(sauna1)),
         add: jest.fn(() => Promise.resolve(sauna1)),
         edit: jest.fn(() => Promise.resolve(sauna1)),
         remove: jest.fn(() => Promise.resolve()),
