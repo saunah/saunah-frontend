@@ -34,7 +34,7 @@ const Input = (props: InputProps) => {
             </label>
             <div className="relative">
                 <input
-                    value={props.value}
+                    value={props.value || ''}
                     onChange={event => props.onChange?.(event.target.value)}
                     name={props.name}
                     placeholder={props.placeholder}
