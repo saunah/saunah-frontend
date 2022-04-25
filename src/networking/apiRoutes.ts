@@ -1,7 +1,6 @@
 import { readonly } from '../utils/object'
 
 const apiRoutes = {
-    greeting: (name: string) => `/greeting/${name}`,
     sauna: {
         list: '/saunas',
         get: (id: number) => `/sauna/${id}`,

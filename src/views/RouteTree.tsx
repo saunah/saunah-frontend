@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
 import Layout from './Layout'
-import GreetingView from './routes/GreetingView'
 import Home from './routes/Home'
 import Overview from './routes/Overview'
 import SaunaEditorView from './routes/sauna/SaunaEditorView'
@@ -12,7 +11,6 @@ const RouteTree = () => {
         <Routes>
             <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
-                <Route path="/greeting/:greetingId" element={<GreetingView />} />
                 <Route path="/showroom" element={<Showroom />} />
                 <Route path="/saunas">
                     <Route index element={<Overview />} />
