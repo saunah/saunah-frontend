@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
-import { Greeting } from '../../../entities/Greeting'
-import { mockGreetingAPI } from '../../../networking/api'
+import { Greeting } from '../../entities/Greeting'
+import { mockGreetingAPI } from '../../networking/api'
 import GreetingView from './GreetingView'
 
 /*
@@ -11,7 +11,7 @@ import GreetingView from './GreetingView'
  */
 
 const defaultMock = () => ({
-    get: jest.fn(async (name: string) => ({ id: 0, content: 'Hello test-user' })),
+    get: jest.fn(async (name: string) => ({ name, content: 'Hello test-user' })),
     save: jest.fn(async (greeting: Greeting) => greeting),
 })
 

@@ -10,7 +10,7 @@ export type UserAPI = DeepReadonly<{
 const user: UserAPI = {
     async signup(user: User.Edit): Promise<void> {
         const requestData = User.mapOut(user)
-        await axios.post(apiRoutes.user.login, requestData)
+        await axios.post(apiRoutes.user.signup, requestData)
     },
 }
 

@@ -5,7 +5,7 @@ import api from '../networking/api'
 export type GreetingState = {
     greetings: Greeting[]
     fetch: (user: string) => Promise<void>
-    greetingWithId: (id: number) => Greeting[]
+    greetingWithName: (name: string) => Greeting[]
     save(greeting: Greeting): Promise<void>
 }
 
@@ -17,9 +17,9 @@ export function useGreeting(): GreetingState {
         setGreetings([...greetings, greeting])
     }
 
-    const greetingWithId = useCallback(
-        (id: number) => {
-            return greetings.filter(greeting => greeting.id === id)
+    const greetingWithName = useCallback(
+        (name: string) => {
+            return greetings.filter(greeting => greeting.name === name)
         },
         [greetings]
     )
@@ -29,5 +29,5 @@ export function useGreeting(): GreetingState {
         setGreetings([...greetings, newGreeting])
     }
 
-    return { greetings, fetch, greetingWithId, save }
+    return { greetings, fetch, greetingWithName, save }
 }

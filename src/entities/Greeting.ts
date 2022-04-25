@@ -1,5 +1,5 @@
 export type Greeting = {
-    id: number
+    name: string
     content: string
 }
 
