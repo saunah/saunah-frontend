@@ -14,7 +14,7 @@ const SaunaEditorView = () => {
 
     useEffect(() => {
         let loaded = true
-        if (saunaId) api.sauna.get(saunaId).then(sauna => loaded && setSauna(Sauna.mapToRequest(sauna)))
+        if (saunaId) api.sauna.get(saunaId).then(response => loaded && setSauna(Sauna.mapToRequest(response)))
         return () => {
             loaded = false
         }
