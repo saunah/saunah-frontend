@@ -13,7 +13,7 @@ const SaunaEditor = (props: SaunaEditorProps) => {
     const sauna = props.value
 
     return (
-        <div className="space-y-2">
+        <div className="space-y-2" data-testid="sauna-editor">
             <Input
                 name="Name"
                 data-testid="input-name"

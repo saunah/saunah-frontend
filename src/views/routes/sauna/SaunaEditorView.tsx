@@ -13,9 +13,12 @@ const SaunaEditorView = () => {
     const [sauna, setSauna] = useState<Sauna.Request>(Sauna.emptyRequest())
 
     useEffect(() => {
-        if (saunaId) api.sauna.get(saunaId).then(sauna => setSauna(Sauna.mapToRequest(sauna)))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+        let loaded = true
+        if (saunaId) api.sauna.get(saunaId).then(sauna => loaded && setSauna(Sauna.mapToRequest(sauna)))
+        return () => {
+            loaded = false
+        }
+    }, [saunaId])
 
     const { success } = useAlert()
     const submit = async () => {
@@ -24,7 +27,7 @@ const SaunaEditorView = () => {
     }
 
     return (
-        <div>
+        <div data-testid="sauna-editor-view">
             <h1 className="font-semibold text-2xl mb-4">{saunaId == null ? 'Sauna erstellen' : 'Sauna bearbeiten'}</h1>
             <SaunaEditor value={sauna} onChange={setSauna} onSubmit={submit} />
         </div>
