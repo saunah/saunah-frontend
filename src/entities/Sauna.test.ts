@@ -20,11 +20,7 @@ describe('Sauna', () => {
         expect(Sauna.isRemoteResponse(null)).toBe(false)
         expect(Sauna.isRemoteResponse({})).toBe(false)
         Object.keys(testRemoteResponse).forEach(key => {
-            const response: any = testRemoteResponse
-            const value = response[key]
-            response[key] = undefined
-            expect(Sauna.isRemoteResponse(response)).toBe(false)
-            response[key] = value
+            expect(Sauna.isRemoteResponse({ ...testRemoteResponse, [key]: undefined })).toBe(false)
         })
     })
 
