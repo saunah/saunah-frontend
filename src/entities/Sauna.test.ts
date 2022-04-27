@@ -29,8 +29,10 @@ describe('Sauna', () => {
         expect(() => Sauna.mapIn({})).toThrow()
     })
 
-    test('emptyRequest() returns object with only null values', () => {
-        Object.values(Sauna.emptyRequest()).forEach(value => expect(value).toBeNull())
+    test('emptyRequest() returns object with only falsy values', () => {
+        Object.values(Sauna.emptyRequest()).forEach(value => {
+            expect(value).toBeFalsy()
+        })
     })
 
     test('mapping-chain works from start to end', () => {

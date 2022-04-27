@@ -17,7 +17,7 @@ const CheckboxLabel = (props: CheckboxLabelProps) => {
     const cursorClass = props.disabled ? '' : ' cursor-pointer'
 
     return (
-        <div className="flex items-start" data-testid={props['data-testid'] || 'checkbox-label'}>
+        <div className="flex items-start" data-testid={props['data-testid'] || 'checkbox-with-label'}>
             <div className="mt-0.5">
                 <Checkbox {...props} />
             </div>
