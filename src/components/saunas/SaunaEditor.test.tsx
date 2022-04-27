@@ -23,7 +23,7 @@ const edited = {
     maxTemp: 88,
     numberOfPeople: 8,
     street: 'Editstreet. 12',
-    zip: '8411',
+    zip: 8411,
     location: 'Hinterthur',
     type: 'Dachsauna',
 }
