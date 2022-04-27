@@ -3,6 +3,7 @@ import Checkbox, { CheckboxProps } from './Checkbox'
 export type CheckboxLabelProps = CheckboxProps & {
     label?: string
     details?: string
+    ['data-testid']?: string
 }
 
 /**
@@ -16,7 +17,7 @@ const CheckboxLabel = (props: CheckboxLabelProps) => {
     const cursorClass = props.disabled ? '' : ' cursor-pointer'
 
     return (
-        <div className="flex items-start">
+        <div className="flex items-start" data-testid={props['data-testid'] || 'checkbox-with-label'}>
             <div className="mt-0.5">
                 <Checkbox {...props} />
             </div>
