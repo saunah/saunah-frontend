@@ -1,18 +1,6 @@
-import { emptyString, emptyBoolean, emptyNumber, mapInOptional, mapInArray } from './mapping'
+import { mapInOptional, mapInArray } from './mapping'
 
 describe('mappings', () => {
-    test('emptyString() returns null', () => {
-        expect(emptyString()).toBeNull()
-    })
-
-    test('emptyBoolean() returns null', () => {
-        expect(emptyBoolean()).toBeNull()
-    })
-
-    test('emptyNumber() returns null', () => {
-        expect(emptyNumber()).toBeNull()
-    })
-
     test('mapInOptional() maps correctly', () => {
         const mapper = (someNumber: number) => someNumber.toString()
         let number: number | null | undefined = 0
@@ -27,7 +15,7 @@ describe('mappings', () => {
 
     test('mapInArray() maps correctly', () => {
         const mapper = (someNumber: unknown) => {
-            if (typeof someNumber != 'number') throw Error()
+            if (typeof someNumber != 'number') throw new Error()
             else return someNumber.toString()
         }
         let array: unknown = [10, 12, 13]

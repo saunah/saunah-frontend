@@ -26,3 +26,14 @@ export declare type DeepReadonly<T> = T extends Builtin
 export function readonly<T>(object: T): DeepReadonly<T> {
     return object as DeepReadonly<T>
 }
+
+/**
+ * This type can be used if a type should be editable by text-fields.
+ * This makes all number properties on the object optional,
+ * so it can be properly initialized with null (instead of 0).
+ */
+export type Editable<T> = T extends {}
+    ? {
+          readonly [K in keyof T]: T[K] extends number ? number | null : T[K]
+      }
+    : T

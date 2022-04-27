@@ -1,31 +1,4 @@
 /**
- * Returns null as type number.
- * This can be used to create an empty object which contains a number.
- * @returns null
- */
-export function emptyNumber(): number {
-    return null as unknown as number
-}
-
-/**
- * Returns null as type boolean.
- * This can be used to create an empty object which contains a boolean.
- * @returns null
- */
-export function emptyBoolean(): boolean {
-    return null as unknown as boolean
-}
-
-/**
- * Returns null as type string.
- * This can be used to create an empty object which contains a string.
- * @returns null
- */
-export function emptyString(): string {
-    return null as unknown as string
-}
-
-/**
  * Maps in an optional value. This is a convenience function for
  * optional ? mapper(optional) : null.
  * @param optional The optional value to map in
@@ -48,6 +21,6 @@ export function mapInOptional<Response, Entity>(
  * @returns the mapped array
  */
 export function mapInArray<Entity>(array: unknown, mapper: (responseItem: unknown) => Entity): Entity[] {
-    if (!Array.isArray(array)) throw Error(`Could not map in object ${array}. It was not of expected type array.`)
+    if (!Array.isArray(array)) throw new Error(`Could not map in object ${array}. It was not of expected type array.`)
     return array.map(mapper)
 }

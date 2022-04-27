@@ -1,5 +1,6 @@
+import { MissingPropertyError } from '../utils/Error'
 import { Identifiable, MaybeIdentifiable } from '../utils/identifiable'
-import { emptyBoolean, emptyNumber, emptyString } from '../utils/mapping'
+import { Editable } from '../utils/object'
 
 export namespace Sauna {
     type Base = {
@@ -31,7 +32,7 @@ export namespace Sauna {
     export type Response = Base & Identifiable
     export type RemoteResponse = RemoteBase & Identifiable
 
-    export type Request = Base & MaybeIdentifiable
+    export type Request = Editable<Base> & MaybeIdentifiable
     export type RemoteRequest = RemoteBase & MaybeIdentifiable
 
     /**
@@ -66,7 +67,7 @@ export namespace Sauna {
      */
     export function mapIn(sauna: unknown): Response {
         if (!isRemoteResponse(sauna))
-            throw Error(`Object ${sauna} could not be mapped in. It is not of type RemoteResponse.`)
+            throw new Error(`Object ${sauna} could not be mapped in. It is not of type RemoteResponse.`)
 
         return {
             id: sauna.id,
@@ -90,16 +91,16 @@ export namespace Sauna {
     export function emptyRequest(): Request {
         return {
             id: null,
-            name: emptyString(),
-            description: emptyString(),
-            price: emptyNumber(),
-            maxTemp: emptyNumber(),
-            numberOfPeople: emptyNumber(),
-            street: emptyString(),
-            zip: emptyString(),
-            location: emptyString(),
-            type: emptyString(),
-            mobile: emptyBoolean(),
+            name: '',
+            description: '',
+            price: 0,
+            maxTemp: 0,
+            numberOfPeople: null,
+            street: '',
+            zip: '',
+            location: '',
+            type: '',
+            mobile: false,
         }
     }
 
@@ -118,6 +119,11 @@ export namespace Sauna {
      * @returns the mapped out Sauna.RemoteRequest
      */
     export function mapOut(sauna: Request): RemoteRequest {
+        if (sauna.price == null) throw new MissingPropertyError('Sauna.Request', 'Sauna.RemoteRequest', 'price')
+        if (sauna.maxTemp == null) throw new MissingPropertyError('Sauna.Request', 'Sauna.RemoteRequest', 'maxTemp')
+        if (sauna.numberOfPeople == null)
+            throw new MissingPropertyError('Sauna.Request', 'Sauna.RemoteRequest', 'numberOfPeople')
+
         return {
             id: sauna.id,
             name: sauna.name,
