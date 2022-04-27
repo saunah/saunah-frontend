@@ -11,6 +11,8 @@ describe('<SaunaEditorView>', () => {
         const mock = mockSaunaAPI(defaultMock())
 
         render(<SaunaEditorView />, { wrapper: wrapper('/sauna/99/edit') })
+        // We have to call this every, when the view performs a api-call.
+        // Otherwise the state-update after the api-call will print warnings in the console.
         await waitForStateUpdate()
         expect(screen.getByTestId('sauna-editor')).toBeInTheDocument()
 
