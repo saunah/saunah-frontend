@@ -28,11 +28,11 @@ const saunaApi: SaunaAPI = {
     },
     async edit(saunaId: number, sauna: Sauna.Request): Promise<Sauna.Response> {
         const remoteRequest = Sauna.mapOut(sauna)
-        const response = await axios.post(apiRoutes.sauna.edit(saunaId), remoteRequest)
+        const response = await axios.post(apiRoutes.sauna.edit, remoteRequest, { params: { Id: saunaId } })
         return Sauna.mapIn(response.data)
     },
     async remove(saunaId: number): Promise<void> {
-        await axios.post(apiRoutes.sauna.remove(saunaId))
+        await axios.post(apiRoutes.sauna.remove, undefined, { params: { Id: saunaId } })
     },
 }
 

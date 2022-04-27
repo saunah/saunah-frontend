@@ -8,7 +8,7 @@ const testRemoteResponse: Sauna.RemoteResponse = {
     maxTemp: 12,
     numberOfPeople: 100,
     street: 'Hinterstrasse 12',
-    zip: '8400',
+    zip: 8400,
     location: 'Winterthur',
     type: 'Zeltsauna',
     mobile: true,

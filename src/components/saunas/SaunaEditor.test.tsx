@@ -10,7 +10,7 @@ const testSauna: Sauna.Request = {
     maxTemp: 99,
     numberOfPeople: 9,
     street: 'Oberstr. 12',
-    zip: '8400',
+    zip: 8400,
     location: 'Winterthur',
     type: 'Zeltsauna',
     mobile: true,

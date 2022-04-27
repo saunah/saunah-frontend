@@ -62,8 +62,9 @@ const SaunaEditor = (props: SaunaEditorProps) => {
             <Input
                 name="PLZ"
                 data-testid="input-zip"
-                value={sauna.zip}
-                onChange={newValue => props.onChange?.({ ...sauna, zip: newValue })}
+                value={'' + sauna.zip}
+                type="number"
+                onChange={newValue => props.onChange?.({ ...sauna, zip: +newValue })}
             />
             <Input
                 name="Ort"

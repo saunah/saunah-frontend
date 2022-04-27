@@ -10,7 +10,7 @@ export namespace Sauna {
         maxTemp: number
         numberOfPeople: number
         street: string
-        zip: string
+        zip: number
         location: string
         type: string
         mobile: boolean
@@ -23,7 +23,7 @@ export namespace Sauna {
         maxTemp: number
         numberOfPeople: number
         street: string
-        zip: string
+        zip: number
         location: string
         type: string
         mobile: boolean
@@ -51,7 +51,7 @@ export namespace Sauna {
             typeof sauna.maxTemp === 'number' &&
             typeof sauna.numberOfPeople === 'number' &&
             typeof sauna.street === 'string' &&
-            typeof sauna.zip === 'string' &&
+            typeof sauna.zip === 'number' &&
             typeof sauna.location === 'string' &&
             typeof sauna.type === 'string' &&
             typeof sauna.mobile === 'boolean'
@@ -93,11 +93,11 @@ export namespace Sauna {
             id: null,
             name: '',
             description: '',
-            price: 0,
-            maxTemp: 0,
+            price: null,
+            maxTemp: null,
             numberOfPeople: null,
             street: '',
-            zip: '',
+            zip: null,
             location: '',
             type: '',
             mobile: false,
@@ -123,6 +123,7 @@ export namespace Sauna {
         if (sauna.maxTemp == null) throw new MissingPropertyError('Sauna.Request', 'Sauna.RemoteRequest', 'maxTemp')
         if (sauna.numberOfPeople == null)
             throw new MissingPropertyError('Sauna.Request', 'Sauna.RemoteRequest', 'numberOfPeople')
+        if (sauna.zip == null) throw new MissingPropertyError('Sauna.Request', 'Sauna.RemoteRequest', 'zip')
 
         return {
             id: sauna.id,
