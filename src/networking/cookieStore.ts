@@ -2,7 +2,7 @@ import Cookies from 'js-cookie'
 import moment from 'moment'
 import { readonly } from '../utils/object'
 
-export type CookieKeys = 'saunah-access-token'
+export type CookieKeys = 'saunah-token'
 
 const DEFAULT_CONFIG: Cookies.CookieAttributes = {
     expires: moment().add(30, 'days').toDate(),
