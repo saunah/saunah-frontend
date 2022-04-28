@@ -28,13 +28,13 @@ const Input = (props: InputProps) => {
             : 'border-primary-300 focus:border-accent-500 focus:ring-accent-500')
 
     return (
-        <div data-testid={props['data-testid']}>
+        <div data-testid={props['data-testid'] || `input-${props.name || 'unknown'}`}>
             <label htmlFor={props.name} className={labelClasses} data-testid="label">
                 {props.name}
             </label>
             <div className="relative">
                 <input
-                    value={props.value}
+                    value={props.value || ''}
                     onChange={event => props.onChange?.(event.target.value)}
                     name={props.name}
                     placeholder={props.placeholder}

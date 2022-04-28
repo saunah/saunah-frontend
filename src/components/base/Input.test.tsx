@@ -29,6 +29,11 @@ describe('<Input>', () => {
         expect(getInput()).toHaveProperty('type', 'number')
         expect(getInput()).toHaveProperty('disabled', true)
     })
+
+    test('is never undefined, sets empty string per default', () => {
+        render(<Input />)
+        expect(getInput()).toHaveValue('')
+    })
 })
 
 const getInput = () => screen.getByTestId('input')

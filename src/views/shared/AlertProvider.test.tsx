@@ -35,7 +35,6 @@ const queryAlert = (number: number) => screen.queryByTestId(`alert-${number}`)
 function setupTestComponent(callback?: (hook: AlertState) => void) {
     return () => {
         const hook = useAlert()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         useEffect(() => callback?.(hook), [])
         return <div />
     }

@@ -7,7 +7,7 @@ export interface Alert {
 export type AlertVariant = 'success' | 'info' | 'warning' | 'error'
 
 export type ControlledAlert = Alert & {
-    id: string
+    id: number
     remove: () => void
 }
 

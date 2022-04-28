@@ -1,6 +1,10 @@
-export type Id = string | number
-export type Identifiable = Readonly<{ id: Id }>
-export type MaybeIdentifiable = Readonly<{ id: Id | null }>
+export type Identifiable = Readonly<{ id: number }>
+export type MaybeIdentifiable = Readonly<{ id: number | null }>
+
+export function parseId(id: string | null | undefined): number | null {
+    if (id != null && !Number.isNaN(id)) return Number.parseInt(id)
+    else return null
+}
 
 function insertSingle<T extends Identifiable>(baseArray: T[], insertItem: T) {
     const index = baseArray.findIndex(item => item.id === insertItem.id)
@@ -26,7 +30,7 @@ export function insert<T extends Identifiable>(array: T[], ...insertItems: T[]):
  * @param id the id which should be removed
  * @returns a new array with the elements removed
  */
-export function removeId<T extends Identifiable>(array: T[], id: Id): T[] {
+export function removeId<T extends Identifiable>(array: T[], id: number): T[] {
     const workingArray = [...array]
     let noMatches = false
     while (!noMatches) {
@@ -43,7 +47,7 @@ export function removeId<T extends Identifiable>(array: T[], id: Id): T[] {
  * @param id the id to find
  * @returns the first element with a matching id or null if none is found
  */
-export function findId<T extends Identifiable>(array: T[], id: Id): T | null {
+export function findId<T extends Identifiable>(array: T[], id: number): T | null {
     const filtered = array.filter(item => item.id === id)
     if (filtered.length > 0) return filtered[0]
     else return null
@@ -55,6 +59,6 @@ export function findId<T extends Identifiable>(array: T[], id: Id): T | null {
  * @param id the id to find
  * @returns `true` if the array contains an element with the specified id
  */
-export function containsId<T extends Identifiable>(array: T[], id: Id): boolean {
+export function containsId<T extends Identifiable>(array: T[], id: number): boolean {
     return findId(array, id) != null
 }
