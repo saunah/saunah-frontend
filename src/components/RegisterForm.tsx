@@ -3,9 +3,10 @@ import Button from './base/Button'
 import { User } from '../entities/User'
 
 export type RegisterFormProps = {
-    user: User.Edit
-    onChange?: (user: User.Edit) => void
+    user: User.Request
+    onChange?: (user: User.Request) => void
     onSubmit?: () => void
+    ['data-testid']?: string
 }
 
 const RegisterForm = (props: RegisterFormProps) => {

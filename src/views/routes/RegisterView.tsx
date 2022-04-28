@@ -5,7 +5,7 @@ import api from '../../networking/api'
 import { useAlert } from '../shared/AlertProvider'
 
 const RegisterView = () => {
-    const [user, setUser] = useState<User.Edit>(User.empty())
+    const [user, setUser] = useState<User.Request>(User.empty())
     const { success } = useAlert()
 
     const signupUser = () => {
@@ -18,7 +18,7 @@ const RegisterView = () => {
 
     return (
         <div>
-            <RegisterForm user={user} onChange={setUser} onSubmit={signupUser} />
+            <RegisterForm data-testid={'registerform'} user={user} onChange={setUser} onSubmit={signupUser} />
         </div>
     )
 }
