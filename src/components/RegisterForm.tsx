@@ -86,22 +86,10 @@ const RegisterForm = (props: RegisterFormProps) => {
                 </div>
             </div>
             <div className="ml-20 mr-20 grid gap-x-8 gap-y-3 grid-cols-2">
-                <Button data-testid="cancel-button" onClick={() => console.log('Cancel?!')}>
-                    Cancel
-                </Button>
                 <Button data-testid="register-button" onClick={props.onSubmit}>
                     Register
                 </Button>
             </div>
-            name: {props.user.name} <br />
-            vorname: {props.user.firstname} <br />
-            mail: {props.user.email} <br />
-            telefon: {props.user.telephone} <br />
-            strasse: {props.user.street} <br />
-            ort: {props.user.place} <br />
-            plz: {props.user.zip} <br />
-            password: {props.user.password} <br />
-            repeatPassword: {props.user.repeatPassword}
         </div>
     )
 }
