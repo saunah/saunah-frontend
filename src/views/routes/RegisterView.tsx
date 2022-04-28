@@ -12,7 +12,6 @@ const RegisterView = () => {
         api.user.signup(user).then(() => {
             // print success message
             success('Registration erfolgreich')
-            // do other stuff
         })
     }
 

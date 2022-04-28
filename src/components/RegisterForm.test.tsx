@@ -201,6 +201,5 @@ const getFieldOfInput = (testId: string) => {
 }
 
 const getButtonClick = (testId: string) => {
-    const button = screen.getByTestId(testId)
-    return within(button).getByTestId('button')
+    return screen.getByTestId(testId)
 }

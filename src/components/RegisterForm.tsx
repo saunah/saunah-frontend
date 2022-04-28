@@ -11,7 +11,7 @@ export type RegisterFormProps = {
 
 const RegisterForm = (props: RegisterFormProps) => {
     return (
-        <div className="grid gap-4">
+        <div className="grid gap-4" data-testid={props['data-testid'] || 'register-form'}>
             <div className="ml-13 mr-13 grid gap-x-6 gap-y-2 sm:grid-cols-1 md:grid-cols-2">
                 <div>
                     <Input
