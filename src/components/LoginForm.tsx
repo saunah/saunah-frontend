@@ -9,20 +9,20 @@ export type LoginCredentials = {
     onChange?: (user: LoginCredentials.Edit) => void
 }
 
-const LoginForm = (props: LoginCredentials.Edit) => {
+const LoginForm = (props: LoginCredentials) => {
     return (
         <div className="grid gap-4">
             <div className="ml-10 mr-10 grid gap-x-6 gap-y-2 grid-cols-1">
                 <Input
                     name="Username"
                     placeholder="Username"
-                    value={props.username}
-                    //onChange={username => props.onChange?.({ ...props.user, username })}
+                    value={props.user.username}
+                    onChange={username => props.onChange?.({ ...props.user, username })}
                 />
                 <Input
                     name="Password"
                     placeholder="Password"
-                    value={props.password}
+                    value={props.user.password}
                    // onChange={password => props.onChange?.({ ...props.user, password })}
                 />
             </div>
@@ -35,8 +35,8 @@ const LoginForm = (props: LoginCredentials.Edit) => {
                     Forgot Password?
                 </Link>
             </div>
-            username: {props.username} <br />
-            password: {props.password}
+            username: {props.user.username} <br />
+            password: {props.user.password}
         </div>
     )
 }
