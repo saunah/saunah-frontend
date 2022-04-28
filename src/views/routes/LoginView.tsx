@@ -4,7 +4,7 @@ import { LoginCredentials } from '../../entities/LoginCredentials'
 import { useAuth } from '../shared/AuthProvider'
 
 const LoginView = () => {
-    const [user, setUser] = useState<LoginCredentials.Edit>(LoginCredentials.empty())
+    const [user, setUser] = useState<LoginCredentials.Request>(LoginCredentials.empty())
 
     const { login } = useAuth()
     return (

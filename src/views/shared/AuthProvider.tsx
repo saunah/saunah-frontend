@@ -1,8 +1,9 @@
 import React, { ReactNode, useState } from 'react'
+import { LoginCredentials } from '../../entities/LoginCredentials'
 
 export type AuthState = {
     isAuthenticated: boolean
-    login: () => Promise<void>
+    login: (credentials: LoginCredentials.Request) => Promise<void>
     logout: () => void
 }
 

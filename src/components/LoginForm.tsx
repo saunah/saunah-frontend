@@ -5,8 +5,8 @@ import { LoginCredentials } from '../entities/LoginCredentials'
 
 // Neuer Typ machen " Login Credentials "
 export type LoginCredentials = {
-    user: LoginCredentials.Edit
-    onChange?: (user: LoginCredentials.Edit) => void
+    user: LoginCredentials.Request
+    onChange?: (user: LoginCredentials.Request) => void
 }
 
 const LoginForm = (props: LoginCredentials) => {
