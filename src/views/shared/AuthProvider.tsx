@@ -1,6 +1,7 @@
 import React, { ReactNode, useState } from 'react'
 import { LoginCredentials } from '../../entities/LoginCredentials'
 import api from '../../networking/api'
+import cookieStore from '../../networking/cookieStore'
 
 export type AuthState = {
     isAuthenticated: boolean
@@ -19,11 +20,13 @@ const AuthProvider = (props: AuthProviderProps) => {
     const [isAuthenticated, setAuthenticated] = useState<boolean>(false)
 
     const login = (credentials: LoginCredentials.Request) =>
-        api.user.login(credentials).then(() => {
+        api.user.login(credentials).then(token => {
+            cookieStore.set('saunah-token', token.token)
             setAuthenticated(true)
         })
 
     const logout = () => {
+        cookieStore.remove('saunah-token')
         setAuthenticated(false)
     }
 
