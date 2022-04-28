@@ -51,6 +51,11 @@ describe('<Checkbox>', () => {
         // so just check if the disabled property is set on the checkbox
         expect(getCheckbox()).toHaveProperty('disabled', true)
     })
+
+    test('value is never undefined, default is false', () => {
+        render(<Checkbox />)
+        expect(getCheckbox()).not.toBeChecked()
+    })
 })
 
 const getCheckbox = () => screen.getByTestId('checkbox')
