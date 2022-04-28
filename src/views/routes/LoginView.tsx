@@ -1,10 +1,12 @@
 import LoginForm from '../../components/LoginForm'
 import { useState } from 'react'
-import { User } from '../../entities/User'
+import { LoginCredentials } from '../../entities/LoginCredentials'
+import { useAuth } from '../shared/AuthProvider'
 
 const LoginView = () => {
-    const [user, setUser] = useState<User.Edit>(User.empty())
+    const [user, setUser] = useState<LoginCredentials.Edit>(LoginCredentials.empty())
 
+    const { login } = useAuth()
     return (
         <div>
             <LoginForm user={user} onChange={setUser} />
