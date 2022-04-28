@@ -1,29 +1,29 @@
 import Button from './base/Button'
 import { Link } from 'react-router-dom'
 import Input from './base/Input'
-import { User } from '../entities/User'
+import { LoginCredentials } from '../entities/LoginCredentials'
 
-export type LoginFormProps = {
-    user: User.Edit
-    onChange?: (user: User.Edit) => void
+// Neuer Typ machen " Login Credentials "
+export type LoginCredentials = {
+    user: LoginCredentials.Edit
+    onChange?: (user: LoginCredentials.Edit) => void
 }
 
-const LoginForm = (props: LoginFormProps) => {
+const LoginForm = (props: LoginCredentials.Edit) => {
     return (
         <div className="grid gap-4">
             <div className="ml-10 mr-10 grid gap-x-6 gap-y-2 grid-cols-1">
                 <Input
                     name="Username"
                     placeholder="Username"
-                    value={"props.user.username"}
-                    // Musste rausgenommen werden, username auf User.Edit nicht mehr vorhanden
-                    //onChange={username => props.onChange?.({ ...props.user, usernamePlaceholder })}
+                    value={props.username}
+                    //onChange={username => props.onChange?.({ ...props.user, username })}
                 />
                 <Input
                     name="Password"
                     placeholder="Password"
-                    value={props.user.password}
-                    onChange={password => props.onChange?.({ ...props.user, password })}
+                    value={props.password}
+                   // onChange={password => props.onChange?.({ ...props.user, password })}
                 />
             </div>
             <div className="ml-20 mr-20 grid gap-x-8 gap-y-3 grid-cols-2">
@@ -35,8 +35,8 @@ const LoginForm = (props: LoginFormProps) => {
                     Forgot Password?
                 </Link>
             </div>
-            username: {"props.user.username"} <br />
-            password: {props.user.password}
+            username: {props.username} <br />
+            password: {props.password}
         </div>
     )
 }
