@@ -14,6 +14,6 @@ export function mockSaunaAPI<T extends SaunaAPI>(mockApi: T): T {
 }
 
 export function mockUserAPI<T extends UserAPI>(mockApi: T): T {
-    api.user = user
+    api.user = mockApi
     return mockApi
 }
