@@ -45,7 +45,7 @@ const AlertProvider = (props: AlertProviderProps) => {
     const [state, dispatch] = useReducer(reducer, initialState)
 
     const push = (alert: Alert) => {
-        const id = `alert-${uniqueId++}`
+        const id = uniqueId++
         const remove = () => dispatch({ removeId: id })
         const newAlert: ControlledAlert = { ...alert, id, remove }
         dispatch({ add: newAlert })
@@ -65,7 +65,7 @@ const AlertProvider = (props: AlertProviderProps) => {
 
             <div className="fixed bottom-0 right-0 p-4 w-full sm:w-96 z-50">
                 {state.alerts.map(alert => (
-                    <div className="mt-2" data-testid={alert.id} key={alert.id}>
+                    <div className="mt-2" data-testid={`alert-${alert.id}`} key={alert.id}>
                         <AlertComponent variant={alert.variant} text={alert.text} onDismiss={() => alert.remove()} />
                     </div>
                 ))}
@@ -82,7 +82,7 @@ type InternalState = {
 
 type InternalActions = {
     add?: ControlledAlert
-    removeId?: string
+    removeId?: number
 }
 
 const initialState: InternalState = { alerts: [] }

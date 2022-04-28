@@ -32,7 +32,7 @@ const Checkbox = (props: CheckboxProps) => {
                 <input
                     type="checkbox"
                     className={checkboxClasses}
-                    checked={props.value}
+                    checked={props.value || false}
                     disabled={props.disabled}
                     onClick={event => event.stopPropagation()}
                     onChange={() => props.onChange?.(!props.value)}
