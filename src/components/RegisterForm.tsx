@@ -85,7 +85,7 @@ const RegisterForm = (props: RegisterFormProps) => {
                     />
                 </div>
             </div>
-            <div className="ml-20 mr-20 grid gap-x-8 gap-y-3 grid-cols-2">
+            <div className="grid gap-8 grid-cols">
                 <Button data-testid="register-button" onClick={props.onSubmit}>
                     Register
                 </Button>
