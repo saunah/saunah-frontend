@@ -2,7 +2,7 @@ import { render, screen, within, fireEvent } from '@testing-library/react'
 import RegisterForm from './RegisterForm'
 import { User } from '../entities/User'
 
-const exampleUser: User.Edit = {
+const exampleUser: User.Request = {
     password: 'Password123',
     repeatPassword: 'Password123',
     name: 'Meier',
@@ -179,6 +179,15 @@ describe('<RegisterForm>', () => {
         expect(onChange).toBeCalledTimes(1)
         expect(onChange).toBeCalledWith({ ...exampleUser, repeatPassword: 'newPassword789?' })
     })
+
+    test('register button, onClick event is called', () => {
+        const onClick = jest.fn()
+        render(<RegisterForm user={exampleUser} onSubmit={onClick} />)
+
+        const button = getButtonClick('register-button')
+        fireEvent.click(button)
+        expect(onClick).toBeCalledTimes(1)
+    })
 })
 
 const getLabelOfInput = (testId: string) => {
@@ -189,4 +198,8 @@ const getLabelOfInput = (testId: string) => {
 const getFieldOfInput = (testId: string) => {
     const input = screen.getByTestId(testId)
     return within(input).getByTestId('input')
+}
+
+const getButtonClick = (testId: string) => {
+    return screen.getByTestId(testId)
 }

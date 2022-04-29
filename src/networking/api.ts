@@ -1,6 +1,6 @@
 import sauna, { SaunaAPI } from './api/sauna'
-import { readonly } from '../utils/object'
 import user, { UserAPI } from './api/user'
+import { readonly } from '../utils/object'
 const api = {
     sauna,
     user,
