@@ -45,8 +45,19 @@ describe('<LoginForm test>', () => {
         const input = getFieldOfInput("username-input")
         fireEvent.change(input, { target : {value : "different text"}})
         expect(onChange).toBeCalledTimes(1)
-        expect(onChange).toBeCalledWith({ ...testUser, user: 'different text' })
+        expect(onChange).toBeCalledWith({ ...testUser, username: "different text" })
     })
+
+    test('check password change', () => {
+        const onChange = jest.fn()
+        render(<BrowserRouter><LoginForm user={testUser} onChange={onChange}/></BrowserRouter>)
+        
+        const input = getFieldOfInput("password-input")
+        fireEvent.change(input, { target : {value : "1111"}})
+        expect(onChange).toBeCalledTimes(1)
+        expect(onChange).toBeCalledWith({ ...testUser, password: "1111" })
+    })
+
 })
 
 

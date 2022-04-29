@@ -25,7 +25,7 @@ const LoginForm = (props: LoginCredentials) => {
                     name="Password"
                     placeholder="Password"
                     value={props.user.password}
-                    // onChange={password => props.onChange?.({ ...props.user, password })}
+                    onChange={password => props.onChange?.({ ...props.user, password })}
                 />
             </div>
             <div className="ml-20 mr-20 grid gap-x-8 gap-y-3 grid-cols-2">
