@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import AppMenu from '../../components/structural/AppMenu'
-import { useAuth } from './AuthProvider'
 
 /**
  * Content view for the navigation bar. It uses
@@ -9,15 +8,13 @@ import { useAuth } from './AuthProvider'
  * and {@link BrowserRouter}.
  */
 const NavigationBar = () => {
-    const { isAuthenticated, login, logout } = useAuth()
-
+    
     return (
         <AppMenu>
             <Link to="/">Home</Link>
             <Link to="/showroom">Showroom</Link>
             <Link to="/saunas">Saunas</Link>
             <Link to="/register">Register</Link>
-            <span>isAuthenticated: {`${isAuthenticated}`} </span>
         </AppMenu>
     )
 }

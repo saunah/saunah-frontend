@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Input from './base/Input'
 import { LoginCredentials } from '../entities/LoginCredentials'
 
-// Neuer Typ machen " Login Credentials "
+// eslint-disable-next-line
 export type LoginCredentials = {
     user: LoginCredentials.Request
     onChange?: (user: LoginCredentials.Request) => void

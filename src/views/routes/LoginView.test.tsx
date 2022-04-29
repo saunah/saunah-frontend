@@ -4,7 +4,9 @@ import LoginView from './LoginView'
 
 describe('<LoginViewTests>', () => {
 
-    test('Test One', () => {
-        render(<div></div>)
+    test('render correctly', () => {
+        render(<BrowserRouter><LoginView/></BrowserRouter>)
+        const element =screen.getByTestId('loginID')
+        expect(element).toBeInTheDocument()
     })
 })
