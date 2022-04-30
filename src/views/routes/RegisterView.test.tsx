@@ -5,7 +5,7 @@ import { mockUserAPI } from '../../networking/api'
 import { ReactNode } from 'react'
 import AlertProvider from '../shared/AlertProvider'
 
-describe('<Registervie>', () => {
+describe('<Registerview>', () => {
     test('registerform show user correctly', () => {
         render(<RegisterView />, { wrapper: wrapper })
         expect(screen.getByTestId('registerform')).toBeInTheDocument()
@@ -28,6 +28,7 @@ describe('<Registervie>', () => {
 const defaultMock = () => {
     return {
         signup: jest.fn(() => Promise.resolve()),
+        login: jest.fn(() => Promise.resolve()),
     }
 }
 
