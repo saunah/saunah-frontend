@@ -45,7 +45,6 @@ const SaunaEditorView = () => {
     }
 
     const removeImage = async (image: SaunaImage.Response) => {
-        console.log('lit')
         await api.saunaImages.remove(image.id)
         success('Das Bild wurde erfolgreich gelöscht.')
         fetchImages()
