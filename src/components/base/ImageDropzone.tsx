@@ -1,11 +1,15 @@
-import { useState } from 'react'
+import { forwardRef, Ref, useImperativeHandle, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 export type DropzoneProps = {
     onFilesChanged?: (files: File[]) => void
 }
 
-const Dropzone = (props: DropzoneProps) => {
+export type DropzoneRef = {
+    reset: () => void
+}
+
+const Dropzone = forwardRef((props: DropzoneProps, ref: Ref<DropzoneRef>) => {
     const [previews, setPreviews] = useState<string[]>([])
 
     const { getRootProps, isDragAccept } = useDropzone({
@@ -16,6 +20,10 @@ const Dropzone = (props: DropzoneProps) => {
             setPreviews(previews)
         },
     })
+
+    useImperativeHandle(ref, () => ({
+        reset: () => setPreviews([]),
+    }))
 
     const rootClasses =
         'w-full h-20 rounded-lg border-dashed border-2 flex items-center justify-center ' +
@@ -48,6 +56,6 @@ const Dropzone = (props: DropzoneProps) => {
             )}
         </div>
     )
-}
+})
 
 export default Dropzone
