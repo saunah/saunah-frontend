@@ -17,7 +17,7 @@ const LoginView = () => {
 
     return (
         <div data-testid={'loginform'}>
-            <LoginForm  user={user} onChange={setUser} onSubmit={onSubmit} />
+            <LoginForm user={user} onChange={setUser} onSubmit={onSubmit} />
         </div>
     )
 }
