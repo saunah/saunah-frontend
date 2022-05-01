@@ -1,11 +1,23 @@
 import PageTitle from '../../components/base/PageTitle'
 import ImageDropzone from '../../components/base/ImageDropzone'
+import { useState } from 'react'
+import axios from 'axios'
+import Button from '../../components/base/Button'
 
 const Home = () => {
+    const [files, setFiles] = useState<File[]>([])
+
+    const onSubmit = () => {
+        const multiplart = new FormData()
+        files.forEach((file, index) => multiplart.append('images', file))
+        axios.post('/sauna/1/addImage', multiplart).then(() => console.log('yeah'))
+    }
+
     return (
         <>
             <PageTitle> You are home. </PageTitle>
-            <ImageDropzone />
+            <ImageDropzone onFilesChanged={setFiles} />
+            <Button onClick={onSubmit}>Hochladen</Button>
 
             {/* <p>
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut

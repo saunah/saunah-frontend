@@ -38,9 +38,16 @@ const SaunaEditorView = () => {
         saunaId && api.saunaImages.list(saunaId).then(setImages)
     }
 
-    const uploadFiles = async (files: File[]) => {
+    const uploadImages = async (files: File[]) => {
         if (saunaId) await api.saunaImages.add(saunaId, files)
         success('Die Bilder wurden erfolgreich hochgeladen.')
+        fetchImages()
+    }
+
+    const removeImage = async (image: SaunaImage.Response) => {
+        console.log('lit')
+        await api.saunaImages.remove(image.id)
+        success('Das Bild wurde erfolgreich gelöscht.')
         fetchImages()
     }
 
@@ -54,8 +61,8 @@ const SaunaEditorView = () => {
                 </div>
                 <div>
                     <h2 className="text-xl font-medium text-primary-700 mb-4"> Bilder </h2>
-                    <SaunaImageEditor images={images} />
-                    <SaunaImageUploader onSubmit={uploadFiles} />
+                    {images.length > 0 && <SaunaImageEditor className="mb-4" images={images} onRemove={removeImage} />}
+                    <SaunaImageUploader onSubmit={uploadImages} />
                 </div>
             </div>
         </div>

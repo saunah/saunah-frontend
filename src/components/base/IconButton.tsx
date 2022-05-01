@@ -7,6 +7,7 @@ export type IconButtonProps = {
     type?: 'button' | 'submit' | 'reset'
     disabled?: boolean
     onClick?: () => void
+    className?: string
 }
 
 /**
@@ -18,10 +19,11 @@ const IconButton = (props: IconButtonProps) => {
     const type = props.type || 'button'
 
     const classes =
-        'p-0.5 transition rounded-md -m-1 ' +
+        props.className +
+        ' p-0.5 transition rounded-md -m-1 ' +
         (props.disabled
             ? `cursor-default text-${color}-300`
-            : `cursor-pointer hover:bg-${color}-500 hover:bg-opacity-10 text-${color}-500`)
+            : `cursor-pointer hover:bg-${color}-500 hover:bg-opacity-20 text-${color}-500`)
 
     return (
         <button
