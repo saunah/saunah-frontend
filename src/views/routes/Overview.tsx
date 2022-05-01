@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SaunaCard from '../../components/saunas/SaunaCard'
 import { Sauna } from '../../entities/Sauna'
+import api from '../../networking/api'
 
 // Change Hardcoded SaunaTypes
 const Telta: Sauna.Response = {
@@ -46,11 +47,19 @@ const Puola: Sauna.Response = {
 }
 
 const Overview = () => {
+
+    const [saunas, setSaunas] = useState<Sauna.Response[]>([])
+
+    const getSaunas = () => {
+        api.sauna.list().then(setSaunas)
+      }
+
     return (
         <div data-testid="overviewTID" className="ml-16 mr-16 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             <SaunaCard sauna={Puola} />
             <SaunaCard sauna={Karhu} />
             <SaunaCard sauna={Telta} />
+            
         </div>
     )
 }
