@@ -1,12 +1,24 @@
 import { render, screen } from '@testing-library/react'
+import { ReactNode } from 'react'
 import { BrowserRouter } from 'react-router-dom'
+import AlertProvider from '../shared/AlertProvider'
+import AuthProvider from '../shared/AuthProvider'
 import LoginView from './LoginView'
 
-describe('<LoginViewTests>', () => {
+const wrapper = (props: { children?: ReactNode }) => {
+    return  <BrowserRouter><AuthProvider><AlertProvider>{props.children}</AlertProvider></AuthProvider></BrowserRouter>
+}
 
-    test('render correctly', () => {
-        render(<BrowserRouter><LoginView/></BrowserRouter>)
-        const element =screen.getByTestId('loginID')
-        expect(element).toBeInTheDocument()
+const defaultMock = () => {
+    return {
+        submit: jest.fn(() => Promise.resolve()),
+    }
+}
+
+describe('<LoginViewTests>', () => {
+    test('registerform show user correctly', () => {
+        render(<LoginView />, { wrapper: wrapper })
+        expect(screen.getByTestId('loginform')).toBeInTheDocument()
     })
+
 })
