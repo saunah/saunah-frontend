@@ -1,19 +1,23 @@
+import { UserCircleIcon } from '@heroicons/react/solid'
 import { render, screen } from '@testing-library/react'
+import { BrowserRouter } from 'react-router-dom'
 import AppMenu from './AppMenu'
 
 test('AppMenu containing element', () => {
-    const itemUrl = 'https://zhaw.ch'
-    const itemName = 'First Menu Link'
-
     render(
-        <AppMenu>
-            <a href={itemUrl}>{itemName}</a>
-        </AppMenu>
+        <BrowserRouter>
+            <AppMenu
+                leadingItem={{ title: 'Home', url: '/' }}
+                mainItems={[]}
+                trailingItemIcon={UserCircleIcon}
+                secondaryItems={[]}
+            />
+        </BrowserRouter>
     )
     const appMenu = screen.getByTestId('app-menu')
-    const child = screen.getByText(itemName)
+    const child = screen.getByTestId('link-home')
 
     expect(appMenu).toBeInTheDocument()
     expect(appMenu).toContainElement(child)
-    expect(child).toHaveAttribute('href', itemUrl)
+    // expect(child).toHaveAttribute('href', itemUrl)
 })

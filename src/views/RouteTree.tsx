@@ -4,23 +4,26 @@ import Home from './routes/Home'
 import Overview from './routes/Overview'
 import SaunaEditorView from './routes/sauna/SaunaEditorView'
 import Showroom from './routes/Showroom'
+import { BreadcrumbRoutes } from './shared/BreadcrumbsRouter'
 import ProtectedRoute from './shared/ProtectedRoute'
 
 const RouteTree = () => {
     return (
-        <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="/showroom" breadcrumb="Showroom" element={<Showroom />} />
-            <Route path="/saunas" breadcrumb="Saunas">
-                <Route index element={<Overview />} />
-                <Route path=":saunaId" breadcrumb="Sauna Detail">
-                    <Route index element={<div>Sauna Details</div>} />
-                    <Route path="edit" breadcrumb="Bearbeiten" element={<SaunaEditorView />} />
+        <BreadcrumbRoutes>
+            <Route path="/" element={<Layout />}>
+                <Route index element={<Home />} />
+                <Route path="/showroom" breadcrumb="Showroom" element={<Showroom />} />
+                <Route path="/saunas" breadcrumb="Saunas">
+                    <Route index element={<Overview />} />
+                    <Route path=":saunaId" breadcrumb="Sauna Detail">
+                        <Route index element={<div>Sauna Details</div>} />
+                        <Route path="edit" breadcrumb="Bearbeiten" element={<SaunaEditorView />} />
+                    </Route>
+                    <Route path="create" breadcrumb="Erstellen" element={<SaunaEditorView />} />
                 </Route>
-                <Route path="create" breadcrumb="Erstellen" element={<SaunaEditorView />} />
+                <Route path="/protected" element={<ProtectedRoute element={<div> Protected Route </div>} />} />
             </Route>
-            <Route path="/protected" element={<ProtectedRoute element={<div> Protected Route </div>} />} />
-        </Route>
+        </BreadcrumbRoutes>
     )
 }
 

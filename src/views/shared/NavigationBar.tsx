@@ -1,6 +1,9 @@
-import { Link } from 'react-router-dom'
-import AppMenu from '../../components/structural/AppMenu'
+import { HomeIcon, UserCircleIcon } from '@heroicons/react/solid'
+import { ReactElement } from 'react'
+import { BreadcrumbData } from 'use-react-router-breadcrumbs'
+import AppMenu, { AppMenuTextItem } from '../../components/structural/AppMenu'
 import { useAuth } from './AuthProvider'
+import { useBreadcrumbs } from './BreadcrumbsRouter'
 
 /**
  * Content view for the navigation bar. It uses
@@ -10,21 +13,23 @@ import { useAuth } from './AuthProvider'
  */
 const NavigationBar = () => {
     const { isAuthenticated, login, logout } = useAuth()
+    const breadcrumbs = useBreadcrumbs()
 
     return (
-        <AppMenu>
-            <Link to="/">Home</Link>
-            <Link to="/showroom">Showroom</Link>
-            <Link to="/saunas">Saunas</Link>
-            <button className="text-accent-300" onClick={login}>
-                Login
-            </button>
-            <button className="text-accent-300" onClick={logout}>
-                Logout
-            </button>
-            <span>isAuthenticated: {`${isAuthenticated}`} </span>
-        </AppMenu>
+        <AppMenu
+            leadingItem={{ icon: HomeIcon, url: '/' }}
+            mainItems={createBreadcrumbItems(breadcrumbs)}
+            trailingItemIcon={UserCircleIcon}
+            secondaryItems={[]}
+        />
     )
 }
 
 export default NavigationBar
+
+function createBreadcrumbItems(breadcrumbs: BreadcrumbData<string>[]): AppMenuTextItem[] {
+    return breadcrumbs.map(item => ({
+        title: ((item.breadcrumb as ReactElement).props.children as string) || '',
+        url: item.match.pathname,
+    }))
+}
