@@ -23,6 +23,7 @@ const LoginForm = (props: LoginCredentials) => {
                 <Input
                 data-testid='password-input'
                     name="Password"
+                    type='password'
                     placeholder="Password"
                     value={props.user.password}
                     onChange={password => props.onChange?.({ ...props.user, password })}
