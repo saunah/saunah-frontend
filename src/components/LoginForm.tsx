@@ -31,7 +31,7 @@ const LoginForm = (props: LoginCredentials) => {
                 />
             </div>
             <div className="ml-20 mr-20 grid gap-x-8 gap-y-3 grid-cols-2">
-                <Button data-testid='LoginButton' onClick={props.onSubmit}> Login </Button>
+                <Button data-testid='login-button' onClick={props.onSubmit}> Login </Button>
                 <Link
                     to="/" //change when we know where the link needs to go
                     className={`inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker`}
