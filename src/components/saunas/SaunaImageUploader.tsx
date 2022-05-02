@@ -21,7 +21,7 @@ const SaunaImageUploader = (props: SaunaImageUploaderProps) => {
     else if (images.length > 1) buttonText = `${images.length} Bilder hochladen`
 
     return (
-        <div>
+        <div data-testid="sauna-image-uploader">
             <ImageDropzone onFilesChanged={setImages} ref={dropzoneRef} />
             <div className="mt-2">
                 <Button disabled={images.length === 0} onClick={submit}>

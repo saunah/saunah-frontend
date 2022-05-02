@@ -53,16 +53,20 @@ const SaunaEditorView = () => {
     return (
         <div data-testid="sauna-editor-view">
             <PageTitle>{saunaId == null ? 'Sauna erstellen' : 'Sauna bearbeiten'}</PageTitle>
-            <div className="grid grid-cols-2 gap-8">
+            <div className={'grid gap-8 grid-cols-1 ' + (saunaId ? 'lg:grid-cols-2' : '')}>
                 <div>
                     <h2 className="text-xl font-medium text-primary-700 mb-4"> Informationen </h2>
                     <SaunaEditor value={sauna} onChange={setSauna} onSubmit={submit} />
                 </div>
-                <div>
-                    <h2 className="text-xl font-medium text-primary-700 mb-4"> Bilder </h2>
-                    {images.length > 0 && <SaunaImageEditor className="mb-4" images={images} onRemove={removeImage} />}
-                    <SaunaImageUploader onSubmit={uploadImages} />
-                </div>
+                {saunaId && (
+                    <div>
+                        <h2 className="text-xl font-medium text-primary-700 mb-4"> Bilder </h2>
+                        {images.length > 0 && (
+                            <SaunaImageEditor className="mb-4" images={images} onRemove={removeImage} />
+                        )}
+                        <SaunaImageUploader onSubmit={uploadImages} />
+                    </div>
+                )}
             </div>
         </div>
     )

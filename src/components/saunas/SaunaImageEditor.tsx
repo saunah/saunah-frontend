@@ -11,7 +11,7 @@ export type SaunaImageEditorProps = {
 
 const SaunaImageEditor = (props: SaunaImageEditorProps) => {
     return (
-        <div className={props.className + ' flex flex-wrap gap-4'}>
+        <div className={props.className + ' flex flex-wrap gap-4'} data-testid="sauna-image-editor">
             {props.images.map(image => (
                 <div key={image.fileName} className="relative h-40">
                     <IconButton
