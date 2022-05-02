@@ -16,8 +16,8 @@ const Dropzone = forwardRef((props: DropzoneProps, ref: Ref<DropzoneRef>) => {
         accept: { 'image/*': [] },
         onDropAccepted: acceptedFiles => {
             props.onFilesChanged?.(acceptedFiles)
-            const previews = acceptedFiles.map(file => URL.createObjectURL(file))
-            setPreviews(previews)
+            const newPreviews = acceptedFiles.map(file => URL.createObjectURL(file))
+            setPreviews(newPreviews)
         },
     })
 
