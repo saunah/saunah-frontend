@@ -17,6 +17,7 @@ const SaunaImageCarousel = (props: SaunaImageCarouselProps) => {
         infinite: true,
         speed: 500,
         arrows: false,
+        dotsClass: 'slick-dots dots-light',
     }
 
     const ref = useRef<Slider>(null)
@@ -26,8 +27,7 @@ const SaunaImageCarousel = (props: SaunaImageCarouselProps) => {
             <button className="carousel-side-button top-0 left-0" onClick={() => ref.current?.slickPrev()}>
                 <ChevronLeftIcon />
             </button>
-            {/* The desired padding of the images is 6. px-14 is 8 (side-button) + 6. pb-14 because of dots.*/}
-            <div className="px-14 pt-6 pb-12 bg-primary-100">
+            <div className="px-8 bg-primary-100">
                 <Slider {...settings} ref={ref}>
                     {props.images.map(image => (
                         <div key={image.fileName}>
