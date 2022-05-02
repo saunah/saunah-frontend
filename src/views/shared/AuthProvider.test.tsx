@@ -1,7 +1,22 @@
 import { renderHook } from '@testing-library/react-hooks'
 import { act } from 'react-dom/test-utils'
+import { LoginCredentials } from '../../entities/LoginCredentials'
+import { Token } from '../../entities/Token'
+import { mockUserAPI } from '../../networking/api'
 
 import AuthProvider, { AuthProviderProps, useAuth } from './AuthProvider'
+
+const defaultMock = () => ({
+    signup: jest.fn(() => Promise.resolve()),
+    login: jest.fn(() => Promise.resolve(testToken)),
+})
+
+const testCredentials: LoginCredentials.Request = {
+    username: 'test-user',
+    password: 'test-pw',
+}
+
+const testToken: Token.Response = { token: 'abc' }
 
 describe('<AuthProvider>', () => {
     test('has correct initial state', () => {
@@ -10,15 +25,22 @@ describe('<AuthProvider>', () => {
     })
 
     test('updates authentication status after login', async () => {
+        const mock = mockUserAPI(defaultMock())
         const { result } = renderHook(useAuth, { wrapper })
+
         expect(result.current.isAuthenticated).toBe(false)
-        await act(async () => result.current.login())
+        await act(() => result.current.login(testCredentials))
+
         expect(result.current.isAuthenticated).toBe(true)
+        expect(mock.login).toBeCalledTimes(1)
+        expect(mock.login).toBeCalledWith(testCredentials)
     })
 
     test('update authentication status after logout', async () => {
+        mockUserAPI(defaultMock())
+
         const { result } = renderHook(useAuth, { wrapper })
-        await act(async () => result.current.login())
+        await act(() => result.current.login(testCredentials))
         expect(result.current.isAuthenticated).toBe(true)
         act(() => result.current.logout())
         expect(result.current.isAuthenticated).toBe(false)

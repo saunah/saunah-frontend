@@ -2,7 +2,6 @@ import { HomeIcon, UserCircleIcon } from '@heroicons/react/solid'
 import { ReactElement } from 'react'
 import { BreadcrumbData } from 'use-react-router-breadcrumbs'
 import AppMenu, { AppMenuTextItem } from '../../components/structural/AppMenu'
-import { useAuth } from './AuthProvider'
 import { useBreadcrumbs } from './BreadcrumbsRouter'
 
 /**
@@ -12,7 +11,6 @@ import { useBreadcrumbs } from './BreadcrumbsRouter'
  * and {@link BrowserRouter}.
  */
 const NavigationBar = () => {
-    const { isAuthenticated, login, logout } = useAuth()
     const breadcrumbs = useBreadcrumbs()
 
     return (

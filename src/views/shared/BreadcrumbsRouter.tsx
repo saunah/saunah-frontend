@@ -1,5 +1,5 @@
-import { createContext, ReactNode, useContext, useState } from 'react'
-import { BrowserRouter, useRoutes } from 'react-router-dom'
+import { createContext, ReactNode, useContext } from 'react'
+import { useRoutes } from 'react-router-dom'
 import setupBreadcrumbs, { BreadcrumbData, createRoutesFromChildren } from 'use-react-router-breadcrumbs'
 
 export const BreadcrumbsContext = createContext<BreadcrumbData<string>[]>([])

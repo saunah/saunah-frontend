@@ -1,8 +1,11 @@
 import React, { ReactNode, useState } from 'react'
+import { LoginCredentials } from '../../entities/LoginCredentials'
+import api from '../../networking/api'
+import cookieStore from '../../networking/cookieStore'
 
 export type AuthState = {
     isAuthenticated: boolean
-    login: () => Promise<void>
+    login: (credentials: LoginCredentials.Request) => Promise<void>
     logout: () => void
 }
 
@@ -16,16 +19,14 @@ export type AuthProviderProps = {
 const AuthProvider = (props: AuthProviderProps) => {
     const [isAuthenticated, setAuthenticated] = useState<boolean>(false)
 
-    const login = async () => {
-        return new Promise<void>(resolve => {
-            setTimeout(() => {
-                setAuthenticated(true)
-                resolve()
-            }, 100)
+    const login = (credentials: LoginCredentials.Request) =>
+        api.user.login(credentials).then(token => {
+            cookieStore.set('saunah-token', token.token)
+            setAuthenticated(true)
         })
-    }
 
     const logout = () => {
+        cookieStore.remove('saunah-token')
         setAuthenticated(false)
     }
 
