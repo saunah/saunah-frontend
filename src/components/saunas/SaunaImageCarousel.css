@@ -1,0 +1,3 @@
+.carousel-side-button {
+    @apply absolute w-8 h-full bg-primary-200/50 hover:bg-primary-200/70 text-primary-400 hover:text-primary-500;
+}
