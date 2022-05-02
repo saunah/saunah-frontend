@@ -18,7 +18,7 @@ function getLabelOfInput(testId: string) {
     return within(input).getByTestId('label')
 }
 
-describe('<LoginForm test>', () => {
+describe('<LoginForm>', () => {
     test('show username correctly', () => {
         render(
             <BrowserRouter>
