@@ -9,7 +9,11 @@ window.matchMedia =
     function () {
         return {
             matches: false,
-            addListener: function () {},
-            removeListener: function () {},
+            addListener: function () {
+                // do nothing
+            },
+            removeListener: function () {
+                // do nothing
+            },
         }
     }
