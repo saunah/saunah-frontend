@@ -30,18 +30,19 @@ const Dropzone = forwardRef((props: DropzoneProps, ref: Ref<DropzoneRef>) => {
         (isDragAccept ? 'bg-accent-100 border-accent-200' : 'bg-primary-100 border-primary-200')
 
     return (
-        <div>
-            <div {...getRootProps()} className={rootClasses}>
+        <div data-testid="image-dropzone">
+            <div {...getRootProps()} className={rootClasses} data-testid="dropzone">
                 <p className="text-primary-500 text-sm font-semibold">{'Fügen Sie Dateien per Drag & Drop hinzu.'}</p>
             </div>
             {previews.length > 0 && (
                 <div className="mt-2">
                     <h4 className="text-lg font-medium text-primary-700"> Ausgewählte Dateien </h4>
                     <div className="mt-2 flex flex-wrap gap-4">
-                        {previews.map(preview => (
+                        {previews.map((preview, index) => (
                             <div key={preview}>
                                 <div>
                                     <img
+                                        data-testid={`preview-${index + 1}`}
                                         className="h-40"
                                         alt="preview"
                                         src={preview}
