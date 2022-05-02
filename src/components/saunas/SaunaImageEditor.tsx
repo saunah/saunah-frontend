@@ -15,6 +15,7 @@ const SaunaImageEditor = (props: SaunaImageEditorProps) => {
             {props.images.map(image => (
                 <div key={image.fileName} className="relative h-40">
                     <IconButton
+                        data-testid={'remove-button-' + image.id}
                         icon={TrashIcon}
                         className="top-1 left-1 absolute"
                         color="red"
@@ -23,6 +24,7 @@ const SaunaImageEditor = (props: SaunaImageEditorProps) => {
                     />
 
                     <img
+                        data-testid={'image-' + image.id}
                         className="h-full"
                         src={getAbsoluteUrl(apiRoutes.saunaImages.get(image.fileName))}
                         alt={image.fileName}

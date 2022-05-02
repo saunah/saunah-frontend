@@ -8,6 +8,7 @@ export type IconButtonProps = {
     disabled?: boolean
     onClick?: () => void
     className?: string
+    ['data-testid']?: string
 }
 
 /**
@@ -31,7 +32,7 @@ const IconButton = (props: IconButtonProps) => {
             className={classes}
             type={type}
             onClick={() => props.onClick?.()}
-            data-testid="icon-button"
+            data-testid={props['data-testid'] || 'icon-button'}
         >
             {props.icon && <props.icon className={`w-${size} h-${size}`} />}
         </button>
