@@ -22,7 +22,7 @@ const SaunaImageCarousel = (props: SaunaImageCarouselProps) => {
     const ref = useRef<Slider>(null)
 
     return (
-        <div className="relative rounded-lg overflow-hidden">
+        <div className="relative rounded-lg overflow-hidden" data-testid="sauna-image-carousel">
             <button className="carousel-side-button top-0 left-0" onClick={() => ref.current?.slickPrev()}>
                 <ChevronLeftIcon />
             </button>
@@ -32,6 +32,7 @@ const SaunaImageCarousel = (props: SaunaImageCarouselProps) => {
                     {props.images.map(image => (
                         <div key={image.fileName}>
                             <div
+                                data-testid={`image-${image.id}`}
                                 className="h-60 md:h-80 lg:h-96 bg-contain bg-no-repeat bg-center"
                                 style={{
                                     backgroundImage: `url(${getAbsoluteUrl(
