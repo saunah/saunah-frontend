@@ -5,16 +5,17 @@ import { Link, LinkProps, useMatch, useResolvedPath } from 'react-router-dom'
  * This component provides the structure for a
  * navigation bar. Items can be passed as children.
  */
-const AppMenu = (props: AppMenuProps) => {
+function AppMenu(props: AppMenuProps) {
     const [secondaryVisible, setSecondaryVisible] = useState<boolean>(false)
     const secondaryVisibilityClass = secondaryVisible ? 'visible' : 'invisible'
     const toggleSecondaryMenu = () => setSecondaryVisible(!secondaryVisible)
 
     return (
-        <div className="p-4 w-full fixed top-0 left-0" data-testid="app-menu">
-            <div className="h-14 px-4 py-2 w-full bg-primary-100 rounded-3xl flex flex-row justify-center shrink-0 shadow-xl shadow-primary-900/[0.1]">
-                <nav className="flex flex-row justify-start grow items-center space-x-4">
+        <div className="p-4 w-full fixed top-0 left-0 z-50" data-testid="app-menu">
+            <div className="h-14 w-full bg-primary-100 rounded-3xl flex flex-row justify-center shrink-0 shadow-xl shadow-primary-900/[0.1]">
+                <nav className="flex flex-row px-4 py-2 justify-start grow items-center space-x-2 overflow-x-scroll">
                     {props.leadingItem && createMenuElement(props.leadingItem)}
+                    <div className="w-0"></div>
                     {props.mainItems &&
                         props.mainItems.map((item, index) => (
                             <Fragment key={index}>
@@ -25,7 +26,7 @@ const AppMenu = (props: AppMenuProps) => {
                             </Fragment>
                         ))}
                 </nav>
-                <div className="flex flex-row justify-end grow-0 items-center space-x-4">
+                <div className="flex flex-row px-4 py-2 justify-end grow-0 items-center space-x-4">
                     {props.trailingItem && createMenuElement({ onClick: toggleSecondaryMenu, ...props.trailingItem })}
                 </div>
             </div>
@@ -103,12 +104,8 @@ function MenuLink({ children, to, ...props }: LinkProps) {
     const ifActiveClass = to && match ? 'active' : 'text-primary-500'
 
     return (
-        <Link className={`font-medium ${ifActiveClass}`} to={to} {...props}>
+        <Link className={`block font-medium ${ifActiveClass}`} to={to} {...props}>
             {children}
         </Link>
     )
-}
-
-function showSecondaryMenu() {
-    console.log('Show secondary menu pressed')
 }

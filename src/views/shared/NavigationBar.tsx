@@ -18,7 +18,12 @@ const NavigationBar = () => {
             leadingItem={{ icon: HomeIcon, url: '/' }}
             mainItems={createBreadcrumbItems(breadcrumbs)}
             trailingItem={{ icon: UserCircleIcon, size: 9 }}
-            secondaryItems={[{ title: 'Meine Buchungen' }, { title: 'Profil' }]}
+            secondaryItems={[
+                { title: 'Showroom', url: '/showroom' },
+                { title: 'Register', url: '/register' },
+                { title: 'Login', url: '/login' },
+                { title: 'Protected', url: '/protected' },
+            ]}
         />
     )
 }
