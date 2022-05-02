@@ -18,6 +18,7 @@ const RegisterForm = (props: RegisterFormProps) => {
                         data-testid="name-input"
                         name="Name"
                         placeholder="Name"
+                        autoComplete="family-name"
                         value={props.user.name}
                         onChange={name => props.onChange?.({ ...props.user, name })}
                     />
@@ -25,6 +26,7 @@ const RegisterForm = (props: RegisterFormProps) => {
                         data-testid="firstname-input"
                         name="Vorname"
                         placeholder="Vorname"
+                        autoComplete="given-name"
                         value={props.user.firstname}
                         onChange={firstname => props.onChange?.({ ...props.user, firstname })}
                     />
@@ -32,6 +34,7 @@ const RegisterForm = (props: RegisterFormProps) => {
                         data-testid="mail-input"
                         name="Mail"
                         placeholder="Mail"
+                        autoComplete="email"
                         value={props.user.email}
                         onChange={email => props.onChange?.({ ...props.user, email })}
                     />
@@ -39,6 +42,7 @@ const RegisterForm = (props: RegisterFormProps) => {
                         data-testid="place-input"
                         name="Ort"
                         placeholder="Ort"
+                        autoComplete="country-name"
                         value={props.user.place}
                         onChange={place => props.onChange?.({ ...props.user, place })}
                     />
@@ -46,6 +50,7 @@ const RegisterForm = (props: RegisterFormProps) => {
                         data-testid="street-input"
                         name="Strasse"
                         placeholder="Strasse"
+                        autoComplete="street-address"
                         value={props.user.street}
                         onChange={street => props.onChange?.({ ...props.user, street })}
                     />
@@ -55,6 +60,7 @@ const RegisterForm = (props: RegisterFormProps) => {
                         data-testid="password-input"
                         name="Passwort"
                         placeholder="****************"
+                        autoComplete="new-password"
                         type="password"
                         value={props.user.password}
                         onChange={password => props.onChange?.({ ...props.user, password })}
@@ -64,6 +70,7 @@ const RegisterForm = (props: RegisterFormProps) => {
                         data-testid="repeatPassword-input"
                         name="Passwort"
                         placeholder="****************"
+                        autoComplete="new-password"
                         type="password"
                         value={props.user.repeatPassword}
                         onChange={repeatPassword => props.onChange?.({ ...props.user, repeatPassword })}
@@ -73,6 +80,7 @@ const RegisterForm = (props: RegisterFormProps) => {
                         data-testid="telephone-input"
                         name="Telefon"
                         placeholder="Telefon"
+                        autoComplete="tel"
                         value={props.user.telephone}
                         onChange={telephone => props.onChange?.({ ...props.user, telephone })}
                     />
@@ -80,6 +88,7 @@ const RegisterForm = (props: RegisterFormProps) => {
                         data-testid="zip-input"
                         name="PLZ"
                         placeholder="PLZ"
+                        autoComplete="postal-code"
                         value={props.user.zip}
                         onChange={zip => props.onChange?.({ ...props.user, zip })}
                     />

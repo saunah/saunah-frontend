@@ -10,7 +10,6 @@ const RegisterView = () => {
 
     const signupUser = () => {
         api.user.signup(user).then(() => {
-            // print success message
             success('Registration erfolgreich')
         })
     }
