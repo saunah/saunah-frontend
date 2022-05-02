@@ -7,6 +7,8 @@ export type IconButtonProps = {
     type?: 'button' | 'submit' | 'reset'
     disabled?: boolean
     onClick?: () => void
+    className?: string
+    ['data-testid']?: string
 }
 
 /**
@@ -18,10 +20,11 @@ const IconButton = (props: IconButtonProps) => {
     const type = props.type || 'button'
 
     const classes =
-        'p-0.5 transition rounded-md -m-1 ' +
+        props.className +
+        ' p-0.5 transition rounded-md -m-1 ' +
         (props.disabled
             ? `cursor-default text-${color}-300`
-            : `cursor-pointer hover:bg-${color}-500 hover:bg-opacity-10 text-${color}-500`)
+            : `cursor-pointer hover:bg-${color}-500 hover:bg-opacity-20 text-${color}-500`)
 
     return (
         <button
@@ -29,7 +32,7 @@ const IconButton = (props: IconButtonProps) => {
             className={classes}
             type={type}
             onClick={() => props.onClick?.()}
-            data-testid="icon-button"
+            data-testid={props['data-testid'] || 'icon-button'}
         >
             {props.icon && <props.icon className={`w-${size} h-${size}`} />}
         </button>
