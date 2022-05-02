@@ -15,23 +15,26 @@ const LoginForm = (props: LoginCredentials) => {
         <div className="grid gap-4">
             <div className="ml-10 mr-10 grid gap-x-6 gap-y-2 grid-cols-1">
                 <Input
-                    data-testid='username-input'
+                    data-testid="username-input"
                     name="Username"
                     placeholder="Username"
                     value={props.user.username}
                     onChange={username => props.onChange?.({ ...props.user, username })}
                 />
                 <Input
-                data-testid='password-input'
+                    data-testid="password-input"
                     name="Password"
-                    type='password'
+                    type="password"
                     placeholder="Password"
                     value={props.user.password}
                     onChange={password => props.onChange?.({ ...props.user, password })}
                 />
             </div>
             <div className="ml-20 mr-20 grid gap-x-8 gap-y-3 grid-cols-2">
-                <Button data-testid='login-button' onClick={props.onSubmit}> Login </Button>
+                <Button data-testid="login-button" onClick={props.onSubmit}>
+                    {' '}
+                    Login{' '}
+                </Button>
                 <Link
                     to="/" //change when we know where the link needs to go
                     className={`inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker`}

@@ -24,12 +24,11 @@ const defaultMock = () => {
     }
 }
 
-describe('<LoginViewTests>', () => {
-    test('registerform show user correctly', () => {
+describe('<LoginView>', () => {
+    test('shows LoginForm correctly', () => {
         render(<LoginView />, { wrapper: wrapper })
         expect(screen.getByTestId('loginform')).toBeInTheDocument()
     })
-
     test('data gets send onSubmit', async () => {
         const mock = mockUserAPI(defaultMock())
         render(<LoginView />, { wrapper: wrapper })
