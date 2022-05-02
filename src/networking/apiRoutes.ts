@@ -8,6 +8,9 @@ const apiRoutes = {
         edit: '/sauna/edit',
         remove: '/sauna/remove',
     },
+    user: {
+        signup: `/signup`,
+    },
 }
 
 export default readonly(apiRoutes)

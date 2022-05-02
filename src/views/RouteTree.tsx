@@ -5,6 +5,7 @@ import Overview from './routes/Overview'
 import SaunaEditorView from './routes/sauna/SaunaEditorView'
 import Showroom from './routes/Showroom'
 import ProtectedRoute from './shared/ProtectedRoute'
+import RegisterView from '../views/routes/RegisterView'
 
 const RouteTree = () => {
     return (
@@ -21,6 +22,7 @@ const RouteTree = () => {
                     <Route path="create" element={<SaunaEditorView />} />
                 </Route>
                 <Route path="/protected" element={<ProtectedRoute element={<div> Protected Route </div>} />} />
+                <Route path="/register" element={<RegisterView />} />
             </Route>
         </Routes>
     )
