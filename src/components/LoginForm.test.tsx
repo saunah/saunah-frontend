@@ -26,7 +26,7 @@ describe('<LoginForm test>', () => {
             </BrowserRouter>
         )
         const label = getLabelOfInput('username-input')
-        expect(label).toHaveTextContent('Username')
+        expect(label).toHaveTextContent('Benutzername')
 
         const input = getFieldOfInput('username-input')
         expect(input).toHaveValue(testUser.username)
@@ -39,7 +39,7 @@ describe('<LoginForm test>', () => {
             </BrowserRouter>
         )
         const label = getLabelOfInput('password-input')
-        expect(label).toHaveTextContent('Password')
+        expect(label).toHaveTextContent('Passwort')
 
         const input = getFieldOfInput('password-input')
         expect(input).toHaveValue(testUser.password)
