@@ -56,10 +56,7 @@ const Overview = () => {
 
     return (
         <div data-testid="overviewTID" className="ml-16 mr-16 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            <SaunaCard sauna={Puola} />
-            <SaunaCard sauna={Karhu} />
-            <SaunaCard sauna={Telta} />
-            
+             {saunas.map(sauna => <SaunaCard sauna={sauna}/>)}
         </div>
     )
 }
