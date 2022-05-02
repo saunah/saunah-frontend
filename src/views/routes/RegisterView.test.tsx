@@ -28,7 +28,7 @@ describe('<Registerview>', () => {
 const defaultMock = () => {
     return {
         signup: jest.fn(() => Promise.resolve()),
-        login: jest.fn(() => Promise.resolve()),
+        login: jest.fn(() => Promise.resolve({ token: 'abc' })),
     }
 }
 

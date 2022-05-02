@@ -17,6 +17,7 @@ const LoginForm = (props: LoginCredentials) => {
                 data-testid="username-input"
                 name="Benutzername"
                 placeholder="Benutzername"
+                autoComplete="username"
                 value={props.user.username}
                 onChange={username => props.onChange?.({ ...props.user, username })}
             />
@@ -25,6 +26,7 @@ const LoginForm = (props: LoginCredentials) => {
                 name="Passwort"
                 placeholder="Passwort"
                 type="password"
+                autoComplete="current-password"
                 value={props.user.password}
                 onChange={password => props.onChange?.({ ...props.user, password })}
             />

@@ -1,19 +1,22 @@
 import { renderHook } from '@testing-library/react-hooks'
 import { act } from 'react-dom/test-utils'
 import { LoginCredentials } from '../../entities/LoginCredentials'
+import { Token } from '../../entities/Token'
 import { mockUserAPI } from '../../networking/api'
 
 import AuthProvider, { AuthProviderProps, useAuth } from './AuthProvider'
 
 const defaultMock = () => ({
     signup: jest.fn(() => Promise.resolve()),
-    login: jest.fn(() => Promise.resolve()),
+    login: jest.fn(() => Promise.resolve(testToken)),
 })
 
 const testCredentials: LoginCredentials.Request = {
     username: 'test-user',
     password: 'test-pw',
 }
+
+const testToken: Token.Response = { token: 'abc' }
 
 describe('<AuthProvider>', () => {
     test('has correct initial state', () => {
