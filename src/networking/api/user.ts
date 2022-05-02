@@ -6,13 +6,13 @@ import { LoginCredentials } from '../../entities/LoginCredentials'
 import { Token } from '../../entities/Token'
 
 export type UserAPI = DeepReadonly<{
-    signup(user: User.Edit): Promise<void>
+    signup(user: User.Request): Promise<void>
     login(credentials: LoginCredentials.Request): Promise<Token.Response>
 }>
 
 const user: UserAPI = {
-    async signup(user: User.Edit): Promise<void> {
-        const requestData = User.mapOut(user)
+    async signup(newUser: User.Request): Promise<void> {
+        const requestData = User.mapOut(newUser)
         await axios.post(apiRoutes.user.signup, requestData)
     },
     async login(credentials: LoginCredentials.Request): Promise<Token.Response> {

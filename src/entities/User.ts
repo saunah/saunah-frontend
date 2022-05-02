@@ -3,7 +3,7 @@ export namespace User {
     // It can differ from the entitiy in the backend sometimes.
     // For example a date object is sent to the backend as a string
     // but we will represent it as a date object here in code
-    export type Edit = {
+    export type Request = {
         password: string
         repeatPassword: string
         name: string
@@ -17,7 +17,7 @@ export namespace User {
 
     // This is the user-entity, exactly the way
     // the backend expects us to send it to it
-    export type EditRequest = {
+    export type RemoteRequest = {
         firstName: string
         lastName: string
         password: string
@@ -29,7 +29,7 @@ export namespace User {
     }
 
     // creates an empty user
-    export function empty(): Edit {
+    export function empty(): Request {
         return {
             name: '',
             firstname: '',
@@ -47,7 +47,7 @@ export namespace User {
     // to the entitiy that the backend expects
     // Ideally this types are the same and we don't have to
     // map anything and can just return the same object
-    export function mapOut(user: Edit): EditRequest {
+    export function mapOut(user: Request): RemoteRequest {
         return {
             firstName: user.firstname,
             lastName: user.name,
