@@ -14,7 +14,7 @@ export default function axiosConfig(): void {
         console.debug(`The request ${method} ${request.url}${stringParams} has started.`)
 
         const accessToken = cookieStore.get('saunah-token')
-        const authHeader = accessToken ? '' : `Bearer ${accessToken}`
+        const authHeader = accessToken ? `Bearer ${accessToken}` : ''
         request.headers = { ...request.headers, Authorization: authHeader }
 
         return request
