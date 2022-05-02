@@ -9,15 +9,15 @@ test('AppMenu containing element', () => {
             <AppMenu
                 leadingItem={{ title: 'Home', url: '/' }}
                 mainItems={[]}
-                trailingItemIcon={UserCircleIcon}
+                trailingItem={{ icon: UserCircleIcon, size: 9 }}
                 secondaryItems={[]}
             />
         </BrowserRouter>
     )
     const appMenu = screen.getByTestId('app-menu')
-    //const child = screen.getByTestId('link-home')
+    // const child = screen.getByTestId('link-home')
 
     expect(appMenu).toBeInTheDocument()
-    //expect(appMenu).toContainElement(child)
+    // expect(appMenu).toContainElement(child)
     // expect(child).toHaveAttribute('href', itemUrl)
 })

@@ -17,7 +17,7 @@ const NavigationBar = () => {
         <AppMenu
             leadingItem={{ icon: HomeIcon, url: '/' }}
             mainItems={createBreadcrumbItems(breadcrumbs)}
-            trailingItemIcon={UserCircleIcon}
+            trailingItem={{ icon: UserCircleIcon, size: 9 }}
             secondaryItems={[{ title: 'Meine Buchungen' }, { title: 'Profil' }]}
         />
     )

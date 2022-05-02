@@ -13,7 +13,7 @@ module.exports = {
     plugins: [],
     safelist: [
         {
-            pattern: /(bg|text|border)-.+-.+/,
+            pattern: /(bg|text|border)-.+-.+|[hw]-.+/,
             variants: ['hover'],
         },
     ],
