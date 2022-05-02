@@ -67,6 +67,19 @@ describe('<SaunaEditorView>', () => {
         expect(mock.edit).toBeCalledTimes(0)
         await waitForStateUpdate()
     })
+
+    test('removeFiles() api calls are done corectly', async () => {
+        mockSaunaAPI(defaultMock())
+        const imageMock = mockSaunaImageAPI(imagesMock())
+
+        render(<SaunaEditorView />, { wrapper: wrapper('/sauna/99/edit') })
+        await waitForStateUpdate()
+
+        fireEvent.click(screen.getByTestId('remove-button-1'))
+        expect(imageMock.remove).toBeCalledWith(1)
+        expect(imageMock.remove).toBeCalledTimes(1)
+        await waitForStateUpdate()
+    })
 })
 
 const wrapper = (startRoute: string) => (props: { children?: ReactNode }) => {

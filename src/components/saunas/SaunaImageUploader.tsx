@@ -24,7 +24,7 @@ const SaunaImageUploader = (props: SaunaImageUploaderProps) => {
         <div data-testid="sauna-image-uploader">
             <ImageDropzone onFilesChanged={setImages} ref={dropzoneRef} />
             <div className="mt-2">
-                <Button disabled={images.length === 0} onClick={submit}>
+                <Button disabled={images.length === 0} onClick={submit} data-testid="upload-button">
                     {buttonText}
                 </Button>
             </div>
