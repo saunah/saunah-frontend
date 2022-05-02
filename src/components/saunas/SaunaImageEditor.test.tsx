@@ -1,4 +1,4 @@
-import { fireEvent, getByTestId, render, screen, within } from '@testing-library/react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
 import { SaunaImage } from '../../entities/SaunaImage'
 import SaunaImageEditor from './SaunaImageEditor'
 
