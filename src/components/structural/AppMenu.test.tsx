@@ -7,6 +7,8 @@ describe('<AppMenu>', () => {
     const itemUrl = '/'
     const defaultIconClass = 'w-7 h-7'
     const customIconClass = 'w-9 h-9'
+    const testIdMenu = 'app-menu'
+    const testIdPrimaryWrap = 'app-menu-primary-items'
     const testIdLeading = 'leading-item'
     const testIdTrailing = 'trailing-item'
     const testIdPrimaryFirst = 'primary-first'
@@ -17,7 +19,7 @@ describe('<AppMenu>', () => {
     test('contains leading and trailing elements', () => {
         render(<TestMenu />)
 
-        const appMenu = screen.getByTestId('app-menu')
+        const appMenu = screen.getByTestId(testIdMenu)
         const leadingItem = screen.getByTestId(testIdLeading)
         const trailingItem = screen.getByTestId(testIdTrailing)
 
@@ -30,7 +32,7 @@ describe('<AppMenu>', () => {
     test('contains primary elements', () => {
         render(<TestMenu />)
 
-        const appMenu = screen.getByTestId('app-menu')
+        const appMenu = screen.getByTestId(testIdMenu)
         const first = screen.getByTestId(testIdPrimaryFirst)
         const second = screen.getByTestId(testIdPrimarySecond)
 
@@ -42,7 +44,7 @@ describe('<AppMenu>', () => {
     test('contains secondary elements after clicking', () => {
         render(<TestMenu />)
 
-        const appMenu = screen.getByTestId('app-menu')
+        const appMenu = screen.getByTestId(testIdMenu)
         const trailingItem = screen.getByTestId(testIdTrailing)
 
         fireEvent.click(trailingItem)
@@ -71,6 +73,18 @@ describe('<AppMenu>', () => {
         const leadingIcon = leadingItem.querySelector('svg')
 
         expect(leadingIcon).toHaveClass(defaultIconClass)
+    })
+
+    test('primary items not rendered if not added', () => {
+        render(
+            <BrowserRouter>
+                <AppMenu />
+            </BrowserRouter>
+        )
+
+        const primaryItemsWrapper = screen.getByTestId(testIdPrimaryWrap)
+
+        expect(primaryItemsWrapper).toBeEmptyDOMElement()
     })
 
     function TestMenu() {
