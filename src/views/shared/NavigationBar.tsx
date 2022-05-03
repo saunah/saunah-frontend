@@ -36,7 +36,7 @@ function createBreadcrumbItems(breadcrumbs: BreadcrumbData<string>[]): AppMenuTe
 
 function createSecondaryItems({ isAuthenticated }: AuthState): AppMenuTextItem[] {
     return [
-        { title: <>Showroom</>, url: '/showroom' },
+        { title: <>Showroom</>, url: '/showroom', testId: 'showroom-test-id' },
         ...(isAuthenticated
             ? [
                   { title: <>Erstellen</>, url: '/saunas/create' },

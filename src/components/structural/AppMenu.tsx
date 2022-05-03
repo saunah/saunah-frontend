@@ -2,6 +2,7 @@ import { Menu, Transition } from '@headlessui/react'
 import React, { Fragment, ReactElement, ReactNode, SVGProps } from 'react'
 import { Link, LinkProps, useMatch, useResolvedPath } from 'react-router-dom'
 
+const defaultTestIdElement = 'menu-element'
 const defaultIconClasses = 'transition ease-in-out duration-200 cursor-pointer text-primary-500 hover:text-primary-400'
 
 /**
@@ -78,10 +79,18 @@ function OuterAppMenuElement({ children, fromItem }: OuterAppMenuItemProps) {
     if (!fromItem) return <></>
 
     if (isAppMenuIconItem(fromItem) && fromItem.onClick != null) {
-        return <button onClick={() => fromItem.onClick?.()}>{children}</button>
+        return (
+            <button onClick={() => fromItem.onClick?.()} data-testid={fromItem.testId || defaultTestIdElement}>
+                {children}
+            </button>
+        )
     }
 
-    return <MenuLink to={fromItem.url || ''}>{children}</MenuLink>
+    return (
+        <MenuLink to={fromItem.url || ''} data-testid={fromItem.testId || defaultTestIdElement}>
+            {children}
+        </MenuLink>
+    )
 }
 
 function InnerAppMenuElement({ fromItem }: AppMenuItemProps): JSX.Element {
@@ -113,7 +122,10 @@ function SecondaryMenu({ trailingItem, secondaryItems }: AppMenuProps) {
         <div className="text-right">
             <Menu as="div" className="relative block text-left">
                 <div>
-                    <Menu.Button className="block focus:outline-none">
+                    <Menu.Button
+                        className="block focus:outline-none"
+                        data-testid={trailingItem?.testId || defaultTestIdElement}
+                    >
                         <InnerAppMenuElement fromItem={trailingItem} />
                     </Menu.Button>
                 </div>
