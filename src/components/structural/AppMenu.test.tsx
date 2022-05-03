@@ -9,7 +9,7 @@ test('AppMenu containing element', () => {
             <AppMenu
                 leadingItem={{ title: <>Home</>, url: '/' }}
                 mainItems={[]}
-                trailingItem={{ icon: UserCircleIcon, size: 9 }}
+                trailingItem={{ icon: UserCircleIcon, iconClasses: 'w-9 h-9' }}
                 secondaryItems={[]}
             />
         </BrowserRouter>
