@@ -5,10 +5,10 @@ import setupBreadcrumbs, { BreadcrumbData, createRoutesFromChildren } from 'use-
 export const BreadcrumbsContext = createContext<BreadcrumbData<string>[]>([])
 export const useBreadcrumbs = () => useContext(BreadcrumbsContext)
 
-export type BreadcrumbRoutesProps = {
-    children?: ReactNode
-}
-
+/**
+ * Initializes breadcrumbs and routes, such that they
+ * can be used with useBreadcrumbs.
+ */
 export const BreadcrumbRoutes = ({ children }: BreadcrumbRoutesProps) => {
     const appRouteObjects = createRoutesFromChildren(children)
     const breadcrumbs = setupBreadcrumbs(appRouteObjects, { disableDefaults: true })
@@ -19,4 +19,8 @@ export const BreadcrumbRoutes = ({ children }: BreadcrumbRoutesProps) => {
             <GeneratedRoutes />
         </BreadcrumbsContext.Provider>
     )
+}
+
+export type BreadcrumbRoutesProps = {
+    children?: ReactNode
 }

@@ -1,5 +1,5 @@
 import { Menu, Transition } from '@headlessui/react'
-import React, { Fragment, ReactElement, ReactNode, SVGProps } from 'react'
+import { Fragment, ReactElement, ReactNode, SVGProps } from 'react'
 import { Link, LinkProps, useMatch, useResolvedPath } from 'react-router-dom'
 
 const defaultTestIdElement = 'menu-element'
