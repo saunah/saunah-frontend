@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { ReactNode } from 'react'
-import { BrowserRouter, MemoryRouter, Route, Routes } from 'react-router-dom'
+import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { Sauna } from '../../entities/Sauna'
 import { mockSaunaAPI } from '../../networking/api'
 import Overview from './Overview'
@@ -19,7 +19,7 @@ const wrapper = (startRoute: string) => (props: { children?: ReactNode }) => {
     return(
         <MemoryRouter initialEntries={[startRoute]}>
             <Routes>
-                <Route path="/sauna/:saunaId/list" element={props.children} />
+                <Route path="/saunas" element={props.children} />
             </Routes>
         </MemoryRouter>    
     )
@@ -45,7 +45,7 @@ describe('<Overview Tests>', () => {
     test('the correct sauna is fetched on the edit page', async () => {
         const mock = mockSaunaAPI(defaultMock())
 
-        render(<Overview />, { wrapper: wrapper('/saunas/') })
+        render(<Overview />, { wrapper: wrapper('/saunas') })
         await waitForStateUpdate()
         expect(screen.getByTestId('overviewTID')).toBeInTheDocument()
 
