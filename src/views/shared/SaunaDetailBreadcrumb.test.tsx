@@ -24,6 +24,21 @@ describe('<SaunaDetailBreadcrumb>', () => {
         expect(breadcrumbAfter).toHaveTextContent(sauna1.name)
     })
 
+    test('only default name is displayed on inavalid id', async () => {
+        const { mock, get: getSaunas } = defaultMock()
+
+        mockSaunaAPI(mock)
+        render(<SaunaDetailBreadcrumb testId={breadcrumbTestId} {...invalidBreadcrumProps} />)
+
+        const breadcrumbBefore = await screen.findByTestId(breadcrumbTestId)
+        expect(breadcrumbBefore).toHaveTextContent(defaultRouteText)
+
+        getSaunas.resolve(sauna1)
+
+        const breadcrumbAfter = await screen.findByTestId(breadcrumbTestId)
+        expect(breadcrumbAfter).toHaveTextContent(defaultRouteText)
+    })
+
     const sauna1: Sauna.Response = {
         id: 1,
         name: 'Sauna 1',
@@ -67,6 +82,25 @@ describe('<SaunaDetailBreadcrumb>', () => {
         match: {
             params: {
                 saunaId: '1',
+            },
+            pathname: '/saunas/1',
+            pattern: { path: '/saunas/:saunaId', end: true },
+            route: { index: true },
+        },
+        key: '',
+        location: {
+            key: 'default',
+            state: null,
+            pathname: '/saunas/1/edit',
+            search: '',
+            hash: '',
+        },
+    }
+
+    const invalidBreadcrumProps: BreadcrumbComponentProps<string> = {
+        match: {
+            params: {
+                saunaId: 'a',
             },
             pathname: '/saunas/1',
             pattern: { path: '/saunas/:saunaId', end: true },
