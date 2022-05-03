@@ -2,6 +2,7 @@ import { HomeIcon, UserCircleIcon } from '@heroicons/react/solid'
 import { ReactElement } from 'react'
 import { BreadcrumbData } from 'use-react-router-breadcrumbs'
 import AppMenu, { AppMenuTextItem } from '../../components/structural/AppMenu'
+import { AuthState, useAuth } from './AuthProvider'
 import { useBreadcrumbs } from './BreadcrumbsRouter'
 
 /**
@@ -11,19 +12,15 @@ import { useBreadcrumbs } from './BreadcrumbsRouter'
  * and {@link BrowserRouter}.
  */
 const NavigationBar = () => {
+    const authState = useAuth()
     const breadcrumbs = useBreadcrumbs()
 
     return (
         <AppMenu
             leadingItem={{ icon: HomeIcon, url: '/' }}
             mainItems={createBreadcrumbItems(breadcrumbs)}
-            trailingItem={{ icon: UserCircleIcon, size: 9 }}
-            secondaryItems={[
-                { title: <>Showroom</>, url: '/showroom' },
-                { title: <>Register</>, url: '/register' },
-                { title: <>Login</>, url: '/login' },
-                { title: <>Protected</>, url: '/protected' },
-            ]}
+            trailingItem={{ icon: UserCircleIcon, iconClasses: 'w-9 h-9' }}
+            secondaryItems={createSecondaryItems(authState)}
         />
     )
 }
@@ -35,4 +32,19 @@ function createBreadcrumbItems(breadcrumbs: BreadcrumbData<string>[]): AppMenuTe
         title: item.breadcrumb as ReactElement,
         url: item.match.pathname,
     }))
+}
+
+function createSecondaryItems({ isAuthenticated }: AuthState): AppMenuTextItem[] {
+    return [
+        { title: <>Showroom</>, url: '/showroom' },
+        ...(isAuthenticated
+            ? [
+                  { title: <>Erstellen</>, url: '/saunas/create' },
+                  { title: <>Logout</>, url: '/logout' },
+              ]
+            : [
+                  { title: <>Register</>, url: '/register' },
+                  { title: <>Login</>, url: '/login' },
+              ]),
+    ]
 }
