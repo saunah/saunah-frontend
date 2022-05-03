@@ -19,10 +19,10 @@ const NavigationBar = () => {
             mainItems={createBreadcrumbItems(breadcrumbs)}
             trailingItem={{ icon: UserCircleIcon, size: 9 }}
             secondaryItems={[
-                { title: 'Showroom', url: '/showroom' },
-                { title: 'Register', url: '/register' },
-                { title: 'Login', url: '/login' },
-                { title: 'Protected', url: '/protected' },
+                { title: <>Showroom</>, url: '/showroom' },
+                { title: <>Register</>, url: '/register' },
+                { title: <>Login</>, url: '/login' },
+                { title: <>Protected</>, url: '/protected' },
             ]}
         />
     )
@@ -32,7 +32,7 @@ export default NavigationBar
 
 function createBreadcrumbItems(breadcrumbs: BreadcrumbData<string>[]): AppMenuTextItem[] {
     return breadcrumbs.map(item => ({
-        title: ((item.breadcrumb as ReactElement).props.children as string) || '',
+        title: item.breadcrumb as ReactElement,
         url: item.match.pathname,
     }))
 }

@@ -1,4 +1,4 @@
-import { Fragment, SVGProps, useState } from 'react'
+import { Fragment, ReactElement, SVGProps, useState } from 'react'
 import { Link, LinkProps, useMatch, useResolvedPath } from 'react-router-dom'
 
 /**
@@ -56,7 +56,7 @@ export type AppMenuProps = {
 export type AppMenuItem = AppMenuTextItem | AppMenuElementItem
 
 export type AppMenuTextItem = {
-    title: string
+    title: ReactElement
     url?: string
 }
 
@@ -68,7 +68,7 @@ export type AppMenuElementItem = {
 }
 
 export function isAppMenuTextItem(item: AppMenuItem): item is AppMenuTextItem {
-    return typeof (item as AppMenuTextItem).title === 'string'
+    return typeof (item as AppMenuTextItem).title === 'object'
 }
 
 export function isAppMenuElementItem(item: AppMenuItem): item is AppMenuElementItem {
