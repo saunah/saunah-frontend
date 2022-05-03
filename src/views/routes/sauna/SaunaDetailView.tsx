@@ -11,7 +11,7 @@ const SaunaDetailView = () => {
     const saunaId = parseId(params['saunaId'])
 
     const getSaunaDetail = () => {
-        if(saunaId != null){
+        if (saunaId != null) {
             api.sauna.get(saunaId).then(setSaunaDetail)
         }
     }
@@ -19,10 +19,13 @@ const SaunaDetailView = () => {
     useEffect(() => {
         getSaunaDetail()
     })
-    
+
     return (
-        <div data-testid="SaunaDetailView" className="ml-16 mr-16 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            <SaunaDetail sauna={saunaDetail}/>
+        <div
+            data-testid={'sauna-detail-view'}
+            className="ml-16 mr-16 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+        >
+            <SaunaDetail sauna={saunaDetail} />
         </div>
     )
 }

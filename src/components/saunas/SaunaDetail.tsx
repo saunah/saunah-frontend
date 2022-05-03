@@ -10,13 +10,17 @@ const PLACEHOLDER_LINK =
 
 const SaunaDetail = (props: SaunaDetailProps) => {
     return (
-        <div className="grid gap-4">
-            <h2 className="text-2xl font-extrabold text-gray-900">{props.sauna.name}</h2>
+        <div className="grid gap-4" data-testid="sauna-detail">
+            <h2 data-testid="title" className="text-2xl font-extrabold text-gray-900">
+                {props.sauna.name}
+            </h2>
             <div>
                 <img src={PLACEHOLDER_LINK /* TODO: add correct link */} alt={'props.alt'} />
             </div>
             <div>
-                <p className="text-gray-500">{props.sauna.description}</p>
+                <p data-testid="description" className="text-gray-500">
+                    {props.sauna.description}
+                </p>
             </div>
         </div>
     )
