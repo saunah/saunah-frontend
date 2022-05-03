@@ -1,5 +1,5 @@
 import { Menu, Transition } from '@headlessui/react'
-import React, { Fragment, ReactElement, SVGProps } from 'react'
+import React, { Fragment, ReactElement, ReactNode, SVGProps } from 'react'
 import { Link, LinkProps, useMatch, useResolvedPath } from 'react-router-dom'
 
 const defaultIconClasses = 'transition ease-in-out duration-200 cursor-pointer text-primary-500 hover:text-primary-400'
@@ -13,26 +13,17 @@ function AppMenu(props: AppMenuProps) {
         <div className="p-4 w-full fixed top-0 left-0 z-50" data-testid="app-menu">
             <div className="h-14 w-full bg-primary-100 rounded-3xl flex flex-row justify-center shrink-0 shadow-xl shadow-primary-900/[0.1]">
                 <nav className="flex flex-row px-4 py-2 justify-start grow items-center space-x-2 overflow-x-scroll">
-                    {props.leadingItem && createMenuElement(props.leadingItem)}
+                    {props.leadingItem && <MenuElement fromItem={props.leadingItem} />}
                     <div className="w-0"></div>
-                    {props.mainItems &&
-                        props.mainItems.map((item, index) => (
-                            <Fragment key={index}>
-                                {createMenuElement(item)}
-                                {props.mainItems && index + 1 < props.mainItems.length && (
-                                    <span className="text-primary-300">/</span>
-                                )}
-                            </Fragment>
-                        ))}
+                    <PrimaryMenu {...props} />
                 </nav>
                 <div className="flex flex-row px-4 py-2 justify-end grow-0 items-center space-x-4">
-                    {props.trailingItem && createSecondaryMenu(props)}
+                    {props.trailingItem && <SecondaryMenu {...props} />}
                 </div>
             </div>
         </div>
     )
 }
-
 export default AppMenu
 
 export type AppMenuProps = {
@@ -42,42 +33,59 @@ export type AppMenuProps = {
     secondaryItems?: AppMenuItem[]
 }
 
-export type AppMenuItem = AppMenuTextItem | AppMenuElementItem
+export type AppMenuItem = AppMenuTextItem | AppMenuIconItem
+
+type AppMenuItemBase = {
+    url?: string
+    onClick?: () => void
+    testId?: string
+}
 
 export type AppMenuTextItem = {
     title: ReactElement
-    url?: string
-}
-
-export type AppMenuElementItem = {
-    icon: (props: SVGProps<SVGSVGElement>) => JSX.Element
-    iconClasses?: string
-    url?: string
-    onClick?: () => void
-}
+} & AppMenuItemBase
 
 export function isAppMenuTextItem(item: AppMenuItem): item is AppMenuTextItem {
     return typeof (item as AppMenuTextItem).title === 'object'
 }
 
-export function isAppMenuElementItem(item: AppMenuItem): item is AppMenuElementItem {
-    return typeof (item as AppMenuElementItem).icon === 'object'
+export type AppMenuIconItem = {
+    icon: (props: SVGProps<SVGSVGElement>) => JSX.Element
+    iconClasses?: string
+} & AppMenuItemBase
+
+export function isAppMenuIconItem(item: AppMenuItem): item is AppMenuIconItem {
+    return typeof (item as AppMenuIconItem).icon === 'object'
 }
 
-function createMenuElement(fromItem: AppMenuItem): JSX.Element {
-    if (isAppMenuElementItem(fromItem)) {
-        if (fromItem.onClick != null) {
-            return <button onClick={() => fromItem.onClick?.()}>{createInnerAppMenuElement(fromItem)}</button>
-        }
-        return <MenuLink to={fromItem.url || ''}>{createInnerAppMenuElement(fromItem)}</MenuLink>
-    } else if (isAppMenuTextItem(fromItem)) {
-        return <MenuLink to={fromItem.url || ''}>{createInnerAppMenuElement(fromItem)}</MenuLink>
+function MenuElement(props: AppMenuItemProps): JSX.Element {
+    return (
+        <OuterAppMenuElement {...props}>
+            <InnerAppMenuElement {...props} />
+        </OuterAppMenuElement>
+    )
+}
+
+type AppMenuItemProps = {
+    fromItem?: AppMenuItem
+}
+
+type OuterAppMenuItemProps = {
+    children: ReactNode
+} & AppMenuItemProps
+
+function OuterAppMenuElement({ children, fromItem }: OuterAppMenuItemProps) {
+    if (!fromItem) return <></>
+
+    if (isAppMenuIconItem(fromItem) && fromItem.onClick != null) {
+        return <button onClick={() => fromItem.onClick?.()}>{children}</button>
     }
-    return <></>
+
+    return <MenuLink to={fromItem.url || ''}>{children}</MenuLink>
 }
 
-function createInnerAppMenuElement(fromItem?: AppMenuItem): JSX.Element {
-    if (fromItem && isAppMenuElementItem(fromItem)) {
+function InnerAppMenuElement({ fromItem }: AppMenuItemProps): JSX.Element {
+    if (fromItem && isAppMenuIconItem(fromItem)) {
         const iconSizedClasses = `${defaultIconClasses} ${fromItem.iconClasses || 'w-7 h-7'}`
         return <fromItem.icon className={iconSizedClasses} />
     } else if (fromItem && isAppMenuTextItem(fromItem)) {
@@ -86,25 +94,27 @@ function createInnerAppMenuElement(fromItem?: AppMenuItem): JSX.Element {
     return <></>
 }
 
-function MenuLink({ children, to, ...props }: LinkProps) {
-    let resolved = useResolvedPath(to)
-    let match = useMatch({ path: resolved.pathname, end: true })
-    const ifActiveClass = to && match ? 'active' : 'text-primary-500'
-
+function PrimaryMenu({ mainItems }: AppMenuProps) {
     return (
-        <Link className={`block font-medium ${ifActiveClass}`} to={to} {...props}>
-            {children}
-        </Link>
+        <>
+            {mainItems &&
+                mainItems.map((item, index) => (
+                    <Fragment key={index}>
+                        <MenuElement fromItem={item} />
+                        {mainItems && index + 1 < mainItems.length && <span className="text-primary-300">/</span>}
+                    </Fragment>
+                ))}
+        </>
     )
 }
 
-function createSecondaryMenu({ trailingItem, secondaryItems }: AppMenuProps) {
+function SecondaryMenu({ trailingItem, secondaryItems }: AppMenuProps) {
     return (
         <div className="text-right">
             <Menu as="div" className="relative block text-left">
                 <div>
                     <Menu.Button className="block focus:outline-none">
-                        {createInnerAppMenuElement(trailingItem)}
+                        <InnerAppMenuElement fromItem={trailingItem} />
                     </Menu.Button>
                 </div>
                 <Transition
@@ -123,12 +133,26 @@ function createSecondaryMenu({ trailingItem, secondaryItems }: AppMenuProps) {
                         {secondaryItems &&
                             secondaryItems.map((item, index) => (
                                 <Menu.Item key={index}>
-                                    <div className="py-2">{createMenuElement(item)}</div>
+                                    <div className="py-2">
+                                        <MenuElement fromItem={item} />
+                                    </div>
                                 </Menu.Item>
                             ))}
                     </Menu.Items>
                 </Transition>
             </Menu>
         </div>
+    )
+}
+
+function MenuLink({ children, to, ...props }: LinkProps) {
+    let resolved = useResolvedPath(to)
+    let match = useMatch({ path: resolved.pathname, end: true })
+    const ifActiveClass = to && match ? 'active' : 'text-primary-500'
+
+    return (
+        <Link className={`block font-medium ${ifActiveClass}`} to={to} {...props}>
+            {children}
+        </Link>
     )
 }
