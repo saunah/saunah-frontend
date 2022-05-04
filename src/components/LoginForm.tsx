@@ -22,17 +22,15 @@ const LoginForm = (props: LoginCredentials) => {
                     value={props.user.username}
                     onChange={username => props.onChange?.({ ...props.user, username })}
                 />
-                <div>
-                    <Input
-                        data-testid="password-input"
-                        name="Passwort"
-                        placeholder="Passwort"
-                        type="password"
-                        autoComplete="current-password"
-                        value={props.user.password}
-                        onChange={password => props.onChange?.({ ...props.user, password })}
-                    />
-                </div>
+                <Input
+                    data-testid="password-input"
+                    name="Passwort"
+                    placeholder="Passwort"
+                    type="password"
+                    autoComplete="current-password"
+                    value={props.user.password}
+                    onChange={password => props.onChange?.({ ...props.user, password })}
+                />
             </div>
             <div className="flex justify-between">
                 <Button className="mt-6" data-testid="login-button" onClick={props.onSubmit}>
