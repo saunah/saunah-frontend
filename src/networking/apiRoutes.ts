@@ -7,16 +7,16 @@ const apiRoutes = {
     },
     sauna: {
         list: '/saunas',
-        get: (id: number) => `/sauna/${id}`,
-        add: '/sauna/add',
-        edit: '/sauna/edit',
-        remove: '/sauna/remove',
+        get: (saunaId: number) => `/saunas/${saunaId}`,
+        add: '/saunas',
+        edit: (saunaId: number) => `/saunas/${saunaId}`,
+        remove: (saunaId: number) => `/sauna/remove/${saunaId}`,
     },
     saunaImages: {
-        list: (saunaId: number) => `/sauna/${saunaId}/images`,
-        get: (imageName: string) => `sauna/images/${imageName}`,
-        add: (saunaId: number) => `/sauna/${saunaId}/addImage`,
-        remove: (imageId: number) => `sauna/images/remove/${imageId}`,
+        list: (saunaId: number) => `/saunas/${saunaId}/images`,
+        add: (saunaId: number) => `/saunas/${saunaId}/images`,
+        get: (imageName: string) => `saunas/images/${imageName}`,
+        remove: (imageId: number) => `saunas/images/${imageId}`,
     },
 }
 
