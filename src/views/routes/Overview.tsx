@@ -16,7 +16,7 @@ const Overview = () => {
             <PageTitle>Unsere Saunas</PageTitle>
             <div data-testid="overviewTID" className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {saunas.map(sauna => (
-                    <SaunaCard sauna={sauna} />
+                    <SaunaCard sauna={sauna} key={sauna.id} />
                 ))}
             </div>
         </div>
