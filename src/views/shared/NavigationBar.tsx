@@ -1,5 +1,9 @@
-import { Link } from 'react-router-dom'
-import AppMenu from '../../components/structural/AppMenu'
+import { HomeIcon, UserCircleIcon } from '@heroicons/react/solid'
+import { ReactElement } from 'react'
+import { BreadcrumbData } from 'use-react-router-breadcrumbs'
+import AppMenu, { AppMenuTextItem } from '../../components/structural/AppMenu'
+import { AuthState, useAuth } from './AuthProvider'
+import { useBreadcrumbs } from './BreadcrumbsRouter'
 
 /**
  * Content view for the navigation bar. It uses
@@ -8,15 +12,39 @@ import AppMenu from '../../components/structural/AppMenu'
  * and {@link BrowserRouter}.
  */
 const NavigationBar = () => {
-    
+    const authState = useAuth()
+    const breadcrumbs = useBreadcrumbs()
+
     return (
-        <AppMenu>
-            <Link to="/">Home</Link>
-            <Link to="/showroom">Showroom</Link>
-            <Link to="/saunas">Saunas</Link>
-            <Link to="/register">Register</Link>
-        </AppMenu>
+        <AppMenu
+            leadingItem={{ icon: HomeIcon, url: '/' }}
+            mainItems={createBreadcrumbItems(breadcrumbs)}
+            trailingItem={{ icon: UserCircleIcon, iconClasses: 'w-9 h-9' }}
+            secondaryItems={createSecondaryItems(authState)}
+        />
     )
 }
 
 export default NavigationBar
+
+function createBreadcrumbItems(breadcrumbs: BreadcrumbData<string>[]): AppMenuTextItem[] {
+    return breadcrumbs.map(item => ({
+        title: item.breadcrumb as ReactElement,
+        url: item.match.pathname,
+    }))
+}
+
+function createSecondaryItems({ isAuthenticated }: AuthState): AppMenuTextItem[] {
+    return [
+        { title: <>Showroom</>, url: '/showroom', testId: 'showroom-test-id' },
+        ...(isAuthenticated
+            ? [
+                  { title: <>Erstellen</>, url: '/saunas/create' },
+                  { title: <>Logout</>, url: '/logout' },
+              ]
+            : [
+                  { title: <>Register</>, url: '/register' },
+                  { title: <>Login</>, url: '/login' },
+              ]),
+    ]
+}
