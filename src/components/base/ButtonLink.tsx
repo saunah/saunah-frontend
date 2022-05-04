@@ -14,7 +14,7 @@ export type ButtonLinkProps = {
  */
 const ButtonLink = (props: ButtonLinkProps) => {
     const color = props.color || 'accent'
-    const classes = `inline-block py-3 px-5 text-sm font-medium rounded-2xl text-${color}-900 shadow-lg shadow-primary-900/[0.1] bg-${color}-200 hover:bg-${color}-300 ${props.className}`
+    const classes = `inline-block py-3 px-5 text-sm font-medium rounded-2xl text-${color}-900 hover:text-${color}-900 shadow-lg shadow-primary-900/[0.1] bg-${color}-200 ${props.className} hover:bg-${color}-300 `
 
     return (
         <Link className={classes} to={props.to}>
