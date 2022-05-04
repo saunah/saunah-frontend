@@ -7,7 +7,7 @@ import { ReactNode } from 'react'
  */
 const AppContainer = (props: AppContainerProps) => {
     return (
-        <div className="px-8 py-4 min-h-screen flex flex-col justify-between items-center" data-testid="app-container">
+        <div className="p-4 min-h-screen flex flex-col justify-between items-center" data-testid="app-container">
             {props.children}
         </div>
     )

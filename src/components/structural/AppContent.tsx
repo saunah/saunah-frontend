@@ -7,7 +7,7 @@ import { ReactNode } from 'react'
  */
 const AppContent = (props: AppContentProps) => {
     return (
-        <div className="container mx-auto max-w-screen-xl mt-28 mb-10" data-testid="app-content">
+        <div className="container mx-auto max-w-screen-xl mt-28 mb-10 sm:px-4" data-testid="app-content">
             {props.children}
         </div>
     )
