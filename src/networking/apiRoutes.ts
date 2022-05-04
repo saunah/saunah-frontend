@@ -10,7 +10,7 @@ const apiRoutes = {
         get: (saunaId: number) => `/saunas/${saunaId}`,
         add: '/saunas',
         edit: (saunaId: number) => `/saunas/${saunaId}`,
-        remove: (saunaId: number) => `/sauna/remove/${saunaId}`,
+        remove: (saunaId: number) => `/saunas/${saunaId}`,
     },
     saunaImages: {
         list: (saunaId: number) => `/saunas/${saunaId}/images`,
