@@ -10,17 +10,15 @@ import api from '../../networking/api'
  */
 function SaunaDetailBreadcrumb({ match, testId }: SaunaDetailBreadcrumbProps<string>): ReactElement {
     const saunaId = Number(match.params['saunaId'])
-    const [sauna, setSauna] = useState<Sauna.Request>(Sauna.emptyRequest())
+    const [sauna, setSauna] = useState<Sauna.Request>()
 
     useEffect(() => {
-        setSauna({ ...sauna, name: 'Detail' })
-
         if (saunaId) {
             api.sauna.get(saunaId).then(response => setSauna(Sauna.mapToRequest(response)))
         }
     }, [saunaId])
 
-    return <span data-testid={testId || 'detail-breadcrumb'}>{sauna.name}</span>
+    return <span data-testid={testId || 'detail-breadcrumb'}>{sauna?.name || 'Detail'}</span>
 }
 
 export default SaunaDetailBreadcrumb

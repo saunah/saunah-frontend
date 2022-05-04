@@ -36,7 +36,7 @@ export default AppMenu
 
 export type AppMenuProps = {
     leadingItem?: AppMenuItem
-    mainItems?: AppMenuItem[]
+    primaryItems?: AppMenuItem[]
     trailingItem?: AppMenuItem
     secondaryItems?: AppMenuItem[]
 }
@@ -50,7 +50,7 @@ type AppMenuItemBase = {
 }
 
 export type AppMenuTextItem = {
-    title: ReactElement
+    title: ReactElement | string
 } & AppMenuItemBase
 
 export function isAppMenuTextItem(item: AppMenuItem): item is AppMenuTextItem {
@@ -66,7 +66,12 @@ export function isAppMenuIconItem(item: AppMenuItem): item is AppMenuIconItem {
     return typeof (item as AppMenuIconItem).icon === 'object'
 }
 
-function MenuElement(props: AppMenuItemProps): JSX.Element {
+/**
+ * Create element for menu item, by connecting the outer
+ * element (<code>OuterAppMenuElement</code>) and inner
+ * element (<code>InnerAppMenuElement</code>)
+ */
+function MenuElement(props: MenuElementProps): JSX.Element {
     return (
         <OuterAppMenuElement {...props}>
             <InnerAppMenuElement {...props} />
@@ -74,17 +79,19 @@ function MenuElement(props: AppMenuItemProps): JSX.Element {
     )
 }
 
-type AppMenuItemProps = {
-    fromItem?: AppMenuItem
+type MenuElementProps = {
+    fromItem: AppMenuItem
 }
 
-type OuterAppMenuItemProps = {
+type OuterAppMenuElementProps = {
     children: ReactNode
-} & AppMenuItemProps
+} & MenuElementProps
 
-function OuterAppMenuElement({ children, fromItem }: OuterAppMenuItemProps) {
-    if (!fromItem) return <></>
-
+/**
+ * Outer wrapper for menu element, which can be either a
+ * <code>button</code> or <code>MenuLink</code>.
+ */
+function OuterAppMenuElement({ children, fromItem }: OuterAppMenuElementProps) {
     if (isAppMenuIconItem(fromItem) && fromItem.onClick != null) {
         return (
             <button onClick={() => fromItem.onClick?.()} data-testid={fromItem.testId || defaultTestIdElement}>
@@ -100,30 +107,41 @@ function OuterAppMenuElement({ children, fromItem }: OuterAppMenuItemProps) {
     )
 }
 
-function InnerAppMenuElement({ fromItem }: AppMenuItemProps): JSX.Element {
-    if (fromItem && isAppMenuIconItem(fromItem)) {
+/**
+ * Inner wrapper for menu element, which can either be text or an icon.
+ */
+function InnerAppMenuElement({ fromItem }: MenuElementProps): JSX.Element {
+    if (isAppMenuIconItem(fromItem)) {
         const iconSizedClasses = `${defaultIconClasses} ${fromItem.iconClasses || 'w-7 h-7'}`
         return <fromItem.icon className={iconSizedClasses} />
-    } else if (fromItem && isAppMenuTextItem(fromItem)) {
-        return fromItem.title
+    } else if (isAppMenuTextItem(fromItem)) {
+        return <>{fromItem.title}</>
     }
     return <></>
 }
 
-function PrimaryMenu({ mainItems }: AppMenuProps) {
+/**
+ * Sub-component to create the primary menu out of primary items passed to
+ * the main component.
+ */
+function PrimaryMenu({ primaryItems }: AppMenuProps) {
     return (
         <>
-            {mainItems &&
-                mainItems.map((item, index) => (
+            {primaryItems &&
+                primaryItems.map((item, index) => (
                     <Fragment key={index}>
                         <MenuElement fromItem={item} />
-                        {mainItems && index + 1 < mainItems.length && <span className="text-primary-300">/</span>}
+                        {primaryItems && index + 1 < primaryItems.length && <span className="text-primary-300">/</span>}
                     </Fragment>
                 ))}
         </>
     )
 }
 
+/**
+ * Sub-component to create the secondary menu out of trailingItem and secondaryItems
+ * passed to the main component.
+ */
 function SecondaryMenu({ trailingItem, secondaryItems }: AppMenuProps) {
     return (
         <div className="text-right">
@@ -133,7 +151,7 @@ function SecondaryMenu({ trailingItem, secondaryItems }: AppMenuProps) {
                         className="block focus:outline-none"
                         data-testid={trailingItem?.testId || defaultTestIdElement}
                     >
-                        <InnerAppMenuElement fromItem={trailingItem} />
+                        {trailingItem && <InnerAppMenuElement fromItem={trailingItem} />}
                     </Menu.Button>
                 </div>
                 <Transition
@@ -164,6 +182,9 @@ function SecondaryMenu({ trailingItem, secondaryItems }: AppMenuProps) {
     )
 }
 
+/**
+ * Component to wrap and style links in the menu.
+ */
 function MenuLink({ children, to, ...props }: LinkProps) {
     let resolved = useResolvedPath(to)
     let match = useMatch({ path: resolved.pathname, end: true })

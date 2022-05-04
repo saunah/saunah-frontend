@@ -18,7 +18,7 @@ const NavigationBar = () => {
     return (
         <AppMenu
             leadingItem={{ icon: HomeIcon, url: '/' }}
-            mainItems={createBreadcrumbItems(breadcrumbs)}
+            primaryItems={createBreadcrumbItems(breadcrumbs)}
             trailingItem={{ icon: UserCircleIcon, iconClasses: 'w-9 h-9' }}
             secondaryItems={createSecondaryItems(authState)}
         />
@@ -34,17 +34,17 @@ function createBreadcrumbItems(breadcrumbs: BreadcrumbData<string>[]): AppMenuTe
     }))
 }
 
-function createSecondaryItems({ isAuthenticated }: AuthState): AppMenuTextItem[] {
+function createSecondaryItems({ isAuthenticated, logout }: AuthState): AppMenuTextItem[] {
     return [
-        { title: <>Showroom</>, url: '/showroom', testId: 'showroom-test-id' },
+        { title: 'Showroom', url: '/showroom', testId: 'showroom-test-id' },
         ...(isAuthenticated
             ? [
-                  { title: <>Erstellen</>, url: '/saunas/create' },
-                  { title: <>Logout</>, url: '/logout' },
+                  { title: 'Erstellen', url: '/saunas/create' },
+                  { title: 'Logout', onClick: () => logout() },
               ]
             : [
-                  { title: <>Register</>, url: '/register' },
-                  { title: <>Login</>, url: '/login' },
+                  { title: 'Register', url: '/register' },
+                  { title: 'Login', url: '/login' },
               ]),
     ]
 }
