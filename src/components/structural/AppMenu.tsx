@@ -54,7 +54,8 @@ export type AppMenuTextItem = {
 } & AppMenuItemBase
 
 export function isAppMenuTextItem(item: AppMenuItem): item is AppMenuTextItem {
-    return typeof (item as AppMenuTextItem).title === 'object'
+    const textItem = item as AppMenuTextItem
+    return typeof textItem.title === 'object' || typeof textItem.title === 'string'
 }
 
 export type AppMenuIconItem = {

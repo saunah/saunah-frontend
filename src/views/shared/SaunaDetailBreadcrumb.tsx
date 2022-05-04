@@ -2,6 +2,7 @@ import { ReactElement, useEffect, useState } from 'react'
 import { BreadcrumbComponentProps } from 'use-react-router-breadcrumbs'
 import { Sauna } from '../../entities/Sauna'
 import api from '../../networking/api'
+import { parseId } from '../../utils/identifiable'
 
 /**
  * Dynamic breadcrumb which display the name of the sauna in the
@@ -9,7 +10,7 @@ import api from '../../networking/api'
  * API.
  */
 function SaunaDetailBreadcrumb({ match, testId }: SaunaDetailBreadcrumbProps<string>): ReactElement {
-    const saunaId = Number(match.params['saunaId'])
+    const saunaId = parseId(match.params['saunaId'])
     const [sauna, setSauna] = useState<Sauna.Request>()
 
     useEffect(() => {
