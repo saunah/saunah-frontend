@@ -17,16 +17,10 @@ function AppMenu(props: AppMenuProps) {
                     className="flex flex-row px-4 py-2 justify-start grow items-center space-x-2 overflow-x-scroll"
                     data-testid="app-menu-primary-items"
                 >
-                    {props.leadingItem && (
-                        <>
-                            <MenuElement fromItem={props.leadingItem} />
-                            <div className="w-0"></div>
-                        </>
-                    )}
                     <PrimaryMenu {...props} />
                 </nav>
                 <div className="flex flex-row px-4 py-2 justify-end grow-0 items-center space-x-4">
-                    {props.trailingItem && <SecondaryMenu {...props} />}
+                    <SecondaryMenu {...props} />
                 </div>
             </div>
         </div>
@@ -122,12 +116,18 @@ function InnerAppMenuElement({ fromItem }: MenuElementProps): JSX.Element {
 }
 
 /**
- * Sub-component to create the primary menu out of primary items passed to
- * the main component.
+ * Sub-component to create the primary menu out of leadingItem and primaryItems
+ * passed to the main component.
  */
-function PrimaryMenu({ primaryItems }: AppMenuProps) {
+function PrimaryMenu({ leadingItem, primaryItems }: AppMenuProps) {
     return (
         <>
+            {leadingItem && (
+                <>
+                    <MenuElement fromItem={leadingItem} />
+                    <div className="w-0"></div> {/* spacing */}
+                </>
+            )}
             {primaryItems &&
                 primaryItems.map((item, index) => (
                     <Fragment key={index}>
