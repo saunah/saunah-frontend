@@ -1,4 +1,5 @@
 import axios from 'axios'
+import cookieStore from './cookieStore'
 
 export default function axiosConfig(): void {
     axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL
@@ -11,6 +12,11 @@ export default function axiosConfig(): void {
             : ''
         const method = request.method?.toUpperCase() || 'UNKNOWN'
         console.debug(`The request ${method} ${request.url}${stringParams} has started.`)
+
+        const accessToken = cookieStore.get('saunah-token')
+        const authHeader = accessToken ? `Bearer ${accessToken}` : ''
+        request.headers = { ...request.headers, Authorization: authHeader }
+
         return request
     })
 }
