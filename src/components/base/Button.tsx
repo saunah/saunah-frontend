@@ -6,8 +6,10 @@ export type ButtonProps = {
     color?: string
     disabled?: boolean
     onClick?: () => void
+    link?: string
     children?: ReactNode
     ['data-testid']?: string
+    className?: string
 }
 
 /**
@@ -16,7 +18,7 @@ export type ButtonProps = {
 const Button = (props: ButtonProps) => {
     const color = props.color || 'accent'
     const classes =
-        `py-2 px-4 text-sm font-medium rounded-md text-${color}-900 ` +
+        `${props.className} py-3 px-5 text-sm font-medium rounded-2xl text-${color}-900 shadow-lg shadow-primary-900/[0.1] ` +
         (props.disabled ? `bg-${color}-100 cursor-default` : `bg-${color}-200 hover:bg-${color}-300`)
 
     return (

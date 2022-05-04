@@ -12,7 +12,7 @@ describe('<SaunaEditorView>', () => {
         const mock = mockSaunaAPI(defaultMock())
         const imageMock = mockSaunaImageAPI(imagesMock())
 
-        render(<SaunaEditorView />, { wrapper: wrapper('/sauna/99/edit') })
+        render(<SaunaEditorView />, { wrapper: wrapper('/saunas/99/edit') })
         // We have to call this every, when the view performs a api-call.
         // Otherwise the state-update after the api-call will print warnings in the console.
         await waitForStateUpdate()
@@ -30,7 +30,7 @@ describe('<SaunaEditorView>', () => {
         const mock = mockSaunaAPI(defaultMock())
         const imageMock = mockSaunaImageAPI(imagesMock())
 
-        render(<SaunaEditorView />, { wrapper: wrapper('/sauna/create') })
+        render(<SaunaEditorView />, { wrapper: wrapper('/saunas/create') })
         expect(screen.getByTestId('sauna-editor')).toBeInTheDocument()
         expect(screen.queryByTestId('sauna-image-editor')).not.toBeInTheDocument()
         expect(screen.queryByTestId('sauna-image-uploader')).not.toBeInTheDocument()
@@ -42,7 +42,7 @@ describe('<SaunaEditorView>', () => {
         const mock = mockSaunaAPI(defaultMock())
         mockSaunaImageAPI(imagesMock())
 
-        render(<SaunaEditorView />, { wrapper: wrapper('/sauna/99/edit') })
+        render(<SaunaEditorView />, { wrapper: wrapper('/saunas/99/edit') })
         await waitForStateUpdate()
 
         fireEvent.click(screen.getByTestId('submit-button'))
@@ -57,7 +57,7 @@ describe('<SaunaEditorView>', () => {
         const mock = mockSaunaAPI(defaultMock())
         mockSaunaImageAPI(imagesMock())
 
-        render(<SaunaEditorView />, { wrapper: wrapper('/sauna/create') })
+        render(<SaunaEditorView />, { wrapper: wrapper('/saunas/create') })
         await waitForStateUpdate()
 
         fireEvent.click(screen.getByTestId('submit-button'))
@@ -72,7 +72,7 @@ describe('<SaunaEditorView>', () => {
         mockSaunaAPI(defaultMock())
         const imageMock = mockSaunaImageAPI(imagesMock())
 
-        render(<SaunaEditorView />, { wrapper: wrapper('/sauna/99/edit') })
+        render(<SaunaEditorView />, { wrapper: wrapper('/saunas/99/edit') })
         await waitForStateUpdate()
 
         fireEvent.click(screen.getByTestId('remove-button-1'))
@@ -87,8 +87,9 @@ const wrapper = (startRoute: string) => (props: { children?: ReactNode }) => {
         <AlertProvider>
             <MemoryRouter initialEntries={[startRoute]}>
                 <Routes>
-                    <Route path="/sauna/:saunaId/edit" element={props.children} />
-                    <Route path="/sauna/create" element={props.children} />
+                    <Route path="/saunas/:saunaId/edit" element={props.children} />
+                    <Route path="/saunas/create" element={props.children} />
+                    <Route path="/saunas/:saunaId" element={<div>Sauna Details</div>} />
                 </Routes>
             </MemoryRouter>
         </AlertProvider>
