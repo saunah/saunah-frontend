@@ -9,6 +9,7 @@ import { BreadcrumbRoutes } from './shared/BreadcrumbsRouter'
 import ProtectedRoute from './shared/ProtectedRoute'
 import RegisterView from '../views/routes/RegisterView'
 import SaunaDetailBreadcrumb from './shared/SaunaDetailBreadcrumb'
+import SaunaDetailView from './routes/sauna/SaunaDetailView'
 
 const RouteTree = () => {
     return (
@@ -20,7 +21,7 @@ const RouteTree = () => {
                 <Route path="/saunas" breadcrumb="Saunas">
                     <Route index element={<Overview />} />
                     <Route path=":saunaId" breadcrumb={SaunaDetailBreadcrumb}>
-                        <Route index element={<div>Sauna Details</div>} />
+                        <Route index element={<SaunaDetailView />} />
                         <Route path="edit" breadcrumb="Bearbeiten" element={<SaunaEditorView />} />
                     </Route>
                     <Route path="create" breadcrumb="Erstellen" element={<SaunaEditorView />} />

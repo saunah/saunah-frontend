@@ -6,7 +6,7 @@ import SaunaDetailView from './SaunaDetailView'
 describe('<SaunaDetailView>', () => {
     test('is here', () => {
         render(<SaunaDetailView />, { wrapper })
-        expect(screen.getByText('Details')).toBeInTheDocument()
+        expect(screen.getByText('Details', { exact: false })).toBeInTheDocument()
     })
 })
 
