@@ -18,6 +18,11 @@ const RouteTree = () => {
                 <Route index element={<Home />} />
                 <Route path="/showroom" breadcrumb="Showroom" element={<Showroom />} />
                 <Route path="/login" breadcrumb="Login" element={<LoginView />} />
+                <Route
+                    path="/forgot-password"
+                    breadcrumb={'Passwort vergessen'}
+                    element={<div>Passwort vergessen</div>}
+                />
                 <Route path="/saunas" breadcrumb="Saunas">
                     <Route index element={<Overview />} />
                     <Route path=":saunaId" breadcrumb={SaunaDetailBreadcrumb}>

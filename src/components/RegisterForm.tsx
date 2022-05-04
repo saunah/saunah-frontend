@@ -90,7 +90,7 @@ const RegisterForm = (props: RegisterFormProps) => {
                     onChange={zip => props.onChange?.({ ...props.user, zip })}
                 />
             </div>
-            <div className="mt-4">
+            <div className="mt-6">
                 <Button data-testid="register-button" onClick={props.onSubmit}>
                     Benutzer registrieren
                 </Button>
