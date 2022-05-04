@@ -92,14 +92,14 @@ describe('<AppMenu>', () => {
             <BrowserRouter>
                 <AppMenu
                     leadingItem={{ icon: HomeIcon, url: itemUrl, testId: testIdLeading }}
-                    mainItems={[
-                        { title: <>Primary First</>, testId: testIdPrimaryFirst },
-                        { title: <>Primary Second</>, testId: testIdPrimarySecond },
+                    primaryItems={[
+                        { title: 'Primary First', testId: testIdPrimaryFirst },
+                        { title: 'Primary Second', testId: testIdPrimarySecond },
                     ]}
                     trailingItem={{ icon: UserCircleIcon, iconClasses: customIconClass, testId: testIdTrailing }}
                     secondaryItems={[
-                        { title: <>Secondary First</>, testId: testIdSecondaryFirst },
-                        { title: <>Secondary Second</>, testId: testIdSecondarySecond },
+                        { title: 'Secondary First', testId: testIdSecondaryFirst },
+                        { title: 'Secondary Second', testId: testIdSecondarySecond },
                     ]}
                 />
             </BrowserRouter>
