@@ -17,6 +17,7 @@ const PriceEditor = (props: PriceEditorProps) => {
                 <Input
                     name="Preis pro Kilometer"
                     data-testid="input-transportService"
+                    placeholder="Preis in CHF"
                     type="number"
                     value={'' + price.transportService}
                     onChange={newValue => props.onChange?.({ ...price, transportService: +newValue })}
@@ -25,6 +26,7 @@ const PriceEditor = (props: PriceEditorProps) => {
                     name="Reinigunsservice"
                     data-testid="input-washService"
                     type="number"
+                    placeholder="Preis in CHF"
                     value={'' + price.washService}
                     onChange={newValue => props.onChange?.({ ...price, washService: +newValue })}
                 />
@@ -32,6 +34,7 @@ const PriceEditor = (props: PriceEditorProps) => {
                     name="Saunawichtel"
                     data-testid="input-saunahImp"
                     type="number"
+                    placeholder="Preis in CHF"
                     value={'' + price.saunahImp}
                     onChange={newValue => props.onChange?.({ ...price, saunahImp: +newValue })}
                 />
@@ -39,12 +42,14 @@ const PriceEditor = (props: PriceEditorProps) => {
                     name="Depot"
                     data-testid="input-deposit"
                     type="number"
+                    placeholder="Preis in CHF"
                     value={'' + price.deposit}
                     onChange={newValue => props.onChange?.({ ...price, deposit: +newValue })}
                 />
                 <Input
                     name="Preis pro Handtuch"
                     data-testid="input-handTowel"
+                    placeholder="Preis in CHF"
                     type="number"
                     value={'' + price.handTowel}
                     onChange={newValue => props.onChange?.({ ...price, handTowel: +newValue })}
@@ -52,6 +57,7 @@ const PriceEditor = (props: PriceEditorProps) => {
                 <Input
                     name="Preis für Holz"
                     data-testid="input-wood"
+                    placeholder="Preis in CHF"
                     type="number"
                     value={'' + price.wood}
                     onChange={newValue => props.onChange?.({ ...price, wood: +newValue })}

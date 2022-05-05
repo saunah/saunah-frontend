@@ -1,6 +1,7 @@
 import { Price } from './Price'
 
 const testRemoteResponse: Price.RemoteResponse = {
+    id: 12,
     transportService: 1,
     washService: 2,
     saunahImp: 3,
