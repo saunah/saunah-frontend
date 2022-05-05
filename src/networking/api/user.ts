@@ -8,6 +8,7 @@ import { Token } from '../../entities/Token'
 export type UserAPI = DeepReadonly<{
     signup(user: User.Request): Promise<void>
     login(credentials: LoginCredentials.Request): Promise<Token.Response>
+    verify(token: string): Promise<void>
 }>
 
 const user: UserAPI = {
@@ -19,6 +20,9 @@ const user: UserAPI = {
         const requestData = LoginCredentials.mapOut(credentials)
         const response = await axios.post(apiRoutes.user.login, requestData)
         return Token.mapIn(response.data)
+    },
+    async verify(token: string): Promise<void> {
+        await axios.get(apiRoutes.user.verify(token))
     },
 }
 

@@ -30,6 +30,7 @@ const defaultMock = () => {
     return {
         signup: jest.fn(() => Promise.resolve()),
         login: jest.fn(() => Promise.resolve({ token: 'abc' })),
+        verify: jest.fn(() => Promise.resolve()),
     }
 }
 
