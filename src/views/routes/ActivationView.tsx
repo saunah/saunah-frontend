@@ -24,7 +24,7 @@ const ActivationView = () => {
                 })
     }, [])
 
-    return <div />
+    return <div data-testid="activation-view" />
 }
 
 export default ActivationView
