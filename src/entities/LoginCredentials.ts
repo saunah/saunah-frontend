@@ -9,6 +9,14 @@ export namespace LoginCredentials {
         password: string
     }
 
+    export type PasswordResetRequest = {
+        mailadress: string
+    }
+
+    export type RemotePasswordResetRequest = {
+        email: string
+    }
+
     export function empty(): Request {
         return {
             username: '',
@@ -20,6 +28,12 @@ export namespace LoginCredentials {
         return {
             email: credentials.username,
             password: credentials.password,
+        }
+    }
+
+    export function mapOutPasswordReset(credentials: PasswordResetRequest): RemotePasswordResetRequest {
+        return {
+            email: credentials.mailadress
         }
     }
 }
