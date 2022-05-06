@@ -11,7 +11,7 @@ const SaunaDetailView = () => {
     const params = useParams()
     const saunaId = parseId(params['saunaId'])
 
-    const [sauna, setSauna] = useState<Sauna.Request>()
+    const [sauna, setSauna] = useState<Sauna.Response>()
     const [images, setImages] = useState<SaunaImage.Response[]>([])
 
     useEffect(() => {

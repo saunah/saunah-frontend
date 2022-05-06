@@ -2,6 +2,8 @@ import { render, screen } from '@testing-library/react'
 import SaunaCard from './SaunaCard'
 import { BrowserRouter } from 'react-router-dom'
 import { Sauna } from '../../entities/Sauna'
+import { SaunaImage } from '../../entities/SaunaImage'
+import { mockSaunaImageAPI } from '../../networking/api'
 
 const exampleSauna: Sauna.Response = {
     id: 1,
@@ -17,34 +19,28 @@ const exampleSauna: Sauna.Response = {
     mobile: false,
 }
 
-describe('<SaunCard>', () => {
-    test('render correctly', () => {
-        render(
-            <BrowserRouter>
-                <SaunaCard sauna={exampleSauna} />
-            </BrowserRouter>
-        )
-    })
+const imagesMock = () => {
+    return {
+        list: jest.fn(() => Promise.resolve([saunaImage1])),
+        add: jest.fn(() => Promise.resolve()),
+        remove: jest.fn(() => Promise.resolve()),
+    }
+}
 
-    test('testing property name', () => {
-        render(
-            <BrowserRouter>
-                <SaunaCard sauna={exampleSauna} />
-            </BrowserRouter>
-        )
-        const sauna1 = screen.getByText('saunaOne')
-        expect(sauna1).toContainHTML('<h2 class="text-2xl font-extrabold text-gray-900">saunaOne</h2>')
-        expect(sauna1).toHaveClass('text-2xl font-extrabold text-gray-900')
-    })
+const saunaImage1: SaunaImage.Response = {
+    id: 1,
+    saunaId: 1,
+    fileName: 'test-sauna-1',
+}
 
-    test('testing property description', () => {
+describe('<SaunaCard>', () => {
+    test('testing property name', async () => {
+        mockSaunaImageAPI(imagesMock())
         render(
             <BrowserRouter>
                 <SaunaCard sauna={exampleSauna} />
             </BrowserRouter>
         )
-        const sauna1 = screen.getByText('Steam Sauna')
-        expect(sauna1).toContainHTML('<p class="text-gray-500>')
-        expect(sauna1).toHaveClass('text-gray-500')
+        expect(await screen.findByText('saunaOne')).toBeInTheDocument()
     })
 })

@@ -21,7 +21,7 @@ const saunaImageApi: SaunaImageAPI = {
         await axios.post(apiRoutes.saunaImages.add(saunaId), multiplart)
     },
     async remove(imageId: number): Promise<void> {
-        await axios.post(apiRoutes.saunaImages.remove(imageId), undefined, { params: { imageId: imageId } })
+        await axios.delete(apiRoutes.saunaImages.remove(imageId))
     },
 }
 

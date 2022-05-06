@@ -20,7 +20,7 @@ const Alert = (props: AlertProps) => {
     const style = VARIANTS[variant]
 
     return (
-        <div className={`rounded-md p-3 bg-${style.color}-50 ${props.className}`}>
+        <div className={`rounded-2xl shadow-lg shadow-primary-900/[0.1] p-3 bg-${style.color}-50 ${props.className}`}>
             <div className="flex items-center">
                 <div className="flex-shrink-0">{<style.icon className={`h-5 w-5 text-${style.color}-500`} />}</div>
 

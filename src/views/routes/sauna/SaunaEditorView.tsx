@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { parseId } from '../../../utils/identifiable'
 import SaunaEditor from '../../../components/saunas/SaunaEditor'
 import { useEffect, useState } from 'react'
@@ -13,6 +13,7 @@ import PageTitle from '../../../components/base/PageTitle'
 const SaunaEditorView = () => {
     const params = useParams()
     const saunaId = parseId(params['saunaId'])
+    const navigate = useNavigate()
 
     const [sauna, setSauna] = useState<Sauna.Request>(Sauna.emptyRequest())
     const [images, setImages] = useState<SaunaImage.Response[]>([])
@@ -29,9 +30,17 @@ const SaunaEditorView = () => {
     }, [saunaId])
 
     const { success } = useAlert()
-    const submit = async () => {
-        if (saunaId) api.sauna.edit(saunaId, sauna).then(() => success('Die Sauna wurde erfolgreich gespeichert.'))
-        else await api.sauna.add(sauna).then(() => success('Die Sauna wurde erfolgreich erstellt.'))
+    const submit = () => {
+        if (saunaId)
+            api.sauna.edit(saunaId, sauna).then(() => {
+                success('Die Sauna wurde erfolgreich gespeichert.')
+                navigate(`/saunas/${saunaId}`)
+            })
+        else
+            api.sauna.add(sauna).then(sauna => {
+                success('Die Sauna wurde erfolgreich erstellt.')
+                navigate(`/saunas/${sauna.id}/edit`)
+            })
     }
 
     const fetchImages = () => {

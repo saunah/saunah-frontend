@@ -19,9 +19,10 @@ const Input = (props: InputProps) => {
     const autoComplete = props.autoComplete || 'off'
     const type = props.type || 'text'
 
-    const labelClasses = 'block text-sm font-medium mb-1 ' + (props.disabled ? 'text-primary-300' : 'text-primary-700')
+    const labelClasses =
+        'ml-2 block text-sm font-medium mb-1 ' + (props.disabled ? 'text-primary-300' : 'text-primary-700')
     const inputClasses =
-        'block w-full rounded-md border focus:outline-none focus:ring-1 transition py-2 pl-4 pr-10 ' +
+        'block w-full rounded-2xl border focus:outline-none focus:ring-1 transition py-2 pl-4 pr-10 ' +
         (props.disabled ? 'text-primary-300 placeholder-primary-300 ' : 'text-primary-900 placeholder-primary-400 ') +
         (props.error
             ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
