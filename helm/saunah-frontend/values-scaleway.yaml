@@ -1,0 +1,65 @@
+# Default values for saunah-frontend.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+namespace: default
+
+replicaCount: 1
+
+env:
+  - name: REACT_APP_TEST_VAR
+    value: 'Hello from Scaleway'
+  - name: REACT_APP_API_BASE_URL
+    value: https://booking-backend.saunah.ch
+
+image:
+  repository: ghcr.io/saunah/saunah-frontend
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: 'v0.2.0'
+
+imagePullSecrets: []
+nameOverride: ''
+fullnameOverride: 'saunah-frontend'
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: true
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.middlewares: default-redirect-https@kubernetescrd # prefixed for namespace (default)
+  hosts:
+    - host: booking.saunah.ch
+      paths: []
+  tls:
+    - secretName: saunah-cert
+      hosts:
+        - booking.saunah.ch
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 800Mi
+  requests:
+    cpu: 1000m
+    memory: 800Mi
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
