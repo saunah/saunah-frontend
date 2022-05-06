@@ -3,20 +3,7 @@ import { ReactNode } from 'react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { Sauna } from '../../../entities/Sauna'
 import { mockSaunaAPI } from '../../../networking/api'
-import AlertProvider from '../../shared/AlertProvider'
 import SaunaDetailView from './SaunaDetailView'
-
-describe('<SaunaDetailView', () => {
-    test('show data correctly', async () => {
-        const mock = mockSaunaAPI(defaultMock())
-        render(<SaunaDetailView />, { wrapper: wrapper('/sauna/1') })
-
-        await waitForStateUpdate()
-        expect(screen.getByTestId('sauna-detail')).toBeInTheDocument()
-
-        expect(mock.get).toBeCalledTimes(1)
-    })
-})
 
 const defaultMock = () => {
     return {
@@ -42,17 +29,20 @@ const sauna1: Sauna.Response = {
     mobile: false,
 }
 
-// this line is needed, so we don't get state update warnings
-const waitForStateUpdate = () => screen.findByTestId('sauna-detail')
+describe('<SaunaDetailView>', () => {
+    test('is here', async () => {
+        mockSaunaAPI(defaultMock())
+        render(<SaunaDetailView />, { wrapper })
+        expect(await screen.findByText('Details', { exact: false })).toBeInTheDocument()
+    })
+})
 
-const wrapper = (startRoute: string) => (props: { children?: ReactNode }) => {
+const wrapper = (props: { children?: ReactNode }) => {
     return (
-        <AlertProvider>
-            <MemoryRouter initialEntries={[startRoute]}>
-                <Routes>
-                    <Route path="/sauna/saunaId" element={props.children} />
-                </Routes>
-            </MemoryRouter>
-        </AlertProvider>
+        <MemoryRouter initialEntries={['/saunas/1']}>
+            <Routes>
+                <Route path="/saunas/:saunaId" element={props.children} />
+            </Routes>
+        </MemoryRouter>
     )
 }

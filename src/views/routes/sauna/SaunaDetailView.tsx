@@ -4,29 +4,30 @@ import React, { useEffect, useState } from 'react'
 import { Sauna } from '../../../entities/Sauna'
 import { parseId } from '../../../utils/identifiable'
 import { useParams } from 'react-router-dom'
+import SaunaImageCarousel from '../../../components/saunas/SaunaImageCarousel'
+import { SaunaImage } from '../../../entities/SaunaImage'
 
 const SaunaDetailView = () => {
-    const [saunaDetail, setSaunaDetail] = useState<Sauna.Request>(Sauna.emptyRequest())
     const params = useParams()
     const saunaId = parseId(params['saunaId'])
 
-    const getSaunaDetail = () => {
-        if (saunaId != null) {
-            api.sauna.get(saunaId).then(setSaunaDetail)
-        }
-    }
+    const [sauna, setSauna] = useState<Sauna.Request>()
+    const [images, setImages] = useState<SaunaImage.Response[]>([])
 
     useEffect(() => {
-        getSaunaDetail()
-    })
+        if (saunaId) {
+            api.sauna.get(saunaId).then(setSauna)
+            api.saunaImages.list(saunaId).then(setImages)
+        }
+    }, [saunaId])
 
     return (
-        <div
-            data-testid={'sauna-detail-view'}
-            className="ml-16 mr-16 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-        >
-            <SaunaDetail sauna={saunaDetail} />
+        <div className="ml-16 mr-16 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <span>Details für {sauna?.name} </span>
+            <SaunaImageCarousel images={images} />
+            <SaunaDetail sauna={sauna} />
         </div>
     )
 }
+
 export default SaunaDetailView
