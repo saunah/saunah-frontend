@@ -4,12 +4,12 @@ import { PwResetMailRequest } from '../entities/PwResetMailRequest'
 
 // eslint-disable-next-line
 export type PwResetMailRequest = {
-    request: PwResetMailRequest.RemoteRequest
+    request: PwResetMailRequest.Request
     onChange?: (request: PwResetMailRequest.Request) => void
     onSubmit?: () => void
 }
 
-const ResetPasswordForm = (props: PwResetMailRequest) => {
+const ResetPasswordMailForm = (props: PwResetMailRequest) => {
     return (
         <div>
             <div className="space-y-2">
@@ -18,7 +18,7 @@ const ResetPasswordForm = (props: PwResetMailRequest) => {
                     name="Mailadresse"
                     placeholder="Mailadresse eingeben"
                     autoComplete="mailaddress"
-                    value={props.request.email}
+                    value={props.request.mailadress}
                     onChange={mailadress => props.onChange?.({ ...props.request, mailadress })}
                 />
             </div>
@@ -31,4 +31,4 @@ const ResetPasswordForm = (props: PwResetMailRequest) => {
     )
 }
 
-export default ResetPasswordForm
+export default ResetPasswordMailForm
