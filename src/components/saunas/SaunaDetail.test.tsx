@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { Sauna } from '../../entities/Sauna'
 import SaunaDetail from './SaunaDetail'
 
-const exampleSauna: Sauna.Request = {
+const exampleSauna: Sauna.Response = {
     id: 1,
     name: 'saunaOne',
     description: 'Steam Sauna',

@@ -22,10 +22,9 @@ const SaunaDetailView = () => {
     }, [saunaId])
 
     return (
-        <div className="ml-16 mr-16 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            <span>Details für {sauna?.name} </span>
+        <div className="ml-16 mr-16 grid gap-4 grid-cols-1" data-testid={'sauna-detail-view'}>
             <SaunaImageCarousel images={images} />
-            <SaunaDetail sauna={sauna} />
+            {sauna && <SaunaDetail sauna={sauna} />}
         </div>
     )
 }

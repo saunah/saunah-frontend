@@ -30,10 +30,10 @@ const sauna1: Sauna.Response = {
 }
 
 describe('<SaunaDetailView>', () => {
-    test('is here', async () => {
+    test('shows SaunaDetail correctly', async () => {
         mockSaunaAPI(defaultMock())
-        render(<SaunaDetailView />, { wrapper })
-        expect(await screen.findByText('Details', { exact: false })).toBeInTheDocument()
+        render(<SaunaDetailView />, { wrapper: wrapper })
+        expect(screen.getByTestId('sauna-detail-view')).toBeInTheDocument()
     })
 })
 
