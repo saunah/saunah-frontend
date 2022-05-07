@@ -4,7 +4,7 @@ const apiRoutes = {
     user: {
         login: '/login',
         signup: `/signup`,
-        resetPassword: '/resetPasswordRequest',
+        resetPasswordRequest: '/resetPasswordRequest',
     },
     sauna: {
         list: '/saunas',

@@ -1,15 +1,15 @@
 import Button from './base/Button'
 import Input from './base/Input'
-import { LoginCredentials } from '../entities/LoginCredentials'
+import { PwResetMailRequest } from '../entities/PwResetMailRequest'
 
 // eslint-disable-next-line
-export type LoginCredentials = {
-    user: LoginCredentials.PasswordResetRequest
-    onChange?: (user: LoginCredentials.PasswordResetRequest) => void
+export type PwResetMailRequest = {
+    request: PwResetMailRequest.RemoteRequest
+    onChange?: (request: PwResetMailRequest.Request) => void
     onSubmit?: () => void
 }
 
-const ResetPasswordForm = (props: LoginCredentials) => {
+const ResetPasswordForm = (props: PwResetMailRequest) => {
     return (
         <div>
             <div className="space-y-2">
@@ -18,8 +18,8 @@ const ResetPasswordForm = (props: LoginCredentials) => {
                     name="Mailadresse"
                     placeholder="Mailadresse eingeben"
                     autoComplete="mailaddress"
-                    value={props.user.mailadress}
-                    onChange={mailadress => props.onChange?.({ ...props.user, mailadress })}
+                    value={props.request.email}
+                    onChange={mailadress => props.onChange?.({ ...props.request, mailadress })}
                 />
             </div>
             <div className="flex justify-between">
