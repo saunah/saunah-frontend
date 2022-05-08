@@ -19,6 +19,13 @@ const apiRoutes = {
         get: (imageName: string) => `saunas/images/${imageName}`,
         remove: (imageId: number) => `saunas/images/${imageId}`,
     },
+    price: {
+        list: '/prices',
+        get: (saunaId: number) => `/prices/${saunaId}`,
+        add: '/prices',
+        edit: (saunaId: number) => `/prices/${saunaId}`,
+        remove: (saunaId: number) => `/prices/${saunaId}`,
+    },
 }
 
 /**
