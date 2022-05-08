@@ -7,10 +7,17 @@ export type SaunaEditorProps = {
     value: Sauna.Request
     onChange?: (newValue: Sauna.Request) => void
     onSubmit?: () => void
+    showDelete?: boolean
+    onDelete?: () => void
 }
 
 const SaunaEditor = (props: SaunaEditorProps) => {
     const sauna = props.value
+
+    const onDelete = () => {
+        const confirm = window.confirm('Möchten Sie die Sauna wirklich unwiderruflich löschen?')
+        if (confirm) props.onDelete?.()
+    }
 
     return (
         <div data-testid="sauna-editor">
@@ -81,7 +88,12 @@ const SaunaEditor = (props: SaunaEditorProps) => {
                     onChange={newValue => props.onChange?.({ ...sauna, mobile: newValue })}
                 />
             </div>
-            <Button className="mt-6" title="Speichern" data-testid="submit-button" onClick={props.onSubmit} />
+            <div className="mt-6 flex space-x-4">
+                <Button title="Speichern" data-testid="submit-button" onClick={props.onSubmit} />
+                {props.showDelete && (
+                    <Button title="Löschen" data-testid="delete-button" onClick={onDelete} color="red" />
+                )}
+            </div>
         </div>
     )
 }

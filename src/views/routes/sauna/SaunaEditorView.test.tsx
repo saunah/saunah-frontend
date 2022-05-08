@@ -80,6 +80,23 @@ describe('<SaunaEditorView>', () => {
         expect(imageMock.remove).toBeCalledTimes(1)
         await waitForStateUpdate()
     })
+
+    test('delete is called on delete-button click', async () => {
+        const mock = mockSaunaAPI(defaultMock())
+        mockSaunaImageAPI(imagesMock())
+        window.confirm = jest.fn(() => true)
+
+        render(<SaunaEditorView />, { wrapper: wrapper('/saunas/99/edit') })
+        await waitForStateUpdate()
+
+        fireEvent.click(screen.getByTestId('delete-button'))
+        await waitForStateUpdate()
+
+        expect(mock.remove).toBeCalled()
+        expect(mock.remove).toBeCalledWith(99)
+        // navigated to overview after delete
+        expect(screen.getByText('Saunas')).toBeInTheDocument()
+    })
 })
 
 const wrapper = (startRoute: string) => (props: { children?: ReactNode }) => {
@@ -90,6 +107,7 @@ const wrapper = (startRoute: string) => (props: { children?: ReactNode }) => {
                     <Route path="/saunas/:saunaId/edit" element={props.children} />
                     <Route path="/saunas/create" element={props.children} />
                     <Route path="/saunas/:saunaId" element={<div>Sauna Details</div>} />
+                    <Route path="/saunas" element={<div>Saunas</div>} />
                 </Routes>
             </MemoryRouter>
         </AlertProvider>

@@ -65,6 +65,32 @@ describe('<SaunaEditor>', () => {
         fireEvent.click(screen.getByTestId('submit-button'))
         expect(onSubmit).toBeCalledTimes(1)
     })
+
+    test('onDelete button is only shown if flag set', () => {
+        render(<SaunaEditor value={testSauna} showDelete={false} />)
+        expect(screen.queryByTestId('delete-button')).not.toBeInTheDocument()
+
+        render(<SaunaEditor value={testSauna} showDelete={true} />)
+        expect(screen.getByTestId('delete-button')).toBeInTheDocument()
+    })
+
+    test('onDelete is called when alert is accepted', () => {
+        const onDelete = jest.fn()
+        render(<SaunaEditor value={testSauna} showDelete={true} onDelete={onDelete} />)
+        window.confirm = jest.fn(() => true)
+        fireEvent.click(screen.getByTestId('delete-button'))
+        expect(window.confirm).toBeCalled()
+        expect(onDelete).toBeCalled()
+    })
+
+    test('onDelete is not called when alert is dismissed', () => {
+        const onDelete = jest.fn()
+        render(<SaunaEditor value={testSauna} showDelete={true} onDelete={onDelete} />)
+        window.confirm = jest.fn(() => false)
+        fireEvent.click(screen.getByTestId('delete-button'))
+        expect(window.confirm).toBeCalled()
+        expect(onDelete).not.toBeCalled()
+    })
 })
 
 const getInputField = (testId: string) => {
