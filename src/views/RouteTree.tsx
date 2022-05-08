@@ -11,6 +11,7 @@ import RegisterView from '../views/routes/RegisterView'
 import SaunaDetailBreadcrumb from './shared/SaunaDetailBreadcrumb'
 import SaunaDetailView from './routes/sauna/SaunaDetailView'
 import PriceEditorView from './routes/sauna/PriceEditorView'
+import ActivationView from './routes/ActivationView'
 
 const RouteTree = () => {
     return (
@@ -35,6 +36,7 @@ const RouteTree = () => {
                 </Route>
                 <Route path="/protected" element={<ProtectedRoute element={<div> Protected Route </div>} />} />
                 <Route path="/register" element={<RegisterView />} />
+                <Route path="/verify/:token" element={<ActivationView />} breadcrumb="Account aktivieren" />
             </Route>
         </BreadcrumbRoutes>
     )

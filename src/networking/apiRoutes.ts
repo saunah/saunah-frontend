@@ -4,6 +4,7 @@ const apiRoutes = {
     user: {
         login: '/login',
         signup: `/signup`,
+        verify: (token: string) => `/verify/${token}`,
     },
     sauna: {
         list: '/saunas',

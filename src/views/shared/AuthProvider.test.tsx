@@ -9,6 +9,7 @@ import AuthProvider, { AuthProviderProps, useAuth } from './AuthProvider'
 const defaultMock = () => ({
     signup: jest.fn(() => Promise.resolve()),
     login: jest.fn(() => Promise.resolve(testToken)),
+    verify: jest.fn(() => Promise.resolve()),
 })
 
 const testCredentials: LoginCredentials.Request = {
