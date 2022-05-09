@@ -5,6 +5,8 @@ import { Sauna } from '../../../entities/Sauna'
 import { mockSaunaAPI } from '../../../networking/api'
 import SaunaDetailView from './SaunaDetailView'
 
+jest.mock('../../../components/saunas/SaunaCalendar')
+
 const defaultMock = () => {
     return {
         list: jest.fn(() => Promise.resolve([sauna1])),
