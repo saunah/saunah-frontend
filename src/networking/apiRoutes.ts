@@ -4,6 +4,7 @@ const apiRoutes = {
     user: {
         login: '/login',
         signup: `/signup`,
+        verify: (token: string) => `/verify/${token}`,
     },
     sauna: {
         list: '/saunas',
@@ -17,6 +18,13 @@ const apiRoutes = {
         add: (saunaId: number) => `/saunas/${saunaId}/images`,
         get: (imageName: string) => `saunas/images/${imageName}`,
         remove: (imageId: number) => `saunas/images/${imageId}`,
+    },
+    price: {
+        list: '/prices',
+        get: (saunaId: number) => `/prices/${saunaId}`,
+        add: '/prices',
+        edit: (saunaId: number) => `/prices/${saunaId}`,
+        remove: (saunaId: number) => `/prices/${saunaId}`,
     },
 }
 

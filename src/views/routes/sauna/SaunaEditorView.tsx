@@ -43,6 +43,14 @@ const SaunaEditorView = () => {
             })
     }
 
+    const deleteSauna = () => {
+        if (saunaId)
+            api.sauna.remove(saunaId).then(() => {
+                success('Die Sauna wurde gelöscht.')
+                navigate('/saunas')
+            })
+    }
+
     const fetchImages = () => {
         saunaId && api.saunaImages.list(saunaId).then(setImages)
     }
@@ -65,7 +73,13 @@ const SaunaEditorView = () => {
             <div className={'grid gap-8 grid-cols-1 ' + (saunaId ? 'lg:grid-cols-2' : '')}>
                 <div>
                     <h2 className="text-xl font-medium text-primary-700 mb-4"> Informationen </h2>
-                    <SaunaEditor value={sauna} onChange={setSauna} onSubmit={submit} />
+                    <SaunaEditor
+                        value={sauna}
+                        onChange={setSauna}
+                        onSubmit={submit}
+                        showDelete={saunaId != null}
+                        onDelete={deleteSauna}
+                    />
                 </div>
                 {saunaId && (
                     <div>
