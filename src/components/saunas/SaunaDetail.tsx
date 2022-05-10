@@ -20,14 +20,14 @@ const SaunaDetail = (props: SaunaDetailProps) => {
             <div className="text-gray-500 grid gap-8 grid-cols-2">
                 <div>
                     <div>Preis:</div>
-                    <div>Max. Temp. in C°:</div>
+                    <div>Max. Temperatur:</div>
                     <div>Anzahl Personen:</div>
                     <div>Hauptstandort:</div>
                     <div>Art der Sauna:</div>
                 </div>
                 <div>
-                    <div>{props.sauna.price}</div>
-                    <div>{props.sauna.maxTemp}</div>
+                    <div>{props.sauna.price} CHF</div>
+                    <div>{props.sauna.maxTemp} °C</div>
                     <div>{props.sauna.numberOfPeople}</div>
                     <div>
                         {props.sauna.zip} {props.sauna.location}
