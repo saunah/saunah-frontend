@@ -1,21 +1,23 @@
 import { render, screen, within, fireEvent } from '@testing-library/react'
 import RegisterForm from './RegisterForm'
 import { User } from '../entities/User'
+import { UserRole } from '../entities/UserRole'
 
 const exampleUser: User.Request = {
     password: 'Password123',
     repeatPassword: 'Password123',
-    name: 'Meier',
-    firstname: 'Max',
+    lastName: 'Meier',
+    firstName: 'Max',
     email: 'example@mail.com',
     telephone: '+41 44 444 44 44',
     place: 'ExamplePlace',
     street: 'Examplestreet 11',
     zip: '2222',
+    role: UserRole.Local.USER,
 }
 const inputs = [
-    { testId: 'name-input', label: 'Name', value: exampleUser.name },
-    { testId: 'firstname-input', label: 'Vorname', value: exampleUser.firstname },
+    { testId: 'name-input', label: 'Name', value: exampleUser.lastName },
+    { testId: 'firstname-input', label: 'Vorname', value: exampleUser.firstName },
     { testId: 'mail-input', label: 'Mail', value: exampleUser.email },
     { testId: 'telephone-input', label: 'Telefon', value: exampleUser.telephone },
     { testId: 'place-input', label: 'Ort', value: exampleUser.place },
@@ -26,8 +28,8 @@ const inputs = [
 ]
 
 const changeInputs = [
-    { testId: 'name-input', newValue: 'new name', changedProperty: 'name' },
-    { testId: 'firstname-input', newValue: 'new firstname', changedProperty: 'firstname' },
+    { testId: 'name-input', newValue: 'new name', changedProperty: 'lastName' },
+    { testId: 'firstname-input', newValue: 'new firstname', changedProperty: 'firstName' },
     { testId: 'mail-input', newValue: 'mail@mail.com', changedProperty: 'email' },
     { testId: 'telephone-input', newValue: '+41 44 111 11 11', changedProperty: 'telephone' },
     { testId: 'place-input', newValue: 'new placename', changedProperty: 'place' },

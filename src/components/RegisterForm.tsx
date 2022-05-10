@@ -18,16 +18,16 @@ const RegisterForm = (props: RegisterFormProps) => {
                     name="Vorname"
                     placeholder="Vorname"
                     autoComplete="given-name"
-                    value={props.user.firstname}
-                    onChange={firstname => props.onChange?.({ ...props.user, firstname })}
+                    value={props.user.firstName}
+                    onChange={firstName => props.onChange?.({ ...props.user, firstName })}
                 />
                 <Input
                     data-testid="name-input"
                     name="Name"
                     placeholder="Name"
                     autoComplete="family-name"
-                    value={props.user.name}
-                    onChange={name => props.onChange?.({ ...props.user, name })}
+                    value={props.user.lastName}
+                    onChange={lastName => props.onChange?.({ ...props.user, lastName })}
                 />
 
                 <Input

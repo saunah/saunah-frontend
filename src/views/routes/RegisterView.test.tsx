@@ -20,7 +20,7 @@ describe('<Registerview>', () => {
         expect(button).toHaveTextContent('Benutzer registrieren')
         fireEvent.click(button)
         expect(mock.signup).toBeCalledTimes(1)
-        expect(mock.signup).toBeCalledWith(User.empty())
+        expect(mock.signup).toBeCalledWith(User.emptyRequest())
 
         await screen.findByTestId('registerform')
     })

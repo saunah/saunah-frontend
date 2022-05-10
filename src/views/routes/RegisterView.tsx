@@ -7,7 +7,7 @@ import api from '../../networking/api'
 import { useAlert } from '../shared/AlertProvider'
 
 const RegisterView = () => {
-    const [user, setUser] = useState<User.Request>(User.empty())
+    const [user, setUser] = useState<User.Request>(User.emptyRequest())
     const { success } = useAlert()
     const navigate = useNavigate()
 
