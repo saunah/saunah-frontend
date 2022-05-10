@@ -47,7 +47,7 @@ describe('User', () => {
 
     const remoteResponse: User.RemoteResponse = {
         id: 1,
-        role: 'ROLE_USER',
+        role: 'USER',
         firstName: 'John',
         lastName: 'Doe',
         email: 'john@example.com',

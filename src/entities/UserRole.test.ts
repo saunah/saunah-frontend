@@ -1,8 +1,8 @@
 import { UserRole } from './UserRole'
 
 describe('UserRole', () => {
-    const remoteKeyUser = 'ROLE_USER'
-    const remoteKeyAdmin = 'ROLE_ADMIN'
+    const remoteKeyUser = 'USER'
+    const remoteKeyAdmin = 'ADMIN'
 
     const localUser = UserRole.Local.USER
     const localAdmin = UserRole.Local.ADMIN
@@ -15,8 +15,6 @@ describe('UserRole', () => {
 
         expect(UserRole.isRemote(undefined)).toBe(false)
         expect(UserRole.isRemote('')).toBe(false)
-        expect(UserRole.isRemote('role_admin')).toBe(false)
-        expect(UserRole.isRemote('ADMIN')).toBe(false)
     })
 
     test('mapIn() only works with correct input entity', () => {

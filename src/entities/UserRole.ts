@@ -5,8 +5,8 @@ export namespace UserRole {
     }
 
     export const enum Remote {
-        USER = 'ROLE_USER',
-        ADMIN = 'ROLE_ADMIN',
+        USER = 'USER',
+        ADMIN = 'ADMIN',
     }
 
     export function isRemote(role: unknown): role is Remote {
