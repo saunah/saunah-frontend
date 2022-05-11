@@ -34,17 +34,19 @@ function createBreadcrumbItems(breadcrumbs: BreadcrumbData<string>[]): AppMenuTe
     }))
 }
 
-function createSecondaryItems({ isAuthenticated, logout }: AuthState): AppMenuTextItem[] {
+function createSecondaryItems({ isAuthenticated, isAdmin, logout }: AuthState): AppMenuTextItem[] {
+    if (isAuthenticated()) {
+        // TODO: Change Profile url
+        const items: AppMenuTextItem[] = [{ title: 'Profil', url: '/' }]
+        if (isAdmin()) {
+            items.push({ title: 'Sauna erstellen', url: '/saunas/create' }, { title: 'Benutzer', url: '/users' })
+        }
+        items.push({ title: 'Logout', onClick: () => logout() })
+        return items
+    }
+
     return [
-        ...(isAuthenticated
-            ? [
-                  { title: 'Erstellen', url: '/saunas/create' },
-                  { title: 'Benutzer', url: '/users' },
-                  { title: 'Logout', onClick: () => logout() },
-              ]
-            : [
-                  { title: 'Register', url: '/register' },
-                  { title: 'Login', url: '/login' },
-              ]),
+        { title: 'Registrieren', url: '/register' },
+        { title: 'Login', url: '/login' },
     ]
 }

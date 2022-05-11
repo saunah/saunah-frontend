@@ -47,7 +47,8 @@ const UserApi: UserAPI = {
         await axios.delete(apiRoutes.user.remove(userId))
     },
     async whoami(): Promise<User.Response> {
-        return axios.get(apiRoutes.user.whoami)
+        const response = await axios.get(apiRoutes.user.whoami)
+        return User.mapIn(response.data)
     },
 }
 

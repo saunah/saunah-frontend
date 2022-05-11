@@ -7,9 +7,10 @@ import api from '../../networking/api'
 import cookieStore from '../../networking/cookieStore'
 
 export type AuthState = {
-    isAuthenticated: boolean
+    isInitialized: boolean
+    isAuthenticated: () => boolean
+    isAdmin: () => boolean
     me: User.Response | null
-    isAdmin(): boolean
     login: (credentials: LoginCredentials.Request) => Promise<void>
     logout: () => void
 }
@@ -22,25 +23,26 @@ export type AuthProviderProps = {
 }
 
 const AuthProvider = (props: AuthProviderProps) => {
-    const [isAuthenticated, setAuthenticated] = useState<boolean>(false)
     const [user, setUser] = useState<User.Response | null>(null)
+    const [isInitialized, setInitialized] = useState<boolean>(false)
+    const isAuthenticated = () => user !== null
+    const isAdmin = () => user?.role == UserRole.Local.ADMIN
 
     useEffect(() => {
-        api.user.whoami().then(user => {
-            setUser(user)
-            setAuthenticated(true)
-        })
+        api.user
+            .whoami()
+            .then(setUser)
+            .finally(() => setInitialized(true))
     }, [])
 
     const login = (credentials: LoginCredentials.Request) =>
         api.user.login(credentials).then(token => {
             cookieStore.set('saunah-token', token.token)
-            setAuthenticated(true)
+            api.user.whoami().then(setUser)
         })
 
     const logout = () => {
         setUser(null)
-        setAuthenticated(false)
         cookieStore.remove('saunah-token')
     }
 
@@ -50,20 +52,19 @@ const AuthProvider = (props: AuthProviderProps) => {
             const statusCode = error?.response?.status as number | undefined
             if (statusCode === 401) {
                 cookieStore.remove('saunah-token')
-                setAuthenticated(false)
+                setUser(null)
             }
             return Promise.reject(error)
         }
     )
 
-    const isAdmin = () => user?.role === UserRole.Local.ADMIN
-
     const state: AuthState = {
         isAuthenticated,
+        isAdmin,
+        isInitialized,
+        me: user,
         login,
         logout,
-        me: user,
-        isAdmin,
     }
 
     return <AuthContext.Provider value={state}>{props.children}</AuthContext.Provider>

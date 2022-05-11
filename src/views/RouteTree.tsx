@@ -14,6 +14,8 @@ import ActivationView from './routes/ActivationView'
 import UserEditorView from './routes/users/UserEditorView'
 import Overview from './routes/sauna/Overview'
 import UsersListView from './routes/users/UsersListView'
+import { UserRole } from '../entities/UserRole'
+import { Navigate } from 'react-router-dom'
 
 const RouteTree = () => {
     return (
@@ -29,21 +31,52 @@ const RouteTree = () => {
                 />
                 <Route path="/saunas" breadcrumb="Saunas">
                     <Route index element={<Overview />} />
-                    <Route path="pricing" breadcrumb={'Preise'} element={<PriceEditorView />} />
+                    <Route
+                        path="pricing"
+                        breadcrumb={'Preise'}
+                        element={
+                            <ProtectedRoute roles={[UserRole.Local.ADMIN]}>
+                                <PriceEditorView />
+                            </ProtectedRoute>
+                        }
+                    />
                     <Route path=":saunaId" breadcrumb={SaunaDetailBreadcrumb}>
                         <Route index element={<SaunaDetailView />} />
-                        <Route path="edit" breadcrumb="Bearbeiten" element={<SaunaEditorView />} />
+                        <Route
+                            path="edit"
+                            breadcrumb="Bearbeiten"
+                            element={
+                                <ProtectedRoute roles={[UserRole.Local.ADMIN]}>
+                                    <SaunaEditorView />
+                                </ProtectedRoute>
+                            }
+                        />
                     </Route>
                     <Route path="create" breadcrumb="Erstellen" element={<SaunaEditorView />} />
                 </Route>
                 <Route path="/users" breadcrumb="Benutzer">
-                    <Route index element={<UsersListView />} />
-                    <Route path=":userId" breadcrumb="Bearbeiten" element={<UserEditorView />} />
+                    <Route
+                        index
+                        element={
+                            <ProtectedRoute roles={[UserRole.Local.ADMIN]}>
+                                <UsersListView />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path=":userId"
+                        breadcrumb="Bearbeiten"
+                        element={
+                            <ProtectedRoute>
+                                <UserEditorView />
+                            </ProtectedRoute>
+                        }
+                    />
                 </Route>
-                <Route path="/protected" element={<ProtectedRoute element={<div> Protected Route </div>} />} />
                 <Route path="/register" breadcrumb="Registrieren" element={<RegisterView />} />
                 <Route path="/verify/:token" element={<ActivationView />} breadcrumb="Account aktivieren" />
             </Route>
+            <Route path="*" element={<Navigate to={'/'} />}></Route>
         </BreadcrumbRoutes>
     )
 }

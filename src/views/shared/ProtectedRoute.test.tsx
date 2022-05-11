@@ -70,13 +70,14 @@ describe('<ProtectedRoute>', () => {
 
 const defaultAuthState = (isAuthenticated?: boolean): AuthState => {
     return {
-        isAuthenticated: isAuthenticated || false,
+        isAuthenticated: () => isAuthenticated || false,
+        isAdmin: () => false,
+        isInitialized: true,
         login: () => Promise.resolve(),
         logout: () => {
             // Ignore logout
         },
         me: null,
-        isAdmin: () => false,
     }
 }
 
