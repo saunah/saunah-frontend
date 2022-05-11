@@ -70,7 +70,7 @@ const UserEditor = (props: UserEditorProps) => {
                         name="Passwort"
                         placeholder="Passwort"
                         data-testid="input-password"
-                        autoComplete={isCreate ? 'new-password' : undefined}
+                        autoComplete="new-password"
                         value={user.password}
                         type="password"
                         onChange={password => props.onChange?.({ ...user, password })}

@@ -40,6 +40,28 @@ describe('<UserEditor>', () => {
         expect(onClick).toBeCalledTimes(1)
     })
 
+    test('onDelete event is called on click and confirm', () => {
+        global.confirm = () => true // stub window.confirm call
+        const onDelete = jest.fn()
+
+        render(<UserEditor value={exampleUser} onDelete={onDelete} />)
+
+        const deleteButton = screen.getByTestId('delete-button')
+        fireEvent.click(deleteButton)
+        expect(onDelete).toBeCalledTimes(1)
+    })
+
+    test('onDelete is not called if confirm is denied', () => {
+        global.confirm = () => false // stub window.confirm call
+        const onDelete = jest.fn()
+
+        render(<UserEditor value={exampleUser} onDelete={onDelete} />)
+
+        const deleteButton = screen.getByTestId('delete-button')
+        fireEvent.click(deleteButton)
+        expect(onDelete).toBeCalledTimes(0)
+    })
+
     test('Role is updated on change', () => {
         const onChange = jest.fn()
         render(<UserEditor value={exampleUser} onChange={onChange} isAdmin={true} />)

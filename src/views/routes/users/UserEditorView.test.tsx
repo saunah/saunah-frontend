@@ -18,6 +18,7 @@ describe('<UserEditorView>', () => {
 
     test('Sends data on submit', async () => {
         const mock = mockUserAPI(defaultMock())
+
         render(<UserEditorView />, { wrapper: wrapper })
 
         const button = screen.getByTestId('submit-button')
@@ -28,6 +29,26 @@ describe('<UserEditorView>', () => {
         fireEvent.click(button)
         expect(mock.edit).toBeCalledTimes(1)
         expect(mock.edit).toBeCalledWith(userId, User.mapToRequest(testUser))
+
+        // test redirect happens
+        const usersView = await screen.findByTestId('users-view')
+        expect(usersView).toBeInTheDocument()
+    })
+
+    test('Deleting user works', async () => {
+        global.confirm = () => true // stub window.confirm call
+        const mock = mockUserAPI(defaultMock())
+
+        render(<UserEditorView />, { wrapper: wrapper })
+
+        const deleteButton = screen.getByTestId('delete-button')
+        expect(deleteButton).toHaveTextContent('Löschen')
+
+        await screen.findByTestId('user-editor')
+
+        fireEvent.click(deleteButton)
+        expect(mock.remove).toBeCalledTimes(1)
+        expect(mock.remove).toBeCalledWith(userId)
 
         // test redirect happens
         const usersView = await screen.findByTestId('users-view')
