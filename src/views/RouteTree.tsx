@@ -41,7 +41,7 @@ const RouteTree = () => {
                     <Route path=":userId" breadcrumb="Bearbeiten" element={<UserEditorView />} />
                 </Route>
                 <Route path="/protected" element={<ProtectedRoute element={<div> Protected Route </div>} />} />
-                <Route path="/register" element={<RegisterView />} />
+                <Route path="/register" breadcrumb="Registrieren" element={<RegisterView />} />
                 <Route path="/verify/:token" element={<ActivationView />} breadcrumb="Account aktivieren" />
             </Route>
         </BreadcrumbRoutes>

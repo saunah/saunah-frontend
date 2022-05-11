@@ -55,10 +55,17 @@ function TableRow({ row, columnType }: TableRowProps) {
         'py-4 ' +
         (ColumnType === TableColumnType.HEAD ? 'text-primary-500 font-semibold' : 'text-primary-600 font-normal')
 
+    function isLastElement(index: number) {
+        return index + 1 === row.length
+    }
+
     return (
         <tr className={rowClasses}>
             {row.map((element, elementIdx) => (
-                <ColumnType key={elementIdx} className={columnClasses}>
+                <ColumnType
+                    key={elementIdx}
+                    className={columnClasses + (isLastElement(elementIdx) ? ' text-right' : ' text-left')}
+                >
                     {element}
                 </ColumnType>
             ))}
