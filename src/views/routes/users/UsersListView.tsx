@@ -1,4 +1,4 @@
-import { PencilAltIcon, PencilIcon } from '@heroicons/react/solid'
+import { PencilIcon } from '@heroicons/react/solid'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import PageTitle from '../../../components/base/PageTitle'

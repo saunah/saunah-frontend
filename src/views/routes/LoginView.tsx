@@ -1,4 +1,4 @@
-import LoginForm from '../../components/LoginForm'
+import LoginForm from '../../components/users/LoginForm'
 import { useState } from 'react'
 import { LoginCredentials } from '../../entities/LoginCredentials'
 import { useAuth } from '../shared/AuthProvider'

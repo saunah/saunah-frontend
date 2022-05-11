@@ -1,7 +1,7 @@
 import { render, screen, within, fireEvent } from '@testing-library/react'
 import RegisterForm from './RegisterForm'
-import { User } from '../entities/User'
-import { UserRole } from '../entities/UserRole'
+import { User } from '../../entities/User'
+import { UserRole } from '../../entities/UserRole'
 
 const exampleUser: User.Request = {
     password: 'Password123',

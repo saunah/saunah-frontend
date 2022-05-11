@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import PageTitle from '../../components/base/PageTitle'
-import RegisterForm from '../../components/RegisterForm'
+import RegisterForm from '../../components/users/RegisterForm'
 import { User } from '../../entities/User'
 import api from '../../networking/api'
 import { useAlert } from '../shared/AlertProvider'
