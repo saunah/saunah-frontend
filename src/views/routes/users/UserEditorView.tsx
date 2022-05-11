@@ -7,7 +7,7 @@ import api from '../../../networking/api'
 import { parseId } from '../../../utils/identifiable'
 import { useAlert } from '../../shared/AlertProvider'
 
-const UserEditorView = () => {
+function UserEditorView() {
     const params = useParams()
     const userId = parseId(params['userId'])
     const navigate = useNavigate()

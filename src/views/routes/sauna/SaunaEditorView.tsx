@@ -37,9 +37,9 @@ const SaunaEditorView = () => {
                 navigate(`/saunas/${saunaId}`)
             })
         else
-            api.sauna.add(sauna).then(sauna => {
+            api.sauna.add(sauna).then(addedSauna => {
                 success('Die Sauna wurde erfolgreich erstellt.')
-                navigate(`/saunas/${sauna.id}/edit`)
+                navigate(`/saunas/${addedSauna.id}/edit`)
             })
     }
 

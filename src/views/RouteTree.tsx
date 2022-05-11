@@ -1,7 +1,6 @@
 import { Route } from 'use-react-router-breadcrumbs'
 import Layout from './Layout'
 import Home from './routes/Home'
-import Overview from './routes/Overview'
 import SaunaEditorView from './routes/sauna/SaunaEditorView'
 import Showroom from './routes/Showroom'
 import LoginView from './routes/LoginView'
@@ -13,6 +12,8 @@ import SaunaDetailView from './routes/sauna/SaunaDetailView'
 import PriceEditorView from './routes/sauna/PriceEditorView'
 import ActivationView from './routes/ActivationView'
 import UserEditorView from './routes/users/UserEditorView'
+import Overview from './routes/sauna/Overview'
+import UsersListView from './routes/users/UsersListView'
 
 const RouteTree = () => {
     return (
@@ -36,7 +37,7 @@ const RouteTree = () => {
                     <Route path="create" breadcrumb="Erstellen" element={<SaunaEditorView />} />
                 </Route>
                 <Route path="/users" breadcrumb="Benutzer">
-                    <Route index element={<span>TODO: Benutzerliste</span>} />
+                    <Route index element={<UsersListView />} />
                     <Route path=":userId" breadcrumb="Bearbeiten" element={<UserEditorView />} />
                 </Route>
                 <Route path="/protected" element={<ProtectedRoute element={<div> Protected Route </div>} />} />
