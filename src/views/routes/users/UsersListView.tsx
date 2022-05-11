@@ -19,7 +19,7 @@ function UsersListView() {
     }
 
     return (
-        <div>
+        <div data-testid="users-list-view">
             <PageTitle>Benutzerverwaltung</PageTitle>
             <Table
                 headings={headings}
