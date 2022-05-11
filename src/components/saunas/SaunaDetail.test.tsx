@@ -24,9 +24,6 @@ describe('<SaunDetail>', () => {
     test('show text correctly', () => {
         render(<SaunaDetail sauna={exampleSauna} />)
 
-        const title = screen.getByTestId('title')
-        expect(title).toHaveTextContent(exampleSauna.name)
-
         const description = screen.getByTestId('description')
         expect(description).toHaveTextContent(exampleSauna.description)
     })

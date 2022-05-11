@@ -9,9 +9,6 @@ export type SaunaDetailProps = {
 const SaunaDetail = (props: SaunaDetailProps) => {
     return (
         <div className="grid gap-4" data-testid={props['data-testid'] || 'sauna-detail'}>
-            <h2 data-testid="title" className="text-3xl font-bold text-primary-600 mb-2">
-                {props.sauna.name}
-            </h2>
             <div>
                 <p data-testid="description" className="text-gray-900">
                     {props.sauna.description}

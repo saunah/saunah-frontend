@@ -6,6 +6,7 @@ import { parseId } from '../../../utils/identifiable'
 import { useParams } from 'react-router-dom'
 import SaunaImageCarousel from '../../../components/saunas/SaunaImageCarousel'
 import { SaunaImage } from '../../../entities/SaunaImage'
+import PageTitle from '../../../components/base/PageTitle'
 
 const SaunaDetailView = () => {
     const params = useParams()
@@ -22,7 +23,8 @@ const SaunaDetailView = () => {
     }, [saunaId])
 
     return (
-        <div className="ml-16 mr-16 grid gap-4 grid-cols-1" data-testid={'sauna-detail-view'}>
+        <div className="space-y-4" data-testid={'sauna-detail-view'}>
+            <PageTitle>{sauna?.name}</PageTitle>
             <SaunaImageCarousel images={images} />
             {sauna && <SaunaDetail sauna={sauna} />}
         </div>

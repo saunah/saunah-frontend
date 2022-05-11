@@ -33,7 +33,7 @@ describe('<SaunaDetailView>', () => {
     test('shows SaunaDetail correctly', async () => {
         mockSaunaAPI(defaultMock())
         render(<SaunaDetailView />, { wrapper: wrapper })
-        expect(screen.getByTestId('sauna-detail-view')).toBeInTheDocument()
+        expect(await screen.findByTestId('sauna-detail-view')).toBeInTheDocument()
     })
 })
 
