@@ -6,6 +6,9 @@ import Table from '../../../components/base/Table'
 import { User } from '../../../entities/User'
 import api from '../../../networking/api'
 
+/**
+ * Fetches all users from API and displays them in a table.
+ */
 function UsersListView() {
     const headings = ['Name', 'E-Mail', 'Telefon', 'Benutzerrolle', '']
     const [users, setUsers] = useState<User.Response[]>([])

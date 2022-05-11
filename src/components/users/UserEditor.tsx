@@ -14,6 +14,10 @@ export type UserEditorProps = {
     testId?: string
 }
 
+/**
+ * Editor for user values. Can either be used to edit user
+ * details or to register a new user.
+ */
 const UserEditor = (props: UserEditorProps) => {
     const user = props.value
     const isCreate = props.isCreate || false

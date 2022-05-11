@@ -1,5 +1,8 @@
 import { UserRole } from './UserRole'
 
+/**
+ * Namespace representing a user in its different forms.
+ */
 export namespace User {
     type Base = {
         firstName: string

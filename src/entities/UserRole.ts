@@ -1,3 +1,8 @@
+/**
+ * Namespace representing user roles. Provides support
+ * that naming of remote values could be different from
+ * local values.
+ */
 export namespace UserRole {
     export const enum Local {
         USER = 'USER',
