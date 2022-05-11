@@ -74,20 +74,20 @@ const RegisterForm = (props: RegisterFormProps) => {
                     onChange={street => props.onChange?.({ ...props.user, street })}
                 />
                 <Input
-                    data-testid="place-input"
-                    name="Ort"
-                    placeholder="Ort"
-                    autoComplete="country-name"
-                    value={props.user.place}
-                    onChange={place => props.onChange?.({ ...props.user, place })}
-                />
-                <Input
                     data-testid="zip-input"
                     name="PLZ"
                     placeholder="PLZ"
                     autoComplete="postal-code"
                     value={props.user.zip}
                     onChange={zip => props.onChange?.({ ...props.user, zip })}
+                />
+                <Input
+                    data-testid="place-input"
+                    name="Ort"
+                    placeholder="Ort"
+                    autoComplete="country-name"
+                    value={props.user.place}
+                    onChange={place => props.onChange?.({ ...props.user, place })}
                 />
             </div>
             <div className="mt-6">

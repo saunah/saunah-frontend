@@ -12,6 +12,7 @@ import SaunaDetailBreadcrumb from './shared/SaunaDetailBreadcrumb'
 import SaunaDetailView from './routes/sauna/SaunaDetailView'
 import PriceEditorView from './routes/sauna/PriceEditorView'
 import ActivationView from './routes/ActivationView'
+import UserEditorView from './routes/users/UserEditorView'
 
 const RouteTree = () => {
     return (
@@ -33,6 +34,10 @@ const RouteTree = () => {
                         <Route path="edit" breadcrumb="Bearbeiten" element={<SaunaEditorView />} />
                     </Route>
                     <Route path="create" breadcrumb="Erstellen" element={<SaunaEditorView />} />
+                </Route>
+                <Route path="/users" breadcrumb="Benutzer">
+                    <Route index element={<span>TODO: Benutzerliste</span>} />
+                    <Route path=":userId" breadcrumb="Bearbeiten" element={<UserEditorView />} />
                 </Route>
                 <Route path="/protected" element={<ProtectedRoute element={<div> Protected Route </div>} />} />
                 <Route path="/register" element={<RegisterView />} />

@@ -19,7 +19,7 @@ export namespace User {
         phoneNumber: string
         street: string
         place: string
-        plz: string
+        zip: string
     }
 
     /**
@@ -74,7 +74,7 @@ export namespace User {
             typeof user.phoneNumber === 'string' &&
             typeof user.street === 'string' &&
             typeof user.place === 'string' &&
-            typeof user.plz === 'string'
+            typeof user.zip === 'string'
         )
     }
 
@@ -122,7 +122,7 @@ export namespace User {
             telephone: user.phoneNumber,
             street: user.street,
             place: user.place,
-            zip: user.plz,
+            zip: user.zip,
         }
     }
 
@@ -161,7 +161,7 @@ export namespace User {
             phoneNumber: user.telephone,
             street: user.street,
             place: user.place,
-            plz: user.zip,
+            zip: user.zip,
         }
     }
 }

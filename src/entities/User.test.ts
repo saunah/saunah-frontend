@@ -54,7 +54,7 @@ describe('User', () => {
         phoneNumber: '078 123 45 67',
         street: 'Technikumstrasse 9',
         place: 'Winterthur',
-        plz: '8400',
+        zip: '8400',
     }
 
     const localResponse: User.Response = {
@@ -90,7 +90,7 @@ describe('User', () => {
         phoneNumber: '078 123 45 67',
         street: 'Technikumstrasse 9',
         place: 'Winterthur',
-        plz: '8400',
+        zip: '8400',
         password: '',
     }
 })
