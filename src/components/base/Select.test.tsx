@@ -14,25 +14,32 @@ describe('<Select>', () => {
     })
 
     test('displays value correctly', () => {
-        render(<Select name={label} values={values} selected="Two" onChange={defaultOnChange} />)
+        render(<Select values={values} selected="Two" onChange={defaultOnChange} />)
         expect(getSelect()).toHaveValue('Two')
     })
 
     test('calls onChange if input changes', () => {
         const onChange = jest.fn()
-        render(<Select name={label} values={values} selected="Two" onChange={onChange} />)
+        render(<Select values={values} selected="Two" onChange={onChange} />)
         fireEvent.change(getSelect(), { target: { value: 'Three' } })
         expect(onChange).toBeCalledTimes(1)
         expect(onChange).toBeCalledWith('Three')
     })
 
+    test('does not call onChange if new vlaue is not inside values', () => {
+        const onChange = jest.fn()
+        render(<Select values={values} selected="Two" onChange={onChange} />)
+        fireEvent.change(getSelect(), { target: { value: 'Other' } })
+        expect(onChange).toBeCalledTimes(0)
+    })
+
     test('does not set disabled if not set', () => {
-        render(<Select name={label} values={values} selected="Two" onChange={defaultOnChange} />)
+        render(<Select values={values} selected="Two" onChange={defaultOnChange} />)
         expect(getSelect()).not.toHaveProperty('disabled', true)
     })
 
     test('sets disabled if set', () => {
-        render(<Select name={label} values={values} selected="Two" onChange={defaultOnChange} disabled />)
+        render(<Select values={values} selected="Two" onChange={defaultOnChange} disabled />)
         expect(getSelect()).toHaveProperty('disabled', true)
     })
 
