@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import PageTitle from '../../components/base/PageTitle'
-import RegisterForm from '../../components/users/RegisterForm'
+import UserEditor from '../../components/users/UserEditor'
 import { User } from '../../entities/User'
 import api from '../../networking/api'
 import { useAlert } from '../shared/AlertProvider'
@@ -21,7 +21,7 @@ const RegisterView = () => {
     return (
         <div>
             <PageTitle>Benutzer registrieren</PageTitle>
-            <RegisterForm data-testid={'registerform'} user={user} onChange={setUser} onSubmit={signupUser} />
+            <UserEditor testId="registerform" value={user} isCreate={true} onChange={setUser} onSubmit={signupUser} />
         </div>
     )
 }

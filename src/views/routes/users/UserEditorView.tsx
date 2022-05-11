@@ -44,7 +44,7 @@ function UserEditorView() {
     return (
         <div data-testid="sauna-editor-view">
             <PageTitle>Benutzer bearbeiten</PageTitle>
-            <UserEditor value={user} onChange={setUser} onSubmit={submit} showDelete={true} onDelete={deleteUser} />
+            <UserEditor value={user} onChange={setUser} onSubmit={submit} isAdmin={true} onDelete={deleteUser} />
         </div>
     )
 }

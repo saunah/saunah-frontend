@@ -7,17 +7,17 @@ import AlertProvider from '../shared/AlertProvider'
 import { MemoryRouter } from 'react-router-dom'
 import { UserRole } from '../../entities/UserRole'
 
-describe('<Registerview>', () => {
-    test('registerform show user correctly', () => {
+describe('<RegisterView>', () => {
+    test('Form show user correctly', () => {
         render(<RegisterView />, { wrapper: wrapper })
         expect(screen.getByTestId('registerform')).toBeInTheDocument()
     })
 
-    test('sends data on submit', async () => {
+    test('Sends data on submit', async () => {
         const mock = mockUserAPI(defaultMock())
         render(<RegisterView />, { wrapper: wrapper })
 
-        const button = screen.getByTestId('register-button')
+        const button = screen.getByTestId('submit-button')
         expect(button).toHaveTextContent('Benutzer registrieren')
         fireEvent.click(button)
         expect(mock.signup).toBeCalledTimes(1)
