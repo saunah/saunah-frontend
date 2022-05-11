@@ -12,6 +12,7 @@ describe('<Table>', () => {
 
     test('Displays table', () => {
         render(<Table headings={defaultHeadings} elements={defaultElements} testId="my-table" />)
+
         const table = screen.getByTestId('my-table')
         expect(table).toBeInTheDocument()
     })
@@ -26,6 +27,22 @@ describe('<Table>', () => {
         })
     })
 
+    test('Does not show thead if header is undefined', () => {
+        render(<Table elements={defaultElements} />)
+
+        const table = screen.getByTestId(defaultTestId)
+        const tHead = table.querySelector('thead')
+        expect(tHead).toBeNull()
+    })
+
+    test('Does not show thead if header is empty', () => {
+        render(<Table headings={[]} elements={defaultElements} />)
+
+        const table = screen.getByTestId(defaultTestId)
+        const tHead = table.querySelector('thead')
+        expect(tHead).toBeNull()
+    })
+
     test('Shows contents corretly', () => {
         render(<Table headings={defaultHeadings} elements={defaultElements} />)
 
@@ -36,5 +53,13 @@ describe('<Table>', () => {
                 expect(element).toHaveTextContent(defaultElements[rowIdx][elementIdx])
             })
         })
+    })
+
+    test('Does not show tbody if elements is empty', () => {
+        render(<Table headings={defaultHeadings} elements={[]} />)
+
+        const table = screen.getByTestId(defaultTestId)
+        const tHead = table.querySelector('tbody')
+        expect(tHead).toBeNull()
     })
 })
