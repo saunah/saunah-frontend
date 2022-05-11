@@ -87,19 +87,28 @@ type OuterAppMenuElementProps = {
  * <code>button</code> or <code>MenuLink</code>.
  */
 function OuterAppMenuElement({ children, fromItem }: OuterAppMenuElementProps) {
-    if (isAppMenuIconItem(fromItem) && fromItem.onClick != null) {
+    if (isAppMenuIconItem(fromItem)) {
         return (
             <button onClick={() => fromItem.onClick?.()} data-testid={fromItem.testId || defaultTestIdElement}>
                 {children}
             </button>
         )
+    } else if (fromItem.url) {
+        return (
+            <MenuLink to={fromItem.url || ''} data-testid={fromItem.testId || defaultTestIdElement}>
+                {children}
+            </MenuLink>
+        )
+    } else {
+        return (
+            <button
+                className="text-primary-500 font-medium transition ease-in-out duration-200  hover:text-accent-200"
+                onClick={fromItem.onClick}
+            >
+                {children}
+            </button>
+        )
     }
-
-    return (
-        <MenuLink to={fromItem.url || ''} data-testid={fromItem.testId || defaultTestIdElement}>
-            {children}
-        </MenuLink>
-    )
 }
 
 /**

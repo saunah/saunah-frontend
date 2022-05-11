@@ -75,6 +75,8 @@ const defaultAuthState = (isAuthenticated?: boolean): AuthState => {
         logout: () => {
             // Ignore logout
         },
+        me: null,
+        isAdmin: () => false,
     }
 }
 
