@@ -34,6 +34,8 @@ function Select<T>(props: SelectProps<T>) {
                     className={selectClasses}
                     value={'' + props.selected}
                     disabled={props.disabled}
+                    name={props.name}
+                    data-testid="select"
                 >
                     {props.values.map((value, valueIdx) => (
                         <option value={'' + value} key={valueIdx}>
