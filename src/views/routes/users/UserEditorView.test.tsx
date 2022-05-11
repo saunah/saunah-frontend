@@ -10,9 +10,10 @@ import UserEditorView from './UserEditorView'
 describe('<UserEditorView>', () => {
     const defaultTestId = 'user-editor'
 
-    test('Editor is displayed', () => {
+    test('Editor is displayed', async () => {
+        mockUserAPI(defaultMock())
         render(<UserEditorView />, { wrapper: wrapper })
-        expect(screen.getByTestId(defaultTestId)).toBeInTheDocument()
+        expect(await screen.findByTestId(defaultTestId)).toBeInTheDocument()
     })
 
     test('Sends data on submit', async () => {
