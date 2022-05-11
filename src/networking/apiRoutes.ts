@@ -26,6 +26,13 @@ const apiRoutes = {
         edit: (saunaId: number) => `/prices/${saunaId}`,
         remove: (saunaId: number) => `/prices/${saunaId}`,
     },
+    booking: {
+        list: '/booking',
+        get: (saunaId: number) => `/booking/${saunaId}`,
+        add: '/booking',
+        edit: (saunaId: number) => `/booking/${saunaId}`,
+        remove: (saunaId: number) => `/booking/${saunaId}`,
+    },
 }
 
 /**

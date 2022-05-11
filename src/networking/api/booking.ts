@@ -1,38 +1,38 @@
 import { DeepReadonly } from '../../utils/object'
-import { Price } from '../../entities/Price'
 import axios from 'axios'
 import apiRoutes from '../apiRoutes'
 import { mapInArray } from '../../utils/mapping'
+import { Booking } from '../../entities/Booking'
 
 export type BookingAPI = DeepReadonly<{
-    list(): Promise<Price.Response[]>
-    get(priceId: number): Promise<Price.Response>
-    add(price: Price.Request): Promise<Price.Response>
-    edit(priceId: number, price: Price.Request): Promise<Price.Response>
-    remove(priceId: number): Promise<void>
+    list(): Promise<Booking.Response[]>
+    get(bookingId: number): Promise<Booking.Response>
+    add(booking: Booking.Request): Promise<Booking.Response>
+    edit(bookingId: number, booking: Booking.Request): Promise<Booking.Response>
+    remove(bookingId: number): Promise<void>
 }>
 //IMPORTANT: this is a copy/paste class from price.ts, still needs a lot of changes!!!!
 const bookingApi: BookingAPI = {
-    async list(): Promise<Price.Response[]> {
-        const response = await axios.get(apiRoutes.price.list)
-        return mapInArray(response.data, Price.mapIn)
+    async list(): Promise<Booking.Response[]> {
+        const response = await axios.get(apiRoutes.booking.list)
+        return mapInArray(response.data, Booking.mapIn)
     },
-    async get(priceId: number): Promise<Price.Response> {
-        const response = await axios.get(apiRoutes.price.get(priceId))
-        return Price.mapIn(response.data)
+    async get(bookingId: number): Promise<Booking.Response> {
+        const response = await axios.get(apiRoutes.booking.get(bookingId))
+        return Booking.mapIn(response.data)
     },
-    async add(price: Price.Request): Promise<Price.Response> {
-        const remoteRequest = Price.mapOut(price)
-        const response = await axios.post(apiRoutes.price.add, remoteRequest)
-        return Price.mapIn(response.data)
+    async add(booking: Booking.Request): Promise<Booking.Response> {
+        const remoteRequest = Booking.mapOut(booking)
+        const response = await axios.post(apiRoutes.booking.add, remoteRequest)
+        return Booking.mapIn(response.data)
     },
-    async edit(priceId: number, price: Price.Request): Promise<Price.Response> {
-        const remoteRequest = Price.mapOut(price)
-        const response = await axios.put(apiRoutes.price.edit(priceId), remoteRequest)
-        return Price.mapIn(response.data)
+    async edit(bookingId: number, booking: Booking.Request): Promise<Booking.Response> {
+        const remoteRequest = Booking.mapOut(booking)
+        const response = await axios.put(apiRoutes.booking.edit(bookingId), remoteRequest)
+        return Booking.mapIn(response.data)
     },
-    async remove(priceId: number): Promise<void> {
-        await axios.delete(apiRoutes.price.remove(priceId))
+    async remove(bookingId: number): Promise<void> {
+        await axios.delete(apiRoutes.booking.remove(bookingId))
     },
 }
 

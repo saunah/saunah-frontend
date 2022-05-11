@@ -12,6 +12,7 @@ import SaunaDetailBreadcrumb from './shared/SaunaDetailBreadcrumb'
 import SaunaDetailView from './routes/sauna/SaunaDetailView'
 import PriceEditorView from './routes/sauna/PriceEditorView'
 import ActivationView from './routes/ActivationView'
+import BookingView from './routes/sauna/BookingView'
 
 const RouteTree = () => {
     return (
@@ -37,7 +38,7 @@ const RouteTree = () => {
                 <Route path="/protected" element={<ProtectedRoute element={<div> Protected Route </div>} />} />
                 <Route path="/register" element={<RegisterView />} />
                 <Route path="/verify/:token" element={<ActivationView />} breadcrumb="Account aktivieren" />
-                <Route path="/booking"/>
+                <Route path="/booking" element={<BookingView />}/>
             </Route>
         </BreadcrumbRoutes>
     )
