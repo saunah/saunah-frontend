@@ -20,6 +20,11 @@ describe('User', () => {
         expect(() => User.mapIn(undefined)).toThrow()
     })
 
+    test('mapIn() fails if role is in wrong format', () => {
+        const response = { ...remoteResponse, role: 'CUSTOM' }
+        expect(() => User.mapIn(response)).toThrow()
+    })
+
     test('mapToRequest() works correctly', () => {
         expect(User.mapToRequest(localResponse)).toEqual(localRequest)
     })
