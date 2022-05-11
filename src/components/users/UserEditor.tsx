@@ -98,7 +98,7 @@ const UserEditor = (props: UserEditorProps) => {
                     data-testid="input-zip"
                     value={user.zip}
                     type="number"
-                    autoComplete={isCreate ? 'postal-code' : undefined}
+                    autoComplete="postal-code"
                     onChange={newValue => props.onChange?.({ ...user, zip: newValue })}
                 />
                 <Input
@@ -114,6 +114,7 @@ const UserEditor = (props: UserEditorProps) => {
                         name="Rolle"
                         values={[UserRole.Local.ADMIN, UserRole.Local.USER]}
                         selected={user.role}
+                        data-testid="select-role"
                         onChange={newValue => props.onChange?.({ ...user, role: newValue })}
                     />
                 )}
