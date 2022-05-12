@@ -39,19 +39,14 @@ const testCredentials: LoginCredentials.Request = {
 const testToken: Token.Response = { token: 'abc' }
 
 describe('<AuthProvider>', () => {
-    test('has correct initial state', () => {
-        const { result } = renderHook(useAuth, { wrapper })
-        expect(result.current.isAuthenticated).toBe(false)
-    })
-
     test('updates authentication status after login', async () => {
         const mock = mockUserAPI(defaultMock())
         const { result } = renderHook(useAuth, { wrapper })
 
-        expect(result.current.isAuthenticated).toBe(false)
+        expect(result.current.isAuthenticated()).toBe(false)
         await act(() => result.current.login(testCredentials))
 
-        expect(result.current.isAuthenticated).toBe(true)
+        expect(result.current.isAuthenticated()).toBe(true)
         expect(mock.login).toBeCalledTimes(1)
         expect(mock.login).toBeCalledWith(testCredentials)
     })
@@ -61,9 +56,9 @@ describe('<AuthProvider>', () => {
 
         const { result } = renderHook(useAuth, { wrapper })
         await act(() => result.current.login(testCredentials))
-        expect(result.current.isAuthenticated).toBe(true)
+        expect(result.current.isAuthenticated()).toBe(true)
         act(() => result.current.logout())
-        expect(result.current.isAuthenticated).toBe(false)
+        expect(result.current.isAuthenticated()).toBe(false)
     })
 })
 
