@@ -1,12 +1,12 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { ReactNode } from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import { LoginCredentials } from '../../entities/LoginCredentials'
-import { User } from '../../entities/User'
-import { UserRole } from '../../entities/UserRole'
-import { mockUserAPI } from '../../networking/api'
-import AlertProvider from '../shared/AlertProvider'
-import AuthProvider from '../shared/AuthProvider'
+import { LoginCredentials } from '../../../entities/LoginCredentials'
+import { User } from '../../../entities/User'
+import { UserRole } from '../../../entities/UserRole'
+import { mockUserAPI } from '../../../networking/api'
+import AlertProvider from '../../shared/AlertProvider'
+import AuthProvider from '../../shared/AuthProvider'
 import LoginView from './LoginView'
 
 const wrapper = (props: { children?: ReactNode }) => {

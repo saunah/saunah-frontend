@@ -1,11 +1,11 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import RegisterView from './RegisterView'
-import { User } from '../../entities/User'
-import { mockUserAPI } from '../../networking/api'
+import { User } from '../../../entities/User'
+import { mockUserAPI } from '../../../networking/api'
 import { ReactNode } from 'react'
-import AlertProvider from '../shared/AlertProvider'
+import AlertProvider from '../../shared/AlertProvider'
 import { MemoryRouter } from 'react-router-dom'
-import { UserRole } from '../../entities/UserRole'
+import { UserRole } from '../../../entities/UserRole'
 
 describe('<RegisterView>', () => {
     test('Form show user correctly', () => {

@@ -14,6 +14,10 @@ export type UserEditorProps = {
     testId?: string
 }
 
+/**
+ * Editor for user values. Can either be used to edit user
+ * details or to register a new user.
+ */
 const UserEditor = (props: UserEditorProps) => {
     const user = props.value
     const isCreate = props.isCreate || false
@@ -66,7 +70,7 @@ const UserEditor = (props: UserEditorProps) => {
                         name="Passwort"
                         placeholder="Passwort"
                         data-testid="input-password"
-                        autoComplete={isCreate ? 'new-password' : undefined}
+                        autoComplete="new-password"
                         value={user.password}
                         type="password"
                         onChange={password => props.onChange?.({ ...user, password })}
@@ -98,7 +102,7 @@ const UserEditor = (props: UserEditorProps) => {
                     data-testid="input-zip"
                     value={user.zip}
                     type="number"
-                    autoComplete={isCreate ? 'postal-code' : undefined}
+                    autoComplete="postal-code"
                     onChange={newValue => props.onChange?.({ ...user, zip: newValue })}
                 />
                 <Input
@@ -114,6 +118,7 @@ const UserEditor = (props: UserEditorProps) => {
                         name="Rolle"
                         values={[UserRole.Local.ADMIN, UserRole.Local.USER]}
                         selected={user.role}
+                        data-testid="select-role"
                         onChange={newValue => props.onChange?.({ ...user, role: newValue })}
                     />
                 )}

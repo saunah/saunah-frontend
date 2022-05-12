@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { AlertDuration } from '../../entities/Alert'
-import api from '../../networking/api'
-import { useAlert } from '../shared/AlertProvider'
+import { AlertDuration } from '../../../entities/Alert'
+import api from '../../../networking/api'
+import { useAlert } from '../../shared/AlertProvider'
 
 const ActivationView = () => {
     const params = useParams()

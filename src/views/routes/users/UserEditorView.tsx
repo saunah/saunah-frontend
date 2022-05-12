@@ -7,6 +7,9 @@ import api from '../../../networking/api'
 import { parseId } from '../../../utils/identifiable'
 import { useAlert } from '../../shared/AlertProvider'
 
+/**
+ * View to fetch a user and edit it's details.
+ */
 function UserEditorView() {
     const params = useParams()
     const userId = parseId(params['userId'])

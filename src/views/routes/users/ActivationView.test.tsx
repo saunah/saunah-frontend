@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react'
 import { ReactNode } from 'react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
-import { User } from '../../entities/User'
-import { UserRole } from '../../entities/UserRole'
-import { mockUserAPI } from '../../networking/api'
-import { deferred } from '../../utils/deferred'
-import AlertProvider from '../shared/AlertProvider'
+import { User } from '../../../entities/User'
+import { UserRole } from '../../../entities/UserRole'
+import { mockUserAPI } from '../../../networking/api'
+import { deferred } from '../../../utils/deferred'
+import AlertProvider from '../../shared/AlertProvider'
 import ActivationView from './ActivationView'
 
 describe('<ActivationView>', () => {

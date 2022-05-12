@@ -1,10 +1,10 @@
-import LoginForm from '../../components/users/LoginForm'
+import LoginForm from '../../../components/users/LoginForm'
 import { useState } from 'react'
-import { LoginCredentials } from '../../entities/LoginCredentials'
-import { useAuth } from '../shared/AuthProvider'
-import { useAlert } from '../shared/AlertProvider'
+import { LoginCredentials } from '../../../entities/LoginCredentials'
+import { useAuth } from '../../shared/AuthProvider'
+import { useAlert } from '../../shared/AlertProvider'
 import { useNavigate } from 'react-router-dom'
-import PageTitle from '../../components/base/PageTitle'
+import PageTitle from '../../../components/base/PageTitle'
 
 const LoginView = () => {
     const [user, setUser] = useState<LoginCredentials.Request>(LoginCredentials.empty())

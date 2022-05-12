@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import PageTitle from '../../components/base/PageTitle'
-import UserEditor from '../../components/users/UserEditor'
-import { User } from '../../entities/User'
-import api from '../../networking/api'
-import { useAlert } from '../shared/AlertProvider'
+import PageTitle from '../../../components/base/PageTitle'
+import UserEditor from '../../../components/users/UserEditor'
+import { User } from '../../../entities/User'
+import api from '../../../networking/api'
+import { useAlert } from '../../shared/AlertProvider'
 
 const RegisterView = () => {
     const [user, setUser] = useState<User.Request>(User.emptyRequest())
