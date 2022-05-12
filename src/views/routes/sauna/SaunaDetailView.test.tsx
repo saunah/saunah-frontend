@@ -2,7 +2,9 @@ import { render, screen } from '@testing-library/react'
 import { ReactNode } from 'react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { Sauna } from '../../../entities/Sauna'
-import { mockSaunaAPI } from '../../../networking/api'
+import { mockSaunaAPI, mockUserAPI } from '../../../networking/api'
+import { simpleUserMock } from '../../../networking/api/userMock'
+import AuthProvider from '../../shared/AuthProvider'
 import SaunaDetailView from './SaunaDetailView'
 
 jest.mock('../../../components/saunas/SaunaCalendar')
@@ -32,19 +34,25 @@ const sauna1: Sauna.Response = {
 }
 
 describe('<SaunaDetailView>', () => {
-    test('is here', async () => {
+    beforeEach(() => {
+        mockUserAPI(simpleUserMock())
+    })
+
+    test('shows SaunaDetail correctly', async () => {
         mockSaunaAPI(defaultMock())
-        render(<SaunaDetailView />, { wrapper })
-        expect(await screen.findByText('Details', { exact: false })).toBeInTheDocument()
+        render(<SaunaDetailView />, { wrapper: wrapper })
+        expect(await screen.findByTestId('sauna-detail-view')).toBeInTheDocument()
     })
 })
 
 const wrapper = (props: { children?: ReactNode }) => {
     return (
-        <MemoryRouter initialEntries={['/saunas/1']}>
-            <Routes>
-                <Route path="/saunas/:saunaId" element={props.children} />
-            </Routes>
-        </MemoryRouter>
+        <AuthProvider>
+            <MemoryRouter initialEntries={['/saunas/1']}>
+                <Routes>
+                    <Route path="/saunas/:saunaId" element={props.children} />
+                </Routes>
+            </MemoryRouter>
+        </AuthProvider>
     )
 }

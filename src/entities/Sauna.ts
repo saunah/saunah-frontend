@@ -67,7 +67,7 @@ export namespace Sauna {
      */
     export function mapIn(sauna: unknown): Response {
         if (!isRemoteResponse(sauna))
-            throw new Error(`Object could not be mapped in. It is not of type RemoteResponse.`)
+            throw new Error('Object could not be mapped in. It is not of type RemoteResponse.')
 
         return {
             id: sauna.id,

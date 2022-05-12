@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 /**
  * This component provides a simple page title.
  */
@@ -12,5 +14,5 @@ const PageTitle = (props: PageTitleProps) => {
 export default PageTitle
 
 export type PageTitleProps = {
-    children: string
+    children?: ReactNode
 }

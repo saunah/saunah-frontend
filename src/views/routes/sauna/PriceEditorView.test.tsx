@@ -1,12 +1,17 @@
 import PriceEditorView from './PriceEditorView'
 import { Price } from '../../../entities/Price'
-import { mockPriceAPI } from '../../../networking/api'
+import { mockPriceAPI, mockUserAPI } from '../../../networking/api'
 import { ReactNode } from 'react'
 import AlertProvider from '../../shared/AlertProvider'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
+import { simpleUserMock } from '../../../networking/api/userMock'
 
 describe('<PriceEditorView>', () => {
+    beforeEach(() => {
+        mockUserAPI(simpleUserMock())
+    })
+
     test('the correct info is fetched', async () => {
         const mock = mockPriceAPI(defaultMock())
         render(<PriceEditorView />, { wrapper })
