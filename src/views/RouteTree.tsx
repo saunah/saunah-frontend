@@ -6,6 +6,7 @@ import SaunaEditorView from './routes/sauna/SaunaEditorView'
 import Showroom from './routes/Showroom'
 import LoginView from './routes/LoginView'
 import ResetPwMailView from './routes/ResetPwMailView'
+import ResetPasswordView from './routes/ResetPasswordView'
 import { BreadcrumbRoutes } from './shared/BreadcrumbsRouter'
 import ProtectedRoute from './shared/ProtectedRoute'
 import RegisterView from '../views/routes/RegisterView'
@@ -24,6 +25,7 @@ const RouteTree = () => {
                     breadcrumb={'Passwort vergessen'}
                     element={<ResetPwMailView/>}
                 />
+                <Route path="/setNewPassword" element={<ResetPasswordView />} />
                 <Route path="/saunas" breadcrumb="Saunas">
                     <Route index element={<Overview />} />
                     <Route path=":saunaId" breadcrumb={SaunaDetailBreadcrumb}>
