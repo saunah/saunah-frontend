@@ -5,11 +5,13 @@ import apiRoutes from '../apiRoutes'
 import { LoginCredentials } from '../../entities/LoginCredentials'
 import { PwResetMailRequest } from '../../entities/PwResetMailRequest'
 import { Token } from '../../entities/Token'
+import { SetNewPassword } from '../../entities/SetNewPassword'
 
 export type UserAPI = DeepReadonly<{
     signup(user: User.Request): Promise<void>
     login(credentials: LoginCredentials.Request): Promise<Token.Response>
     passwordResetMail(credentials : PwResetMailRequest.Request): Promise<void>
+    setNewPassword(credentials : SetNewPassword.Request):Promise<void>
 }>
 
 const user: UserAPI = {
@@ -25,6 +27,10 @@ const user: UserAPI = {
     async passwordResetMail(credentials: PwResetMailRequest.Request): Promise<void> {
         const requestData = PwResetMailRequest.mapOut(credentials)
         await axios.post(apiRoutes.user.resetPasswordRequest, requestData)
+    },
+    async setNewPassword(credentials: SetNewPassword.Request): Promise<void> {
+        const requestData = SetNewPassword.mapOut(credentials)
+        await axios.post(apiRoutes.user.setNewPassword, requestData)
     },
 }
 

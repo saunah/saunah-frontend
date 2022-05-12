@@ -7,12 +7,12 @@ import api from '../../networking/api'
 import PageTitle from '../../components/base/PageTitle'
 
 const ResetPasswordView = () => {
-    const [email, setUser] = useState<SetNewPassword.Request>(SetNewPassword.empty())
+    const [newPw, setUser] = useState<SetNewPassword.Request>(SetNewPassword.empty())
     const { success } = useAlert()
     const navigate = useNavigate()
 
     const onSubmit = () => {
-        api.user.passwordResetMail(email).then(() => {
+        api.user.setNewPassword(newPw).then(() => {
             success('Passwort neu gesetzt')
             navigate('/')
         })
@@ -20,8 +20,8 @@ const ResetPasswordView = () => {
 
     return (
         <div data-testid={'pw-reset-mail-form'}>
-            <PageTitle> Neues Passwort eingeben </PageTitle>
-            <SetNewPaswordForm request={email} onChange={setUser} onSubmit={onSubmit} />
+            <PageTitle> Passwort neu setzen </PageTitle>
+            <SetNewPaswordForm request={newPw} onChange={setUser} onSubmit={onSubmit} />
         </div>
     )
 }
