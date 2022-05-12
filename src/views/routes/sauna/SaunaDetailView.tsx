@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import SaunaDetail from '../../../components/saunas/SaunaDetail'
+import api from '../../../networking/api'
+import React, { useEffect, useState } from 'react'
+import { Sauna } from '../../../entities/Sauna'
+import { parseId } from '../../../utils/identifiable'
 import { useParams } from 'react-router-dom'
 import SaunaImageCarousel from '../../../components/saunas/SaunaImageCarousel'
-import { Sauna } from '../../../entities/Sauna'
 import { SaunaImage } from '../../../entities/SaunaImage'
-import api from '../../../networking/api'
-import { parseId } from '../../../utils/identifiable'
+import PageTitle from '../../../components/base/PageTitle'
 
 const SaunaDetailView = () => {
     const params = useParams()
@@ -21,9 +23,10 @@ const SaunaDetailView = () => {
     }, [saunaId])
 
     return (
-        <div>
-            <span>Details für {sauna?.name} </span>
+        <div className="space-y-4" data-testid={'sauna-detail-view'}>
+            <PageTitle>{sauna?.name}</PageTitle>
             <SaunaImageCarousel images={images} />
+            {sauna && <SaunaDetail sauna={sauna} />}
         </div>
     )
 }

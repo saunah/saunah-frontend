@@ -12,5 +12,5 @@ const PageTitle = (props: PageTitleProps) => {
 export default PageTitle
 
 export type PageTitleProps = {
-    children: string
+    children?: string
 }
