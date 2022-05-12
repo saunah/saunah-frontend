@@ -64,6 +64,7 @@ describe('<UserEditorView>', () => {
             get: jest.fn(() => Promise.resolve(testUser)),
             edit: jest.fn(() => Promise.resolve(testUser)),
             remove: jest.fn(() => Promise.resolve()),
+            whoami: jest.fn(() => Promise.resolve(testUser)),
         }
     }
 

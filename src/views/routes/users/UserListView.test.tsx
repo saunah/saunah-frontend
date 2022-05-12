@@ -41,6 +41,7 @@ describe('<UserListView>', () => {
             get: jest.fn(() => Promise.resolve(user1)),
             edit: jest.fn(() => Promise.resolve(user1)),
             remove: jest.fn(() => Promise.resolve()),
+            whoami: jest.fn(() => Promise.resolve(user1)),
         }
     }
 

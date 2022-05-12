@@ -2,6 +2,7 @@ import { HomeIcon, UserCircleIcon } from '@heroicons/react/solid'
 import { ReactElement } from 'react'
 import { BreadcrumbData } from 'use-react-router-breadcrumbs'
 import AppMenu, { AppMenuTextItem } from '../../components/structural/AppMenu'
+import { AlertState, useAlert } from './AlertProvider'
 import { AuthState, useAuth } from './AuthProvider'
 import { useBreadcrumbs } from './BreadcrumbsRouter'
 
@@ -13,6 +14,7 @@ import { useBreadcrumbs } from './BreadcrumbsRouter'
  */
 const NavigationBar = () => {
     const authState = useAuth()
+    const alertState = useAlert()
     const breadcrumbs = useBreadcrumbs()
 
     return (
@@ -20,7 +22,7 @@ const NavigationBar = () => {
             leadingItem={{ icon: HomeIcon, url: '/' }}
             primaryItems={createBreadcrumbItems(breadcrumbs)}
             trailingItem={{ icon: UserCircleIcon, iconClasses: 'w-9 h-9' }}
-            secondaryItems={createSecondaryItems(authState)}
+            secondaryItems={createSecondaryItems(authState, alertState)}
         />
     )
 }
@@ -34,18 +36,30 @@ function createBreadcrumbItems(breadcrumbs: BreadcrumbData<string>[]): AppMenuTe
     }))
 }
 
-function createSecondaryItems({ isAuthenticated, logout }: AuthState): AppMenuTextItem[] {
+function createSecondaryItems(
+    { isAuthenticated, isAdmin, logout }: AuthState,
+    { success }: AlertState
+): AppMenuTextItem[] {
+    const logoutWithSuccess = () => {
+        logout()
+        success('Sie haben sich ausgeloggt.')
+    }
+
+    if (isAuthenticated()) {
+        const items: AppMenuTextItem[] = [{ title: 'Profil', url: '/profile' }]
+        if (isAdmin()) {
+            items.push(
+                { title: 'Sauna erstellen', url: '/saunas/create' },
+                { title: 'Preise', url: '/saunas/pricing' },
+                { title: 'Benutzer', url: '/users' }
+            )
+        }
+        items.push({ title: 'Logout', onClick: logoutWithSuccess })
+        return items
+    }
+
     return [
-        { title: 'Showroom', url: '/showroom', testId: 'showroom-test-id' },
-        ...(isAuthenticated
-            ? [
-                  { title: 'Erstellen', url: '/saunas/create' },
-                  { title: 'Benutzer', url: '/users' },
-                  { title: 'Logout', onClick: () => logout() },
-              ]
-            : [
-                  { title: 'Register', url: '/register' },
-                  { title: 'Login', url: '/login' },
-              ]),
+        { title: 'Registrieren', url: '/register' },
+        { title: 'Login', url: '/login' },
     ]
 }

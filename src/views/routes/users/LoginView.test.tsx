@@ -28,6 +28,7 @@ const defaultMock = () => {
         get: jest.fn(() => Promise.resolve(testUser)),
         edit: jest.fn(() => Promise.resolve(testUser)),
         remove: jest.fn(() => Promise.resolve()),
+        whoami: jest.fn(() => Promise.resolve(testUser)),
     }
 }
 
@@ -44,10 +45,14 @@ const testUser: User.Response = {
 }
 
 describe('<LoginView>', () => {
-    test('shows LoginForm correctly', () => {
+    test('shows LoginForm correctly', async () => {
+        mockUserAPI(defaultMock())
         render(<LoginView />, { wrapper: wrapper })
         expect(screen.getByTestId('loginform')).toBeInTheDocument()
+
+        await screen.findByTestId('loginform')
     })
+
     test('data gets send onSubmit', async () => {
         const mock = mockUserAPI(defaultMock())
         render(<LoginView />, { wrapper: wrapper })

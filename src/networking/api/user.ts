@@ -14,6 +14,7 @@ export type UserAPI = DeepReadonly<{
     get(userId: number): Promise<User.Response>
     edit(userId: number, user: User.Request): Promise<User.Response>
     remove(userId: number): Promise<void>
+    whoami(): Promise<User.Response>
 }>
 
 const UserApi: UserAPI = {
@@ -44,6 +45,10 @@ const UserApi: UserAPI = {
     },
     async remove(userId: number): Promise<void> {
         await axios.delete(apiRoutes.user.remove(userId))
+    },
+    async whoami(): Promise<User.Response> {
+        const response = await axios.get(apiRoutes.user.whoami)
+        return User.mapIn(response.data)
     },
 }
 
