@@ -4,8 +4,14 @@ import { Route, Routes, Outlet, Link, MemoryRouter } from 'react-router-dom'
 import { render, screen, waitFor } from '@testing-library/react'
 import { AuthContext, AuthState } from './AuthProvider'
 import ProtectedRoute from './ProtectedRoute'
+import { mockUserAPI } from '../../networking/api'
+import { simpleUserMock } from '../../networking/api/userMock'
 
 describe('<ProtectedRoute>', () => {
+    beforeAll(() => {
+        mockUserAPI(simpleUserMock())
+    })
+
     test('shows home route at start', () => {
         render(TestRoutes(), { wrapper: createWrapper() })
         expect(screen.getByTestId('parent')).toHaveTextContent('home')

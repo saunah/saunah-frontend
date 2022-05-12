@@ -1,6 +1,8 @@
 import { HomeIcon, UserCircleIcon } from '@heroicons/react/solid'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
+import { mockUserAPI } from '../../networking/api'
+import { simpleUserMock } from '../../networking/api/userMock'
 import AppMenu from './AppMenu'
 
 describe('<AppMenu>', () => {
@@ -15,6 +17,10 @@ describe('<AppMenu>', () => {
     const testIdPrimarySecond = 'primary-second'
     const testIdSecondaryFirst = 'secondary-first'
     const testIdSecondarySecond = 'secondary-second'
+
+    beforeAll(() => {
+        mockUserAPI(simpleUserMock())
+    })
 
     test('contains leading and trailing elements', () => {
         render(<TestMenu />)

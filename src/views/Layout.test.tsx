@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import Layout from './Layout'
+import AlertProvider from './shared/AlertProvider'
 import AuthProvider from './shared/AuthProvider'
 
 test('Renders AppContainer', () => {
@@ -22,10 +23,12 @@ test('Renders AppContent', () => {
  */
 const wrappedLayout = () => {
     return (
-        <AuthProvider>
-            <BrowserRouter>
-                <Layout />
-            </BrowserRouter>
-        </AuthProvider>
+        <AlertProvider>
+            <AuthProvider>
+                <BrowserRouter>
+                    <Layout />
+                </BrowserRouter>
+            </AuthProvider>
+        </AlertProvider>
     )
 }

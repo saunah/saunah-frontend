@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
+import AlertProvider from './AlertProvider'
 import AuthProvider from './AuthProvider'
 import NavigationBar from './NavigationBar'
 
@@ -16,10 +17,12 @@ test('Renders NavigationBar', () => {
  */
 const wrappedView = () => {
     return (
-        <AuthProvider>
-            <BrowserRouter>
-                <NavigationBar />
-            </BrowserRouter>
-        </AuthProvider>
+        <AlertProvider>
+            <AuthProvider>
+                <BrowserRouter>
+                    <NavigationBar />
+                </BrowserRouter>
+            </AuthProvider>
+        </AlertProvider>
     )
 }

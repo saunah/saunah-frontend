@@ -2,7 +2,8 @@ import { render, screen } from '@testing-library/react'
 import { ReactNode } from 'react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { Sauna } from '../../../entities/Sauna'
-import { mockSaunaAPI } from '../../../networking/api'
+import { mockSaunaAPI, mockUserAPI } from '../../../networking/api'
+import { simpleUserMock } from '../../../networking/api/userMock'
 import SaunaDetailView from './SaunaDetailView'
 
 const defaultMock = () => {
@@ -30,6 +31,10 @@ const sauna1: Sauna.Response = {
 }
 
 describe('<SaunaDetailView>', () => {
+    beforeAll(() => {
+        mockUserAPI(simpleUserMock())
+    })
+
     test('shows SaunaDetail correctly', async () => {
         mockSaunaAPI(defaultMock())
         render(<SaunaDetailView />, { wrapper: wrapper })

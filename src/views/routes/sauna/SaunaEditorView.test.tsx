@@ -3,11 +3,16 @@ import { ReactNode } from 'react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { Sauna } from '../../../entities/Sauna'
 import { SaunaImage } from '../../../entities/SaunaImage'
-import { mockSaunaAPI, mockSaunaImageAPI } from '../../../networking/api'
+import { mockSaunaAPI, mockSaunaImageAPI, mockUserAPI } from '../../../networking/api'
+import { simpleUserMock } from '../../../networking/api/userMock'
 import AlertProvider from '../../shared/AlertProvider'
 import SaunaEditorView from './SaunaEditorView'
 
 describe('<SaunaEditorView>', () => {
+    beforeAll(() => {
+        mockUserAPI(simpleUserMock())
+    })
+
     test('the correct info is fetched on the edit page', async () => {
         const mock = mockSaunaAPI(defaultMock())
         const imageMock = mockSaunaImageAPI(imagesMock())

@@ -5,6 +5,7 @@ import { LoginCredentials } from '../../entities/LoginCredentials'
 import { User } from '../../entities/User'
 import { UserRole } from '../../entities/UserRole'
 import { mockUserAPI } from '../../networking/api'
+import { simpleUserMock } from '../../networking/api/userMock'
 import AlertProvider from '../shared/AlertProvider'
 import AuthProvider from '../shared/AuthProvider'
 import LoginView from './LoginView'
@@ -46,9 +47,11 @@ const testUser: User.Response = {
 
 describe('<LoginView>', () => {
     test('shows LoginForm correctly', () => {
+        mockUserAPI(defaultMock())
         render(<LoginView />, { wrapper: wrapper })
         expect(screen.getByTestId('loginform')).toBeInTheDocument()
     })
+
     test('data gets send onSubmit', async () => {
         const mock = mockUserAPI(defaultMock())
         render(<LoginView />, { wrapper: wrapper })
