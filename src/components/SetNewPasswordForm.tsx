@@ -11,7 +11,7 @@ export type SetNewPassword = {
 
 const SetNewPasswordForm = (props: SetNewPassword) => {
     return (
-        <div>
+        <div className="space-y-2">
             <div className="space-y-2">
                 <Input
                     data-testid="mailaddress"
@@ -25,8 +25,8 @@ const SetNewPasswordForm = (props: SetNewPassword) => {
             <div className="space-y-2">
                 <Input
                     data-testid="set-new-pw-field"
-                    name="neues Passwort"
-                    placeholder="neues Passwort eingeben"
+                    name="Neues Passwort eingebe"
+                    placeholder="neues passwort..."
                     autoComplete="password"
                     value={props.request.newPassword}
                     onChange={newPassword => props.onChange?.({ ...props.request, newPassword })}
@@ -35,8 +35,8 @@ const SetNewPasswordForm = (props: SetNewPassword) => {
             <div className="space-y-2">
                 <Input
                     data-testid="confirm-new-pw-field"
-                    name="passwort bestätigen"
-                    placeholder="Passwort bestätigen"
+                    name="Neues Passwort bestätigen"
+                    placeholder="neues passwort..."
                     autoComplete="password"
                     value={props.request.newPassword}
                     onChange={newPassword => props.onChange?.({ ...props.request, newPassword })}
