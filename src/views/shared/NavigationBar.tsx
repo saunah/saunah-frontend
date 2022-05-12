@@ -2,6 +2,7 @@ import { HomeIcon, UserCircleIcon } from '@heroicons/react/solid'
 import { ReactElement } from 'react'
 import { BreadcrumbData } from 'use-react-router-breadcrumbs'
 import AppMenu, { AppMenuTextItem } from '../../components/structural/AppMenu'
+import { AlertState, useAlert } from './AlertProvider'
 import { AuthState, useAuth } from './AuthProvider'
 import { useBreadcrumbs } from './BreadcrumbsRouter'
 
@@ -13,6 +14,7 @@ import { useBreadcrumbs } from './BreadcrumbsRouter'
  */
 const NavigationBar = () => {
     const authState = useAuth()
+    const alertState = useAlert()
     const breadcrumbs = useBreadcrumbs()
 
     return (
@@ -20,7 +22,7 @@ const NavigationBar = () => {
             leadingItem={{ icon: HomeIcon, url: '/' }}
             primaryItems={createBreadcrumbItems(breadcrumbs)}
             trailingItem={{ icon: UserCircleIcon, iconClasses: 'w-9 h-9' }}
-            secondaryItems={createSecondaryItems(authState)}
+            secondaryItems={createSecondaryItems(authState, alertState)}
         />
     )
 }
@@ -34,7 +36,15 @@ function createBreadcrumbItems(breadcrumbs: BreadcrumbData<string>[]): AppMenuTe
     }))
 }
 
-function createSecondaryItems({ isAuthenticated, isAdmin, logout }: AuthState): AppMenuTextItem[] {
+function createSecondaryItems(
+    { isAuthenticated, isAdmin, logout }: AuthState,
+    { success }: AlertState
+): AppMenuTextItem[] {
+    const logoutWithSuccess = () => {
+        logout()
+        success('Sie haben sich ausgeloggt.')
+    }
+
     if (isAuthenticated()) {
         const items: AppMenuTextItem[] = [{ title: 'Profil', url: '/profile' }]
         if (isAdmin()) {
@@ -44,7 +54,7 @@ function createSecondaryItems({ isAuthenticated, isAdmin, logout }: AuthState): 
                 { title: 'Benutzer', url: '/users' }
             )
         }
-        items.push({ title: 'Logout', onClick: () => logout() })
+        items.push({ title: 'Logout', onClick: logoutWithSuccess })
         return items
     }
 
