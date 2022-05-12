@@ -37,6 +37,7 @@ const RouteTree = () => {
                 <Route path="/protected" element={<ProtectedRoute element={<div> Protected Route </div>} />} />
                 <Route path="/register" element={<RegisterView />} />
                 <Route path="/verify/:token" element={<ActivationView />} breadcrumb="Account aktivieren" />
+                <Route path="/booking" element={<BookingView />}/>
             </Route>
         </BreadcrumbRoutes>
     )
