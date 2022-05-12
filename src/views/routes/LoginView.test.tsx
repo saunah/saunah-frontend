@@ -45,10 +45,12 @@ const testUser: User.Response = {
 }
 
 describe('<LoginView>', () => {
-    test('shows LoginForm correctly', () => {
+    test('shows LoginForm correctly', async () => {
         mockUserAPI(defaultMock())
         render(<LoginView />, { wrapper: wrapper })
         expect(screen.getByTestId('loginform')).toBeInTheDocument()
+
+        await screen.findByTestId('loginform')
     })
 
     test('data gets send onSubmit', async () => {

@@ -38,7 +38,7 @@ const AuthProvider = (props: AuthProviderProps) => {
     const login = (credentials: LoginCredentials.Request) =>
         api.user.login(credentials).then(token => {
             cookieStore.set('saunah-token', token.token)
-            api.user.whoami().then(setUser)
+            return api.user.whoami().then(setUser)
         })
 
     const logout = () => {
