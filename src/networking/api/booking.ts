@@ -11,7 +11,7 @@ export type BookingAPI = DeepReadonly<{
     edit(bookingId: number, booking: Booking.Request): Promise<Booking.Response>
     remove(bookingId: number): Promise<void>
 }>
-//IMPORTANT: this is a copy/paste class from price.ts, still needs a lot of changes!!!!
+
 const bookingApi: BookingAPI = {
     async list(): Promise<Booking.Response[]> {
         const response = await axios.get(apiRoutes.booking.list)

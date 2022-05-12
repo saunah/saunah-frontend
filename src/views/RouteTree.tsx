@@ -32,13 +32,13 @@ const RouteTree = () => {
                     <Route path=":saunaId" breadcrumb={SaunaDetailBreadcrumb}>
                         <Route index element={<SaunaDetailView />} />
                         <Route path="edit" breadcrumb="Bearbeiten" element={<SaunaEditorView />} />
+                        <Route path="/booking" element={<BookingView />} />
                     </Route>
                     <Route path="create" breadcrumb="Erstellen" element={<SaunaEditorView />} />
                 </Route>
                 <Route path="/protected" element={<ProtectedRoute element={<div> Protected Route </div>} />} />
                 <Route path="/register" element={<RegisterView />} />
                 <Route path="/verify/:token" element={<ActivationView />} breadcrumb="Account aktivieren" />
-                <Route path="/booking" element={<BookingView />}/>
             </Route>
         </BreadcrumbRoutes>
     )
