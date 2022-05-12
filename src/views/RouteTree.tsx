@@ -1,17 +1,19 @@
 import { Route } from 'use-react-router-breadcrumbs'
 import Layout from './Layout'
 import Home from './routes/Home'
-import Overview from './routes/Overview'
 import SaunaEditorView from './routes/sauna/SaunaEditorView'
 import Showroom from './routes/Showroom'
-import LoginView from './routes/LoginView'
+import LoginView from './routes/users/LoginView'
 import { BreadcrumbRoutes } from './shared/BreadcrumbsRouter'
 import ProtectedRoute from './shared/ProtectedRoute'
-import RegisterView from '../views/routes/RegisterView'
+import RegisterView from '../views/routes/users/RegisterView'
 import SaunaDetailBreadcrumb from './shared/SaunaDetailBreadcrumb'
 import SaunaDetailView from './routes/sauna/SaunaDetailView'
 import PriceEditorView from './routes/sauna/PriceEditorView'
-import ActivationView from './routes/ActivationView'
+import ActivationView from './routes/users/ActivationView'
+import UserEditorView from './routes/users/UserEditorView'
+import Overview from './routes/sauna/Overview'
+import UsersListView from './routes/users/UsersListView'
 
 const RouteTree = () => {
     return (
@@ -34,8 +36,12 @@ const RouteTree = () => {
                     </Route>
                     <Route path="create" breadcrumb="Erstellen" element={<SaunaEditorView />} />
                 </Route>
+                <Route path="/users" breadcrumb="Benutzer">
+                    <Route index element={<UsersListView />} />
+                    <Route path=":userId" breadcrumb="Bearbeiten" element={<UserEditorView />} />
+                </Route>
                 <Route path="/protected" element={<ProtectedRoute element={<div> Protected Route </div>} />} />
-                <Route path="/register" element={<RegisterView />} />
+                <Route path="/register" breadcrumb="Registrieren" element={<RegisterView />} />
                 <Route path="/verify/:token" element={<ActivationView />} breadcrumb="Account aktivieren" />
             </Route>
         </BreadcrumbRoutes>

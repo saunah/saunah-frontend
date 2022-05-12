@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import PageTitle from '../../components/base/PageTitle'
-import SaunaCard from '../../components/saunas/SaunaCard'
-import { Sauna } from '../../entities/Sauna'
-import api from '../../networking/api'
+import PageTitle from '../../../components/base/PageTitle'
+import SaunaCard from '../../../components/saunas/SaunaCard'
+import { Sauna } from '../../../entities/Sauna'
+import api from '../../../networking/api'
 
 const Overview = () => {
     const [saunas, setSaunas] = useState<Sauna.Response[]>([])

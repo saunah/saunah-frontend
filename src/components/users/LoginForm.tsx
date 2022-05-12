@@ -1,7 +1,7 @@
-import Button from './base/Button'
+import Button from './../base/Button'
 import { Link } from 'react-router-dom'
-import Input from './base/Input'
-import { LoginCredentials } from '../entities/LoginCredentials'
+import Input from './../base/Input'
+import { LoginCredentials } from '../../entities/LoginCredentials'
 
 // eslint-disable-next-line
 export type LoginCredentials = {

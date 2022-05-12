@@ -40,6 +40,7 @@ function createSecondaryItems({ isAuthenticated, logout }: AuthState): AppMenuTe
         ...(isAuthenticated
             ? [
                   { title: 'Erstellen', url: '/saunas/create' },
+                  { title: 'Benutzer', url: '/users' },
                   { title: 'Logout', onClick: () => logout() },
               ]
             : [

@@ -3,8 +3,12 @@ import { readonly } from '../utils/object'
 const apiRoutes = {
     user: {
         login: '/login',
-        signup: `/signup`,
+        signup: '/signup',
         verify: (token: string) => `/verify/${token}`,
+        list: '/users',
+        get: (userId: number) => `/users/${userId}`,
+        edit: (userId: number) => `/users/${userId}`,
+        remove: (userId: number) => `/users/${userId}`,
     },
     sauna: {
         list: '/saunas',
