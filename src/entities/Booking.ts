@@ -58,10 +58,10 @@ export namespace Booking {
     }
 
     export type Response = Base & Identifiable
-    export type RemoteResponse = RemoteBase & Identifiable
+    export type RemoteResponse = Base & Identifiable
 
     export type Request = Editable<Base> & MaybeIdentifiable
-    export type RemoteRequest = RemoteBase & MaybeIdentifiable
+    export type RemoteRequest = Base & MaybeIdentifiable
 
     export function isRemoteResponse(object: unknown): object is RemoteResponse {
         const booking = object as RemoteResponse
@@ -78,10 +78,10 @@ export namespace Booking {
             typeof booking.location === 'string' &&
             typeof booking.transportService === 'boolean' &&
             typeof booking.washService === 'boolean' &&
-            typeof booking.saunahImp === 'number' &&
-            typeof booking.deposit === 'number' &&
-            typeof booking.handTowel === 'number' &&
-            typeof booking.wood === 'number' &&
+            typeof booking.saunahImp === 'boolean' &&
+            typeof booking.deposit === 'boolean' &&
+            typeof booking.handTowel === 'boolean' &&
+            typeof booking.wood === 'boolean' &&
             typeof booking.saunaDescription === 'string' &&
             typeof booking.saunaIsMobile === 'boolean' &&
             typeof booking.saunaPrice === 'number' &&
