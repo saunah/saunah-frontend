@@ -26,7 +26,7 @@ const AuthProvider = (props: AuthProviderProps) => {
     const [user, setUser] = useState<User.Response | null>(null)
     const [isInitialized, setInitialized] = useState<boolean>(false)
     const isAuthenticated = () => user !== null
-    const isAdmin = () => user?.role == UserRole.Local.ADMIN
+    const isAdmin = () => user?.role === UserRole.Local.ADMIN
 
     useEffect(() => {
         api.user

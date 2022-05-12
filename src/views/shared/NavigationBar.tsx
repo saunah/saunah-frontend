@@ -36,10 +36,13 @@ function createBreadcrumbItems(breadcrumbs: BreadcrumbData<string>[]): AppMenuTe
 
 function createSecondaryItems({ isAuthenticated, isAdmin, logout }: AuthState): AppMenuTextItem[] {
     if (isAuthenticated()) {
-        // TODO: Change Profile url
-        const items: AppMenuTextItem[] = [{ title: 'Profil', url: '/' }]
+        const items: AppMenuTextItem[] = [{ title: 'Profil', url: '/profile' }]
         if (isAdmin()) {
-            items.push({ title: 'Sauna erstellen', url: '/saunas/create' }, { title: 'Benutzer', url: '/users' })
+            items.push(
+                { title: 'Sauna erstellen', url: '/saunas/create' },
+                { title: 'Preise', url: '/saunas/pricing' },
+                { title: 'Benutzer', url: '/users' }
+            )
         }
         items.push({ title: 'Logout', onClick: () => logout() })
         return items
