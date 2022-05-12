@@ -32,7 +32,6 @@ const RouteTree = () => {
                     <Route path=":saunaId" breadcrumb={SaunaDetailBreadcrumb}>
                         <Route index element={<SaunaDetailView />} />
                         <Route path="edit" breadcrumb="Bearbeiten" element={<SaunaEditorView />} />
-                        <Route path="/booking" element={<BookingView />} />
                     </Route>
                     <Route path="create" breadcrumb="Erstellen" element={<SaunaEditorView />} />
                 </Route>
