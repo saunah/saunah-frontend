@@ -18,7 +18,6 @@ describe('<Layout>', () => {
     })
 
     test('Renders AppContent', async () => {
-        console.log('hello')
         render(wrappedLayout())
         const appContent = await screen.findByTestId('app-content')
         expect(appContent).toBeInTheDocument()
