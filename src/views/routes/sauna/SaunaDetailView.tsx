@@ -35,6 +35,7 @@ const SaunaDetailView = () => {
             </PageTitle>
             <SaunaImageCarousel images={images} />
             {sauna && <SaunaDetail sauna={sauna} />}
+            <ButtonLink to="./book">Buchung anfragen</ButtonLink>
         </div>
     )
 }

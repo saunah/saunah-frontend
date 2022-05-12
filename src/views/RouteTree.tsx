@@ -16,6 +16,7 @@ import Overview from './routes/sauna/Overview'
 import UsersListView from './routes/users/UsersListView'
 import { UserRole } from '../entities/UserRole'
 import { Navigate } from 'react-router-dom'
+import BookingView from './routes/sauna/BookingView'
 
 const RouteTree = () => {
     return (
@@ -42,6 +43,15 @@ const RouteTree = () => {
                     />
                     <Route path=":saunaId" breadcrumb={SaunaDetailBreadcrumb}>
                         <Route index element={<SaunaDetailView />} />
+                        <Route
+                            path="book"
+                            breadcrumb="Buchen"
+                            element={
+                                <ProtectedRoute>
+                                    <BookingView />
+                                </ProtectedRoute>
+                            }
+                        />
                         <Route
                             path="edit"
                             breadcrumb="Bearbeiten"
@@ -75,7 +85,6 @@ const RouteTree = () => {
                 </Route>
                 <Route path="/register" breadcrumb="Registrieren" element={<RegisterView />} />
                 <Route path="/verify/:token" element={<ActivationView />} breadcrumb="Account aktivieren" />
-                <Route path="/booking" element={<BookingView />}/>
             </Route>
             <Route path="*" element={<Navigate to={'/'} />}></Route>
         </BreadcrumbRoutes>

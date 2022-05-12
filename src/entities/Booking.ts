@@ -1,24 +1,30 @@
+import moment, { Moment } from 'moment'
 import { MissingPropertyError } from '../utils/Error'
 import { Identifiable, MaybeIdentifiable } from '../utils/identifiable'
 import { Editable } from '../utils/object'
+import { ModifiableDate } from './ModifiableDate'
 
 export namespace Booking {
-    type Base = {
-        id: number
-        startBookingDate: string
-        endBookingDate: string
-        creation: string
-        state: string
-        endPrice: number
-        userId: number
-        saunaId: number
-        location: string
+    export type Extras = {
         transportService: boolean
         washService: boolean
         saunahImp: boolean
         deposit: boolean
         handTowel: boolean
         wood: boolean
+    }
+
+    type RequestBase = Extras & {
+        userId: number
+        saunaId: number
+        location: string
+    }
+
+    type ResponseBase = RequestBase & {
+        creation: string
+        state: string
+        endPrice: number
+
         saunaDescription: string
         saunaIsMobile: boolean
         saunaPrice: number
@@ -30,38 +36,19 @@ export namespace Booking {
         saunaType: string
     }
 
-    type RemoteBase = {
-        id: number
+    type RemoteDates = {
         startBookingDate: string
         endBookingDate: string
-        creation: string
-        state: string
-        endPrice: number
-        userId: number
-        saunaId: number
-        location: string
-        transportService: boolean
-        washService: boolean
-        saunahImp: boolean
-        deposit: boolean
-        handTowel: boolean
-        wood: boolean
-        saunaDescription: string
-        saunaIsMobile: boolean
-        saunaPrice: number
-        saunaMaxTemp: number
-        saunaNumberOfPeople: number
-        saunaLocation: string
-        saunaStreet: string
-        saunaZip: number
-        saunaType: string
     }
 
-    export type Response = Base & Identifiable
-    export type RemoteResponse = RemoteBase & Identifiable
+    type ResponseDates = { [K in keyof RemoteDates]: Moment }
+    type RequestDates = { [K in keyof RemoteDates]: ModifiableDate.Request }
 
-    export type Request = Editable<Base> & MaybeIdentifiable
-    export type RemoteRequest = RemoteBase & MaybeIdentifiable
+    export type Response = ResponseBase & ResponseDates & Identifiable
+    export type RemoteResponse = ResponseBase & RemoteDates & Identifiable
+
+    export type Request = Editable<RequestBase> & RequestDates & MaybeIdentifiable
+    export type RemoteRequest = RequestBase & RemoteDates & MaybeIdentifiable
 
     export function isRemoteResponse(object: unknown): object is RemoteResponse {
         const booking = object as RemoteResponse
@@ -97,19 +84,21 @@ export namespace Booking {
     export function mapIn(booking: unknown): Response {
         if (!isRemoteResponse(booking))
             throw new Error(`Object could not be mapped in. It is not of type RemoteResponse.`)
-        return booking
+
+        return {
+            ...booking,
+            startBookingDate: moment(booking.startBookingDate),
+            endBookingDate: moment(booking.endBookingDate),
+        }
     }
 
-    export function emptyRequest(): Request {
+    export function emptyRequest(userId: number, saunaId: number): Request {
         return {
             id: null,
-            startBookingDate: '',
-            endBookingDate: '',
-            creation: '',
-            state: '',
-            endPrice: null,
-            userId: null,
-            saunaId: null,
+            userId: userId,
+            saunaId: saunaId,
+            startBookingDate: ModifiableDate.emptyRequest(),
+            endBookingDate: ModifiableDate.emptyRequest(),
             location: '',
             transportService: false,
             washService: false,
@@ -117,77 +106,16 @@ export namespace Booking {
             deposit: false,
             handTowel: false,
             wood: false,
-            saunaDescription: '',
-            saunaIsMobile: false,
-            saunaPrice: null,
-            saunaMaxTemp: null,
-            saunaNumberOfPeople: null,
-            saunaLocation: '',
-            saunaStreet: '',
-            saunaZip: null,
-            saunaType: '',
         }
     }
 
     export function mapToRequest(booking: Response): Request {
-        return booking
-    }
-
-    export function mapOut(booking: Request): RemoteRequest {
-        if (booking.id == null) throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'id')
-        if (booking.startBookingDate == null)
-            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'startBookingDate')
-        if (booking.endBookingDate == null)
-            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'endBookingDate')
-        if (booking.creation == null)
-            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'creation')
-        if (booking.state == null) throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'state')
-        if (booking.endPrice == null)
-            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'endPrice')
-        if (booking.userId == null) throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'userId')
-        if (booking.saunaId == null)
-            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'saunaId')
-        if (booking.location == null)
-            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'location')
-        if (booking.transportService == null)
-            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'transportService')
-        if (booking.washService == null)
-            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'washService')
-        if (booking.saunahImp == null)
-            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'saunahImp')
-        if (booking.deposit == null)
-            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'deposit')
-        if (booking.handTowel == null)
-            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'handTowel')
-        if (booking.wood == null) throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'wood')
-        if (booking.saunaDescription == null)
-            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'saunaDescription')
-        if (booking.saunaIsMobile == null)
-            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'saunaIsMobile')
-        if (booking.saunaPrice == null)
-            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'saunaPrice')
-        if (booking.saunaMaxTemp == null)
-            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'saunaMaxTemp')
-        if (booking.saunaNumberOfPeople == null)
-            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'saunaNumberOfPeople')
-        if (booking.saunaLocation == null)
-            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'saunaLocation')
-        if (booking.saunaStreet == null)
-            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'saunaStreet')
-        if (booking.saunaZip == null)
-            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'saunaZip')
-        if (booking.saunaType == null)
-            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'saunaType')
-
         return {
             id: booking.id,
-            startBookingDate: booking.startBookingDate,
-            endBookingDate: booking.endBookingDate,
-            creation: booking.creation,
-            state: booking.state,
-            endPrice: booking.endPrice,
             userId: booking.userId,
             saunaId: booking.saunaId,
+            startBookingDate: ModifiableDate.mapFromMoment(booking.startBookingDate),
+            endBookingDate: ModifiableDate.mapFromMoment(booking.endBookingDate),
             location: booking.location,
             transportService: booking.transportService,
             washService: booking.washService,
@@ -195,15 +123,20 @@ export namespace Booking {
             deposit: booking.deposit,
             handTowel: booking.handTowel,
             wood: booking.wood,
-            saunaDescription: booking.saunaDescription,
-            saunaIsMobile: booking.saunaIsMobile,
-            saunaPrice: booking.saunaPrice,
-            saunaMaxTemp: booking.saunaMaxTemp,
-            saunaNumberOfPeople: booking.saunaNumberOfPeople,
-            saunaLocation: booking.saunaLocation,
-            saunaStreet: booking.saunaStreet,
-            saunaZip: booking.saunaZip,
-            saunaType: booking.saunaType,
+        }
+    }
+
+    export function mapOut(booking: Request): RemoteRequest {
+        if (booking.userId == null) throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'userId')
+        if (booking.saunaId == null)
+            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'saunaId')
+
+        return {
+            ...booking,
+            userId: booking.userId,
+            saunaId: booking.saunaId,
+            startBookingDate: ModifiableDate.mapOut(booking.startBookingDate),
+            endBookingDate: ModifiableDate.mapOut(booking.endBookingDate),
         }
     }
 }
