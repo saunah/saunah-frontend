@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import { ReactNode } from 'react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
-import { Sauna } from '../../entities/Sauna'
-import { SaunaImage } from '../../entities/SaunaImage'
-import { mockSaunaAPI, mockSaunaImageAPI } from '../../networking/api'
+import { Sauna } from '../../../entities/Sauna'
+import { SaunaImage } from '../../../entities/SaunaImage'
+import { mockSaunaAPI, mockSaunaImageAPI } from '../../../networking/api'
 import Overview from './Overview'
 
 const defaultMock = () => {

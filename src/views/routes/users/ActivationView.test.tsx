@@ -1,9 +1,11 @@
 import { render, screen } from '@testing-library/react'
 import { ReactNode } from 'react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
-import { mockUserAPI } from '../../networking/api'
-import { deferred } from '../../utils/deferred'
-import AlertProvider from '../shared/AlertProvider'
+import { User } from '../../../entities/User'
+import { UserRole } from '../../../entities/UserRole'
+import { mockUserAPI } from '../../../networking/api'
+import { deferred } from '../../../utils/deferred'
+import AlertProvider from '../../shared/AlertProvider'
 import ActivationView from './ActivationView'
 
 describe('<ActivationView>', () => {
@@ -51,10 +53,27 @@ const defaultMock = () => {
         signup: jest.fn(() => Promise.resolve()),
         login: jest.fn(() => Promise.resolve({ token: 'abc' })),
         verify: jest.fn(() => verifyPromise.promise),
+        list: jest.fn(() => Promise.resolve([])),
+        get: jest.fn(() => Promise.resolve(testUser)),
+        edit: jest.fn(() => Promise.resolve(testUser)),
+        remove: jest.fn(() => Promise.resolve()),
+        whoami: jest.fn(() => Promise.resolve(testUser)),
     }
 
     return {
         mock,
         verifyPromise,
     }
+}
+
+const testUser: User.Response = {
+    id: 1,
+    role: UserRole.Local.USER,
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'john@example.com',
+    telephone: '078 123 45 67',
+    street: 'Technikumstrasse 9',
+    place: 'Winterthur',
+    zip: '8400',
 }
