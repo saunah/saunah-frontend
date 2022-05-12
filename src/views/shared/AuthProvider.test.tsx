@@ -9,7 +9,8 @@ import AuthProvider, { AuthProviderProps, useAuth } from './AuthProvider'
 const defaultMock = () => ({
     signup: jest.fn(() => Promise.resolve()),
     login: jest.fn(() => Promise.resolve(testToken)),
-    passwordResetMail: jest.fn(()=> Promise.resolve())
+    passwordResetMail: jest.fn(()=> Promise.resolve()),
+    setNewPassword: jest.fn(()=> Promise.resolve()),
 })
 
 const testCredentials: LoginCredentials.Request = {
