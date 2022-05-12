@@ -12,7 +12,6 @@ import SaunaDetailBreadcrumb from './shared/SaunaDetailBreadcrumb'
 import SaunaDetailView from './routes/sauna/SaunaDetailView'
 import PriceEditorView from './routes/sauna/PriceEditorView'
 import ActivationView from './routes/ActivationView'
-import BookingView from './routes/sauna/BookingView'
 
 const RouteTree = () => {
     return (
