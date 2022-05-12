@@ -4,15 +4,15 @@ import Layout from './Layout'
 import AlertProvider from './shared/AlertProvider'
 import AuthProvider from './shared/AuthProvider'
 
-test('Renders AppContainer', () => {
+test('Renders AppContainer', async () => {
     render(wrappedLayout())
-    const appContainer = screen.getByTestId('app-container')
+    const appContainer = await screen.findByTestId('app-container')
     expect(appContainer).toBeInTheDocument()
 })
 
-test('Renders AppContent', () => {
+test('Renders AppContent', async () => {
     render(wrappedLayout())
-    const appContent = screen.getByTestId('app-content')
+    const appContent = await screen.findByTestId('app-content')
     expect(appContent).toBeInTheDocument()
 })
 

@@ -18,7 +18,7 @@ describe('<AppMenu>', () => {
     const testIdSecondaryFirst = 'secondary-first'
     const testIdSecondarySecond = 'secondary-second'
 
-    beforeAll(() => {
+    beforeEach(() => {
         mockUserAPI(simpleUserMock())
     })
 

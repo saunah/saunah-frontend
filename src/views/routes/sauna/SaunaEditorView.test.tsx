@@ -9,7 +9,7 @@ import AlertProvider from '../../shared/AlertProvider'
 import SaunaEditorView from './SaunaEditorView'
 
 describe('<SaunaEditorView>', () => {
-    beforeAll(() => {
+    beforeEach(() => {
         mockUserAPI(simpleUserMock())
     })
 

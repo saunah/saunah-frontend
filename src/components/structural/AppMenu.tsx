@@ -104,6 +104,7 @@ function OuterAppMenuElement({ children, fromItem }: OuterAppMenuElementProps) {
             <button
                 className="text-primary-500 font-medium transition ease-in-out duration-200 hover:text-accent-200"
                 onClick={fromItem.onClick}
+                data-testid={fromItem.testId || defaultTestIdElement}
             >
                 {children}
             </button>

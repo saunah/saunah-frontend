@@ -4,6 +4,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { Sauna } from '../../../entities/Sauna'
 import { mockSaunaAPI, mockUserAPI } from '../../../networking/api'
 import { simpleUserMock } from '../../../networking/api/userMock'
+import AuthProvider from '../../shared/AuthProvider'
 import SaunaDetailView from './SaunaDetailView'
 
 const defaultMock = () => {
@@ -31,7 +32,7 @@ const sauna1: Sauna.Response = {
 }
 
 describe('<SaunaDetailView>', () => {
-    beforeAll(() => {
+    beforeEach(() => {
         mockUserAPI(simpleUserMock())
     })
 
@@ -44,10 +45,12 @@ describe('<SaunaDetailView>', () => {
 
 const wrapper = (props: { children?: ReactNode }) => {
     return (
-        <MemoryRouter initialEntries={['/saunas/1']}>
-            <Routes>
-                <Route path="/saunas/:saunaId" element={props.children} />
-            </Routes>
-        </MemoryRouter>
+        <AuthProvider>
+            <MemoryRouter initialEntries={['/saunas/1']}>
+                <Routes>
+                    <Route path="/saunas/:saunaId" element={props.children} />
+                </Routes>
+            </MemoryRouter>
+        </AuthProvider>
     )
 }

@@ -8,7 +8,7 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import { simpleUserMock } from '../../../networking/api/userMock'
 
 describe('<PriceEditorView>', () => {
-    beforeAll(() => {
+    beforeEach(() => {
         mockUserAPI(simpleUserMock())
     })
 
