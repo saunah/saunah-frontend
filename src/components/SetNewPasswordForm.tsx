@@ -44,7 +44,7 @@ const SetNewPasswordForm = (props: SetNewPassword) => {
             </div>
             <div className="flex justify-between">
                 <Button className="mt-6" data-testid="send-button" onClick={props.onSubmit}>
-                    Passwort Reset
+                    Reset Passwort 
                 </Button>
             </div>
         </div>
