@@ -8,7 +8,7 @@ describe('<SaunaEditor>', () => {
         render(<SaunaEditor value={SaunaMock.sampleRemoteResponse1} />)
 
         Object.keys(SaunaMock.sampleRemoteResponse1)
-            .filter(k => !ignoredInputKeys.includes(k))
+            .filter(k => ![...ignoredInputKeys, ...notInputKeys].includes(k))
             .forEach(key => {
                 const input = getInputField(`input-${key}`)
                 expect(input).toBeInTheDocument()
@@ -23,11 +23,13 @@ describe('<SaunaEditor>', () => {
         render(<SaunaEditor value={SaunaMock.sampleRemoteResponse1} onChange={onChange} />)
 
         let calls = 0
-        Object.entries(editedSauna).forEach(([key, value]) => {
-            fireEvent.change(getInputField(`input-${key}`), { target: { value: value } })
-            expect(onChange).toBeCalledTimes(++calls)
-            expect(onChange).toBeCalledWith({ ...SaunaMock.sampleRemoteResponse1, [key]: value })
-        })
+        Object.entries(editedSauna)
+            .filter(([key, _]) => ![...ignoredInputKeys, ...notInputKeys].includes(key))
+            .forEach(([key, value]) => {
+                fireEvent.change(getInputField(`input-${key}`), { target: { value: value } })
+                expect(onChange).toBeCalledTimes(++calls)
+                expect(onChange).toBeCalledWith({ ...SaunaMock.sampleRemoteResponse1, [key]: value })
+            })
 
         fireEvent.click(getCheckbox('input-mobile'))
         expect(onChange).toBeCalledTimes(++calls)
@@ -90,7 +92,8 @@ const editedSauna: Sauna.Request = {
     zip: 8411,
     location: 'Hinterthur',
     type: 'Dachsauna',
-    googleCalendarId: '',
+    googleCalendarId: 'new-id',
 }
 
-const ignoredInputKeys = ['id', 'mobile']
+const ignoredInputKeys = ['id']
+const notInputKeys = ['mobile']
