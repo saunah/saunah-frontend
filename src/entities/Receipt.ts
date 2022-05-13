@@ -1,3 +1,4 @@
+import { Moment } from 'moment'
 import { Booking } from './Booking'
 import { CheckableNumber } from './CheckableNumber'
 import { ModifiableDate } from './ModifiableDate'
@@ -26,10 +27,14 @@ export namespace Receipt {
         }
     }
 
+    function calculateDuration(start: Moment, end: Moment): number {
+        return Math.max(Math.ceil(((end.unix() - start.unix()) / 3600) * 2) / 2, 0)
+    }
+
     export function mapFromRequest(booking: Booking.Request, sauna: Sauna.Response, price: Price.Response): Response {
         const start = ModifiableDate.mapToMoment(booking.startBookingDate)
         const end = ModifiableDate.mapToMoment(booking.endBookingDate)
-        const duration = start && end ? Math.ceil(((end.unix() - start.unix()) / 3600) * 2) / 2 : 0
+        const duration = start && end ? calculateDuration(start, end) : 0
 
         return {
             booked: {
@@ -44,6 +49,21 @@ export namespace Receipt {
             prices: {
                 hourlyRate: sauna.price,
                 ...price,
+            },
+        }
+    }
+
+    export function mapFromResponse(booking: Booking.Response): Response {
+        const duration = calculateDuration(booking.startBookingDate, booking.endBookingDate)
+
+        return {
+            booked: {
+                duration,
+                ...booking.extras,
+            },
+            prices: {
+                hourlyRate: booking.sauna.price,
+                ...booking.price,
             },
         }
     }

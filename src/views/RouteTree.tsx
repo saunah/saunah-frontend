@@ -19,6 +19,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 import BookingView from './routes/sauna/BookingView'
 import BookingListView from './routes/booking/BookingsListView'
 import BookingEditorView from './routes/booking/BookingEditorView'
+import BookingDetailView from './routes/booking/BookingDetailView'
 
 const RouteTree = () => {
     return (
@@ -76,7 +77,17 @@ const RouteTree = () => {
                     }
                 >
                     <Route index element={<BookingListView />} />
-                    <Route path=":boookingId" element={<BookingEditorView />} />
+                    <Route path=":bookingId">
+                        <Route index element={<BookingDetailView />}></Route>
+                        <Route
+                            path="edit"
+                            element={
+                                <ProtectedRoute roles={[UserRole.Local.ADMIN]}>
+                                    <BookingEditorView />
+                                </ProtectedRoute>
+                            }
+                        ></Route>
+                    </Route>
                 </Route>
                 <Route path="/users" breadcrumb="Benutzer">
                     <Route

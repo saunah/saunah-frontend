@@ -1,5 +1,5 @@
 const BookingEditorView = () => {
-    return <div>BookingEditorView</div>
+    return <div>BookingEditor</div>
 }
 
 export default BookingEditorView
