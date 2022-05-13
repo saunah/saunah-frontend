@@ -22,8 +22,16 @@ describe('<SaunaDetailView>', () => {
         expect(await screen.findByTestId('sauna-detail-view')).toBeInTheDocument()
     })
 
-    test('does not show calendar if calendar ID is not set', async () => {
+    test('does not show calendar if calendar ID is undefined', async () => {
         const noCalendarSauna = { ...SaunaMock.sampleResponse1, googleCalendarId: undefined }
+        mockSaunaAPI(SaunaMock.simpleMock({ get: noCalendarSauna }))
+        render(<SaunaDetailView />, { wrapper: wrapper })
+        expect(await screen.findByTestId('sauna-detail-view')).toBeInTheDocument()
+        expect(screen.queryByTestId('sauna-calendar')).toBeNull()
+    })
+
+    test('does not show calendar if calendar ID is null', async () => {
+        const noCalendarSauna = { ...SaunaMock.sampleResponse1, googleCalendarId: null! }
         mockSaunaAPI(SaunaMock.simpleMock({ get: noCalendarSauna }))
         render(<SaunaDetailView />, { wrapper: wrapper })
         expect(await screen.findByTestId('sauna-detail-view')).toBeInTheDocument()
