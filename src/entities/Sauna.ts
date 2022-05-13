@@ -57,7 +57,7 @@ export namespace Sauna {
             typeof sauna.location === 'string' &&
             typeof sauna.type === 'string' &&
             typeof sauna.mobile === 'boolean' &&
-            (typeof sauna.googleCalendarId === 'string' || typeof sauna.googleCalendarId === 'undefined')
+            (typeof sauna.googleCalendarId === 'string' || sauna.googleCalendarId == null)
         )
     }
 
