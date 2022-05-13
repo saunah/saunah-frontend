@@ -5,14 +5,20 @@ import { mapInArray } from '../../utils/mapping'
 import { Booking } from '../../entities/Booking'
 
 export type BookingAPI = DeepReadonly<{
+    listAll(): Promise<Booking.Response[]>
     list(): Promise<Booking.Response[]>
     get(bookingId: number): Promise<Booking.Response>
     add(booking: Booking.Request): Promise<Booking.Response>
     edit(bookingId: number, booking: Booking.Request): Promise<Booking.Response>
-    remove(bookingId: number): Promise<void>
+    approve(bookingId: number): Promise<void>
+    cancel(bookingId: number): Promise<void>
 }>
-//IMPORTANT: this is a copy/paste class from price.ts, still needs a lot of changes!!!!
+
 const bookingApi: BookingAPI = {
+    async listAll(): Promise<Booking.Response[]> {
+        const response = await axios.get(apiRoutes.booking.listAll)
+        return mapInArray(response.data, Booking.mapIn)
+    },
     async list(): Promise<Booking.Response[]> {
         const response = await axios.get(apiRoutes.booking.list)
         return mapInArray(response.data, Booking.mapIn)
@@ -31,8 +37,11 @@ const bookingApi: BookingAPI = {
         const response = await axios.put(apiRoutes.booking.edit(bookingId), remoteRequest)
         return Booking.mapIn(response.data)
     },
-    async remove(bookingId: number): Promise<void> {
-        await axios.delete(apiRoutes.booking.remove(bookingId))
+    async approve(bookingId: number): Promise<void> {
+        await axios.put(apiRoutes.booking.approve(bookingId))
+    },
+    async cancel(bookingId: number): Promise<void> {
+        await axios.put(apiRoutes.booking.cancel(bookingId))
     },
 }
 

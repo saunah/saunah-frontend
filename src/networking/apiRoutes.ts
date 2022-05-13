@@ -32,11 +32,13 @@ const apiRoutes = {
         remove: (saunaId: number) => `/prices/${saunaId}`,
     },
     booking: {
-        list: '/booking',
-        get: (saunaId: number) => `/booking/${saunaId}`,
-        add: '/booking',
-        edit: (saunaId: number) => `/booking/${saunaId}`,
-        remove: (saunaId: number) => `/booking/${saunaId}`,
+        listAll: '/bookings/all',
+        list: '/bookings',
+        get: (bookingId: number) => `/bookings/${bookingId}`,
+        add: '/bookings',
+        edit: (bookingId: number) => `/bookings/${bookingId}`,
+        approve: (bookingId: number) => `/bookings/${bookingId}/approve`,
+        cancel: (bookingId: number) => `/bookings/${bookingId}/cancel`,
     },
 }
 
