@@ -1,4 +1,5 @@
 import { fireEvent, render, screen, within } from '@testing-library/react'
+import { Sauna } from '../../entities/Sauna'
 import { SaunaMock } from '../../networking/api/sauna.mock'
 import SaunaEditor from './SaunaEditor'
 
@@ -77,7 +78,9 @@ const getCheckbox = (testId: string) => {
     return within(checkbox).getByTestId('checkbox')
 }
 
-const editedSauna = {
+const editedSauna: Sauna.Request = {
+    id: SaunaMock.sampleResponse1.id,
+    mobile: SaunaMock.sampleRemoteResponse1.mobile,
     name: 'Test Edited',
     description: 'Hoi Edited',
     price: 888,
@@ -87,6 +90,7 @@ const editedSauna = {
     zip: 8411,
     location: 'Hinterthur',
     type: 'Dachsauna',
+    googleCalendarId: '',
 }
 
 const ignoredInputKeys = ['id', 'mobile']
