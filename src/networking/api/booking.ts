@@ -32,22 +32,28 @@ const bookingApi: BookingAPI = {
         return Promise.resolve(BookingMock.sampleResponse1)
     },
     async add(booking: Booking.Request): Promise<Booking.Response> {
+        console.log('add booking')
+        console.log(booking)
         // const remoteRequest = Booking.mapOut(booking)
         // const response = await axios.post(apiRoutes.booking.add, remoteRequest)
         // return Booking.mapIn(response.data)
         return Promise.resolve(BookingMock.sampleResponse1)
     },
     async edit(bookingId: number, booking: Booking.Request): Promise<Booking.Response> {
+        console.log('edit booking')
+        console.log(booking)
         // const remoteRequest = Booking.mapOut(booking)
         // const response = await axios.put(apiRoutes.booking.edit(bookingId), remoteRequest)
         // return Booking.mapIn(response.data)
         return Promise.resolve(BookingMock.sampleResponse1)
     },
     async approve(bookingId: number): Promise<void> {
+        console.log('approve booking id = ' + bookingId)
         //await axios.put(apiRoutes.booking.approve(bookingId))
         return Promise.resolve()
     },
     async cancel(bookingId: number): Promise<void> {
+        console.log('approve booking id = ' + bookingId)
         //await axios.put(apiRoutes.booking.cancel(bookingId))
         return Promise.resolve()
     },

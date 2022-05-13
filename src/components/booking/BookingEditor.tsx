@@ -67,6 +67,11 @@ const BookingEditor = (props: BookingEditorProps) => {
                     value={booking.location}
                     onChange={newValue => props.onChange?.({ ...booking, location: newValue })}
                 />
+                <Input
+                    name="Bemerkungen"
+                    value={booking.comment || ''}
+                    onChange={newValue => props.onChange?.({ ...booking, comment: newValue || null })}
+                />
             </div>
             <div>
                 <h2 className="text-primary-600 text-2xl font-semibold mb-4"> Extras hinzufügen </h2>

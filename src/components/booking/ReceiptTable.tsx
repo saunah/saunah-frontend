@@ -1,3 +1,4 @@
+import { ReactElement } from 'react'
 import { Receipt } from '../../entities/Receipt'
 import Table from '../base/Table'
 
@@ -10,7 +11,9 @@ const ReceiptTable = (props: ReceiptProps) => {
 }
 
 function buildElements(receipt: Receipt.Response) {
-    const elements = [
+    const highlight = (text: string | ReactElement) => <span className="font-semibold text-gray-700">{text}</span>
+
+    const elements: (string | ReactElement)[][] = [
         [
             'Stundenpreis',
             `CHF ${receipt.prices.hourlyRate} / h`,
@@ -66,7 +69,7 @@ function buildElements(receipt: Receipt.Response) {
             `CHF ${receipt.booked.deposit ? receipt.prices.deposit : 0}`,
         ])
 
-    elements.push(['Total', '', '', `CHF ${Receipt.calculateTotal(receipt)}`])
+    elements.push([highlight('Total'), '', '', highlight(`CHF ${Receipt.calculateTotal(receipt)}`)])
     return elements
 }
 
