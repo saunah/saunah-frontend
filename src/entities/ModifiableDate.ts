@@ -20,23 +20,18 @@ export namespace ModifiableDate {
         }
     }
 
-    export function mapOut(date: Request, ignoreTime = false): string {
-        if (date.date) return formatOutDate(date.date, ignoreTime ? null : date.time)
-        else return ''
+    export function mapToMoment(date: Request): Moment | null {
+        if (date.date && date.time) {
+            return moment(`${date.date} ${date.time}`, 'YY-MM-DD HH:mm')
+        } else if (date.date) {
+            return moment.utc(date.date, 'YYYY-MM-DD')
+        } else return null
+    }
+
+    export function mapOut(date: Request, ignoreTime = false): string | null {
+        return mapToMoment(date)?.toISOString() || null
     }
 
     type Keys<T> = { [P in keyof T]: T[P] extends Request ? P : never }[keyof T]
     export type Extract<T> = Pick<T, Keys<T>>
-}
-
-function formatOutDate(date: string, time?: string | null): string {
-    let parsedDate: Moment
-
-    if (date && time) {
-        parsedDate = moment(`${date} ${time}`, 'YY-MM-DD HH:mm')
-    } else if (date) {
-        parsedDate = moment.utc(date, 'YYYY-MM-DD')
-    } else return ''
-
-    return parsedDate.toISOString()
 }

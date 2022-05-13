@@ -40,6 +40,7 @@ const BookingEditor = (props: BookingEditorProps) => {
                     name="Startdatum"
                     type="date"
                     value={booking.startBookingDate.date}
+                    max={booking.endBookingDate.date}
                     onChange={newValue => updateDate(newValue, 'startBookingDate')}
                 />
                 <Input
@@ -51,6 +52,7 @@ const BookingEditor = (props: BookingEditorProps) => {
                 <Input
                     name="Enddatum"
                     type="date"
+                    min={booking.startBookingDate.date}
                     value={booking.endBookingDate.date}
                     onChange={newValue => updateDate(newValue, 'endBookingDate')}
                 />
@@ -79,6 +81,7 @@ const BookingEditor = (props: BookingEditorProps) => {
                         <Input
                             name="Kilometer zum Wunschplatz"
                             type="number"
+                            min="0"
                             disabled={!booking.transportService.checked}
                             value={booking.transportService.number + ''}
                             onChange={newValue => updateNumber(newValue, 'transportService')}
@@ -109,6 +112,7 @@ const BookingEditor = (props: BookingEditorProps) => {
                     <Input
                         name="Anzahl Handtücher"
                         type="number"
+                        min="0"
                         disabled={!booking.handTowel.checked}
                         value={booking.handTowel.number + ''}
                         onChange={newValue => updateNumber(newValue, 'handTowel')}
@@ -122,6 +126,7 @@ const BookingEditor = (props: BookingEditorProps) => {
                     <Input
                         name="Anzahl Holzkisten"
                         type="number"
+                        min="0"
                         disabled={!booking.wood.checked}
                         value={booking.wood.number + ''}
                         onChange={newValue => updateNumber(newValue, 'wood')}
@@ -135,6 +140,7 @@ const BookingEditor = (props: BookingEditorProps) => {
                     <Input
                         name="Stunden Saunawichtel"
                         type="number"
+                        min="0"
                         disabled={!booking.saunahImp.checked}
                         value={booking.saunahImp.number + ''}
                         onChange={newValue => updateNumber(newValue, 'saunahImp')}

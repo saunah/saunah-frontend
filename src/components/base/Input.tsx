@@ -8,6 +8,8 @@ export type InputProps = {
     type?: string
     error?: boolean
     disabled?: boolean
+    min?: string
+    max?: string
     onChange?: (newValue: string) => void
     ['data-testid']?: string
 }
@@ -36,6 +38,8 @@ const Input = (props: InputProps) => {
             <div className="relative">
                 <input
                     value={props.value || ''}
+                    min={props.min}
+                    max={props.max}
                     onChange={event => props.onChange?.(event.target.value)}
                     name={props.name}
                     placeholder={props.placeholder}

@@ -3,9 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Button from '../../../components/base/Button'
 import PageTitle from '../../../components/base/PageTitle'
 import BookingEditor from '../../../components/booking/BookingEditor'
-import PricePrediction from '../../../components/booking/PricePrediction'
+import ReceiptTable from '../../../components/booking/ReceiptTable'
 import { Booking } from '../../../entities/Booking'
 import { Price } from '../../../entities/Price'
+import { Receipt } from '../../../entities/Receipt'
 import { Sauna } from '../../../entities/Sauna'
 import api from '../../../networking/api'
 import { parseId } from '../../../utils/identifiable'
@@ -22,6 +23,7 @@ const BookingView = () => {
     const [booking, setBooking] = useState(Booking.emptyRequest(me?.id, saunaId))
     const [sauna, setSauna] = useState<Sauna.Response>()
     const [price, setPrice] = useState<Price.Response>()
+    const receipt = sauna && price ? Receipt.mapFromRequest(booking, sauna, price) : null
 
     useEffect(() => {
         if (saunaId) api.sauna.get(saunaId).then(setSauna)
@@ -40,11 +42,11 @@ const BookingView = () => {
         <div data-testid="booking-view">
             <PageTitle>Buchung anfragen</PageTitle>
             <BookingEditor value={booking} sauna={sauna} onChange={setBooking} />
-            {sauna && price && (
-                <div className="mt-6">
-                    <PricePrediction sauna={sauna} prices={price} booking={booking} />
-                </div>
-            )}
+            <h2 className="text-primary-600 text-2xl font-semibold"> Voraussichtlicher Preis </h2>
+            <p className="text-primary-500 mb-4">
+                Der angezeigte Preis ist eine Schätzung. Der genaue Preis wird bei der bestätigten Buchung angezeigt.{' '}
+            </p>
+            {receipt && <div className="mt-6">{<ReceiptTable receipt={receipt} />}</div>}
             <Button className="mt-6" data-testid="submit-button" onClick={onSubmit}>
                 Buchung anfragen
             </Button>

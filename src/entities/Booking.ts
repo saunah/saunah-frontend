@@ -12,6 +12,7 @@ export namespace Booking {
         saunahImp: number
         handTowel: number
         wood: number
+        deposit: boolean
     }
 
     type RequestBase = {
@@ -104,6 +105,7 @@ export namespace Booking {
             saunahImp: CheckableNumber.emptyRequest(),
             handTowel: CheckableNumber.emptyRequest(),
             wood: CheckableNumber.emptyRequest(),
+            deposit: true,
         }
     }
 
@@ -120,6 +122,7 @@ export namespace Booking {
             saunahImp: CheckableNumber.mapFromNumber(booking.saunahImp),
             handTowel: CheckableNumber.mapFromNumber(booking.handTowel),
             wood: CheckableNumber.mapFromNumber(booking.wood),
+            deposit: booking.deposit,
         }
     }
 
@@ -127,6 +130,13 @@ export namespace Booking {
         if (booking.userId == null) throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'userId')
         if (booking.saunaId == null)
             throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'saunaId')
+
+        const startBookingDate = ModifiableDate.mapOut(booking.startBookingDate)
+        const endBookingDate = ModifiableDate.mapOut(booking.endBookingDate)
+        if (startBookingDate == null)
+            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'startBookingDate')
+        if (endBookingDate == null)
+            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'endBookingDate')
 
         return {
             ...booking,
@@ -136,8 +146,8 @@ export namespace Booking {
             saunahImp: CheckableNumber.mapToNumber(booking.saunahImp),
             handTowel: CheckableNumber.mapToNumber(booking.handTowel),
             wood: CheckableNumber.mapToNumber(booking.wood),
-            startBookingDate: ModifiableDate.mapOut(booking.startBookingDate),
-            endBookingDate: ModifiableDate.mapOut(booking.endBookingDate),
+            startBookingDate,
+            endBookingDate,
         }
     }
 }
