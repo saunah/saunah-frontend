@@ -1,6 +1,7 @@
 import { Moment } from 'moment'
 import { MissingPropertyError } from '../utils/Error'
 import { Identifiable, MaybeIdentifiable } from '../utils/identifiable'
+import { Editable } from '../utils/object'
 import { BookingRemote } from './BookingRemote'
 import { CheckableNumber } from './CheckableNumber'
 import { ModifiableDate } from './ModifiableDate'
@@ -29,6 +30,7 @@ export namespace Booking {
     export type Response = {
         userId: number
         creation: Moment
+        // TODO: Change to enum
         state: string
         endPrice: number
         sauna: Sauna.Response
@@ -37,9 +39,10 @@ export namespace Booking {
     } & Base &
         Identifiable
 
-    export type Request = {
+    export type Request = Editable<{
         saunaId: number
-    } & ModifiableDate.Object<Base> &
+    }> &
+        ModifiableDate.Object<Base> &
         CheckableNumber.Object<Extras> &
         MaybeIdentifiable
 
@@ -53,7 +56,7 @@ export namespace Booking {
         return {} as any as Booking.Response
     }
 
-    export function emptyRequest(saunaId: number): Request {
+    export function emptyRequest(saunaId: number | null): Request {
         return {
             id: null,
             saunaId: saunaId,
@@ -92,6 +95,9 @@ export namespace Booking {
     }
 
     export function mapOut(booking: Request): BookingRemote.Request {
+        if (booking.saunaId == null)
+            throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'saunaId')
+
         const startBookingDate = ModifiableDate.mapOut(booking.startBookingDate)
         const endBookingDate = ModifiableDate.mapOut(booking.endBookingDate)
         if (startBookingDate == null)

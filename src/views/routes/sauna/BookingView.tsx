@@ -20,7 +20,7 @@ const BookingView = () => {
     const { success } = useAlert()
     const navigate = useNavigate()
 
-    const [booking, setBooking] = useState(Booking.emptyRequest(me?.id, saunaId))
+    const [booking, setBooking] = useState(Booking.emptyRequest(saunaId))
     const [sauna, setSauna] = useState<Sauna.Response>()
     const [price, setPrice] = useState<Price.Response>()
     const receipt = sauna && price ? Receipt.mapFromRequest(booking, sauna, price) : null
