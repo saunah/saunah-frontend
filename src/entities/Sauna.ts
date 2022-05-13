@@ -14,7 +14,7 @@ export namespace Sauna {
         location: string
         type: string
         mobile: boolean
-        googleCalendarId: string
+        googleCalendarId?: string
     }
 
     type RemoteBase = {
@@ -28,7 +28,7 @@ export namespace Sauna {
         location: string
         type: string
         mobile: boolean
-        googleCalendarId: string
+        googleCalendarId?: string
     }
 
     export type Response = Base & Identifiable

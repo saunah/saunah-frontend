@@ -80,6 +80,12 @@ const SaunaEditor = (props: SaunaEditorProps) => {
                     value={sauna.location}
                     onChange={newValue => props.onChange?.({ ...sauna, location: newValue })}
                 />
+                <Input
+                    name="Google Calendar ID"
+                    data-testid="input-googleCalendarId"
+                    value={sauna.googleCalendarId}
+                    onChange={newValue => props.onChange?.({ ...sauna, googleCalendarId: newValue })}
+                />
                 <CheckboxLabel
                     data-testid="input-mobile"
                     label="Mobil"

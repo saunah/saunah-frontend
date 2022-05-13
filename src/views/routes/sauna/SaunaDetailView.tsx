@@ -36,9 +36,12 @@ const SaunaDetailView = () => {
             </PageTitle>
             <SaunaImageCarousel images={images} />
             {sauna && <SaunaDetail sauna={sauna} />}
-            <h3 className="pt-6 text-2xl font-medium">Verfügbarkeit</h3>
-            {/* TODO: Replace with acutal calendar ID from API */}
-            <SaunaCaledar googleCalendarId="cs85d7fer742u5v5r4v6e7jink@group.calendar.google.com" />
+            {sauna?.googleCalendarId && (
+                <>
+                    <h3 className="pt-6 text-2xl font-medium">Verfügbarkeit</h3>
+                    <SaunaCaledar googleCalendarId={sauna.googleCalendarId} />
+                </>
+            )}
         </div>
     )
 }

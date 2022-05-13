@@ -2,29 +2,17 @@ import { fireEvent, render, screen, within } from '@testing-library/react'
 import { SaunaMock } from '../../networking/api/sauna.mock'
 import SaunaEditor from './SaunaEditor'
 
-const editedSauna = {
-    name: 'Test Edited',
-    description: 'Hoi Edited',
-    price: 888,
-    maxTemp: 88,
-    numberOfPeople: 8,
-    street: 'Editstreet. 12',
-    zip: 8411,
-    location: 'Hinterthur',
-    type: 'Dachsauna',
-}
-
-const checkInputs = ['name', 'description', 'price', 'maxTemp', 'numberOfPeople', 'street', 'zip', 'location', 'type']
-
 describe('<SaunaEditor>', () => {
     test('properties are assigned to inputs correctly', () => {
         render(<SaunaEditor value={SaunaMock.sampleRemoteResponse1} />)
 
-        checkInputs.forEach(key => {
-            const input = getInputField(`input-${key}`)
-            expect(input).toBeInTheDocument()
-            expect(input).toHaveValue((SaunaMock.sampleRemoteResponse1 as any)[key])
-        })
+        Object.keys(SaunaMock.sampleRemoteResponse1)
+            .filter(k => !ignoredInputKeys.includes(k))
+            .forEach(key => {
+                const input = getInputField(`input-${key}`)
+                expect(input).toBeInTheDocument()
+                expect(input).toHaveValue((SaunaMock.sampleRemoteResponse1 as any)[key])
+            })
 
         expect(getCheckbox('input-mobile')).toBeChecked()
     })
@@ -88,3 +76,17 @@ const getCheckbox = (testId: string) => {
     const checkbox = screen.getByTestId(testId)
     return within(checkbox).getByTestId('checkbox')
 }
+
+const editedSauna = {
+    name: 'Test Edited',
+    description: 'Hoi Edited',
+    price: 888,
+    maxTemp: 88,
+    numberOfPeople: 8,
+    street: 'Editstreet. 12',
+    zip: 8411,
+    location: 'Hinterthur',
+    type: 'Dachsauna',
+}
+
+const ignoredInputKeys = ['id', 'mobile']
