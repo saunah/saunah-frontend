@@ -1,10 +1,8 @@
 import { render, screen } from '@testing-library/react'
-import { User } from '../../../entities/User'
 import { mockUserAPI } from '../../../networking/api'
 import { ReactNode } from 'react'
 import AlertProvider from '../../shared/AlertProvider'
 import { MemoryRouter } from 'react-router-dom'
-import { UserRole } from '../../../entities/UserRole'
 import UsersListView from './UsersListView'
 import { UserMock } from '../../../networking/api/user.mock'
 

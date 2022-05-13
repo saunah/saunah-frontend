@@ -4,7 +4,6 @@ import { mockUserAPI } from '../../../networking/api'
 import { ReactNode } from 'react'
 import AlertProvider from '../../shared/AlertProvider'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
-import { UserRole } from '../../../entities/UserRole'
 import UserEditorView from './UserEditorView'
 import { UserMock } from '../../../networking/api/user.mock'
 
