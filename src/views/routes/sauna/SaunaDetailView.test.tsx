@@ -1,45 +1,49 @@
 import { render, screen } from '@testing-library/react'
 import { ReactNode } from 'react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
-import { Sauna } from '../../../entities/Sauna'
-import { mockSaunaAPI, mockUserAPI } from '../../../networking/api'
-import { simpleUserMock } from '../../../networking/api/userMock'
+import { mockSaunaAPI, mockSaunaImageAPI, mockUserAPI } from '../../../networking/api'
+import { SaunaMock } from '../../../networking/api/sauna.mock'
+import { SaunaImagesMock } from '../../../networking/api/saunaImages.mock'
+import { UserMock } from '../../../networking/api/user.mock'
 import AuthProvider from '../../shared/AuthProvider'
 import SaunaDetailView from './SaunaDetailView'
 
-const defaultMock = () => {
-    return {
-        list: jest.fn(() => Promise.resolve([sauna1])),
-        get: jest.fn(() => Promise.resolve(sauna1)),
-        add: jest.fn(() => Promise.resolve(sauna1)),
-        edit: jest.fn(() => Promise.resolve(sauna1)),
-        remove: jest.fn(() => Promise.resolve()),
-    }
-}
-
-const sauna1: Sauna.Response = {
-    id: 1,
-    name: 'Sauna 1',
-    description: 'Das ist Sauna 1.',
-    price: 100000,
-    maxTemp: 100,
-    numberOfPeople: 10,
-    street: 'Hinterstrasse 12',
-    zip: 8400,
-    location: 'Winterthur',
-    type: 'Zeltsauna',
-    mobile: false,
-}
+jest.mock('../../../components/saunas/SaunaCalendar')
 
 describe('<SaunaDetailView>', () => {
     beforeEach(() => {
-        mockUserAPI(simpleUserMock())
+        mockUserAPI(UserMock.simpleMock())
+        mockSaunaAPI(SaunaMock.simpleMock())
+        mockSaunaImageAPI(SaunaImagesMock.simpleMock())
     })
 
     test('shows SaunaDetail correctly', async () => {
-        mockSaunaAPI(defaultMock())
         render(<SaunaDetailView />, { wrapper: wrapper })
         expect(await screen.findByTestId('sauna-detail-view')).toBeInTheDocument()
+    })
+
+    test('does not show calendar if calendar ID is undefined', async () => {
+        const noCalendarSauna = { ...SaunaMock.sampleResponse1, googleCalendarId: undefined }
+        mockSaunaAPI(SaunaMock.simpleMock({ get: noCalendarSauna }))
+        render(<SaunaDetailView />, { wrapper: wrapper })
+        expect(await screen.findByTestId('sauna-detail-view')).toBeInTheDocument()
+        expect(screen.queryByTestId('sauna-calendar')).toBeNull()
+    })
+
+    test('does not show calendar if calendar ID is null', async () => {
+        const noCalendarSauna = { ...SaunaMock.sampleResponse1, googleCalendarId: null! }
+        mockSaunaAPI(SaunaMock.simpleMock({ get: noCalendarSauna }))
+        render(<SaunaDetailView />, { wrapper: wrapper })
+        expect(await screen.findByTestId('sauna-detail-view')).toBeInTheDocument()
+        expect(screen.queryByTestId('sauna-calendar')).toBeNull()
+    })
+
+    test('shows calendar if calendar ID is set', async () => {
+        const withCalendarSauna = { ...SaunaMock.sampleResponse1, googleCalendarId: 'test-calendar-id' }
+        mockSaunaAPI(SaunaMock.simpleMock({ get: withCalendarSauna }))
+        render(<SaunaDetailView />, { wrapper: wrapper })
+        expect(await screen.findByTestId('sauna-detail-view')).toBeInTheDocument()
+        expect(screen.getByTestId('sauna-calendar')).toBeInTheDocument()
     })
 })
 
