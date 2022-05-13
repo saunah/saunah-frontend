@@ -42,7 +42,7 @@ const BookingView = () => {
         <div data-testid="booking-view">
             <PageTitle>Buchung anfragen</PageTitle>
             <BookingEditor value={booking} sauna={sauna} onChange={setBooking} />
-            <h2 className="text-primary-600 text-2xl font-semibold"> Voraussichtlicher Preis </h2>
+            <h2 className="text-primary-600 text-2xl font-semibold mt-6"> Voraussichtlicher Preis </h2>
             <p className="text-primary-500 mb-4">
                 Der angezeigte Preis ist eine Schätzung. Der genaue Preis wird bei der bestätigten Buchung angezeigt.{' '}
             </p>
