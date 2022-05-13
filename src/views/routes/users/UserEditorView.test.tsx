@@ -4,20 +4,20 @@ import { mockUserAPI } from '../../../networking/api'
 import { ReactNode } from 'react'
 import AlertProvider from '../../shared/AlertProvider'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
-import { UserRole } from '../../../entities/UserRole'
 import UserEditorView from './UserEditorView'
+import { UserMock } from '../../../networking/api/user.mock'
 
 describe('<UserEditorView>', () => {
     const defaultTestId = 'user-editor'
 
     test('Editor is displayed', async () => {
-        mockUserAPI(defaultMock())
+        mockUserAPI(UserMock.simpleMock())
         render(<UserEditorView />, { wrapper: wrapper })
         expect(await screen.findByTestId(defaultTestId)).toBeInTheDocument()
     })
 
     test('Sends data on submit', async () => {
-        const mock = mockUserAPI(defaultMock())
+        const mock = mockUserAPI(UserMock.simpleMock())
 
         render(<UserEditorView />, { wrapper: wrapper })
 
@@ -28,7 +28,7 @@ describe('<UserEditorView>', () => {
 
         fireEvent.click(button)
         expect(mock.edit).toBeCalledTimes(1)
-        expect(mock.edit).toBeCalledWith(userId, User.mapToRequest(testUser))
+        expect(mock.edit).toBeCalledWith(userId, User.mapToRequest(UserMock.sampleResponse1))
 
         // test redirect happens
         const usersView = await screen.findByTestId('users-view')
@@ -37,7 +37,7 @@ describe('<UserEditorView>', () => {
 
     test('Deleting user works', async () => {
         global.confirm = () => true // stub window.confirm call
-        const mock = mockUserAPI(defaultMock())
+        const mock = mockUserAPI(UserMock.simpleMock())
 
         render(<UserEditorView />, { wrapper: wrapper })
 
@@ -55,32 +55,7 @@ describe('<UserEditorView>', () => {
         expect(usersView).toBeInTheDocument()
     })
 
-    const defaultMock = () => {
-        return {
-            signup: jest.fn(() => Promise.resolve()),
-            login: jest.fn(() => Promise.resolve({ token: 'abc' })),
-            verify: jest.fn(() => Promise.resolve()),
-            list: jest.fn(() => Promise.resolve([])),
-            get: jest.fn(() => Promise.resolve(testUser)),
-            edit: jest.fn(() => Promise.resolve(testUser)),
-            remove: jest.fn(() => Promise.resolve()),
-            whoami: jest.fn(() => Promise.resolve(testUser)),
-        }
-    }
-
-    const userId = 1
-
-    const testUser: User.Response = {
-        id: userId,
-        role: UserRole.Local.USER,
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john@example.com',
-        telephone: '078 123 45 67',
-        street: 'Technikumstrasse 9',
-        place: 'Winterthur',
-        zip: '8400',
-    }
+    const userId = UserMock.sampleResponse1.id
 
     const wrapper = (props: { children?: ReactNode }) => {
         return (

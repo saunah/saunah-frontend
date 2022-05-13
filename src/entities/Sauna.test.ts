@@ -1,31 +1,23 @@
+import { SaunaMock } from '../networking/api/sauna.mock'
 import { Sauna } from './Sauna'
 
-const testRemoteResponse: Sauna.RemoteResponse = {
-    id: 12,
-    name: 'Karhu',
-    description: 'Nice sauna',
-    price: 10,
-    maxTemp: 12,
-    numberOfPeople: 100,
-    street: 'Hinterstrasse 12',
-    zip: 8400,
-    location: 'Winterthur',
-    type: 'Zeltsauna',
-    mobile: true,
-}
-
 describe('Sauna', () => {
+    const optionalKeys = ['googleCalendarId']
+
     test('isRemoteResponse() works correctly', () => {
-        expect(Sauna.isRemoteResponse(testRemoteResponse)).toBe(true)
+        expect(Sauna.isRemoteResponse(SaunaMock.sampleRemoteResponse1)).toBe(true)
         expect(Sauna.isRemoteResponse(null)).toBe(false)
         expect(Sauna.isRemoteResponse({})).toBe(false)
-        Object.keys(testRemoteResponse).forEach(key => {
-            expect(Sauna.isRemoteResponse({ ...testRemoteResponse, [key]: undefined })).toBe(false)
+        Object.keys(SaunaMock.sampleRemoteResponse1).forEach(key => {
+            const expectedResult = optionalKeys.includes(key) ? true : false
+            expect(Sauna.isRemoteResponse({ ...SaunaMock.sampleRemoteResponse1, [key]: undefined })).toBe(
+                expectedResult
+            )
         })
     })
 
     test('mapIn() only works with correct input entity', () => {
-        expect(Sauna.mapIn(testRemoteResponse)).toBeTruthy()
+        expect(Sauna.mapIn(SaunaMock.sampleRemoteResponse1)).toBeTruthy()
         expect(() => Sauna.mapIn({})).toThrow()
     })
 
@@ -36,7 +28,7 @@ describe('Sauna', () => {
     })
 
     test('mapping-chain works from start to end', () => {
-        const mapped = Sauna.mapOut(Sauna.mapToRequest(Sauna.mapIn(testRemoteResponse)))
+        const mapped = Sauna.mapOut(Sauna.mapToRequest(Sauna.mapIn(SaunaMock.sampleRemoteResponse1)))
         expect(mapped).toBeTruthy()
     })
 })

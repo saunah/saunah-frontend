@@ -2,7 +2,7 @@ import { HomeIcon, UserCircleIcon } from '@heroicons/react/solid'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import { mockUserAPI } from '../../networking/api'
-import { simpleUserMock } from '../../networking/api/userMock'
+import { UserMock } from '../../networking/api/user.mock'
 import AppMenu from './AppMenu'
 
 describe('<AppMenu>', () => {
@@ -17,9 +17,10 @@ describe('<AppMenu>', () => {
     const testIdPrimarySecond = 'primary-second'
     const testIdSecondaryFirst = 'secondary-first'
     const testIdSecondarySecond = 'secondary-second'
+    const testIdSecondaryIcon = 'secondary-icon'
 
     beforeEach(() => {
-        mockUserAPI(simpleUserMock())
+        mockUserAPI(UserMock.simpleMock())
     })
 
     test('contains leading and trailing elements', () => {
@@ -93,7 +94,19 @@ describe('<AppMenu>', () => {
         expect(primaryItemsWrapper).toBeEmptyDOMElement()
     })
 
-    function TestMenu() {
+    test('onClick is called when clicking on item', () => {
+        const onClick = jest.fn()
+        render(<TestMenu onClick={onClick} />)
+
+        const trailingItem = screen.getByTestId(testIdTrailing)
+        fireEvent.click(trailingItem)
+
+        const iconElement = screen.getByTestId(testIdSecondaryIcon)
+        fireEvent.click(iconElement)
+        expect(onClick).toBeCalledTimes(1)
+    })
+
+    function TestMenu({ onClick }: TestMenuProps) {
         return (
             <BrowserRouter>
                 <AppMenu
@@ -106,9 +119,14 @@ describe('<AppMenu>', () => {
                     secondaryItems={[
                         { title: 'Secondary First', testId: testIdSecondaryFirst },
                         { title: 'Secondary Second', testId: testIdSecondarySecond },
+                        { icon: HomeIcon, iconClasses: 'w-4 h-4', onClick, testId: testIdSecondaryIcon },
                     ]}
                 />
             </BrowserRouter>
         )
+    }
+
+    type TestMenuProps = {
+        onClick?: () => void
     }
 })

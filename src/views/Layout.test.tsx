@@ -1,14 +1,14 @@
 import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import { mockUserAPI } from '../networking/api'
-import { simpleUserMock } from '../networking/api/userMock'
+import { UserMock } from '../networking/api/user.mock'
 import Layout from './Layout'
 import AlertProvider from './shared/AlertProvider'
 import AuthProvider from './shared/AuthProvider'
 
 describe('<Layout>', () => {
     beforeEach(() => {
-        mockUserAPI(simpleUserMock())
+        mockUserAPI(UserMock.simpleMock())
     })
 
     test('Renders AppContainer', async () => {

@@ -11,6 +11,12 @@ env:
     value: 'Hello from Local'
   - name: REACT_APP_API_BASE_URL
     value: http://localhost:8888
+  - name: REACT_APP_GOOGLE_CALENDAR_API_KEY
+    valueFrom:
+      secretKeyRef:
+        name: saunah-secrets-credentials
+        key: googleCalendarApiKey
+        optional: false
 
 image:
   repository: ghcr.io/saunah/saunah-frontend

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Sauna } from '../../../entities/Sauna'
 import { parseId } from '../../../utils/identifiable'
 import { useParams } from 'react-router-dom'
+import SaunaCaledar from '../../../components/saunas/SaunaCalendar'
 import SaunaImageCarousel from '../../../components/saunas/SaunaImageCarousel'
 import { SaunaImage } from '../../../entities/SaunaImage'
 import PageTitle from '../../../components/base/PageTitle'
@@ -35,6 +36,12 @@ const SaunaDetailView = () => {
             </PageTitle>
             <SaunaImageCarousel images={images} />
             {sauna && <SaunaDetail sauna={sauna} />}
+            {sauna?.googleCalendarId && (
+                <>
+                    <h3 className="pt-6 text-2xl font-medium">Verfügbarkeit</h3>
+                    <SaunaCaledar googleCalendarId={sauna.googleCalendarId} />
+                </>
+            )}
         </div>
     )
 }

@@ -1,30 +1,16 @@
 import { render, screen } from '@testing-library/react'
-import { Sauna } from '../../entities/Sauna'
+import { SaunaMock } from '../../networking/api/sauna.mock'
 import SaunaDetail from './SaunaDetail'
-
-const exampleSauna: Sauna.Response = {
-    id: 1,
-    name: 'saunaOne',
-    description: 'Steam Sauna',
-    price: 100000,
-    maxTemp: 100,
-    numberOfPeople: 10,
-    street: 'Hinterstrasse 12',
-    zip: 8400,
-    location: 'Winterthur',
-    type: 'Zeltsauna',
-    mobile: false,
-}
 
 describe('<SaunDetail>', () => {
     test('render correctly', () => {
-        render(<SaunaDetail sauna={exampleSauna} />)
+        render(<SaunaDetail sauna={SaunaMock.sampleResponse1} />)
     })
 
     test('show text correctly', () => {
-        render(<SaunaDetail sauna={exampleSauna} />)
+        render(<SaunaDetail sauna={SaunaMock.sampleRemoteResponse1} />)
 
         const description = screen.getByTestId('description')
-        expect(description).toHaveTextContent(exampleSauna.description)
+        expect(description).toHaveTextContent(SaunaMock.sampleRemoteResponse1.description)
     })
 })
