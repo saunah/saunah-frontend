@@ -67,4 +67,53 @@ export namespace UserMock {
         place: 'Winterthur',
         zip: '8400',
     }
+
+    export const sampleResponse2: User.Response = {
+        id: 2,
+        role: UserRole.Local.USER,
+        firstName: 'Jonny',
+        lastName: 'Doey',
+        email: 'jonny@example.com',
+        telephone: '078 987 65 43',
+        street: 'Technikumstrasse 11',
+        place: 'Zürich',
+        zip: '8000',
+    }
+
+    export const sampleRemoteResponse1: User.RemoteResponse = {
+        id: 1,
+        role: 'USER',
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john@example.com',
+        phoneNumber: '078 123 45 67',
+        street: 'Technikumstrasse 9',
+        place: 'Winterthur',
+        zip: '8400',
+    }
+
+    export const sampleRequest1: User.Request = {
+        role: UserRole.Local.USER,
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john@example.com',
+        telephone: '078 123 45 67',
+        street: 'Technikumstrasse 9',
+        place: 'Winterthur',
+        zip: '8400',
+        password: '',
+        repeatPassword: '',
+    }
+
+    export const sampleRemoteRequest1: User.RemoteRequest = {
+        role: UserRole.Remote.USER,
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john@example.com',
+        phoneNumber: '078 123 45 67',
+        street: 'Technikumstrasse 9',
+        place: 'Winterthur',
+        zip: '8400',
+        password: '',
+    }
 }

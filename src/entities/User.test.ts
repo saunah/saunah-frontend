@@ -1,12 +1,13 @@
+import { UserMock } from '../networking/api/user.mock'
 import { User } from './User'
 import { UserRole } from './UserRole'
 
 describe('User', () => {
     test('isRemoteResponse() works correctly', () => {
-        expect(User.isRemoteResponse(remoteResponse)).toBe(true)
+        expect(User.isRemoteResponse(UserMock.sampleRemoteResponse1)).toBe(true)
 
-        Object.keys(remoteResponse).forEach(key => {
-            expect(User.isRemoteResponse({ ...remoteResponse, [key]: undefined })).toBe(false)
+        Object.keys(UserMock.sampleRemoteResponse1).forEach(key => {
+            expect(User.isRemoteResponse({ ...UserMock.sampleRemoteResponse1, [key]: undefined })).toBe(false)
         })
 
         expect(User.isRemoteResponse({})).toBe(false)
@@ -15,27 +16,27 @@ describe('User', () => {
     })
 
     test('mapIn() only works with correct input entity', () => {
-        expect(User.mapIn(remoteResponse)).toEqual(localResponse)
+        expect(User.mapIn(UserMock.sampleRemoteResponse1)).toEqual(UserMock.sampleResponse1)
         expect(() => User.mapIn({})).toThrow()
         expect(() => User.mapIn(undefined)).toThrow()
     })
 
     test('mapIn() fails if role is in wrong format', () => {
-        const response = { ...remoteResponse, role: 'CUSTOM' }
+        const response = { ...UserMock.sampleRemoteResponse1, role: 'CUSTOM' }
         expect(() => User.mapIn(response)).toThrow()
     })
 
     test('mapToRequest() works correctly', () => {
-        expect(User.mapToRequest(localResponse)).toEqual(localRequest)
+        expect(User.mapToRequest(UserMock.sampleResponse1)).toEqual(UserMock.sampleRequest1)
     })
 
     test('mapOut() only works with correct input entity', () => {
-        expect(User.mapOut(localRequest)).toEqual(remoteRequest)
+        expect(User.mapOut(UserMock.sampleRequest1)).toEqual(UserMock.sampleRemoteRequest1)
     })
 
     test('mapping-chain works from start to end', () => {
-        const mapped = User.mapOut(User.mapToRequest(User.mapIn(remoteResponse)))
-        expect(mapped).toEqual(remoteRequest)
+        const mapped = User.mapOut(User.mapToRequest(User.mapIn(UserMock.sampleRemoteResponse1)))
+        expect(mapped).toEqual(UserMock.sampleRemoteRequest1)
     })
 
     test('emptyRequest() has all values set to correct defaults', () => {
@@ -47,55 +48,4 @@ describe('User', () => {
             expect(value).toEqual(expected)
         })
     })
-
-    // Test objects
-
-    const remoteResponse: User.RemoteResponse = {
-        id: 1,
-        role: 'USER',
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john@example.com',
-        phoneNumber: '078 123 45 67',
-        street: 'Technikumstrasse 9',
-        place: 'Winterthur',
-        zip: '8400',
-    }
-
-    const localResponse: User.Response = {
-        id: 1,
-        role: UserRole.Local.USER,
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john@example.com',
-        telephone: '078 123 45 67',
-        street: 'Technikumstrasse 9',
-        place: 'Winterthur',
-        zip: '8400',
-    }
-
-    const localRequest: User.Request = {
-        role: UserRole.Local.USER,
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john@example.com',
-        telephone: '078 123 45 67',
-        street: 'Technikumstrasse 9',
-        place: 'Winterthur',
-        zip: '8400',
-        password: '',
-        repeatPassword: '',
-    }
-
-    const remoteRequest: User.RemoteRequest = {
-        role: UserRole.Remote.USER,
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john@example.com',
-        phoneNumber: '078 123 45 67',
-        street: 'Technikumstrasse 9',
-        place: 'Winterthur',
-        zip: '8400',
-        password: '',
-    }
 })

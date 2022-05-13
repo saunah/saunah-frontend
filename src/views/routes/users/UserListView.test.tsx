@@ -6,18 +6,19 @@ import AlertProvider from '../../shared/AlertProvider'
 import { MemoryRouter } from 'react-router-dom'
 import { UserRole } from '../../../entities/UserRole'
 import UsersListView from './UsersListView'
+import { UserMock } from '../../../networking/api/user.mock'
 
 describe('<UserListView>', () => {
     const defaultTestId = 'users-list-view'
 
     test('Table is displayed', async () => {
-        mockUserAPI(defaultMock())
+        mockUserAPI(UserMock.simpleMock())
         render(<UsersListView />, { wrapper: wrapper })
         expect(await screen.findByTestId(defaultTestId)).toBeInTheDocument()
     })
 
     test('Users are displayed correctly in the table', async () => {
-        mockUserAPI(defaultMock())
+        mockUserAPI(UserMock.simpleMock())
         render(<UsersListView />, { wrapper: wrapper })
 
         const tableComponent = await screen.findByTestId(defaultTestId)
@@ -32,19 +33,6 @@ describe('<UserListView>', () => {
         })
     })
 
-    const defaultMock = () => {
-        return {
-            signup: jest.fn(() => Promise.resolve()),
-            login: jest.fn(() => Promise.resolve({ token: 'abc' })),
-            verify: jest.fn(() => Promise.resolve()),
-            list: jest.fn(() => Promise.resolve([user1, user2])),
-            get: jest.fn(() => Promise.resolve(user1)),
-            edit: jest.fn(() => Promise.resolve(user1)),
-            remove: jest.fn(() => Promise.resolve()),
-            whoami: jest.fn(() => Promise.resolve(user1)),
-        }
-    }
-
     const wrapper = (props: { children?: ReactNode }) => {
         return (
             <MemoryRouter>
@@ -53,32 +41,20 @@ describe('<UserListView>', () => {
         )
     }
 
-    const user1: User.Response = {
-        id: 1,
-        role: UserRole.Local.ADMIN,
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john@example.com',
-        telephone: '078 123 45 67',
-        street: 'Technikumstrasse 9',
-        place: 'Winterthur',
-        zip: '8400',
-    }
-
-    const user2: User.Response = {
-        id: 2,
-        role: UserRole.Local.USER,
-        firstName: 'Jonny',
-        lastName: 'Doey',
-        email: 'jonny@example.com',
-        telephone: '078 987 65 43',
-        street: 'Technikumstrasse 11',
-        place: 'Zürich',
-        zip: '8000',
-    }
-
     const tableValues = [
-        [`${user1.firstName} ${user1.lastName}`, user1.email, user1.telephone, user1.role, ''],
-        [`${user2.firstName} ${user2.lastName}`, user2.email, user2.telephone, user2.role, ''],
+        [
+            `${UserMock.sampleResponse1.firstName} ${UserMock.sampleResponse1.lastName}`,
+            UserMock.sampleResponse1.email,
+            UserMock.sampleResponse1.telephone,
+            UserMock.sampleResponse1.role,
+            '',
+        ],
+        [
+            `${UserMock.sampleResponse2.firstName} ${UserMock.sampleResponse2.lastName}`,
+            UserMock.sampleResponse2.email,
+            UserMock.sampleResponse2.telephone,
+            UserMock.sampleResponse2.role,
+            '',
+        ],
     ]
 })
