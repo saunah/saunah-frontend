@@ -29,7 +29,7 @@ const SaunaDetailView = () => {
     return (
         <div className="space-y-4" data-testid={'sauna-detail-view'}>
             <PageTitle>
-                <div className="flex  justify-between">
+                <div className="flex justify-between">
                     <span>{sauna?.name}</span>
                     {isAdmin() && <ButtonLink to="./edit">Sauna bearbeiten</ButtonLink>}
                 </div>
