@@ -2,19 +2,19 @@ import moment, { Moment } from 'moment'
 import { MissingPropertyError } from '../utils/Error'
 import { Identifiable, MaybeIdentifiable } from '../utils/identifiable'
 import { Editable } from '../utils/object'
+import { Checkable, CheckableNumber } from './CheckableNumber'
 import { ModifiableDate } from './ModifiableDate'
 
 export namespace Booking {
-    export type Extras = {
-        transportService: boolean
+    export type ExtrasBase = {
         washService: boolean
-        saunahImp: boolean
-        deposit: boolean
-        handTowel: boolean
-        wood: boolean
+        transportService: number
+        saunahImp: number
+        handTowel: number
+        wood: number
     }
 
-    type RequestBase = Extras & {
+    type RequestBase = {
         userId: number
         saunaId: number
         location: string
@@ -44,11 +44,11 @@ export namespace Booking {
     type ResponseDates = { [K in keyof RemoteDates]: Moment }
     type RequestDates = { [K in keyof RemoteDates]: ModifiableDate.Request }
 
-    export type Response = ResponseBase & ResponseDates & Identifiable
-    export type RemoteResponse = ResponseBase & RemoteDates & Identifiable
+    export type Response = ResponseBase & ExtrasBase & ResponseDates & Identifiable
+    export type RemoteResponse = ResponseBase & ExtrasBase & RemoteDates & Identifiable
 
-    export type Request = Editable<RequestBase> & RequestDates & MaybeIdentifiable
-    export type RemoteRequest = RequestBase & RemoteDates & MaybeIdentifiable
+    export type Request = Editable<RequestBase> & Checkable<ExtrasBase> & RequestDates & MaybeIdentifiable
+    export type RemoteRequest = RequestBase & ExtrasBase & RemoteDates & MaybeIdentifiable
 
     export function isRemoteResponse(object: unknown): object is RemoteResponse {
         const booking = object as RemoteResponse
@@ -66,7 +66,6 @@ export namespace Booking {
             typeof booking.transportService === 'boolean' &&
             typeof booking.washService === 'boolean' &&
             typeof booking.saunahImp === 'number' &&
-            typeof booking.deposit === 'number' &&
             typeof booking.handTowel === 'number' &&
             typeof booking.wood === 'number' &&
             typeof booking.saunaDescription === 'string' &&
@@ -92,20 +91,19 @@ export namespace Booking {
         }
     }
 
-    export function emptyRequest(userId: number, saunaId: number): Request {
+    export function emptyRequest(userId?: number | null, saunaId?: number | null): Request {
         return {
             id: null,
-            userId: userId,
-            saunaId: saunaId,
+            userId: userId || null,
+            saunaId: saunaId || null,
             startBookingDate: ModifiableDate.emptyRequest(),
             endBookingDate: ModifiableDate.emptyRequest(),
             location: '',
-            transportService: false,
+            transportService: CheckableNumber.emptyRequest(),
             washService: false,
-            saunahImp: false,
-            deposit: false,
-            handTowel: false,
-            wood: false,
+            saunahImp: CheckableNumber.emptyRequest(),
+            handTowel: CheckableNumber.emptyRequest(),
+            wood: CheckableNumber.emptyRequest(),
         }
     }
 
@@ -117,12 +115,11 @@ export namespace Booking {
             startBookingDate: ModifiableDate.mapFromMoment(booking.startBookingDate),
             endBookingDate: ModifiableDate.mapFromMoment(booking.endBookingDate),
             location: booking.location,
-            transportService: booking.transportService,
+            transportService: CheckableNumber.mapFromNumber(booking.transportService),
             washService: booking.washService,
-            saunahImp: booking.saunahImp,
-            deposit: booking.deposit,
-            handTowel: booking.handTowel,
-            wood: booking.wood,
+            saunahImp: CheckableNumber.mapFromNumber(booking.saunahImp),
+            handTowel: CheckableNumber.mapFromNumber(booking.handTowel),
+            wood: CheckableNumber.mapFromNumber(booking.wood),
         }
     }
 
@@ -135,6 +132,10 @@ export namespace Booking {
             ...booking,
             userId: booking.userId,
             saunaId: booking.saunaId,
+            transportService: CheckableNumber.mapToNumber(booking.transportService),
+            saunahImp: CheckableNumber.mapToNumber(booking.saunahImp),
+            handTowel: CheckableNumber.mapToNumber(booking.handTowel),
+            wood: CheckableNumber.mapToNumber(booking.wood),
             startBookingDate: ModifiableDate.mapOut(booking.startBookingDate),
             endBookingDate: ModifiableDate.mapOut(booking.endBookingDate),
         }

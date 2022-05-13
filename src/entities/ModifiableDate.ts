@@ -24,6 +24,9 @@ export namespace ModifiableDate {
         if (date.date) return formatOutDate(date.date, ignoreTime ? null : date.time)
         else return ''
     }
+
+    type Keys<T> = { [P in keyof T]: T[P] extends Request ? P : never }[keyof T]
+    export type Extract<T> = Pick<T, Keys<T>>
 }
 
 function formatOutDate(date: string, time?: string | null): string {
