@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import PageTitle from '../../../components/base/PageTitle'
+import BookingDetails from '../../../components/booking/BookingDetails'
 import ReceiptTable from '../../../components/booking/ReceiptTable'
 import { Booking } from '../../../entities/Booking'
 import { Receipt } from '../../../entities/Receipt'
@@ -20,6 +21,8 @@ const BookingDetailView = () => {
     return (
         <div>
             <PageTitle>Buchung für {booking?.sauna.name}</PageTitle>
+            {booking && <BookingDetails booking={booking} />}
+
             <h2 className="text-primary-600 text-2xl font-semibold mt-6"> Berechneter Preis </h2>
             <p className="text-primary-500 mb-4">
                 Der berechnete Preis setzt sich aus den aufgelisteten Kostenpunkten zusammen.

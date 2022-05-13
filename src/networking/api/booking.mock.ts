@@ -45,4 +45,13 @@ export namespace BookingMock {
         discountDescription: null,
         comment: 'Cool, ich freue mich.',
     }
+
+    export function getSampleResponse(): Booking.Response {
+        // set all moment dates new, so the locale is correct
+        const response = sampleResponse1
+        response.startBookingDate = moment().add(1, 'day')
+        response.endBookingDate = moment().add(2, 'days')
+        response.creation = moment()
+        return response
+    }
 }

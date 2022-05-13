@@ -19,17 +19,17 @@ const bookingApi: BookingAPI = {
     async listAll(): Promise<Booking.Response[]> {
         // const response = await axios.get(apiRoutes.booking.listAll)
         // return mapInArray(response.data, Booking.mapIn)
-        return Promise.resolve([BookingMock.sampleResponse1])
+        return Promise.resolve([BookingMock.getSampleResponse()])
     },
     async list(): Promise<Booking.Response[]> {
         // const response = await axios.get(apiRoutes.booking.list)
         // return mapInArray(response.data, Booking.mapIn)
-        return Promise.resolve([BookingMock.sampleResponse1])
+        return Promise.resolve([BookingMock.getSampleResponse()])
     },
     async get(bookingId: number): Promise<Booking.Response> {
         // const response = await axios.get(apiRoutes.booking.get(bookingId))
         // return Booking.mapIn(response.data)
-        return Promise.resolve(BookingMock.sampleResponse1)
+        return Promise.resolve(BookingMock.getSampleResponse())
     },
     async add(booking: Booking.Request): Promise<Booking.Response> {
         console.log('add booking')
@@ -37,7 +37,7 @@ const bookingApi: BookingAPI = {
         // const remoteRequest = Booking.mapOut(booking)
         // const response = await axios.post(apiRoutes.booking.add, remoteRequest)
         // return Booking.mapIn(response.data)
-        return Promise.resolve(BookingMock.sampleResponse1)
+        return Promise.resolve(BookingMock.getSampleResponse())
     },
     async edit(bookingId: number, booking: Booking.Request): Promise<Booking.Response> {
         console.log('edit booking')
@@ -45,7 +45,7 @@ const bookingApi: BookingAPI = {
         // const remoteRequest = Booking.mapOut(booking)
         // const response = await axios.put(apiRoutes.booking.edit(bookingId), remoteRequest)
         // return Booking.mapIn(response.data)
-        return Promise.resolve(BookingMock.sampleResponse1)
+        return Promise.resolve(BookingMock.getSampleResponse())
     },
     async approve(bookingId: number): Promise<void> {
         console.log('approve booking id = ' + bookingId)
