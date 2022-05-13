@@ -11,10 +11,8 @@ import { Sauna } from '../../../entities/Sauna'
 import api from '../../../networking/api'
 import { parseId } from '../../../utils/identifiable'
 import { useAlert } from '../../shared/AlertProvider'
-import { useAuth } from '../../shared/AuthProvider'
 
 const BookingView = () => {
-    const { me } = useAuth()
     const params = useParams()
     const saunaId = parseId(params['saunaId'])
     const { success } = useAlert()
@@ -34,7 +32,7 @@ const BookingView = () => {
 
     const onSubmit = async () => {
         await api.booking.add(booking)
-        success('Die Buchung war erfolgreich.')
+        success('Die Buchungsanfrage wurde gesendet.')
         navigate('..')
     }
 

@@ -22,7 +22,7 @@ export namespace BookingMock {
         }
     }
 
-    const sampleResponse1: Booking.Response = {
+    export const sampleResponse1: Booking.Response = {
         id: 1,
         userId: 2,
         creation: moment(),

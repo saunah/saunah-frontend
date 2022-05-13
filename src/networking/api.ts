@@ -4,7 +4,6 @@ import user, { UserAPI } from './api/user'
 import price, { PriceAPI } from './api/price'
 import { readonly } from '../utils/object'
 import booking, { BookingAPI } from './api/booking'
-import { BookingMock } from './api/booking.mock'
 
 const api = {
     sauna,
@@ -40,6 +39,3 @@ export function mockBookingAPI<T extends BookingAPI>(mockApi: T): T {
     api.booking = mockApi
     return mockApi
 }
-
-// TODO: Remove when backend ready
-mockBookingAPI(BookingMock.simpleMock())
