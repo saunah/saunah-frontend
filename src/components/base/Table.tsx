@@ -52,7 +52,7 @@ function TableRow({ row, columnType }: TableRowProps) {
     const ColumnType = columnType || TableColumnType.DATA
     const rowClasses = 'border-b transition duration-300 ease-in-out hover:bg-primary-100'
     const columnClasses =
-        'p-4 px-2 ' +
+        'py-4 px-2 ' +
         (ColumnType === TableColumnType.HEAD ? 'text-primary-500 font-semibold' : 'text-primary-600 font-normal')
 
     function isLastElement(index: number) {
