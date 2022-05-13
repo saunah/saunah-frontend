@@ -2,7 +2,7 @@ import { HomeIcon, UserCircleIcon } from '@heroicons/react/solid'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import { mockUserAPI } from '../../networking/api'
-import { simpleUserMock } from '../../networking/api/userMock'
+import { UserMock } from '../../networking/api/user.mock'
 import AppMenu from './AppMenu'
 
 describe('<AppMenu>', () => {
@@ -19,7 +19,7 @@ describe('<AppMenu>', () => {
     const testIdSecondarySecond = 'secondary-second'
 
     beforeEach(() => {
-        mockUserAPI(simpleUserMock())
+        mockUserAPI(UserMock.simpleMock())
     })
 
     test('contains leading and trailing elements', () => {

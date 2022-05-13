@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { mockSaunaAPI, mockUserAPI } from '../../../networking/api'
 import { SaunaMock } from '../../../networking/api/sauna.mock'
-import { simpleUserMock } from '../../../networking/api/userMock'
+import { UserMock } from '../../../networking/api/user.mock'
 import AuthProvider from '../../shared/AuthProvider'
 import SaunaDetailView from './SaunaDetailView'
 
@@ -11,7 +11,7 @@ jest.mock('../../../components/saunas/SaunaCalendar')
 
 describe('<SaunaDetailView>', () => {
     beforeEach(() => {
-        mockUserAPI(simpleUserMock())
+        mockUserAPI(UserMock.simpleMock())
     })
 
     test('shows SaunaDetail correctly', async () => {

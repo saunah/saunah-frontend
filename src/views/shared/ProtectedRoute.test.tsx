@@ -5,13 +5,13 @@ import { render, screen, waitFor } from '@testing-library/react'
 import { AuthContext, AuthState } from './AuthProvider'
 import ProtectedRoute from './ProtectedRoute'
 import { mockUserAPI } from '../../networking/api'
-import { simpleUserMock } from '../../networking/api/userMock'
 import { User } from '../../entities/User'
 import { UserRole } from '../../entities/UserRole'
+import { UserMock } from '../../networking/api/user.mock'
 
 describe('<ProtectedRoute>', () => {
     beforeEach(() => {
-        mockUserAPI(simpleUserMock())
+        mockUserAPI(UserMock.simpleMock())
     })
 
     test('shows home route at start', () => {

@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react'
-import { Sauna } from '../../entities/Sauna'
 import { SaunaMock } from '../../networking/api/sauna.mock'
 import SaunaDetail from './SaunaDetail'
 

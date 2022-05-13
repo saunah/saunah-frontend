@@ -5,13 +5,13 @@ import { Sauna } from '../../../entities/Sauna'
 import { SaunaImage } from '../../../entities/SaunaImage'
 import { mockSaunaAPI, mockSaunaImageAPI, mockUserAPI } from '../../../networking/api'
 import { SaunaMock } from '../../../networking/api/sauna.mock'
-import { simpleUserMock } from '../../../networking/api/userMock'
+import { UserMock } from '../../../networking/api/user.mock'
 import AlertProvider from '../../shared/AlertProvider'
 import SaunaEditorView from './SaunaEditorView'
 
 describe('<SaunaEditorView>', () => {
     beforeEach(() => {
-        mockUserAPI(simpleUserMock())
+        mockUserAPI(UserMock.simpleMock())
     })
 
     test('the correct info is fetched on the edit page', async () => {

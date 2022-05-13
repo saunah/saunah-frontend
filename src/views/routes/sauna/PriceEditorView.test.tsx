@@ -5,11 +5,11 @@ import { ReactNode } from 'react'
 import AlertProvider from '../../shared/AlertProvider'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
-import { simpleUserMock } from '../../../networking/api/userMock'
+import { UserMock } from '../../../networking/api/user.mock'
 
 describe('<PriceEditorView>', () => {
     beforeEach(() => {
-        mockUserAPI(simpleUserMock())
+        mockUserAPI(UserMock.simpleMock())
     })
 
     test('the correct info is fetched', async () => {
