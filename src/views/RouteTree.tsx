@@ -15,8 +15,10 @@ import UserEditorView from './routes/users/UserEditorView'
 import Overview from './routes/sauna/Overview'
 import UsersListView from './routes/users/UsersListView'
 import { UserRole } from '../entities/UserRole'
-import { Navigate } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
 import BookingView from './routes/sauna/BookingView'
+import BookingListView from './routes/booking/BookingsListView'
+import BookingEditorView from './routes/booking/BookingEditorView'
 
 const RouteTree = () => {
     return (
@@ -63,6 +65,18 @@ const RouteTree = () => {
                         />
                     </Route>
                     <Route path="create" breadcrumb="Erstellen" element={<SaunaEditorView />} />
+                </Route>
+                <Route
+                    path="/bookings"
+                    breadcrumb="Buchungen"
+                    element={
+                        <ProtectedRoute>
+                            <Outlet />
+                        </ProtectedRoute>
+                    }
+                >
+                    <Route index element={<BookingListView />} />
+                    <Route path=":boookingId" element={<BookingEditorView />} />
                 </Route>
                 <Route path="/users" breadcrumb="Benutzer">
                     <Route
