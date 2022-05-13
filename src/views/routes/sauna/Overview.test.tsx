@@ -1,20 +1,10 @@
 import { render, screen } from '@testing-library/react'
 import { ReactNode } from 'react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
-import { Sauna } from '../../../entities/Sauna'
 import { SaunaImage } from '../../../entities/SaunaImage'
 import { mockSaunaAPI, mockSaunaImageAPI } from '../../../networking/api'
+import { SaunaMock } from '../../../networking/api/sauna.mock'
 import Overview from './Overview'
-
-const defaultMock = () => {
-    return {
-        list: jest.fn(() => Promise.resolve([sauna1])),
-        get: jest.fn(() => Promise.resolve(sauna1)),
-        add: jest.fn(() => Promise.resolve(sauna1)),
-        edit: jest.fn(() => Promise.resolve(sauna1)),
-        remove: jest.fn(() => Promise.resolve()),
-    }
-}
 
 const imagesMock = () => {
     return {
@@ -40,25 +30,11 @@ const saunaImage1: SaunaImage.Response = {
     fileName: 'test-sauna-1',
 }
 
-const sauna1: Sauna.Response = {
-    id: 1,
-    name: 'Sauna 1',
-    description: 'Das ist Sauna 1.',
-    price: 100000,
-    maxTemp: 100,
-    numberOfPeople: 10,
-    street: 'Hinterstrasse 12',
-    zip: 8400,
-    location: 'Winterthur',
-    type: 'Zeltsauna',
-    mobile: false,
-}
-
 const waitForStateUpdate = () => screen.findByTestId('overviewTID')
 
 describe('<Overview Tests>', () => {
     test('the correct sauna is fetched on the edit page', async () => {
-        const mock = mockSaunaAPI(defaultMock())
+        const mock = mockSaunaAPI(SaunaMock.simpleMock())
         mockSaunaImageAPI(imagesMock())
 
         render(<Overview />, { wrapper: wrapper('/saunas') })

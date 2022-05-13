@@ -1,22 +1,8 @@
 import { fireEvent, render, screen, within } from '@testing-library/react'
-import { Sauna } from '../../entities/Sauna'
+import { SaunaMock } from '../../networking/api/sauna.mock'
 import SaunaEditor from './SaunaEditor'
 
-const testSauna: Sauna.Request = {
-    id: 11,
-    name: 'Test Sauna ',
-    description: 'Hoi Sauna.',
-    price: 999,
-    maxTemp: 99,
-    numberOfPeople: 9,
-    street: 'Oberstr. 12',
-    zip: 8400,
-    location: 'Winterthur',
-    type: 'Zeltsauna',
-    mobile: true,
-}
-
-const edited = {
+const editedSauna = {
     name: 'Test Edited',
     description: 'Hoi Edited',
     price: 888,
@@ -32,12 +18,12 @@ const checkInputs = ['name', 'description', 'price', 'maxTemp', 'numberOfPeople'
 
 describe('<SaunaEditor>', () => {
     test('properties are assigned to inputs correctly', () => {
-        render(<SaunaEditor value={testSauna} />)
+        render(<SaunaEditor value={SaunaMock.sampleRemoteResponse1} />)
 
         checkInputs.forEach(key => {
             const input = getInputField(`input-${key}`)
             expect(input).toBeInTheDocument()
-            expect(input).toHaveValue((testSauna as any)[key])
+            expect(input).toHaveValue((SaunaMock.sampleRemoteResponse1 as any)[key])
         })
 
         expect(getCheckbox('input-mobile')).toBeChecked()
@@ -45,38 +31,38 @@ describe('<SaunaEditor>', () => {
 
     test('onChange is called correctly', () => {
         const onChange = jest.fn()
-        render(<SaunaEditor value={testSauna} onChange={onChange} />)
+        render(<SaunaEditor value={SaunaMock.sampleRemoteResponse1} onChange={onChange} />)
 
         let calls = 0
-        Object.entries(edited).forEach(([key, value]) => {
+        Object.entries(editedSauna).forEach(([key, value]) => {
             fireEvent.change(getInputField(`input-${key}`), { target: { value: value } })
             expect(onChange).toBeCalledTimes(++calls)
-            expect(onChange).toBeCalledWith({ ...testSauna, [key]: value })
+            expect(onChange).toBeCalledWith({ ...SaunaMock.sampleRemoteResponse1, [key]: value })
         })
 
         fireEvent.click(getCheckbox('input-mobile'))
         expect(onChange).toBeCalledTimes(++calls)
-        expect(onChange).toBeCalledWith({ ...testSauna, mobile: false })
+        expect(onChange).toBeCalledWith({ ...SaunaMock.sampleRemoteResponse1, mobile: false })
     })
 
     test('onSubmit is called correctly', () => {
         const onSubmit = jest.fn()
-        render(<SaunaEditor value={testSauna} onSubmit={onSubmit} />)
+        render(<SaunaEditor value={SaunaMock.sampleRemoteResponse1} onSubmit={onSubmit} />)
         fireEvent.click(screen.getByTestId('submit-button'))
         expect(onSubmit).toBeCalledTimes(1)
     })
 
     test('onDelete button is only shown if flag set', () => {
-        render(<SaunaEditor value={testSauna} showDelete={false} />)
+        render(<SaunaEditor value={SaunaMock.sampleRemoteResponse1} showDelete={false} />)
         expect(screen.queryByTestId('delete-button')).not.toBeInTheDocument()
 
-        render(<SaunaEditor value={testSauna} showDelete={true} />)
+        render(<SaunaEditor value={SaunaMock.sampleRemoteResponse1} showDelete={true} />)
         expect(screen.getByTestId('delete-button')).toBeInTheDocument()
     })
 
     test('onDelete is called when alert is accepted', () => {
         const onDelete = jest.fn()
-        render(<SaunaEditor value={testSauna} showDelete={true} onDelete={onDelete} />)
+        render(<SaunaEditor value={SaunaMock.sampleRemoteResponse1} showDelete={true} onDelete={onDelete} />)
         window.confirm = jest.fn(() => true)
         fireEvent.click(screen.getByTestId('delete-button'))
         expect(window.confirm).toBeCalled()
@@ -85,7 +71,7 @@ describe('<SaunaEditor>', () => {
 
     test('onDelete is not called when alert is dismissed', () => {
         const onDelete = jest.fn()
-        render(<SaunaEditor value={testSauna} showDelete={true} onDelete={onDelete} />)
+        render(<SaunaEditor value={SaunaMock.sampleRemoteResponse1} showDelete={true} onDelete={onDelete} />)
         window.confirm = jest.fn(() => false)
         fireEvent.click(screen.getByTestId('delete-button'))
         expect(window.confirm).toBeCalled()

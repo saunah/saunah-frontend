@@ -1,23 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import SaunaCard from './SaunaCard'
 import { BrowserRouter } from 'react-router-dom'
-import { Sauna } from '../../entities/Sauna'
 import { SaunaImage } from '../../entities/SaunaImage'
 import { mockSaunaImageAPI } from '../../networking/api'
-
-const exampleSauna: Sauna.Response = {
-    id: 1,
-    name: 'saunaOne',
-    description: 'Steam Sauna',
-    price: 100000,
-    maxTemp: 100,
-    numberOfPeople: 10,
-    street: 'Hinterstrasse 12',
-    zip: 8400,
-    location: 'Winterthur',
-    type: 'Zeltsauna',
-    mobile: false,
-}
+import { SaunaMock } from '../../networking/api/sauna.mock'
 
 const imagesMock = () => {
     return {
@@ -38,9 +24,9 @@ describe('<SaunaCard>', () => {
         mockSaunaImageAPI(imagesMock())
         render(
             <BrowserRouter>
-                <SaunaCard sauna={exampleSauna} />
+                <SaunaCard sauna={SaunaMock.sampleResponse1} />
             </BrowserRouter>
         )
-        expect(await screen.findByText('saunaOne')).toBeInTheDocument()
+        expect(await screen.findByText(SaunaMock.sampleResponse1.name)).toBeInTheDocument()
     })
 })
