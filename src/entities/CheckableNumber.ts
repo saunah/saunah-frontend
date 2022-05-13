@@ -25,15 +25,12 @@ export namespace CheckableNumber {
 
     type Keys<T> = { [P in keyof T]: T[P] extends Request ? P : never }[keyof T]
     export type Extract<T> = Pick<T, Keys<T>>
+
+    /**
+     * This type can be used if a types numbers should be edited by checkboxes and text-fields.
+     * This makes all number properties of the object of type CheckableNumber.
+     */
+    export type Object<T> = {
+        readonly [K in keyof T]: T[K] extends number ? Request : T[K]
+    }
 }
-
-/**
- * This type can be used if a types numbers should be edited by checkboxes and text-fields.
- * This makes all number properties of the object of type CheckableNumber.
-
- */
-export type Checkable<T> = T extends {}
-    ? {
-          readonly [K in keyof T]: T[K] extends number ? CheckableNumber.Request : T[K]
-      }
-    : T

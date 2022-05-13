@@ -34,4 +34,9 @@ export namespace ModifiableDate {
 
     type Keys<T> = { [P in keyof T]: T[P] extends Request ? P : never }[keyof T]
     export type Extract<T> = Pick<T, Keys<T>>
+
+    /**
+     * This type makes all moment properties of an object to a ModifiableDate.Request.
+     */
+    export type Object<T> = { [P in keyof T]: T[P] extends Moment ? Request : T[P] }
 }

@@ -28,6 +28,9 @@ import { Booking } from './Booking'
 // }
 
 describe('Booking', () => {
+    test('something', () => {
+        expect({} as Booking.Request).toBeTruthy()
+    })
     // test('remoteResponse works correctly', () => {
     //     expect(Booking.isRemoteResponse(testRemoteResponse)).toBe(true)
     //     expect(Booking.isRemoteResponse(null)).toBe(false)
