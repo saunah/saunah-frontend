@@ -76,7 +76,7 @@ describe('<ProtectedRoute>', () => {
     })
 })
 
-const defaultAuthState = (isAuthenticated?: boolean, testUser?: User.Response): AuthState => {
+const defaultAuthState = (isAuthenticated?: boolean, user?: User.Response): AuthState => {
     return {
         isAuthenticated: () => isAuthenticated || false,
         isAdmin: () => false,
@@ -85,7 +85,7 @@ const defaultAuthState = (isAuthenticated?: boolean, testUser?: User.Response): 
         logout: () => {
             // Ignore logout
         },
-        me: testUser || null,
+        me: user || null,
     }
 }
 
@@ -101,7 +101,7 @@ const testUser: User.Response = {
     zip: '8400',
 }
 
-const createWrapper = (isAuthenticated?: boolean, testUser?: User.Response) => (props: { children: ReactNode }) =>
+const createWrapper = (isAuthenticated?: boolean, user?: User.Response) => (props: { children: ReactNode }) =>
     (
         <MemoryRouter initialEntries={['/']}>
             <Link to="/unprotected" data-testid="link-u" />
@@ -110,7 +110,7 @@ const createWrapper = (isAuthenticated?: boolean, testUser?: User.Response) => (
             <Link to="/protected" data-testid="link-p" />
             <Link to="/protected/child-unprotected" data-testid="link-p-u" />
             <Link to="/protected/child-protected" data-testid="link-p-p" />
-            <AuthContext.Provider value={defaultAuthState(isAuthenticated, testUser)}>
+            <AuthContext.Provider value={defaultAuthState(isAuthenticated, user)}>
                 {props.children}
             </AuthContext.Provider>
         </MemoryRouter>
