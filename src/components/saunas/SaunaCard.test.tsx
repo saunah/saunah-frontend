@@ -1,27 +1,13 @@
 import { render, screen } from '@testing-library/react'
 import SaunaCard from './SaunaCard'
 import { BrowserRouter } from 'react-router-dom'
-import { SaunaImage } from '../../entities/SaunaImage'
 import { mockSaunaImageAPI } from '../../networking/api'
 import { SaunaMock } from '../../networking/api/sauna.mock'
-
-const imagesMock = () => {
-    return {
-        list: jest.fn(() => Promise.resolve([saunaImage1])),
-        add: jest.fn(() => Promise.resolve()),
-        remove: jest.fn(() => Promise.resolve()),
-    }
-}
-
-const saunaImage1: SaunaImage.Response = {
-    id: 1,
-    saunaId: 1,
-    fileName: 'test-sauna-1',
-}
+import { SaunaImagesMock } from '../../networking/api/saunaImages.mock'
 
 describe('<SaunaCard>', () => {
     test('testing property name', async () => {
-        mockSaunaImageAPI(imagesMock())
+        mockSaunaImageAPI(SaunaImagesMock.simpleMock())
         render(
             <BrowserRouter>
                 <SaunaCard sauna={SaunaMock.sampleResponse1} />

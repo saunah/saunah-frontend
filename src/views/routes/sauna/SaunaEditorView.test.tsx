@@ -5,6 +5,7 @@ import { Sauna } from '../../../entities/Sauna'
 import { SaunaImage } from '../../../entities/SaunaImage'
 import { mockSaunaAPI, mockSaunaImageAPI, mockUserAPI } from '../../../networking/api'
 import { SaunaMock } from '../../../networking/api/sauna.mock'
+import { SaunaImagesMock } from '../../../networking/api/saunaImages.mock'
 import { UserMock } from '../../../networking/api/user.mock'
 import AlertProvider from '../../shared/AlertProvider'
 import SaunaEditorView from './SaunaEditorView'
@@ -16,7 +17,7 @@ describe('<SaunaEditorView>', () => {
 
     test('the correct info is fetched on the edit page', async () => {
         const mock = mockSaunaAPI(SaunaMock.simpleMock())
-        const imageMock = mockSaunaImageAPI(imagesMock())
+        const imageMock = mockSaunaImageAPI(SaunaImagesMock.simpleMock())
 
         render(<SaunaEditorView />, { wrapper: wrapper('/saunas/99/edit') })
         // We have to call this every, when the view performs a api-call.
@@ -34,7 +35,7 @@ describe('<SaunaEditorView>', () => {
 
     test('no sauna is fetched on the create page', async () => {
         const mock = mockSaunaAPI(SaunaMock.simpleMock())
-        const imageMock = mockSaunaImageAPI(imagesMock())
+        const imageMock = mockSaunaImageAPI(SaunaImagesMock.simpleMock())
 
         render(<SaunaEditorView />, { wrapper: wrapper('/saunas/create') })
         expect(screen.getByTestId('sauna-editor')).toBeInTheDocument()
@@ -46,7 +47,7 @@ describe('<SaunaEditorView>', () => {
     })
     test('the edit endpoint is called on submit on the edit page', async () => {
         const mock = mockSaunaAPI(SaunaMock.simpleMock())
-        mockSaunaImageAPI(imagesMock())
+        mockSaunaImageAPI(SaunaImagesMock.simpleMock())
 
         render(<SaunaEditorView />, { wrapper: wrapper('/saunas/99/edit') })
         await waitForStateUpdate()
@@ -61,7 +62,7 @@ describe('<SaunaEditorView>', () => {
 
     test('the add endpoint is called on submit on the create page', async () => {
         const mock = mockSaunaAPI(SaunaMock.simpleMock())
-        mockSaunaImageAPI(imagesMock())
+        mockSaunaImageAPI(SaunaImagesMock.simpleMock())
 
         render(<SaunaEditorView />, { wrapper: wrapper('/saunas/create') })
         await waitForStateUpdate()
@@ -76,7 +77,7 @@ describe('<SaunaEditorView>', () => {
 
     test('removeFiles() api calls are done corectly', async () => {
         mockSaunaAPI(SaunaMock.simpleMock())
-        const imageMock = mockSaunaImageAPI(imagesMock())
+        const imageMock = mockSaunaImageAPI(SaunaImagesMock.simpleMock())
 
         render(<SaunaEditorView />, { wrapper: wrapper('/saunas/99/edit') })
         await waitForStateUpdate()
@@ -89,7 +90,7 @@ describe('<SaunaEditorView>', () => {
 
     test('delete is called on delete-button click', async () => {
         const mock = mockSaunaAPI(SaunaMock.simpleMock())
-        mockSaunaImageAPI(imagesMock())
+        mockSaunaImageAPI(SaunaImagesMock.simpleMock())
         window.confirm = jest.fn(() => true)
 
         render(<SaunaEditorView />, { wrapper: wrapper('/saunas/99/edit') })
@@ -118,20 +119,6 @@ const wrapper = (startRoute: string) => (props: { children?: ReactNode }) => {
             </MemoryRouter>
         </AlertProvider>
     )
-}
-
-const imagesMock = () => {
-    return {
-        list: jest.fn(() => Promise.resolve([saunaImage1])),
-        add: jest.fn(() => Promise.resolve()),
-        remove: jest.fn(() => Promise.resolve()),
-    }
-}
-
-const saunaImage1: SaunaImage.Response = {
-    id: 1,
-    saunaId: 1,
-    fileName: 'test-sauna-1',
 }
 
 // this line is needed, so we don't get state update warnings
