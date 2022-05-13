@@ -13,7 +13,7 @@ export namespace ModifiableDate {
         }
     }
 
-    export function mapFromMoment(moment: Moment, withTime?: boolean): Request {
+    export function mapFromMoment(moment: Moment, withTime = true): Request {
         return {
             date: moment.format('YYYY-MM-DD'),
             time: withTime ? moment.format('HH:mm') : null,
