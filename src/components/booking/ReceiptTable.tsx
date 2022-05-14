@@ -16,7 +16,7 @@ function formatPrice(price: number): string {
 }
 
 function buildElements(receipt: Receipt.Response) {
-    const highlight = (text: string | ReactElement) => <span className="font-semibold text-gray-700">{text}</span>
+    const highlight = (text: string | ReactElement) => <span className="font-semibold text-primary-700">{text}</span>
 
     const elements: (string | ReactElement)[][] = [
         [
