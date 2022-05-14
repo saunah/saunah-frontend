@@ -3,6 +3,7 @@ import { MissingPropertyError } from '../utils/Error'
 import { Identifiable, MaybeIdentifiable } from '../utils/identifiable'
 import { Editable } from '../utils/object'
 import { BookingRemote } from './BookingRemote'
+import { BookingState } from './BookingState'
 import { CheckableNumber } from './CheckableNumber'
 import { ModifiableDate } from './ModifiableDate'
 import { Price } from './Price'
@@ -31,7 +32,7 @@ export namespace Booking {
         userId: number
         creation: Moment
         // TODO: Change to enum
-        state: string
+        state: BookingState
         endPrice: number
         sauna: Sauna.Response
         price: Price.Response

@@ -1,5 +1,6 @@
 import moment from 'moment'
 import { Booking } from '../../entities/Booking'
+import { BookingState } from '../../entities/BookingState'
 import { PriceMock } from './price.mock'
 import { SaunaMock } from './sauna.mock'
 
@@ -26,7 +27,7 @@ export namespace BookingMock {
         id: 1,
         userId: 2,
         creation: moment(),
-        state: 'ACTIVE',
+        state: BookingState.OPENED,
         endPrice: 100,
         sauna: SaunaMock.sampleResponse1,
         price: PriceMock.sampleResponse1,
