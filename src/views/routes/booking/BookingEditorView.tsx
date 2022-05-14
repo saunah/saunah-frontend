@@ -39,7 +39,7 @@ const BookingEditorView = () => {
     }
 
     return (
-        <div>
+        <div data-testid="booking-editor-view">
             <PageTitle>Buchung bearbeiten</PageTitle>
             {editBooking && booking && (
                 <BookingEditor

@@ -51,7 +51,7 @@ const BookingDetailView = () => {
     }
 
     return (
-        <div>
+        <div data-testid="booking-detail-view">
             <PageTitle>
                 <div className="md:flex md:justify-between md:items-center">
                     <div className="flex space-x-4 items-center">
