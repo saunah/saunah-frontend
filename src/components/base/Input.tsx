@@ -37,7 +37,7 @@ const Input = (props: InputProps) => {
             </label>
             <div className="relative">
                 <input
-                    value={props.value || ''}
+                    value={props.value}
                     min={props.min}
                     max={props.max}
                     onChange={event => props.onChange?.(event.target.value)}

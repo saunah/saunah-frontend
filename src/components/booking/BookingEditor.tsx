@@ -9,6 +9,7 @@ export type BookingEditorProps = {
     value: Booking.Request
     sauna?: Sauna.Response
     onChange?: (newValue: Booking.Request) => void
+    isEditingAsAdmin?: boolean
 }
 
 const BookingEditor = (props: BookingEditorProps) => {
@@ -70,8 +71,29 @@ const BookingEditor = (props: BookingEditorProps) => {
                 <Input
                     name="Bemerkungen"
                     value={booking.comment || ''}
-                    onChange={newValue => props.onChange?.({ ...booking, comment: newValue || null })}
+                    onChange={newValue => props.onChange?.({ ...booking, comment: newValue })}
                 />
+
+                {props.isEditingAsAdmin && (
+                    <>
+                        <Input
+                            name="Preisreduktion"
+                            type="number"
+                            value={'' + booking.discount}
+                            onChange={newValue => {
+                                // this ugly logic is somehow needed to deal with negative values (if the user start to type the minus first)
+                                if (newValue.length === 0)
+                                    props.onChange?.({ ...booking, discount: newValue as any as number })
+                                else props.onChange?.({ ...booking, discount: +newValue })
+                            }}
+                        />
+                        <Input
+                            name="Bemerkung zur Preisanpassung"
+                            value={booking.discountDescription || ''}
+                            onChange={newValue => props.onChange?.({ ...booking, discountDescription: newValue })}
+                        />
+                    </>
+                )}
             </div>
             <div>
                 <h2 className="text-primary-600 text-2xl font-semibold mb-4"> Extras hinzufügen </h2>

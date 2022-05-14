@@ -15,6 +15,7 @@ export namespace Receipt {
             wood: number
             washService: boolean
             deposit: boolean
+            discount: number
         }
         prices: {
             hourlyRate: number
@@ -45,6 +46,7 @@ export namespace Receipt {
                 wood: CheckableNumber.mapToNumber(booking.wood) || 0,
                 washService: booking.washService,
                 deposit: booking.deposit,
+                discount: booking.discount || 0,
             },
             prices: {
                 hourlyRate: sauna.price,
@@ -60,6 +62,7 @@ export namespace Receipt {
             booked: {
                 duration,
                 ...booking.extras,
+                discount: booking.discount || 0,
             },
             prices: {
                 hourlyRate: booking.sauna.price,
@@ -76,6 +79,7 @@ export namespace Receipt {
         total += receipt.booked.wood * receipt.prices.wood
         total += receipt.booked.washService ? receipt.prices.washService : 0
         total += receipt.booked.deposit ? receipt.prices.deposit : 0
+        total -= receipt.booked.discount
         return total
     }
 }

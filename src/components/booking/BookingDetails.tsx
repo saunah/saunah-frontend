@@ -9,8 +9,7 @@ const BookingDetails = ({ booking }: BookingDetailsProps) => {
         { title: 'Bemerkungen', text: booking.comment },
     ]
 
-    if (booking.discountDescription)
-        listItems.push({ title: 'Details zur Preisanpassung', text: booking.discountDescription })
+    if (booking.discountDescription) listItems.push({ title: 'Preisanpassung', text: booking.discountDescription })
 
     return (
         <div>

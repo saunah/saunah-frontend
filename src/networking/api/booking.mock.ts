@@ -41,8 +41,8 @@ export namespace BookingMock {
         startBookingDate: moment().add(1, 'day'),
         endBookingDate: moment().add(2, 'days'),
         location: '8400 Winterthur',
-        discount: null,
-        discountDescription: null,
+        discount: 30,
+        discountDescription: '20% Mitglieder-Rabatt',
         comment: 'Cool, ich freue mich.',
     }
 

@@ -9,8 +9,10 @@ import { Receipt } from '../../../entities/Receipt'
 import api from '../../../networking/api'
 import { parseId } from '../../../utils/identifiable'
 import { useAlert } from '../../shared/AlertProvider'
+import { useAuth } from '../../shared/AuthProvider'
 
 const BookingEditorView = () => {
+    const { isAdmin } = useAuth()
     const params = useParams()
     const bookingId = parseId(params['bookingId'])
     const { success } = useAlert()
@@ -39,7 +41,14 @@ const BookingEditorView = () => {
     return (
         <div>
             <PageTitle>Buchung bearbeiten</PageTitle>
-            {editBooking && <BookingEditor value={editBooking} onChange={setEditBooking} />}
+            {editBooking && booking && (
+                <BookingEditor
+                    value={editBooking}
+                    onChange={setEditBooking}
+                    sauna={booking.sauna}
+                    isEditingAsAdmin={isAdmin()}
+                />
+            )}
             <h2 className="text-primary-600 text-2xl font-semibold mt-6"> Berechneter Preis </h2>
             <p className="text-primary-500 mb-4">
                 Der berechnete Preis setzt sich aus den aufgelisteten Kostenpunkten zusammen.

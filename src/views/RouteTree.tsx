@@ -77,10 +77,11 @@ const RouteTree = () => {
                     }
                 >
                     <Route index element={<BookingListView />} />
-                    <Route path=":bookingId">
+                    <Route path=":bookingId" breadcrumb={'Details'}>
                         <Route index element={<BookingDetailView />}></Route>
                         <Route
                             path="edit"
+                            breadcrumb={'Bearbeiten'}
                             element={
                                 <ProtectedRoute roles={[UserRole.Local.ADMIN]}>
                                     <BookingEditorView />
