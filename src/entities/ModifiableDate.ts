@@ -13,10 +13,10 @@ export namespace ModifiableDate {
         }
     }
 
-    export function mapFromMoment(moment: Moment, withTime = true): Request {
+    export function mapFromMoment(date: Moment, withTime = true): Request {
         return {
-            date: moment.format('YYYY-MM-DD'),
-            time: withTime ? moment.format('HH:mm') : null,
+            date: date.format('YYYY-MM-DD'),
+            time: withTime ? date.format('HH:mm') : null,
         }
     }
 
@@ -28,7 +28,7 @@ export namespace ModifiableDate {
         } else return null
     }
 
-    export function mapOut(date: Request, ignoreTime = false): string | null {
+    export function mapOut(date: Request): string | null {
         return mapToMoment(date)?.toISOString() || null
     }
 

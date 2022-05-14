@@ -26,9 +26,9 @@ const BookingDetailView = () => {
 
     const fetch = () => {
         if (bookingId)
-            api.booking.get(bookingId).then(booking => {
-                setBooking(booking)
-                if (isAdmin()) api.user.get(booking.userId).then(setUser)
+            api.booking.get(bookingId).then(newBooking => {
+                setBooking(newBooking)
+                if (isAdmin()) api.user.get(newBooking.userId).then(setUser)
             })
     }
 

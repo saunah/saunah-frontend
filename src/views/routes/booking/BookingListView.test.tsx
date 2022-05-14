@@ -6,7 +6,7 @@ import { BookingMock } from '../../../networking/api/booking.mock'
 import { UserMock } from '../../../networking/api/user.mock'
 import AlertProvider from '../../shared/AlertProvider'
 import AuthProvider from '../../shared/AuthProvider'
-import BookingListView from './BookingsListView'
+import BookingListView from './BookingListView'
 
 describe('<BookingDetailView>', () => {
     beforeEach(() => {

@@ -31,7 +31,6 @@ export namespace Booking {
     export type Response = {
         userId: number
         creation: Moment
-        // TODO: Change to enum
         state: BookingState
         endPrice: number
         sauna: Sauna.Response

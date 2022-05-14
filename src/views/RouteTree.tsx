@@ -17,7 +17,7 @@ import UsersListView from './routes/users/UsersListView'
 import { UserRole } from '../entities/UserRole'
 import { Navigate, Outlet } from 'react-router-dom'
 import BookingView from './routes/sauna/BookingView'
-import BookingListView from './routes/booking/BookingsListView'
+import BookingListView from './routes/booking/BookingListView'
 import BookingEditorView from './routes/booking/BookingEditorView'
 import BookingDetailView from './routes/booking/BookingDetailView'
 
