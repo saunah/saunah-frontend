@@ -1,3 +1,5 @@
+import { ReactElement } from 'react'
+
 const List = ({ items }: ListProps) => {
     return (
         <dl>
@@ -24,5 +26,5 @@ export type ListProps = {
 
 export type ListItem = {
     title: string
-    text?: string | null
+    text?: ReactElement | string | null
 }

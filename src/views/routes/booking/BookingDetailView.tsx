@@ -9,6 +9,7 @@ import ReceiptTable from '../../../components/booking/ReceiptTable'
 import { Booking } from '../../../entities/Booking'
 import { BookingState } from '../../../entities/BookingState'
 import { Receipt } from '../../../entities/Receipt'
+import { User } from '../../../entities/User'
 import api from '../../../networking/api'
 import { parseId } from '../../../utils/identifiable'
 import { useAlert } from '../../shared/AlertProvider'
@@ -21,9 +22,14 @@ const BookingDetailView = () => {
     const bookingId = parseId(params['bookingId'])
     const [booking, setBooking] = useState<Booking.Response>()
     const receipt = booking ? Receipt.mapFromResponse(booking) : null
+    const [user, setUser] = useState<User.Response>()
 
     const fetch = () => {
-        if (bookingId) api.booking.get(bookingId).then(setBooking)
+        if (bookingId)
+            api.booking.get(bookingId).then(booking => {
+                setBooking(booking)
+                if (isAdmin()) api.user.get(booking.userId).then(setUser)
+            })
     }
 
     useEffect(() => fetch(), [])
@@ -60,7 +66,7 @@ const BookingDetailView = () => {
                 </div>
             </PageTitle>
 
-            {booking && <BookingDetails booking={booking} />}
+            {booking && <BookingDetails booking={booking} user={user} />}
 
             <h2 className="text-primary-600 text-2xl font-semibold mt-6"> Berechneter Preis </h2>
             <p className="text-primary-500 mb-4">
