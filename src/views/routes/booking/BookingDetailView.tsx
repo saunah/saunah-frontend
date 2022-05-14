@@ -4,6 +4,7 @@ import Button from '../../../components/base/Button'
 import ButtonLink from '../../../components/base/ButtonLink'
 import PageTitle from '../../../components/base/PageTitle'
 import BookingDetails from '../../../components/booking/BookingDetails'
+import BookingStateBadge from '../../../components/booking/BookingStateBadge'
 import ReceiptTable from '../../../components/booking/ReceiptTable'
 import { Booking } from '../../../entities/Booking'
 import { BookingState } from '../../../entities/BookingState'
@@ -21,14 +22,17 @@ const BookingDetailView = () => {
     const [booking, setBooking] = useState<Booking.Response>()
     const receipt = booking ? Receipt.mapFromResponse(booking) : null
 
-    useEffect(() => {
+    const fetch = () => {
         if (bookingId) api.booking.get(bookingId).then(setBooking)
-    }, [])
+    }
+
+    useEffect(() => fetch(), [])
 
     const approveBooking = async () => {
         if (bookingId && window.confirm('Möchten Sie die Buchung wirklich bestätigen?')) {
-            api.booking.approve(bookingId)
+            await api.booking.approve(bookingId)
             success('Die Buchung wurde bestätigt.')
+            fetch()
         }
     }
 
@@ -36,15 +40,23 @@ const BookingDetailView = () => {
         if (bookingId && window.confirm('Möchten Sie die Buchung wirklich stornieren?')) {
             api.booking.cancel(bookingId)
             success('Die Buchung wurde storniert.')
+            fetch()
         }
     }
 
     return (
         <div>
             <PageTitle>
-                <div className="flex justify-between">
-                    <span>Buchung für {booking?.sauna.name}</span>
-                    {isAdmin() && <ButtonLink to="./edit">Buchung bearbeiten</ButtonLink>}
+                <div className="md:flex md:justify-between md:items-center">
+                    <div className="flex space-x-4 items-center">
+                        <span>Buchung für {booking?.sauna.name} </span>
+                        {booking && <BookingStateBadge state={booking.state} />}
+                    </div>
+                    {isAdmin() && (
+                        <ButtonLink className="mt-4 md:mt-0" to="./edit">
+                            Buchung bearbeiten
+                        </ButtonLink>
+                    )}
                 </div>
             </PageTitle>
 
@@ -63,9 +75,11 @@ const BookingDetailView = () => {
                             Buchung bestätigen
                         </Button>
                     )}
-                    <Button color="red" onClick={cancelBooking}>
-                        Buchung stornieren
-                    </Button>
+                    {booking?.state !== BookingState.CANCELED && (
+                        <Button color="red" onClick={cancelBooking}>
+                            Buchung stornieren
+                        </Button>
+                    )}
                 </div>
             )}
         </div>
