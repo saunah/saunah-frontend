@@ -27,7 +27,7 @@ export namespace BookingMock {
         id: 1,
         userId: 2,
         creation: moment(),
-        state: BookingState.OPENED,
+        state: BookingState.APPROVED,
         endPrice: 100,
         sauna: SaunaMock.sampleResponse1,
         price: PriceMock.sampleResponse1,

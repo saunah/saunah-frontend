@@ -31,7 +31,8 @@ function getBookingStateDescription(state: BookingState): string {
         case BookingState.OPENED:
             return 'Die Buchung wird von einem Mitarbeiter von SauNah überprüft. Sobald alle Angaben kontrolliert wurden erhalten Sie eine Bestätigungsemail.'
         case BookingState.APPROVED:
-            return 'Die Buchung findet am vereinbarten Datum statt. Bitte melden Sie sich direkt bei SauNah, falls Sie noch etwas an der Buchung anpassen möchten.'
+            // TODO: How does payment work?
+            return 'Die Buchung findet am vereinbarten Datum statt. Bitte bezahlen Sie den berechneten Betrag bis eine Woche vor dem Start der Buchung. Falls Sie noch etwas an der Buchung anpassen möchten, können Sie sich direkt bei Saunah melden.'
         case BookingState.CANCELED:
             return 'Die Buchung wurde storniert.'
     }
