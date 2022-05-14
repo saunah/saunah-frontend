@@ -14,7 +14,7 @@ describe('<BookingEditorView>', () => {
         mockBookingAPI(BookingMock.simpleMock())
     })
 
-    test('something', async () => {
+    test('renders correctly', async () => {
         render(<BookingEditorView />, { wrapper })
         const detailView = await screen.findByTestId('booking-editor-view')
         expect(detailView).toBeInTheDocument()
