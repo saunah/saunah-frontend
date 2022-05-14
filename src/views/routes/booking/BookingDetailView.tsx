@@ -41,7 +41,7 @@ const BookingDetailView = () => {
             {receipt && <ReceiptTable receipt={receipt} />}
             {isAdmin() && (
                 <div className="flex mt-6 space-x-6">
-                    <Button color="green">Buchung aktivieren</Button>
+                    <Button color="green">Buchung bestätigen</Button>
                     <Button color="red">Buchung stornieren</Button>
                 </div>
             )}

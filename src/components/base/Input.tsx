@@ -10,6 +10,7 @@ export type InputProps = {
     disabled?: boolean
     min?: string
     max?: string
+    step?: number
     onChange?: (newValue: string) => void
     ['data-testid']?: string
 }
@@ -40,6 +41,7 @@ const Input = (props: InputProps) => {
                     value={props.value}
                     min={props.min}
                     max={props.max}
+                    step={props.step}
                     onChange={event => props.onChange?.(event.target.value)}
                     name={props.name}
                     placeholder={props.placeholder}

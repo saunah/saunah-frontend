@@ -11,7 +11,7 @@ const ReceiptTable = (props: ReceiptProps) => {
 }
 
 function formatPrice(price: number): string {
-    if (price > 0) return `CHF ${Math.round(price * 20) / 20}`
+    if (price >= 0) return `CHF ${Math.round(price * 20) / 20}`
     else return `- CHF ${Math.round(-price * 20) / 20}`
 }
 
