@@ -22,7 +22,7 @@ export namespace ModifiableDate {
 
     export function mapToMoment(date: Request): Moment | null {
         if (date.date && date.time) {
-            return moment(`${date.date} ${date.time}`, 'YY-MM-DD HH:mm')
+            return moment(`${date.date} ${date.time}`, 'YYYY-MM-DD HH:mm')
         } else if (date.date) {
             return moment.utc(date.date, 'YYYY-MM-DD')
         } else return null
