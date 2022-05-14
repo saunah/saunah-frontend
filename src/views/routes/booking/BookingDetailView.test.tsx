@@ -25,9 +25,9 @@ const wrapper = (props: { children?: ReactNode }) => {
     return (
         <AuthProvider>
             <AlertProvider>
-                <MemoryRouter initialEntries={['/']}>
+                <MemoryRouter initialEntries={['/bookings/1']}>
                     <Routes>
-                        <Route path="/" element={props.children} />
+                        <Route path="/bookings/:bookingId" element={props.children} />
                     </Routes>
                 </MemoryRouter>
             </AlertProvider>
