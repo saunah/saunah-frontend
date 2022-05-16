@@ -172,12 +172,24 @@ const BookingEditor = (props: BookingEditorProps) => {
                         value={booking.saunahImp.number + ''}
                         onChange={newValue => updateNumber(newValue, 'saunahImp')}
                     />
-                    <CheckboxLabel
-                        label="Waschservice"
-                        details="Die Sauna wird nach Ihrem Aufenthalt für Sie gereinigt."
-                        value={booking.washService}
-                        onChange={newValue => props.onChange?.({ ...booking, washService: newValue })}
-                    />
+                    <div className="md:col-span-2">
+                        <CheckboxLabel
+                            label="Waschservice"
+                            details="Die Sauna wird nach Ihrem Aufenthalt für Sie gereinigt."
+                            value={booking.washService}
+                            onChange={newValue => props.onChange?.({ ...booking, washService: newValue })}
+                        />
+                    </div>
+                    {props.isEditingAsAdmin && (
+                        <div className="md:col-span-2">
+                            <CheckboxLabel
+                                label="Depot"
+                                details="Der Benutzer zahlt das definierte Depot für diese Buchung."
+                                value={booking.deposit}
+                                onChange={newValue => props.onChange?.({ ...booking, deposit: newValue })}
+                            />
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
