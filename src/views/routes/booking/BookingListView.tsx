@@ -1,15 +1,11 @@
-import { PencilIcon } from '@heroicons/react/solid'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import PageTitle from '../../../components/base/PageTitle'
 import Table from '../../../components/base/Table'
 import { Booking } from '../../../entities/Booking'
 import api from '../../../networking/api'
-import { useAuth } from '../../shared/AuthProvider'
 
 const BookingListView = () => {
-    const { isAdmin } = useAuth()
-
     const headings = ['Buchungsnr.', 'Sauna', 'Buchungsdatum', 'Preis', 'Buchungs-Status']
     const [bookings, setBooking] = useState<Booking.Response[]>([])
 
@@ -30,9 +26,6 @@ const BookingListView = () => {
                     return [
                         <span>{implodeNonEmpty([booking.id.toString()])}</span>,
                         <span>{booking.sauna.type}</span>,
-                        // <Link to={`/bookings/${booking.id}`}>
-                        //     {implodeNonEmpty([booking.id.toString(), booking.sauna.type])}
-                        // </Link>,
                         <span>
                             {[
                                 booking.startBookingDate.format('DD.MM.YYYY'),
@@ -40,7 +33,6 @@ const BookingListView = () => {
                                 booking.endBookingDate.format('DD.MM.YYYY'),
                             ]}
                         </span>,
-                        //<span>{booking.endBookingDate.format('DD.MM.YYYY')}</span>,
                         <span>{booking.endPrice}</span>,
                         <Link to={`/bookings/${booking.id}`}>{booking.state}</Link>,
                     ]
