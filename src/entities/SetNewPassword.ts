@@ -3,7 +3,6 @@ export namespace SetNewPassword {
         mailadress: string,
         resetToken: string,
         newPassword: string,
-        newPasswordConfirm: string,
     }
 
     export type RemoteRequest = {
@@ -17,7 +16,6 @@ export namespace SetNewPassword {
             mailadress: '',
             resetToken: '',
             newPassword: '',
-            newPasswordConfirm: '',
         }
     }
 

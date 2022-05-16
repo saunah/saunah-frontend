@@ -4,9 +4,8 @@ import { SetNewPassword } from '../entities/SetNewPassword'
 
 const testRequest: SetNewPassword.Request = {
     mailadress:'eins@test.com',
-    newPasswordConfirm:'',
     newPassword:'sdfs',
-    resetToken :'sdfs'
+    resetToken :'sdfszt'
 }
 
 const getFieldOfInput = (testId: string) => {
@@ -24,10 +23,10 @@ describe('<Reset Password Test>', () =>{
     //Check labels 
     test('check labels enter mail-field', () => {
         render(<SetNewPasswordForm request={testRequest}/>)
-        const label = getLabelOfInput('mailaddress')
-        expect(label).toHaveTextContent('eins@test.com')
+        const label = getLabelOfInput('mailadress-id')
+        expect(label).toHaveTextContent('Email')
 
-        const input = getFieldOfInput('mailaddress')
+        const input = getFieldOfInput('mailadress-id')
         expect(input).toHaveValue(testRequest.mailadress)
         
     })
@@ -35,20 +34,10 @@ describe('<Reset Password Test>', () =>{
     test('check labels enter password field', () => {
         render(<SetNewPasswordForm request={testRequest}/>)
         const label = getLabelOfInput('set-new-pw-field')
-        expect(label).toHaveTextContent('sdfs')
+        expect(label).toHaveTextContent('Neues Passwort eingeben')
 
         const input = getFieldOfInput('set-new-pw-field')
-        expect(input).toHaveValue(testRequest.mailadress)
-        
-    })
-
-    test('check labels cofirm password field', () => {
-        render(<SetNewPasswordForm request={testRequest}/>)
-        const label = getLabelOfInput('confirm-new-pw-field')
-        expect(label).toHaveTextContent('sdfs')
-
-        const input = getFieldOfInput('confirm-new-pw-field')
-        expect(input).toHaveValue(testRequest.mailadress)
+        expect(input).toHaveValue(testRequest.newPassword)
         
     })
     
@@ -57,7 +46,7 @@ describe('<Reset Password Test>', () =>{
         const onChange = jest.fn()
         render(<SetNewPasswordForm request={testRequest} onChange={onChange}/>)
 
-        const input = getFieldOfInput('mailaddress')
+        const input = getFieldOfInput('mailadress-id')
         fireEvent.change(input, { target: { value: 'different input' } })
         expect(onChange).toBeCalledTimes(1)
         expect(onChange).toBeCalledWith({ ...testRequest, mailadress: 'different input' })
@@ -70,16 +59,6 @@ describe('<Reset Password Test>', () =>{
         const input = getFieldOfInput('set-new-pw-field')
         fireEvent.change(input, { target: { value: 'different input' } })
         expect(onChange).toBeCalledTimes(1)
-        expect(onChange).toBeCalledWith({ ...testRequest, mailadress: 'different input' })
-    })
-
-    test('check confirm-password-field change', () => {
-        const onChange = jest.fn()
-        render(<SetNewPasswordForm request={testRequest} onChange={onChange}/>)
-
-        const input = getFieldOfInput('confirm-new-pw-field')
-        fireEvent.change(input, { target: { value: 'different input' } })
-        expect(onChange).toBeCalledTimes(1)
-        expect(onChange).toBeCalledWith({ ...testRequest, mailadress: 'different input' })
+        expect(onChange).toBeCalledWith({ ...testRequest, newPassword: 'different input' })
     })
 })
