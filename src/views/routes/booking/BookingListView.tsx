@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import PageTitle from '../../../components/base/PageTitle'
 import Table from '../../../components/base/Table'
+import BookingStateBadge from '../../../components/booking/BookingStateBadge'
 import { Booking } from '../../../entities/Booking'
 import api from '../../../networking/api'
 
@@ -34,7 +35,9 @@ const BookingListView = () => {
                             ]}
                         </span>,
                         <span>{booking.endPrice}</span>,
-                        <Link to={`/bookings/${booking.id}`}>{booking.state}</Link>,
+                        <Link to={`/bookings/${booking.id}`}>
+                            <BookingStateBadge state={booking.state} />
+                        </Link>,
                     ]
                 })}
             />
