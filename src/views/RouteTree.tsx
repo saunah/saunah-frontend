@@ -25,7 +25,7 @@ const RouteTree = () => {
                     breadcrumb={'Passwort vergessen'}
                     element={<ResetPwMailView/>}
                 />
-                <Route path="/setNewPassword" element={<ResetPasswordView />} />
+                <Route path="/setNewPassword/:token" element={<ResetPasswordView />} />
                 <Route path="/saunas" breadcrumb="Saunas">
                     <Route index element={<Overview />} />
                     <Route path=":saunaId" breadcrumb={SaunaDetailBreadcrumb}>

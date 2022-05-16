@@ -4,6 +4,7 @@ import { SetNewPassword } from '../entities/SetNewPassword'
 
 const testRequest: SetNewPassword.Request = {
     mailadress:'eins@test.com',
+    newPasswordConfirm:'',
     newPassword:'sdfs',
     resetToken :'sdfs'
 }

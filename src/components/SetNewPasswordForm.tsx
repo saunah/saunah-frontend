@@ -14,10 +14,10 @@ const SetNewPasswordForm = (props: SetNewPassword) => {
         <div className="space-y-2">
             <div className="space-y-2">
                 <Input
-                    data-testid="mailaddress"
-                    name="Mailadresse"
-                    placeholder="Mailadresse eingeben"
-                    autoComplete="mailaddress"
+                    data-testid="Token"
+                    name="Token"
+                    placeholder="token eingeben..."
+                    autoComplete="token"
                     value={props.request.mailadress}
                     onChange={mailadress => props.onChange?.({ ...props.request, mailadress })}
                 />
@@ -27,6 +27,7 @@ const SetNewPasswordForm = (props: SetNewPassword) => {
                     data-testid="set-new-pw-field"
                     name="Neues Passwort eingebe"
                     placeholder="neues passwort..."
+                    type="password"
                     autoComplete="password"
                     value={props.request.newPassword}
                     onChange={newPassword => props.onChange?.({ ...props.request, newPassword })}
@@ -37,9 +38,10 @@ const SetNewPasswordForm = (props: SetNewPassword) => {
                     data-testid="confirm-new-pw-field"
                     name="Neues Passwort bestätigen"
                     placeholder="neues passwort..."
+                    type="password"
                     autoComplete="password"
-                    value={props.request.newPassword}
-                    onChange={newPassword => props.onChange?.({ ...props.request, newPassword })}
+                    value={props.request.newPasswordConfirm}
+                    onChange={newPasswordConfirm => props.onChange?.({ ...props.request, newPasswordConfirm })}
                 />
             </div>
             <div className="flex justify-between">
