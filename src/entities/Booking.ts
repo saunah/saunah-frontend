@@ -46,12 +46,8 @@ export namespace Booking {
         CheckableNumber.Object<Extras> &
         MaybeIdentifiable
 
-    export function isRemoteResponse(object: unknown): object is BookingRemote.Response {
-        return true //(object as BookingRemote.Response).michi === true
-    }
-
     export function mapIn(booking: unknown): Response {
-        if (!isRemoteResponse(booking))
+        if (!BookingRemote.isResponse(booking))
             throw new Error(`Object could not be mapped in. It is not of type RemoteResponse.`)
 
         return {

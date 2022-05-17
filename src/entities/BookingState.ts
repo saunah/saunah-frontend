@@ -4,6 +4,8 @@ export enum BookingState {
     CANCELED = 'CANCELED',
 }
 
+export const allBookingStates = [BookingState.OPENED, BookingState.APPROVED, BookingState.CANCELED]
+
 export function trslBookingState(state: BookingState): string {
     switch (state) {
         case BookingState.OPENED:
