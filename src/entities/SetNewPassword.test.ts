@@ -8,7 +8,7 @@ const testRequest: SetNewPassword.Request = {
 
 describe('<SetNewPassword tests>', () => {
 
-    test('test mapOut', () =>{
+    test('mapOut', () =>{
         expect(SetNewPassword.mapOut(testRequest)).toBeTruthy()
     })
 })
