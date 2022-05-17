@@ -44,7 +44,7 @@ const BookingDetailView = () => {
 
     const cancelBooking = async () => {
         if (bookingId && window.confirm('Möchten Sie die Buchung wirklich stornieren?')) {
-            api.booking.cancel(bookingId)
+            await api.booking.cancel(bookingId)
             success('Die Buchung wurde storniert.')
             fetch()
         }
@@ -58,7 +58,7 @@ const BookingDetailView = () => {
                         <span>Buchung für {booking?.sauna.name} </span>
                         {booking && <BookingStateBadge state={booking.state} />}
                     </div>
-                    {isAdmin() && (
+                    {isAdmin() && booking?.state !== BookingState.CANCELED && (
                         <ButtonLink className="mt-4 md:mt-0" to="./edit">
                             Buchung bearbeiten
                         </ButtonLink>

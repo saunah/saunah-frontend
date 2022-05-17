@@ -14,10 +14,6 @@ const BookingListView = () => {
         api.booking.list().then(setBooking)
     }, [])
 
-    function implodeNonEmpty(values: string[], separator: string = ' ') {
-        return values.filter(v => v.trim().length > 0).join(separator)
-    }
-
     return (
         <div data-testid="booking-list-view">
             <PageTitle>Buchungsverwaltung</PageTitle>
@@ -25,8 +21,8 @@ const BookingListView = () => {
                 headings={headings}
                 elements={bookings.map(booking => {
                     return [
-                        <span>{implodeNonEmpty([booking.id.toString()])}</span>,
-                        <span>{booking.sauna.type}</span>,
+                        <span>{booking.id}</span>,
+                        <Link to={`/bookings/${booking.id}`}>{booking.sauna.type}</Link>,
                         <span>
                             {[
                                 booking.startBookingDate.format('DD.MM.YYYY'),
@@ -35,9 +31,9 @@ const BookingListView = () => {
                             ]}
                         </span>,
                         <span>{booking.endPrice}</span>,
-                        <Link to={`/bookings/${booking.id}`}>
+                        <div className="flex justify-end">
                             <BookingStateBadge state={booking.state} />
-                        </Link>,
+                        </div>,
                     ]
                 })}
             />

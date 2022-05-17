@@ -1,4 +1,4 @@
-import { Moment } from 'moment'
+import moment, { Moment } from 'moment'
 import { MissingPropertyError } from '../utils/Error'
 import { Identifiable, MaybeIdentifiable } from '../utils/identifiable'
 import { Editable } from '../utils/object'
@@ -47,13 +47,56 @@ export namespace Booking {
         MaybeIdentifiable
 
     export function isRemoteResponse(object: unknown): object is BookingRemote.Response {
-        return (object as BookingRemote.Response).michi === true
+        return true //(object as BookingRemote.Response).michi === true
     }
 
     export function mapIn(booking: unknown): Response {
         if (!isRemoteResponse(booking))
             throw new Error(`Object could not be mapped in. It is not of type RemoteResponse.`)
-        return {} as any as Booking.Response
+
+        return {
+            id: booking.id,
+            userId: booking.userId,
+            creation: moment(booking.creation),
+            state: booking.state,
+            endPrice: booking.endPrice,
+            startBookingDate: moment(booking.startBookingDate),
+            endBookingDate: moment(booking.endBookingDate),
+            location: booking.location,
+            discount: booking.discount,
+            discountDescription: booking.discountDescription,
+            comment: booking.comment,
+            sauna: {
+                id: booking.sauna.saunaId,
+                name: booking.sauna.saunaName,
+                description: booking.sauna.saunaDescription,
+                price: booking.sauna.saunaPrice,
+                maxTemp: booking.sauna.saunaMaxTemp,
+                numberOfPeople: booking.sauna.saunaNumberOfPeople,
+                street: booking.sauna.saunaStreet,
+                zip: booking.sauna.saunaZip,
+                location: booking.sauna.saunaLocation,
+                type: booking.sauna.saunaType,
+                mobile: booking.sauna.saunaIsMobile,
+            },
+            price: {
+                id: 1,
+                transportService: booking.price.transportServicePrice,
+                washService: booking.price.washServicePrice,
+                saunahImp: booking.price.saunahImpPrice,
+                deposit: booking.price.depositPrice,
+                handTowel: booking.price.handTowelPrice,
+                wood: booking.price.woodPrice,
+            },
+            extras: {
+                washService: booking.washService,
+                transportService: booking.transportServiceDistance,
+                saunahImp: booking.saunahImpAmount,
+                handTowel: booking.handTowelAmount,
+                wood: booking.woodAmount,
+                deposit: booking.deposit,
+            },
+        }
     }
 
     export function emptyRequest(saunaId: number | null): Request {
@@ -105,6 +148,20 @@ export namespace Booking {
         if (endBookingDate == null)
             throw new MissingPropertyError('Booking.Request', 'Booking.RemoteRequest', 'endBookingDate')
 
-        return { michi: true }
+        return {
+            saunaId: booking.saunaId,
+            startBookingDate: startBookingDate,
+            endBookingDate: endBookingDate,
+            location: booking.location,
+            transportServiceDistance: CheckableNumber.mapToNumber(booking.transportService),
+            washService: booking.washService,
+            saunahImpAmount: CheckableNumber.mapToNumber(booking.saunahImp),
+            handTowelAmount: CheckableNumber.mapToNumber(booking.handTowel),
+            woodAmount: CheckableNumber.mapToNumber(booking.wood),
+            comment: booking.comment,
+            discount: booking.discount,
+            discountDescription: booking.discountDescription,
+            deposit: booking.deposit,
+        }
     }
 }
