@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, within } from '@testing-library/react'
-import { SaunaImage } from '../../entities/SaunaImage'
+import { SaunaImagesMock } from '../../networking/api/saunaImages.mock'
 import SaunaImageEditor from './SaunaImageEditor'
 
 describe('<SaunaImageEditor>', () => {
@@ -18,7 +18,7 @@ describe('<SaunaImageEditor>', () => {
         for (let i = 1; i <= 3; i++) {
             fireEvent.click(getRemoveButton(i))
             expect(remove).toBeCalledTimes(i)
-            expect(remove).toBeCalledWith({ id: i, saunaId: i, fileName: `file-${i}` })
+            expect(remove).toBeCalledWith({ id: i, saunaId: i, url: `http://localhost/test-sauna-${i}.jpg` })
         }
     })
 })
@@ -27,22 +27,4 @@ const getEditor = () => screen.getByTestId('sauna-image-editor')
 const getImage = (id: number) => within(getEditor()).getByTestId('image-' + id)
 const getRemoveButton = (id: number) => within(getEditor()).getByTestId('remove-button-' + id)
 
-const image1: SaunaImage.Response = {
-    id: 1,
-    saunaId: 1,
-    fileName: 'file-1',
-}
-
-const image2: SaunaImage.Response = {
-    id: 2,
-    saunaId: 2,
-    fileName: 'file-2',
-}
-
-const image3: SaunaImage.Response = {
-    id: 3,
-    saunaId: 3,
-    fileName: 'file-3',
-}
-
-const images = [image1, image2, image3]
+const images = [SaunaImagesMock.sampleResponse1, SaunaImagesMock.sampleResponse2, SaunaImagesMock.sampleResponse3]
