@@ -8,13 +8,14 @@ import api from '../../networking/api'
 import PageTitle from '../../components/base/PageTitle'
 
 const ResetPasswordView = () => {
-    const params = useParams();
+    const params = useParams()
+    const token = params['token']
     const [newPw, setUser] = useState<SetNewPassword.Request>(SetNewPassword.empty())
     const { success } = useAlert()
     const navigate = useNavigate()
 
     const onSubmit = () => {
-        newPw.resetToken = JSON.stringify(params)
+        newPw.resetToken = token || ""
         api.user.setNewPassword(newPw).then(() => {
             success('Passwort neu gesetzt')
             navigate('/')
