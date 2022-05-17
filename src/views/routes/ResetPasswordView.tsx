@@ -1,9 +1,8 @@
 import SetNewPaswordForm from '../../components/SetNewPasswordForm'
 import { SetNewPassword } from '../../entities/SetNewPassword'
-import {useParams} from "react-router-dom"
+import {useParams, useNavigate} from "react-router-dom"
 import { useState } from 'react'
 import { useAlert } from '../shared/AlertProvider'
-import { useNavigate } from 'react-router-dom'
 import api from '../../networking/api'
 import PageTitle from '../../components/base/PageTitle'
 
