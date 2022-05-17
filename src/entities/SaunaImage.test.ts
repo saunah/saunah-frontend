@@ -1,23 +1,20 @@
+import { SaunaImagesMock } from '../networking/api/saunaImages.mock'
 import { SaunaImage } from './SaunaImage'
-
-const testRemoteResponse: SaunaImage.RemoteResponse = {
-    id: 1,
-    saunaId: 2,
-    fileName: 'file-3',
-}
 
 describe('SaunaImage', () => {
     test('isRemoveResponse() works correctly', () => {
-        expect(SaunaImage.isRemoteResponse(testRemoteResponse)).toBe(true)
+        expect(SaunaImage.isRemoteResponse(SaunaImagesMock.sampleRemoteResponse1)).toBe(true)
         expect(SaunaImage.isRemoteResponse(null)).toBe(false)
         expect(SaunaImage.isRemoteResponse({})).toBe(false)
-        Object.keys(testRemoteResponse).forEach(key => {
-            expect(SaunaImage.isRemoteResponse({ ...testRemoteResponse, [key]: undefined })).toBe(false)
+        Object.keys(SaunaImagesMock.sampleRemoteResponse1).forEach(key => {
+            expect(SaunaImage.isRemoteResponse({ ...SaunaImagesMock.sampleRemoteResponse1, [key]: undefined })).toBe(
+                false
+            )
         })
     })
 
     test('mapIn() only works with correct input entity', () => {
-        expect(SaunaImage.mapIn(testRemoteResponse)).toBeTruthy()
+        expect(SaunaImage.mapIn(SaunaImagesMock.sampleRemoteResponse1)).toBeTruthy()
         expect(() => SaunaImage.mapIn({})).toThrow()
     })
 })
