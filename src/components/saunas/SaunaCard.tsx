@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Sauna } from '../../entities/Sauna'
 import { SaunaImage } from '../../entities/SaunaImage'
 import api from '../../networking/api'
-import apiRoutes, { getAbsoluteUrl } from '../../networking/apiRoutes'
 import ButtonLink from '../base/ButtonLink'
 
 export type SaunaCardProps = {
@@ -12,7 +11,7 @@ export type SaunaCardProps = {
 
 const SaunaCard = (props: SaunaCardProps) => {
     const [images, setImages] = useState<SaunaImage.Response[]>([])
-    const imgLink = images[0] ? getAbsoluteUrl(apiRoutes.saunaImages.get(images[0].fileName)) : ''
+    const imgLink = images[0] ? images[0].url : ''
     const navLink = `/saunas/${props.sauna.id}`
 
     useEffect(() => {

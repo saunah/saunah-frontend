@@ -2,7 +2,7 @@ export namespace SaunaImage {
     export type Response = {
         id: number
         saunaId: number
-        fileName: string
+        url: string
     }
 
     export type RemoteResponse = Response
@@ -13,7 +13,7 @@ export namespace SaunaImage {
             image != null &&
             typeof image.id === 'number' &&
             typeof image.saunaId === 'number' &&
-            typeof image.fileName === 'string'
+            typeof image.url === 'string'
         )
     }
 
