@@ -22,7 +22,7 @@ const BookingListView = () => {
                 elements={bookings.map(booking => {
                     return [
                         <span>{booking.id}</span>,
-                        <Link to={`/bookings/${booking.id}`}>{booking.sauna.type}</Link>,
+                        <Link to={`/bookings/${booking.id}`}>{booking.sauna.name}</Link>,
                         <span>
                             {[
                                 booking.startBookingDate.format('DD.MM.YYYY'),
