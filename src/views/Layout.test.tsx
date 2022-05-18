@@ -1,18 +1,27 @@
 import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
+import { mockUserAPI } from '../networking/api'
+import { UserMock } from '../networking/api/user.mock'
 import Layout from './Layout'
+import AlertProvider from './shared/AlertProvider'
 import AuthProvider from './shared/AuthProvider'
 
-test('Renders AppContainer', () => {
-    render(wrappedLayout())
-    const appContainer = screen.getByTestId('app-container')
-    expect(appContainer).toBeInTheDocument()
-})
+describe('<Layout>', () => {
+    beforeEach(() => {
+        mockUserAPI(UserMock.simpleMock())
+    })
 
-test('Renders AppContent', () => {
-    render(wrappedLayout())
-    const appContent = screen.getByTestId('app-content')
-    expect(appContent).toBeInTheDocument()
+    test('Renders AppContainer', async () => {
+        render(wrappedLayout())
+        const appContainer = await screen.findByTestId('app-container')
+        expect(appContainer).toBeInTheDocument()
+    })
+
+    test('Renders AppContent', async () => {
+        render(wrappedLayout())
+        const appContent = await screen.findByTestId('app-content')
+        expect(appContent).toBeInTheDocument()
+    })
 })
 
 /**
@@ -22,10 +31,12 @@ test('Renders AppContent', () => {
  */
 const wrappedLayout = () => {
     return (
-        <AuthProvider>
-            <BrowserRouter>
-                <Layout />
-            </BrowserRouter>
-        </AuthProvider>
+        <AlertProvider>
+            <AuthProvider>
+                <BrowserRouter>
+                    <Layout />
+                </BrowserRouter>
+            </AuthProvider>
+        </AlertProvider>
     )
 }

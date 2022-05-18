@@ -4,8 +4,16 @@ import { Route, Routes, Outlet, Link, MemoryRouter } from 'react-router-dom'
 import { render, screen, waitFor } from '@testing-library/react'
 import { AuthContext, AuthState } from './AuthProvider'
 import ProtectedRoute from './ProtectedRoute'
+import { mockUserAPI } from '../../networking/api'
+import { User } from '../../entities/User'
+import { UserRole } from '../../entities/UserRole'
+import { UserMock } from '../../networking/api/user.mock'
 
 describe('<ProtectedRoute>', () => {
+    beforeEach(() => {
+        mockUserAPI(UserMock.simpleMock())
+    })
+
     test('shows home route at start', () => {
         render(TestRoutes(), { wrapper: createWrapper() })
         expect(screen.getByTestId('parent')).toHaveTextContent('home')
@@ -41,7 +49,7 @@ describe('<ProtectedRoute>', () => {
     })
 
     test('shows all routes when authenticated', async () => {
-        render(TestRoutes(), { wrapper: createWrapper(true) })
+        render(TestRoutes(), { wrapper: createWrapper(true, testUser) })
         expect(screen.getByTestId('parent')).toHaveTextContent('home')
 
         screen.getByTestId('link-u').click()
@@ -68,17 +76,32 @@ describe('<ProtectedRoute>', () => {
     })
 })
 
-const defaultAuthState = (isAuthenticated?: boolean): AuthState => {
+const defaultAuthState = (isAuthenticated?: boolean, user?: User.Response): AuthState => {
     return {
-        isAuthenticated: isAuthenticated || false,
+        isAuthenticated: () => isAuthenticated || false,
+        isAdmin: () => false,
+        isInitialized: true,
         login: () => Promise.resolve(),
         logout: () => {
             // Ignore logout
         },
+        me: user || null,
     }
 }
 
-const createWrapper = (isAuthenticated?: boolean) => (props: { children: ReactNode }) =>
+const testUser: User.Response = {
+    id: 1,
+    role: UserRole.Local.USER,
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'john@example.com',
+    telephone: '078 123 45 67',
+    street: 'Technikumstrasse 9',
+    place: 'Winterthur',
+    zip: '8400',
+}
+
+const createWrapper = (isAuthenticated?: boolean, user?: User.Response) => (props: { children: ReactNode }) =>
     (
         <MemoryRouter initialEntries={['/']}>
             <Link to="/unprotected" data-testid="link-u" />
@@ -87,7 +110,9 @@ const createWrapper = (isAuthenticated?: boolean) => (props: { children: ReactNo
             <Link to="/protected" data-testid="link-p" />
             <Link to="/protected/child-unprotected" data-testid="link-p-u" />
             <Link to="/protected/child-protected" data-testid="link-p-p" />
-            <AuthContext.Provider value={defaultAuthState(isAuthenticated)}>{props.children}</AuthContext.Provider>
+            <AuthContext.Provider value={defaultAuthState(isAuthenticated, user)}>
+                {props.children}
+            </AuthContext.Provider>
         </MemoryRouter>
     )
 

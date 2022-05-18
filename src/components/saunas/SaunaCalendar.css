@@ -1,0 +1,63 @@
+.sauna-calendar .fc-event-main,
+.sauna-calendar .fc-event-title {
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+    @apply break-words;
+}
+
+.sauna-calendar .fc-toolbar-title {
+    @apply text-xl text-primary-500;
+}
+
+.sauna-calendar .fc-event-main-frame {
+    @apply flex-col;
+}
+
+.sauna-calendar .fc-daygrid-event {
+    @apply whitespace-normal;
+}
+
+.sauna-calendar .fc-daygrid-dot-event {
+    @apply flex-wrap;
+}
+
+.sauna-calendar .fc-daygrid-event-dot {
+    @apply border-accent-300;
+}
+
+.sauna-calendar .fc-h-event {
+    @apply border-accent-300 bg-accent-300;
+}
+
+.sauna-calendar a {
+    @apply text-primary-600 hover:text-primary-600;
+}
+
+.sauna-calendar .fc-button,
+.sauna-calendar .fc-button-primary {
+    @apply py-3 px-5 text-sm font-medium rounded-2xl text-accent-900 bg-accent-200 border-0 disabled:text-accent-900/[0.5] hover:text-accent-900 hover:bg-accent-300 disabled:bg-accent-100 shadow-lg shadow-primary-900/[0.1] focus:outline-none;
+}
+
+.sauna-calendar .fc .fc-button:disabled {
+    @apply opacity-100;
+}
+
+.sauna-calendar .fc-button:not(:disabled),
+.sauna-calendar .fc-button-primary:not(:disabled) {
+    @apply active:bg-accent-400 active:text-accent-900 active:border-0;
+}
+
+.sauna-calendar .fc-button:not(:disabled):active:focus,
+.sauna-calendar .fc-button-primary:not(:disabled):active:focus {
+    @apply outline-none shadow-none;
+}
+
+.sauna-calendar .fc-button-group {
+    @apply rounded-2xl shadow-lg shadow-primary-900/[0.1];
+}
+
+.sauna-calendar .fc-button-group .fc-button,
+.sauna-calendar .fc-button-group .fc-button-primary {
+    @apply shadow-none;
+}

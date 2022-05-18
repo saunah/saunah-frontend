@@ -14,6 +14,7 @@ export namespace Sauna {
         location: string
         type: string
         mobile: boolean
+        googleCalendarId?: string
     }
 
     type RemoteBase = {
@@ -27,6 +28,7 @@ export namespace Sauna {
         location: string
         type: string
         mobile: boolean
+        googleCalendarId?: string
     }
 
     export type Response = Base & Identifiable
@@ -54,7 +56,8 @@ export namespace Sauna {
             typeof sauna.zip === 'number' &&
             typeof sauna.location === 'string' &&
             typeof sauna.type === 'string' &&
-            typeof sauna.mobile === 'boolean'
+            typeof sauna.mobile === 'boolean' &&
+            (typeof sauna.googleCalendarId === 'string' || sauna.googleCalendarId == null)
         )
     }
 
@@ -67,7 +70,7 @@ export namespace Sauna {
      */
     export function mapIn(sauna: unknown): Response {
         if (!isRemoteResponse(sauna))
-            throw new Error(`Object could not be mapped in. It is not of type RemoteResponse.`)
+            throw new Error('Object could not be mapped in. It is not of type RemoteResponse.')
 
         return {
             id: sauna.id,
@@ -81,6 +84,7 @@ export namespace Sauna {
             location: sauna.location,
             type: sauna.type,
             mobile: sauna.mobile,
+            googleCalendarId: sauna.googleCalendarId,
         }
     }
 
@@ -101,6 +105,7 @@ export namespace Sauna {
             location: '',
             type: '',
             mobile: false,
+            googleCalendarId: '',
         }
     }
 
@@ -137,6 +142,7 @@ export namespace Sauna {
             location: sauna.location,
             type: sauna.type,
             mobile: sauna.mobile,
+            googleCalendarId: sauna.googleCalendarId,
         }
     }
 }

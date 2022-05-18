@@ -3,7 +3,13 @@ import { readonly } from '../utils/object'
 const apiRoutes = {
     user: {
         login: '/login',
-        signup: `/signup`,
+        signup: '/signup',
+        verify: (token: string) => `/verify/${token}`,
+        list: '/users',
+        get: (userId: number) => `/users/${userId}`,
+        edit: (userId: number) => `/users/${userId}`,
+        remove: (userId: number) => `/users/${userId}`,
+        whoami: '/users/whoami',
         resetPasswordRequest: '/resetPasswordRequest',
         setNewPassword:'/setNewPassword',
     },
@@ -19,6 +25,13 @@ const apiRoutes = {
         add: (saunaId: number) => `/saunas/${saunaId}/images`,
         get: (imageName: string) => `saunas/images/${imageName}`,
         remove: (imageId: number) => `saunas/images/${imageId}`,
+    },
+    price: {
+        list: '/prices',
+        get: (saunaId: number) => `/prices/${saunaId}`,
+        add: '/prices',
+        edit: (saunaId: number) => `/prices/${saunaId}`,
+        remove: (saunaId: number) => `/prices/${saunaId}`,
     },
 }
 
