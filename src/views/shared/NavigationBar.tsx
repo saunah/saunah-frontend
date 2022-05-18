@@ -54,7 +54,7 @@ function createSecondaryItems(
                 { title: 'Benutzer', url: '/users' }
             )
         }
-        items.push({ title: 'Logout', onClick: logoutWithSuccess })
+        items.push({ title: 'Buchungen', url: '/bookings' }, { title: 'Logout', onClick: logoutWithSuccess })
         return items
     }
 
