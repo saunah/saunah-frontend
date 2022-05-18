@@ -3,7 +3,13 @@ import { readonly } from '../utils/object'
 const apiRoutes = {
     user: {
         login: '/login',
-        signup: `/signup`,
+        signup: '/signup',
+        verify: (token: string) => `/verify/${token}`,
+        list: '/users',
+        get: (userId: number) => `/users/${userId}`,
+        edit: (userId: number) => `/users/${userId}`,
+        remove: (userId: number) => `/users/${userId}`,
+        whoami: '/users/whoami',
     },
     sauna: {
         list: '/saunas',
@@ -17,6 +23,22 @@ const apiRoutes = {
         add: (saunaId: number) => `/saunas/${saunaId}/images`,
         get: (imageName: string) => `saunas/images/${imageName}`,
         remove: (imageId: number) => `saunas/images/${imageId}`,
+    },
+    price: {
+        list: '/prices',
+        get: (saunaId: number) => `/prices/${saunaId}`,
+        add: '/prices',
+        edit: (saunaId: number) => `/prices/${saunaId}`,
+        remove: (saunaId: number) => `/prices/${saunaId}`,
+    },
+    booking: {
+        listAll: '/bookings/all',
+        list: '/bookings',
+        get: (bookingId: number) => `/bookings/${bookingId}`,
+        add: '/bookings',
+        edit: (bookingId: number) => `/bookings/${bookingId}`,
+        approve: (bookingId: number) => `/bookings/${bookingId}/approve`,
+        cancel: (bookingId: number) => `/bookings/${bookingId}/cancel`,
     },
 }
 

@@ -11,6 +11,12 @@ env:
     value: 'Hello from Staging'
   - name: REACT_APP_API_BASE_URL
     value: https://saunah-backend-staging.k8s.init-lab.ch
+  - name: REACT_APP_GOOGLE_CALENDAR_API_KEY
+    valueFrom:
+      secretKeyRef:
+        name: saunah-secrets-credentials
+        key: googleCalendarApiKey
+        optional: false
 
 image:
   repository: ghcr.io/saunah/saunah-frontend

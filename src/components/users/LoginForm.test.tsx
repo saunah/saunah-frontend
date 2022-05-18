@@ -1,6 +1,6 @@
 import { render, screen, within, fireEvent } from '@testing-library/react'
 import LoginForm from './LoginForm'
-import { LoginCredentials } from '../entities/LoginCredentials'
+import { LoginCredentials } from '../../entities/LoginCredentials'
 import { BrowserRouter } from 'react-router-dom'
 
 const testUser: LoginCredentials.Request = {

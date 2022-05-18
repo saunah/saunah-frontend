@@ -1,9 +1,12 @@
 import { Menu, Transition } from '@headlessui/react'
-import { Fragment, ReactElement, ReactNode, SVGProps } from 'react'
+import { ForwardedRef, forwardRef, Fragment, ReactElement, ReactNode, SVGProps } from 'react'
 import { Link, LinkProps, useMatch, useResolvedPath } from 'react-router-dom'
 
 const defaultTestIdElement = 'menu-element'
 const defaultIconClasses = 'transition ease-in-out duration-200 cursor-pointer text-primary-500 hover:text-primary-400'
+const secondaryElementDefaultTextColor = 'text-primary-500'
+const secondaryElementCurrentTextColor = 'text-accent-300'
+const secondaryElementActiveTextColor = 'text-accent-200'
 
 /**
  * This component provides the structure for a
@@ -66,16 +69,16 @@ export function isAppMenuIconItem(item: AppMenuItem): item is AppMenuIconItem {
  * element (<code>OuterAppMenuElement</code>) and inner
  * element (<code>InnerAppMenuElement</code>)
  */
-function MenuElement(props: MenuElementProps): JSX.Element {
-    return (
-        <OuterAppMenuElement {...props}>
-            <InnerAppMenuElement {...props} />
-        </OuterAppMenuElement>
-    )
-}
+const MenuElement = forwardRef((props: MenuElementProps, ref: ForwardedRef<HTMLButtonElement>) => (
+    <OuterAppMenuElement {...props} ref={ref}>
+        <InnerAppMenuElement {...props} />
+    </OuterAppMenuElement>
+))
 
 type MenuElementProps = {
     fromItem: AppMenuItem
+    className?: string
+    isActive?: boolean
 }
 
 type OuterAppMenuElementProps = {
@@ -86,21 +89,54 @@ type OuterAppMenuElementProps = {
  * Outer wrapper for menu element, which can be either a
  * <code>button</code> or <code>MenuLink</code>.
  */
-function OuterAppMenuElement({ children, fromItem }: OuterAppMenuElementProps) {
-    if (isAppMenuIconItem(fromItem) && fromItem.onClick != null) {
-        return (
-            <button onClick={() => fromItem.onClick?.()} data-testid={fromItem.testId || defaultTestIdElement}>
-                {children}
-            </button>
-        )
+const OuterAppMenuElement = forwardRef(
+    (
+        { children, fromItem, className, isActive, ...props }: OuterAppMenuElementProps,
+        ref: ForwardedRef<HTMLButtonElement>
+    ) => {
+        if (isAppMenuIconItem(fromItem) && fromItem.onClick) {
+            return (
+                <button
+                    {...props}
+                    onClick={() => fromItem.onClick?.()}
+                    data-testid={fromItem.testId || defaultTestIdElement}
+                    className={`${className} ${
+                        isActive ? secondaryElementActiveTextColor : secondaryElementDefaultTextColor
+                    }`}
+                    ref={ref}
+                >
+                    {children}
+                </button>
+            )
+        } else if (fromItem.url) {
+            return (
+                <MenuLink
+                    {...props}
+                    to={fromItem.url || ''}
+                    data-testid={fromItem.testId || defaultTestIdElement}
+                    className={className}
+                    isActive={isActive}
+                >
+                    {children}
+                </MenuLink>
+            )
+        } else {
+            return (
+                <button
+                    {...props}
+                    className={`font-medium text-left ${className} ${
+                        isActive ? secondaryElementActiveTextColor : secondaryElementDefaultTextColor
+                    }`}
+                    onClick={fromItem.onClick}
+                    data-testid={fromItem.testId || defaultTestIdElement}
+                    ref={ref}
+                >
+                    {children}
+                </button>
+            )
+        }
     }
-
-    return (
-        <MenuLink to={fromItem.url || ''} data-testid={fromItem.testId || defaultTestIdElement}>
-            {children}
-        </MenuLink>
-    )
-}
+)
 
 /**
  * Inner wrapper for menu element, which can either be text or an icon.
@@ -171,9 +207,15 @@ function SecondaryMenu({ trailingItem, secondaryItems }: AppMenuProps) {
                         {secondaryItems &&
                             secondaryItems.map((item, index) => (
                                 <Menu.Item key={index}>
-                                    <div className="py-2">
-                                        <MenuElement fromItem={item} />
-                                    </div>
+                                    {({ active }) => {
+                                        return (
+                                            <MenuElement
+                                                fromItem={item}
+                                                className="py-2 transition ease-in-out duration-200"
+                                                isActive={active}
+                                            />
+                                        )
+                                    }}
                                 </Menu.Item>
                             ))}
                     </Menu.Items>
@@ -183,16 +225,21 @@ function SecondaryMenu({ trailingItem, secondaryItems }: AppMenuProps) {
     )
 }
 
+type MenuLinkProps = {
+    isActive?: boolean
+} & LinkProps
+
 /**
  * Component to wrap and style links in the menu.
  */
-function MenuLink({ children, to, ...props }: LinkProps) {
+function MenuLink({ children, to, className, isActive, ...props }: MenuLinkProps) {
     let resolved = useResolvedPath(to)
     let match = useMatch({ path: resolved.pathname, end: true })
-    const ifActiveClass = to && match ? 'active' : 'text-primary-500'
+    const defaultColor = to && match ? secondaryElementCurrentTextColor : secondaryElementDefaultTextColor
+    const activeColor = isActive ? secondaryElementActiveTextColor : defaultColor
 
     return (
-        <Link className={`block font-medium ${ifActiveClass}`} to={to} {...props}>
+        <Link {...props} className={`block font-medium ${activeColor} ${className}`} to={to}>
             {children}
         </Link>
     )
