@@ -3,23 +3,9 @@ import { ReactNode } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { SetNewPassword } from '../../entities/SetNewPassword'
 import { mockUserAPI } from '../../networking/api'
+import { UserMock } from '../../networking/api/user.mock'
 import AlertProvider from '../shared/AlertProvider'
 import ResetPasswordView from './ResetPasswordView'
-
-const defaultMock = () => {
-    return {
-        signup: jest.fn(() => Promise.resolve()),
-        login: jest.fn(() => Promise.resolve({ token: 'abc' })),
-        passwordResetMail: jest.fn(()=> Promise.resolve()),
-        setNewPassword: jest.fn(()=> Promise.resolve()),
-    }
-}
-
-const wrapper = (props: { children?: ReactNode }) => {
-    return (
-        <BrowserRouter><AlertProvider>{props.children}</AlertProvider></BrowserRouter>
-    )
-}
 
 describe('<ResetPasswordView tests>', () => {
     test('render correctly', () => {
@@ -28,7 +14,7 @@ describe('<ResetPasswordView tests>', () => {
     })
 
     test('data gets send onSubmit', async () => {
-        const mock = mockUserAPI(defaultMock())
+        const mock = mockUserAPI(UserMock.simpleMock())
         render(<ResetPasswordView />, { wrapper: wrapper })
 
         const button = screen.getByTestId('send-button')
@@ -40,3 +26,11 @@ describe('<ResetPasswordView tests>', () => {
         await screen.findByTestId('pw-reset-mail-form')
     })
 })
+
+const wrapper = (props: { children?: ReactNode }) => {
+    return (
+        <BrowserRouter>
+            <AlertProvider>{props.children}</AlertProvider>
+        </BrowserRouter>
+    )
+}

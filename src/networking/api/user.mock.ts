@@ -19,6 +19,8 @@ export namespace UserMock {
             edit: jest.fn(() => Promise.resolve(config?.edit || sampleResponse1)),
             remove: jest.fn(() => Promise.resolve()),
             whoami: jest.fn(() => Promise.resolve(config?.whoami || sampleResponse1)),
+            passwordResetMail: jest.fn(() => Promise.resolve()),
+            setNewPassword: jest.fn(() => Promise.resolve()),
         }
     }
 
@@ -31,6 +33,8 @@ export namespace UserMock {
         const editDefer = deferred<User.Response>()
         const removeDefer = deferred<void>()
         const whoamiDefer = deferred<User.Response>()
+        const passwordResetMailDefer = deferred<void>()
+        const setNewPasswordDefer = deferred<void>()
 
         const mock = {
             signup: jest.fn(() => signupDefer.promise),
@@ -41,6 +45,8 @@ export namespace UserMock {
             edit: jest.fn(() => editDefer.promise),
             remove: jest.fn(() => removeDefer.promise),
             whoami: jest.fn(() => whoamiDefer.promise),
+            passwordResetMail: jest.fn(() => passwordResetMailDefer.promise),
+            setNewPassword: jest.fn(() => setNewPasswordDefer.promise),
         }
 
         return {
@@ -53,6 +59,8 @@ export namespace UserMock {
             editDefer,
             removeDefer,
             whoamiDefer,
+            passwordResetMailDefer,
+            setNewPasswordDefer,
         }
     }
 

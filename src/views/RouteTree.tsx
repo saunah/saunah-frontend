@@ -3,7 +3,7 @@ import Layout from './Layout'
 import Home from './routes/Home'
 import SaunaEditorView from './routes/sauna/SaunaEditorView'
 import Showroom from './routes/Showroom'
-import LoginView from './routes/LoginView'
+import LoginView from './routes/users/LoginView'
 import ResetPwMailView from './routes/ResetPwMailView'
 import ResetPasswordView from './routes/ResetPasswordView'
 import { BreadcrumbRoutes } from './shared/BreadcrumbsRouter'
@@ -26,11 +26,7 @@ const RouteTree = () => {
                 <Route index element={<Home />} />
                 <Route path="/showroom" breadcrumb="Showroom" element={<Showroom />} />
                 <Route path="/login" breadcrumb="Login" element={<LoginView />} />
-                <Route
-                    path="/forgot-password"
-                    breadcrumb={'Passwort vergessen'}
-                    element={<ResetPwMailView/>}
-                />
+                <Route path="/forgot-password" breadcrumb={'Passwort vergessen'} element={<ResetPwMailView />} />
                 <Route path="/reset-password/:token" element={<ResetPasswordView />} />
                 <Route path="/saunas" breadcrumb="Saunas">
                     <Route index element={<Overview />} />
