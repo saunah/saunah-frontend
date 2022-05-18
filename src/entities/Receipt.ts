@@ -29,7 +29,7 @@ export namespace Receipt {
     }
 
     function calculateDuration(start: Moment, end: Moment): number {
-        return Math.max(Math.ceil(((end.unix() - start.unix()) / 3600) * 2) / 2, 0)
+        return Math.max((end.unix() - start.unix()) / 3600, 0)
     }
 
     export function mapFromRequest(booking: Booking.Request, sauna: Sauna.Response, price: Price.Response): Response {

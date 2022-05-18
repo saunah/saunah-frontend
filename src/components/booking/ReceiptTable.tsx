@@ -1,6 +1,7 @@
 import { ReactElement } from 'react'
 import { Receipt } from '../../entities/Receipt'
 import Table from '../base/Table'
+import { formatHours, formatPrice } from '../../utils/format'
 
 export type ReceiptProps = {
     receipt: Receipt.Response
@@ -10,11 +11,6 @@ const ReceiptTable = (props: ReceiptProps) => {
     return <Table headings={['Kostenpunkt', 'Preis', 'Gebucht', 'Total']} elements={buildElements(props.receipt)} />
 }
 
-function formatPrice(price: number): string {
-    if (price >= 0) return `CHF ${Math.round(price * 20) / 20}`
-    else return `- CHF ${Math.round(-price * 20) / 20}`
-}
-
 function buildElements(receipt: Receipt.Response) {
     const highlight = (text: string | ReactElement) => <span className="font-semibold text-primary-700">{text}</span>
 
@@ -22,7 +18,7 @@ function buildElements(receipt: Receipt.Response) {
         [
             'Stundenpreis',
             `${formatPrice(receipt.prices.hourlyRate)} / h`,
-            `${receipt.booked.duration} h`,
+            formatHours(receipt.booked.duration),
             formatPrice(receipt.prices.hourlyRate * receipt.booked.duration),
         ],
     ]
@@ -54,7 +50,7 @@ function buildElements(receipt: Receipt.Response) {
         elements.push([
             'Saunawichtel',
             `${formatPrice(receipt.prices.saunahImp)} / h`,
-            `${receipt.booked.saunahImp} h`,
+            formatHours(receipt.booked.saunahImp),
             formatPrice(receipt.prices.saunahImp * receipt.booked.saunahImp),
         ])
 
@@ -76,7 +72,7 @@ function buildElements(receipt: Receipt.Response) {
 
     if (receipt.booked.discount) elements.push(['Preisanpassung', '', '', formatPrice(-receipt.booked.discount)])
 
-    elements.push([highlight('Total'), '', '', highlight(`CHF ${Receipt.calculateTotal(receipt)}`)])
+    elements.push([highlight('Total'), '', '', highlight(formatPrice(Receipt.calculateTotal(receipt)))])
     return elements
 }
 

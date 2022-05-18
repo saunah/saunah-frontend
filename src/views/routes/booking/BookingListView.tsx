@@ -5,6 +5,7 @@ import Table from '../../../components/base/Table'
 import BookingStateBadge from '../../../components/booking/BookingStateBadge'
 import { Booking } from '../../../entities/Booking'
 import api from '../../../networking/api'
+import { formatPrice } from '../../../utils/format'
 
 const BookingListView = () => {
     const headings = ['Buchungsnr.', 'Sauna', 'Buchungsdatum', 'Preis', 'Buchungs-Status']
@@ -30,7 +31,7 @@ const BookingListView = () => {
                                 booking.endBookingDate.format('DD.MM.YYYY'),
                             ]}
                         </span>,
-                        <span>{booking.endPrice}</span>,
+                        <span>{formatPrice(booking.endPrice)}</span>,
                         <div className="flex justify-end">
                             <BookingStateBadge state={booking.state} />
                         </div>,
