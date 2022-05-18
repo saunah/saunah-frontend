@@ -100,7 +100,7 @@ const BookingEditor = (props: BookingEditorProps) => {
                 <div className="grid gap-x-4 gap-y-2 grid-cols-1 md:grid-cols-2">
                     <CheckboxLabel
                         label="Transportservice"
-                        details="Die Sauna wird direkt an Ihren Wunschort geliefert. Der Preis berechnet sich aus den Anzahl Kilometer vom Lagerplatz der Sauna zu ihrem Wunschort."
+                        details="Die Sauna wird direkt an Ihren Wunschort geliefert. Der Preis berechnet sich aus den Anzahl Kilometer vom Lagerplatz der Sauna zu Ihrem Wunschort."
                         value={booking.transportService.checked}
                         onChange={newValue => updateChecked(newValue, 'transportService')}
                     />
