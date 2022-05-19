@@ -85,6 +85,7 @@ const defaultAuthState = (isAuthenticated?: boolean, user?: User.Response): Auth
         logout: () => {
             // Ignore logout
         },
+        fetchMe: () => Promise.resolve(),
         me: user || null,
     }
 }

@@ -10,7 +10,8 @@ export type UserEditorProps = {
     onSubmit?: () => void
     onDelete?: () => void
     isCreate?: boolean
-    isAdmin?: boolean
+    showRole?: boolean
+    showDelete?: boolean
     testId?: string
 }
 
@@ -21,7 +22,6 @@ export type UserEditorProps = {
 const UserEditor = (props: UserEditorProps) => {
     const user = props.value
     const isCreate = props.isCreate || false
-    const isAdmin = props.isAdmin || true
 
     const onDelete = () => {
         const confirm = window.confirm('Möchten Sie den Benutzer wirklich unwiderruflich löschen?')
@@ -113,7 +113,7 @@ const UserEditor = (props: UserEditorProps) => {
                     autoComplete={isCreate ? 'country-name' : undefined}
                     onChange={newValue => props.onChange?.({ ...user, place: newValue })}
                 />
-                {!isCreate && isAdmin && (
+                {!isCreate && props.showRole && (
                     <Select
                         name="Rolle"
                         values={[UserRole.Local.ADMIN, UserRole.Local.USER]}
@@ -129,7 +129,9 @@ const UserEditor = (props: UserEditorProps) => {
                     data-testid="submit-button"
                     onClick={props.onSubmit}
                 />
-                {!isCreate && <Button title="Löschen" data-testid="delete-button" onClick={onDelete} color="red" />}
+                {!isCreate && props.showDelete && (
+                    <Button title="Löschen" data-testid="delete-button" onClick={onDelete} color="red" />
+                )}
             </div>
         </div>
     )
