@@ -120,7 +120,7 @@ export namespace Booking {
             startBookingDate: ModifiableDate.mapFromMoment(booking.startBookingDate),
             endBookingDate: ModifiableDate.mapFromMoment(booking.endBookingDate),
             location: booking.location,
-            discount: '' + booking.discount,
+            discount: booking.discount?.toString() || '',
             discountDescription: booking.discountDescription,
             comment: booking.comment,
             transportService: CheckableNumber.mapFromNumber(booking.extras.transportService),

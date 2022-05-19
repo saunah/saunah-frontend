@@ -24,7 +24,7 @@ const BookingEditor = (props: BookingEditorProps) => {
     }
 
     function updateNumber(newValue: string, key: keyof CheckableNumber.Extract<Booking.Request>) {
-        onChange({ ...booking, [key]: { checked: booking[key].checked, number: +newValue } })
+        onChange({ ...booking, [key]: { checked: booking[key].checked, number: newValue } })
     }
 
     function updateDate(newValue: string, key: keyof ModifiableDate.Extract<Booking.Request>) {
@@ -106,7 +106,7 @@ const BookingEditor = (props: BookingEditorProps) => {
                             type="number"
                             min="0"
                             disabled={!booking.transportService.checked}
-                            value={booking.transportService.number + ''}
+                            value={booking.transportService.number}
                             onChange={newValue => updateNumber(newValue, 'transportService')}
                         />
                         <p
@@ -137,7 +137,7 @@ const BookingEditor = (props: BookingEditorProps) => {
                         type="number"
                         min="0"
                         disabled={!booking.handTowel.checked}
-                        value={booking.handTowel.number + ''}
+                        value={booking.handTowel.number}
                         onChange={newValue => updateNumber(newValue, 'handTowel')}
                     />
                     <CheckboxLabel
@@ -151,7 +151,7 @@ const BookingEditor = (props: BookingEditorProps) => {
                         type="number"
                         min="0"
                         disabled={!booking.wood.checked}
-                        value={booking.wood.number + ''}
+                        value={booking.wood.number}
                         onChange={newValue => updateNumber(newValue, 'wood')}
                     />
                     <CheckboxLabel
@@ -165,7 +165,7 @@ const BookingEditor = (props: BookingEditorProps) => {
                         type="number"
                         min="0"
                         disabled={!booking.saunahImp.checked}
-                        value={booking.saunahImp.number + ''}
+                        value={booking.saunahImp.number}
                         onChange={newValue => updateNumber(newValue, 'saunahImp')}
                     />
                     <div className="md:col-span-2">
