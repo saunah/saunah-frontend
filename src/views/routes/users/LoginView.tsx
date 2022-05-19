@@ -6,6 +6,7 @@ import { useAlert } from '../../shared/AlertProvider'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import PageTitle from '../../../components/base/PageTitle'
 import Button from '../../../components/base/Button'
+import ActivityIndicator from '../../../components/base/ActivityIndicator'
 
 const LoginView = () => {
     const [user, setUser] = useState<LoginCredentials.Request>(LoginCredentials.empty())
@@ -16,7 +17,7 @@ const LoginView = () => {
     const redirect = queryParams.get('redirect')
 
     const onSubmit = () => {
-        login(user).then(() => {
+        return login(user).then(() => {
             success('Login erfolgreich')
             if (redirect) navigate(decodeURIComponent(redirect))
             else navigate('/')
@@ -26,7 +27,6 @@ const LoginView = () => {
     return (
         <div data-testid={'loginform'}>
             <PageTitle> Login </PageTitle>
-
             <p className="text-primary-500 mb-6">
                 <span>Loggen Sie sich ein, um fortzufahren. Sie haben noch kein Konto?</span>
                 <Link

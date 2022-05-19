@@ -125,7 +125,7 @@ const UserEditor = (props: UserEditorProps) => {
             </div>
             <div className="mt-6 flex space-x-4">
                 <Button
-                    title={isCreate ? 'Benutzer registrieren' : 'Speichern'}
+                    title={isCreate ? 'Registrieren' : 'Speichern'}
                     data-testid="submit-button"
                     onClick={props.onSubmit}
                 />

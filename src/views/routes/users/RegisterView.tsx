@@ -19,8 +19,8 @@ const RegisterView = () => {
     }
 
     const signupUser = () => {
-        api.user.signup(user).then(() => {
-            success('Aktivierungs-Email wurde verschickt. Konsultieren Sie ihr Postfach.', AlertDuration.LONG)
+        return api.user.signup(user).then(() => {
+            success('Aktivierungs-Email wurde verschickt. Konsultieren Sie Ihr Postfach.', AlertDuration.LONG)
             navigate(getLoginRoute())
         })
     }
