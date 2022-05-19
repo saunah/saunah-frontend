@@ -39,10 +39,9 @@ export namespace Booking {
     } & Base &
         Identifiable
 
-    export type Request = Editable<{
-        saunaId: number
-    }> &
-        ModifiableDate.Object<Base> &
+    export type Request = {
+        saunaId: number | null
+    } & ModifiableDate.Object<Editable<Base>> &
         CheckableNumber.Object<Extras> &
         MaybeIdentifiable
 
@@ -102,7 +101,7 @@ export namespace Booking {
             startBookingDate: ModifiableDate.emptyRequest(),
             endBookingDate: ModifiableDate.emptyRequest(),
             location: '',
-            discount: null,
+            discount: '',
             discountDescription: null,
             comment: null,
             transportService: CheckableNumber.emptyRequest(),
@@ -121,7 +120,7 @@ export namespace Booking {
             startBookingDate: ModifiableDate.mapFromMoment(booking.startBookingDate),
             endBookingDate: ModifiableDate.mapFromMoment(booking.endBookingDate),
             location: booking.location,
-            discount: booking.discount,
+            discount: '' + booking.discount,
             discountDescription: booking.discountDescription,
             comment: booking.comment,
             transportService: CheckableNumber.mapFromNumber(booking.extras.transportService),
@@ -155,7 +154,7 @@ export namespace Booking {
             handTowelAmount: CheckableNumber.mapToNumber(booking.handTowel),
             woodAmount: CheckableNumber.mapToNumber(booking.wood),
             comment: booking.comment,
-            discount: booking.discount,
+            discount: booking.discount ? +booking.discount : null,
             discountDescription: booking.discountDescription,
             deposit: booking.deposit,
         }

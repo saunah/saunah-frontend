@@ -1,4 +1,3 @@
-import { MissingPropertyError } from '../utils/Error'
 import { Identifiable, MaybeIdentifiable } from '../utils/identifiable'
 import { Editable } from '../utils/object'
 
@@ -41,37 +40,36 @@ export namespace Price {
     export function emptyRequest(): Request {
         return {
             id: null,
-            transportService: null,
-            washService: null,
-            saunahImp: null,
-            deposit: null,
-            handTowel: null,
-            wood: null,
+            transportService: '',
+            washService: '',
+            saunahImp: '',
+            deposit: '',
+            handTowel: '',
+            wood: '',
         }
     }
 
     export function mapToRequest(price: Response): Request {
-        return price
+        return {
+            id: price.id,
+            transportService: '' + price.transportService,
+            washService: '' + price.washService,
+            saunahImp: '' + price.saunahImp,
+            deposit: '' + price.deposit,
+            handTowel: '' + price.handTowel,
+            wood: '' + price.wood,
+        }
     }
 
     export function mapOut(price: Request): RemoteRequest {
-        if (price.transportService == null)
-            throw new MissingPropertyError('Price.Request', 'Price.RemoteRequest', 'transportService')
-        if (price.washService == null)
-            throw new MissingPropertyError('Price.Request', 'Price.RemoteRequest', 'washService')
-        if (price.saunahImp == null) throw new MissingPropertyError('Price.Request', 'Price.RemoteRequest', 'saunahImp')
-        if (price.deposit == null) throw new MissingPropertyError('Price.Request', 'Price.RemoteRequest', 'deposit')
-        if (price.handTowel == null) throw new MissingPropertyError('Price.Request', 'Price.RemoteRequest', 'handTowel')
-        if (price.wood == null) throw new MissingPropertyError('Price.Request', 'Price.RemoteRequest', 'wood')
-
         return {
             id: price.id,
-            transportService: price.transportService,
-            washService: price.washService,
-            saunahImp: price.saunahImp,
-            deposit: price.deposit,
-            handTowel: price.handTowel,
-            wood: price.wood,
+            transportService: +price.transportService,
+            washService: +price.washService,
+            saunahImp: +price.saunahImp,
+            deposit: +price.deposit,
+            handTowel: +price.handTowel,
+            wood: +price.wood,
         }
     }
 }

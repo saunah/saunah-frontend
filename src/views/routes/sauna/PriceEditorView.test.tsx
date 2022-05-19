@@ -29,7 +29,7 @@ describe('<PriceEditorView>', () => {
 
         fireEvent.click(screen.getByTestId('submit-button'))
         await waitForStateUpdate()
-        expect(mock.edit).toBeCalledWith(1, PriceMock.sampleResponse1)
+        expect(mock.edit).toBeCalledWith(1, PriceMock.sampleRequest1)
         expect(mock.edit).toBeCalledTimes(1)
         expect(screen.getByText('Saunas')).toBeInTheDocument()
     })

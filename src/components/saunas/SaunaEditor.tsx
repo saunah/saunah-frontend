@@ -43,25 +43,25 @@ const SaunaEditor = (props: SaunaEditorProps) => {
                 <Input
                     name="Preis"
                     data-testid="input-price"
-                    value={'' + sauna.price}
+                    value={sauna.price}
                     type="number"
                     step={0.1}
-                    onChange={newValue => props.onChange?.({ ...sauna, price: +newValue })}
+                    onChange={newValue => props.onChange?.({ ...sauna, price: newValue })}
                 />
                 <p className="mt-1 text-sm text-primary-500">Komma bitte als "," eintippen. 5.5 =&gt; 5,5.</p>
                 <Input
                     name="Maximale Temperatur"
                     data-testid="input-maxTemp"
-                    value={'' + sauna.maxTemp}
+                    value={sauna.maxTemp}
                     type="number"
-                    onChange={newValue => props.onChange?.({ ...sauna, maxTemp: +newValue })}
+                    onChange={newValue => props.onChange?.({ ...sauna, maxTemp: newValue })}
                 />
                 <Input
                     name="Anzahl Personen"
                     data-testid="input-numberOfPeople"
-                    value={'' + sauna.numberOfPeople}
+                    value={sauna.numberOfPeople}
                     type="number"
-                    onChange={newValue => props.onChange?.({ ...sauna, numberOfPeople: +newValue })}
+                    onChange={newValue => props.onChange?.({ ...sauna, numberOfPeople: newValue })}
                 />
                 <Input
                     name="Adresse"
@@ -72,9 +72,9 @@ const SaunaEditor = (props: SaunaEditorProps) => {
                 <Input
                     name="PLZ"
                     data-testid="input-zip"
-                    value={'' + sauna.zip}
+                    value={sauna.zip}
                     type="number"
-                    onChange={newValue => props.onChange?.({ ...sauna, zip: +newValue })}
+                    onChange={newValue => props.onChange?.({ ...sauna, zip: newValue })}
                 />
                 <Input
                     name="Ort"

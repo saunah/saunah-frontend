@@ -80,13 +80,8 @@ const BookingEditor = (props: BookingEditorProps) => {
                         <Input
                             name="Preisreduktion"
                             type="number"
-                            value={'' + booking.discount}
-                            onChange={newValue => {
-                                // this ugly logic is somehow needed to deal with negative values (if the user start to type the minus first)
-                                if (newValue.length === 0)
-                                    props.onChange?.({ ...booking, discount: newValue as any as number })
-                                else props.onChange?.({ ...booking, discount: +newValue })
-                            }}
+                            value={booking.discount}
+                            onChange={newValue => props.onChange?.({ ...booking, discount: newValue })}
                         />
                         <Input
                             name="Bemerkung zur Preisanpassung"

@@ -26,7 +26,7 @@ describe('Price', () => {
     })
 
     test('emptyRequest() returns object with only null values', () => {
-        Object.values(Price.emptyRequest()).forEach(value => expect(value).toBe(null))
+        Object.values(Price.emptyRequest()).forEach(value => expect(value).toBeFalsy())
     })
 
     test('mapping-chain works from start to end', () => {
