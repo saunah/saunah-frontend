@@ -7,10 +7,14 @@ namespace: default
 replicaCount: 1
 
 env:
-  - name: REACT_APP_TEST_VAR
-    value: 'Hello from Scaleway'
   - name: REACT_APP_API_BASE_URL
-    value: https://booking-backend.saunah.ch
+    value: https://api.booking.saunah.ch
+  - name: REACT_APP_GOOGLE_CALENDAR_API_KEY
+    valueFrom:
+      secretKeyRef:
+        name: saunah-secrets-credentials
+        key: googleCalendarApiKey
+        optional: false
 
 image:
   repository: ghcr.io/saunah/saunah-frontend
