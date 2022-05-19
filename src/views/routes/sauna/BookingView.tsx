@@ -32,9 +32,9 @@ const BookingView = () => {
     }, [])
 
     const onSubmit = async () => {
-        await api.booking.add(booking)
+        const newBooking = await api.booking.add(booking)
         success('Die Buchungsanfrage wurde gesendet.')
-        navigate('..')
+        navigate(`/bookings/${newBooking.id}`)
     }
 
     return (

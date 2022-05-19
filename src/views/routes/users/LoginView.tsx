@@ -6,7 +6,6 @@ import { useAlert } from '../../shared/AlertProvider'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import PageTitle from '../../../components/base/PageTitle'
 import Button from '../../../components/base/Button'
-import ActivityIndicator from '../../../components/base/ActivityIndicator'
 
 const LoginView = () => {
     const [user, setUser] = useState<LoginCredentials.Request>(LoginCredentials.empty())
