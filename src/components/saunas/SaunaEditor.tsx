@@ -45,8 +45,10 @@ const SaunaEditor = (props: SaunaEditorProps) => {
                     data-testid="input-price"
                     value={'' + sauna.price}
                     type="number"
+                    step={0.1}
                     onChange={newValue => props.onChange?.({ ...sauna, price: +newValue })}
                 />
+                <p className="mt-1 text-sm text-primary-500">Komma bitte als "," eintippen. 5.5 =&gt; 5,5.</p>
                 <Input
                     name="Maximale Temperatur"
                     data-testid="input-maxTemp"
