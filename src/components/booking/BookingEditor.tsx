@@ -4,6 +4,7 @@ import { CheckableNumber } from '../../entities/CheckableNumber'
 import CheckboxLabel from '../base/CheckboxLabel'
 import Input from '../base/Input'
 import { ModifiableDate } from '../../entities/ModifiableDate'
+import Subtitle from '../base/Subtitle'
 
 export type BookingEditorProps = {
     value: Booking.Request
@@ -96,7 +97,7 @@ const BookingEditor = (props: BookingEditorProps) => {
                 )}
             </div>
             <div>
-                <h2 className="text-primary-600 text-2xl font-semibold mb-4"> Extras hinzufügen </h2>
+                <Subtitle className="mb-4"> Extras hinzufügen </Subtitle>
                 <div className="grid gap-x-4 gap-y-2 grid-cols-1 md:grid-cols-2">
                     <CheckboxLabel
                         label="Transportservice"

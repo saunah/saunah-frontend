@@ -20,7 +20,7 @@ const Button = (props: ButtonProps) => {
     const classes =
         `${props.className} py-3 px-5 text-sm font-medium rounded-2xl shadow-lg shadow-primary-900/[0.1] ` +
         (props.disabled
-            ? `text-${color}-900/[0.5] bg-${color}-100 cursor-default`
+            ? `text-${color}-200 bg-${color}-100 cursor-default`
             : `text-${color}-900 bg-${color}-200 hover:bg-${color}-300`)
 
     return (

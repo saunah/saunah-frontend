@@ -1,7 +1,6 @@
-import { InformationCircleIcon, UserCircleIcon } from '@heroicons/react/solid'
+import { InformationCircleIcon } from '@heroicons/react/solid'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import IconButton from '../../../components/base/IconButton'
 import PageTitle from '../../../components/base/PageTitle'
 import Table from '../../../components/base/Table'
 import BookingStateBadge from '../../../components/booking/BookingStateBadge'
