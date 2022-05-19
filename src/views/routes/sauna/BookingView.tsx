@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Button from '../../../components/base/Button'
 import PageTitle from '../../../components/base/PageTitle'
+import Subtitle from '../../../components/base/Subtitle'
 import BookingEditor from '../../../components/booking/BookingEditor'
 import ReceiptTable from '../../../components/booking/ReceiptTable'
 import { Booking } from '../../../entities/Booking'
@@ -40,7 +41,7 @@ const BookingView = () => {
         <div data-testid="booking-view">
             <PageTitle>Buchung anfragen</PageTitle>
             <BookingEditor value={booking} sauna={sauna} onChange={setBooking} />
-            <h2 className="text-primary-600 text-2xl font-semibold mt-6"> Voraussichtlicher Preis </h2>
+            <Subtitle className="mt-4"> Voraussichtlicher Preis </Subtitle>
             <p className="text-primary-500 mb-4">
                 Der angezeigte Preis ist eine Schätzung. Der genaue Preis wird bei der bestätigten Buchung angezeigt.{' '}
             </p>
