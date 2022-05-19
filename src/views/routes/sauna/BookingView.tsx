@@ -5,6 +5,7 @@ import PageTitle from '../../../components/base/PageTitle'
 import Subtitle from '../../../components/base/Subtitle'
 import BookingEditor from '../../../components/booking/BookingEditor'
 import ReceiptTable from '../../../components/booking/ReceiptTable'
+import SaunaCalendar from '../../../components/saunas/SaunaCalendar'
 import { Booking } from '../../../entities/Booking'
 import { Price } from '../../../entities/Price'
 import { Receipt } from '../../../entities/Receipt'
@@ -40,7 +41,11 @@ const BookingView = () => {
     return (
         <div data-testid="booking-view">
             <PageTitle>Buchung anfragen</PageTitle>
-            <BookingEditor value={booking} sauna={sauna} onChange={setBooking} />
+            {sauna?.googleCalendarId && <SaunaCalendar googleCalendarId={sauna.googleCalendarId} />}
+            <div className="mt-4">
+                <Subtitle className="mb-4"> Datum auswählen </Subtitle>
+                <BookingEditor value={booking} sauna={sauna} onChange={setBooking} />
+            </div>
             <Subtitle className="mt-4"> Voraussichtlicher Preis </Subtitle>
             <p className="text-primary-500 mb-4">
                 Der angezeigte Preis ist eine Schätzung. Der genaue Preis wird bei der bestätigten Buchung angezeigt.{' '}
