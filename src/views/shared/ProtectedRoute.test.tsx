@@ -120,6 +120,7 @@ const createWrapper = (isAuthenticated?: boolean, user?: User.Response) => (prop
 const TestRoutes = () => (
     <Routes>
         <Route index element={<span data-testid="parent"> home </span>} />
+        <Route path="/login" element={<span data-testid="parent"> home </span>} />
         <Route
             path="/unprotected"
             element={
