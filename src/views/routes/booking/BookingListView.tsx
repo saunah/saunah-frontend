@@ -1,19 +1,26 @@
+import { InformationCircleIcon, UserCircleIcon } from '@heroicons/react/solid'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import IconButton from '../../../components/base/IconButton'
 import PageTitle from '../../../components/base/PageTitle'
 import Table from '../../../components/base/Table'
 import BookingStateBadge from '../../../components/booking/BookingStateBadge'
 import { Booking } from '../../../entities/Booking'
 import api from '../../../networking/api'
 import { formatPrice } from '../../../utils/format'
+import { useAuth } from '../../shared/AuthProvider'
 
 const BookingListView = () => {
-    const headings = ['Buchungsnr.', 'Sauna', 'Buchungsdatum', 'Preis', 'Buchungs-Status']
-    const [bookings, setBooking] = useState<Booking.Response[]>([])
+    const headings = ['ID', 'Sauna', 'Buchungsdatum', 'Preis', 'Buchungs-Status', '']
+    const [bookings, setBookings] = useState<Booking.Response[]>([])
+    const { isAdmin, isInitialized } = useAuth()
 
     useEffect(() => {
-        api.booking.list().then(setBooking)
-    }, [])
+        if (isInitialized) {
+            if (isAdmin()) api.booking.listAll().then(setBookings)
+            else api.booking.list().then(setBookings)
+        }
+    }, [isInitialized])
 
     return (
         <div data-testid="booking-list-view">
@@ -22,8 +29,9 @@ const BookingListView = () => {
                 headings={headings}
                 elements={bookings.map(booking => {
                     return [
-                        <span>{booking.id}</span>,
-                        <Link to={`/bookings/${booking.id}`}>{booking.sauna.name}</Link>,
+                        <Link to={`/bookings/${booking.id}`}>{booking.id}</Link>,
+                        <Link to={`/saunas/${booking.sauna.id}`}>{booking.sauna.name}</Link>,
+
                         <span>
                             {[
                                 booking.startBookingDate.format('DD.MM.YYYY'),
@@ -32,9 +40,12 @@ const BookingListView = () => {
                             ]}
                         </span>,
                         <span>{formatPrice(booking.endPrice)}</span>,
-                        <div className="flex justify-end">
-                            <BookingStateBadge state={booking.state} />
+                        <div className="flex text-sm">
+                            <BookingStateBadge state={booking.state} small={true} />
                         </div>,
+                        <Link to={`/bookings/${booking.id}`} className="text-right">
+                            <InformationCircleIcon className="w-6 h-6 float-right" />
+                        </Link>,
                     ]
                 })}
             />
