@@ -2,7 +2,7 @@ import PageTitle from '../base/PageTitle'
 
 const Datenschutz = () => {
     return (
-        <div>
+        <div data-testid="datenschutz">
             <PageTitle>Datenschutzerklärung</PageTitle>
             <h2 className="text-primary-600 text-3xl font-bold mb-4">Allgemeiner Hinweis</h2>{' '}
             <p>
