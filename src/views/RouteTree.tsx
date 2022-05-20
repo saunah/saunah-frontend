@@ -20,6 +20,7 @@ import BookingView from './routes/sauna/BookingView'
 import BookingListView from './routes/booking/BookingListView'
 import BookingEditorView from './routes/booking/BookingEditorView'
 import BookingDetailView from './routes/booking/BookingDetailView'
+import Datenschutz from '../components/users/Datenschutz'
 
 const RouteTree = () => {
     return (
@@ -111,6 +112,7 @@ const RouteTree = () => {
                 </Route>
                 <Route path="/register" breadcrumb="Registrieren" element={<RegisterView />} />
                 <Route path="/verify/:token" element={<ActivationView />} breadcrumb="Account aktivieren" />
+                <Route path="/datenschutz" element={<Datenschutz />} />
             </Route>
             <Route path="*" element={<Navigate to={'/'} />}></Route>
         </BreadcrumbRoutes>
