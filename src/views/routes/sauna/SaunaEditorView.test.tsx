@@ -53,7 +53,7 @@ describe('<SaunaEditorView>', () => {
 
         fireEvent.click(screen.getByTestId('submit-button'))
 
-        expect(mock.edit).toBeCalledWith(99, SaunaMock.sampleResponse1)
+        expect(mock.edit).toBeCalledWith(99, SaunaMock.sampleRequest)
         expect(mock.edit).toBeCalledTimes(1)
         expect(mock.add).toBeCalledTimes(0)
         await waitForStateUpdate()

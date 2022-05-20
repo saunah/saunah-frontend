@@ -4,22 +4,22 @@ import PriceEditor from './PriceEditor'
 
 const testPrice: Price.Request = {
     id: null,
-    transportService: 1,
-    washService: 2,
-    saunahImp: 3,
-    deposit: 4,
-    handTowel: 5,
-    wood: 6,
+    transportService: '1',
+    washService: '2',
+    saunahImp: '3',
+    deposit: '4',
+    handTowel: '5',
+    wood: '6',
 }
 
 const edited: Price.Request = {
     id: null,
-    transportService: 11,
-    washService: 22,
-    saunahImp: 33,
-    deposit: 44,
-    handTowel: 55,
-    wood: 66,
+    transportService: '11',
+    washService: '22',
+    saunahImp: '33',
+    deposit: '44',
+    handTowel: '55',
+    wood: '66',
 }
 
 const ignoreKeys = ['id']
@@ -32,7 +32,7 @@ describe('<PriceEditor>', () => {
             if (ignoreKeys.includes(key)) return
             const input = getInputField(key)
             expect(input).toBeInTheDocument()
-            expect(input).toHaveValue((testPrice as any)[key])
+            expect(input).toHaveDisplayValue((testPrice as any)[key])
         })
     })
 
