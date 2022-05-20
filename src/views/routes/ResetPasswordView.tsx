@@ -1,30 +1,27 @@
-import SetNewPaswordForm from '../../components/SetNewPasswordForm'
-import { SetNewPassword } from '../../entities/SetNewPassword'
-import {useParams, useNavigate} from "react-router-dom"
 import { useState } from 'react'
 import { useAlert } from '../shared/AlertProvider'
+import { useNavigate } from 'react-router-dom'
 import api from '../../networking/api'
 import PageTitle from '../../components/base/PageTitle'
+import { ResetPassword } from '../../entities/ResetPassword'
+import ResetPasswordForm from '../../components/users/ResetPasswordForm'
 
 const ResetPasswordView = () => {
-    const params = useParams()
-    const token = params['token']
-    const [newPw, setUser] = useState<SetNewPassword.Request>(SetNewPassword.empty())
     const { success } = useAlert()
     const navigate = useNavigate()
+    const [request, setRequest] = useState<ResetPassword.Request>(ResetPassword.emptyRequest())
 
     const onSubmit = () => {
-        newPw.resetToken = token || ""
-        api.user.setNewPassword(newPw).then(() => {
-            success('Passwort neu gesetzt')
+        api.user.resetPassword(request).then(() => {
+            success('Email wurde versendet')
             navigate('/')
         })
     }
 
     return (
-        <div className="space-y-5" data-testid={'pw-reset-mail-form'}>
-            <PageTitle> Passwort Reset </PageTitle>
-            <SetNewPaswordForm request={newPw} onChange={setUser} onSubmit={onSubmit} />
+        <div data-testid={'reset-password-view'}>
+            <PageTitle>Passwort zurücksetzen</PageTitle>
+            <ResetPasswordForm value={request} onChange={setRequest} onSubmit={onSubmit} />
         </div>
     )
 }

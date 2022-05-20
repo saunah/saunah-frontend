@@ -1,21 +1,21 @@
-export namespace PwResetMailRequest {
+export namespace ResetPassword {
     export type Request = {
-        mailadress: string
+        email: string
     }
 
     export type RemoteRequest = {
         email: string
     }
 
-    export function empty() : Request {
-        return{
-            mailadress: '',
+    export function emptyRequest(): Request {
+        return {
+            email: '',
         }
     }
 
     export function mapOut(credentials: Request): RemoteRequest {
         return {
-            email: credentials.mailadress
+            email: credentials.email,
         }
     }
 }

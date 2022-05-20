@@ -3,10 +3,10 @@ import { User } from '../../entities/User'
 import axios from 'axios'
 import apiRoutes from '../apiRoutes'
 import { LoginCredentials } from '../../entities/LoginCredentials'
-import { PwResetMailRequest } from '../../entities/PwResetMailRequest'
 import { Token } from '../../entities/Token'
 import { mapInArray } from '../../utils/mapping'
-import { SetNewPassword } from '../../entities/SetNewPassword'
+import { ResetPassword } from '../../entities/ResetPassword'
+import { NewPassword } from '../../entities/NewPassword'
 
 export type UserAPI = DeepReadonly<{
     signup(user: User.Request): Promise<void>
@@ -17,8 +17,8 @@ export type UserAPI = DeepReadonly<{
     edit(userId: number, user: User.Request): Promise<User.Response>
     remove(userId: number): Promise<void>
     whoami(): Promise<User.Response>
-    passwordResetMail(credentials : PwResetMailRequest.Request): Promise<void>
-    setNewPassword(credentials : SetNewPassword.Request):Promise<void>
+    resetPassword(credentials: ResetPassword.Request): Promise<void>
+    newPassword(token: string, credentials: NewPassword.Request): Promise<void>
 }>
 
 const UserApi: UserAPI = {
@@ -54,13 +54,13 @@ const UserApi: UserAPI = {
         const response = await axios.get(apiRoutes.user.whoami)
         return User.mapIn(response.data)
     },
-    async passwordResetMail(credentials: PwResetMailRequest.Request): Promise<void> {
-        const requestData = PwResetMailRequest.mapOut(credentials)
+    async resetPassword(credentials: ResetPassword.Request): Promise<void> {
+        const requestData = ResetPassword.mapOut(credentials)
         await axios.post(apiRoutes.user.resetPasswordRequest, requestData)
     },
-    async setNewPassword(credentials: SetNewPassword.Request): Promise<void> {
-        const requestData = SetNewPassword.mapOut(credentials)
-        await axios.post(apiRoutes.user.setNewPassword, requestData)
+    async newPassword(token: string, credentials: NewPassword.Request): Promise<void> {
+        const requestData = NewPassword.mapOut(credentials)
+        await axios.post(apiRoutes.user.resetPasswordSubmit(token), requestData)
     },
 }
 

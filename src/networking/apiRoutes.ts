@@ -10,8 +10,8 @@ const apiRoutes = {
         edit: (userId: number) => `/users/${userId}`,
         remove: (userId: number) => `/users/${userId}`,
         whoami: '/users/whoami',
-        resetPasswordRequest: '/resetPasswordRequest',
-        setNewPassword:'/setNewPassword',
+        resetPasswordRequest: '/reset-password',
+        resetPasswordSubmit: (token: string) => `/reset-password/${token}`,
     },
     sauna: {
         list: '/saunas',
