@@ -28,7 +28,7 @@ const SaunaCard = (props: SaunaCardProps) => {
             </Link>
             <div className="pt-6 px-4">
                 <h2 className="text-3xl font-bold text-primary-600 mb-2">{props.sauna.name}</h2>
-                <p className="text-primary-900">{props.sauna.description}</p>
+                <p className="text-primary-900 text-sm">{props.sauna.description}</p>
 
                 <ButtonLink className="mt-4" to={navLink}>
                     Sauna ansehen

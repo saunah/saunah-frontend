@@ -10,6 +10,7 @@ import { SaunaImage } from '../../../entities/SaunaImage'
 import PageTitle from '../../../components/base/PageTitle'
 import ButtonLink from '../../../components/base/ButtonLink'
 import { useAuth } from '../../shared/AuthProvider'
+import Subtitle from '../../../components/base/Subtitle'
 
 const SaunaDetailView = () => {
     const params = useParams()
@@ -27,21 +28,26 @@ const SaunaDetailView = () => {
     }, [saunaId])
 
     return (
-        <div className="space-y-4" data-testid={'sauna-detail-view'}>
-            <PageTitle>
-                <div className="flex  justify-between">
-                    <span>{sauna?.name}</span>
-                    {isAdmin() && <ButtonLink to="./edit">Sauna bearbeiten</ButtonLink>}
-                </div>
-            </PageTitle>
-            <SaunaImageCarousel images={images} />
-            {sauna && <SaunaDetail sauna={sauna} />}
-            {sauna?.googleCalendarId && (
-                <>
-                    <h3 className="pt-6 text-2xl font-medium">Verfügbarkeit</h3>
-                    <SaunaCaledar googleCalendarId={sauna.googleCalendarId} />
-                </>
-            )}
+        <div>
+            <div className="space-y-4" data-testid={'sauna-detail-view'}>
+                <PageTitle>
+                    <div className="flex justify-between">
+                        <span>{sauna?.name}</span>
+                        {isAdmin() && <ButtonLink to="./edit">Sauna bearbeiten</ButtonLink>}
+                    </div>
+                </PageTitle>
+                <SaunaImageCarousel images={images} />
+                {sauna && <SaunaDetail sauna={sauna} />}
+                {sauna?.googleCalendarId && (
+                    <div>
+                        <Subtitle>Verfügbarkeit</Subtitle>
+                        <SaunaCaledar googleCalendarId={sauna.googleCalendarId} />
+                    </div>
+                )}
+            </div>
+            <div className="mt-6">
+                <ButtonLink to="./book">Buchung anfragen</ButtonLink>
+            </div>
         </div>
     )
 }

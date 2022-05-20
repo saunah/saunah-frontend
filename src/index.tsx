@@ -4,8 +4,12 @@ import './index.css'
 import reportWebVitals from './reportWebVitals'
 import axiosConfig from './networking/axiosConfig'
 import App from './views/App'
+import moment from 'moment'
+import 'moment/locale/de-ch'
 
+moment.locale('de-ch')
 axiosConfig()
+
 ReactDOM.render(
     <React.StrictMode>
         <App />

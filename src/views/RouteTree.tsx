@@ -17,7 +17,12 @@ import UserEditorView from './routes/users/UserEditorView'
 import Overview from './routes/sauna/Overview'
 import UsersListView from './routes/users/UsersListView'
 import { UserRole } from '../entities/UserRole'
-import { Navigate } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
+import BookingView from './routes/sauna/BookingView'
+import BookingListView from './routes/booking/BookingListView'
+import BookingEditorView from './routes/booking/BookingEditorView'
+import BookingDetailView from './routes/booking/BookingDetailView'
+import ProfileView from './routes/users/ProfileView'
 
 const RouteTree = () => {
     return (
@@ -42,6 +47,15 @@ const RouteTree = () => {
                     <Route path=":saunaId" breadcrumb={SaunaDetailBreadcrumb}>
                         <Route index element={<SaunaDetailView />} />
                         <Route
+                            path="book"
+                            breadcrumb="Buchen"
+                            element={
+                                <ProtectedRoute>
+                                    <BookingView />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
                             path="edit"
                             breadcrumb="Bearbeiten"
                             element={
@@ -52,6 +66,29 @@ const RouteTree = () => {
                         />
                     </Route>
                     <Route path="create" breadcrumb="Erstellen" element={<SaunaEditorView />} />
+                </Route>
+                <Route
+                    path="/bookings"
+                    breadcrumb="Buchungen"
+                    element={
+                        <ProtectedRoute>
+                            <Outlet />
+                        </ProtectedRoute>
+                    }
+                >
+                    <Route index element={<BookingListView />} />
+                    <Route path=":bookingId" breadcrumb={'Details'}>
+                        <Route index element={<BookingDetailView />}></Route>
+                        <Route
+                            path="edit"
+                            breadcrumb={'Bearbeiten'}
+                            element={
+                                <ProtectedRoute roles={[UserRole.Local.ADMIN]}>
+                                    <BookingEditorView />
+                                </ProtectedRoute>
+                            }
+                        ></Route>
+                    </Route>
                 </Route>
                 <Route path="/users" breadcrumb="Benutzer">
                     <Route
@@ -72,6 +109,15 @@ const RouteTree = () => {
                         }
                     />
                 </Route>
+                <Route
+                    path="/profile"
+                    breadcrumb={'Profil'}
+                    element={
+                        <ProtectedRoute>
+                            <ProfileView />
+                        </ProtectedRoute>
+                    }
+                />
                 <Route path="/register" breadcrumb="Registrieren" element={<RegisterView />} />
                 <Route path="/verify/:token" element={<ActivationView />} breadcrumb="Account aktivieren" />
             </Route>

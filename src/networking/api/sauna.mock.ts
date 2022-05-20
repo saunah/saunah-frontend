@@ -46,7 +46,7 @@ export namespace SaunaMock {
         id: 1,
         name: 'Sauna 1',
         description: 'Das ist Sauna 1.',
-        price: 100000,
+        price: 20,
         maxTemp: 100,
         numberOfPeople: 10,
         street: 'Hinterstrasse 12',
@@ -71,4 +71,6 @@ export namespace SaunaMock {
         mobile: true,
         googleCalendarId: '',
     }
+
+    export const sampleRequest = Sauna.mapToRequest(sampleResponse1)
 }

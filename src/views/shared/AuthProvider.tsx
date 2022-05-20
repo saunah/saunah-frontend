@@ -11,6 +11,7 @@ export type AuthState = {
     isAuthenticated: () => boolean
     isAdmin: () => boolean
     me: User.Response | null
+    fetchMe: () => Promise<void>
     login: (credentials: LoginCredentials.Request) => Promise<void>
     logout: () => void
 }
@@ -28,17 +29,16 @@ const AuthProvider = (props: AuthProviderProps) => {
     const isAuthenticated = () => user !== null
     const isAdmin = () => user?.role === UserRole.Local.ADMIN
 
+    const fetchMe = () => api.user.whoami().then(setUser)
+
     useEffect(() => {
-        api.user
-            .whoami()
-            .then(setUser)
-            .finally(() => setInitialized(true))
+        fetchMe().finally(() => setInitialized(true))
     }, [])
 
     const login = (credentials: LoginCredentials.Request) =>
         api.user.login(credentials).then(token => {
             cookieStore.set('saunah-token', token.token)
-            return api.user.whoami().then(setUser)
+            return fetchMe()
         })
 
     const logout = () => {
@@ -63,6 +63,7 @@ const AuthProvider = (props: AuthProviderProps) => {
         isAdmin,
         isInitialized,
         me: user,
+        fetchMe,
         login,
         logout,
     }

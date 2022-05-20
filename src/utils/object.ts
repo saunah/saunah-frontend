@@ -34,6 +34,6 @@ export function readonly<T>(object: T): DeepReadonly<T> {
  */
 export type Editable<T> = T extends {}
     ? {
-          readonly [K in keyof T]: T[K] extends number ? number | null : T[K]
+          readonly [K in keyof T]: T[K] extends number | null ? string : T[K]
       }
     : T

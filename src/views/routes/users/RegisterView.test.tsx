@@ -18,7 +18,7 @@ describe('<RegisterView>', () => {
         render(<RegisterView />, { wrapper: wrapper })
 
         const button = screen.getByTestId('submit-button')
-        expect(button).toHaveTextContent('Benutzer registrieren')
+        expect(button).toHaveTextContent('Registrieren')
         fireEvent.click(button)
         expect(mock.signup).toBeCalledTimes(1)
         expect(mock.signup).toBeCalledWith(User.emptyRequest())
