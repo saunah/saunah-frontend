@@ -31,7 +31,7 @@ export default function ProfileView() {
     }
 
     return (
-        <div data-testid="sauna-editor-view">
+        <div data-testid="profile-view">
             <PageTitle>Profil bearbeiten</PageTitle>
             <UserEditor value={user} onChange={setUser} onSubmit={submit} showRole={false} showDelete={false} />
         </div>

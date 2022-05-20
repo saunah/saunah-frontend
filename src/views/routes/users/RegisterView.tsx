@@ -29,7 +29,7 @@ const RegisterView = () => {
         <div>
             <PageTitle>Registrieren</PageTitle>
             <p className="text-primary-500 mb-6">
-                <span>Registrieren Sie ein neues Konto. Sie haben schon ein Konto?</span>
+                <span>Erstellen Sie ein neues Konto. Sie haben schon ein Konto?</span>
                 <Link className="font-medium" to={getLoginRoute()}>
                     {' '}
                     Jetzt einloggen
