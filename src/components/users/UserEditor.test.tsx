@@ -44,7 +44,7 @@ describe('<UserEditor>', () => {
         global.confirm = () => true // stub window.confirm call
         const onDelete = jest.fn()
 
-        render(<UserEditor value={exampleUser} onDelete={onDelete} />)
+        render(<UserEditor value={exampleUser} onDelete={onDelete} showDelete={true} />)
 
         const deleteButton = screen.getByTestId('delete-button')
         fireEvent.click(deleteButton)
@@ -55,7 +55,7 @@ describe('<UserEditor>', () => {
         global.confirm = () => false // stub window.confirm call
         const onDelete = jest.fn()
 
-        render(<UserEditor value={exampleUser} onDelete={onDelete} />)
+        render(<UserEditor value={exampleUser} onDelete={onDelete} showDelete={true} />)
 
         const deleteButton = screen.getByTestId('delete-button')
         fireEvent.click(deleteButton)
@@ -64,7 +64,7 @@ describe('<UserEditor>', () => {
 
     test('Role is updated on change', () => {
         const onChange = jest.fn()
-        render(<UserEditor value={exampleUser} onChange={onChange} isAdmin={true} />)
+        render(<UserEditor value={exampleUser} onChange={onChange} showRole={true} showDelete={true} />)
 
         const selectComponent = screen.getByTestId('select-role')
         const select = within(selectComponent).getByTestId('select')

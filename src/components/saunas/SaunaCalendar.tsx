@@ -6,7 +6,7 @@ import './SaunaCalendar.css'
 
 function SaunaCalendar({ googleCalendarId }: SaunaCalendarProps) {
     return (
-        <div data-testid="sauna-calendar" className="sauna-calendar py-4">
+        <div data-testid="sauna-calendar" className="sauna-calendar">
             <FullCalendar
                 plugins={[dayGridPlugin, googleCalendarPlugin]}
                 googleCalendarApiKey={process.env.REACT_APP_GOOGLE_CALENDAR_API_KEY}

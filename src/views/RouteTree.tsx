@@ -20,6 +20,7 @@ import BookingView from './routes/sauna/BookingView'
 import BookingListView from './routes/booking/BookingListView'
 import BookingEditorView from './routes/booking/BookingEditorView'
 import BookingDetailView from './routes/booking/BookingDetailView'
+import ProfileView from './routes/users/ProfileView'
 
 const RouteTree = () => {
     return (
@@ -109,6 +110,15 @@ const RouteTree = () => {
                         }
                     />
                 </Route>
+                <Route
+                    path="/profile"
+                    breadcrumb={'Profil'}
+                    element={
+                        <ProtectedRoute>
+                            <ProfileView />
+                        </ProtectedRoute>
+                    }
+                />
                 <Route path="/register" breadcrumb="Registrieren" element={<RegisterView />} />
                 <Route path="/verify/:token" element={<ActivationView />} breadcrumb="Account aktivieren" />
             </Route>

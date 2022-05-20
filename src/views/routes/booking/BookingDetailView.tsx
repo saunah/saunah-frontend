@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import Button from '../../../components/base/Button'
 import ButtonLink from '../../../components/base/ButtonLink'
 import PageTitle from '../../../components/base/PageTitle'
+import Subtitle from '../../../components/base/Subtitle'
 import BookingDetails from '../../../components/booking/BookingDetails'
 import BookingStateBadge from '../../../components/booking/BookingStateBadge'
 import ReceiptTable from '../../../components/booking/ReceiptTable'
@@ -68,7 +69,7 @@ const BookingDetailView = () => {
 
             {booking && <BookingDetails booking={booking} user={user} />}
 
-            <h2 className="text-primary-600 text-2xl font-semibold mt-6"> Berechneter Preis </h2>
+            <Subtitle className="mt-6"> Berechneter Preis </Subtitle>
             <p className="text-primary-500 mb-4">
                 Der berechnete Preis setzt sich aus den aufgelisteten Kostenpunkten zusammen.
             </p>
