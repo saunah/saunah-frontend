@@ -1,7 +1,8 @@
-import React, { ReactNode, useReducer } from 'react'
+import React, { ReactNode, useEffect, useReducer } from 'react'
 import { Alert, AlertDuration, ControlledAlert } from '../../entities/Alert'
 import { removeId } from '../../utils/identifiable'
 import AlertComponent from '../../components/base/Alert'
+import { isAxiosSaunahError, SaunahError } from '../../entities/SaunahError'
 
 export type AlertState = {
     /**
@@ -58,6 +59,23 @@ const AlertProvider = (props: AlertProviderProps) => {
     const error = (text: string, duration?: AlertDuration) => push({ text, duration, variant: 'error' })
 
     const alertState: AlertState = { push, success, info, warning, error }
+
+    useEffect(() => {
+        window.onunhandledrejection = (event: PromiseRejectionEvent) => {
+            const catchedError = event.reason
+            console.warn(`Catched error in AlertProvider: ${catchedError?.message || catchedError || 'unknown'}`)
+
+            if (catchedError && isAxiosSaunahError(catchedError)) {
+                const response = SaunahError.mapIn(catchedError.response?.data)
+                error(response.message, AlertDuration.LONG)
+            } else {
+                warning('Etwas ist schiefgelaufen.')
+            }
+
+            // don't print default message to console
+            event.preventDefault()
+        }
+    }, [])
 
     return (
         <AlertContext.Provider value={alertState}>
