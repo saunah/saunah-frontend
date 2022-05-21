@@ -34,9 +34,10 @@ const AuthProvider = (props: AuthProviderProps) => {
 
     useEffect(() => {
         fetchMe()
-            // catch 401 and ignore
             .catch(error => {
-                if (!isAxiosSaunahError(error) || error.response?.status !== 401) throw error
+                if (isAxiosSaunahError(error) && error.response?.status !== 401) {
+                    logout()
+                } else throw error
             })
             .finally(() => setInitialized(true))
     }, [])
@@ -56,10 +57,7 @@ const AuthProvider = (props: AuthProviderProps) => {
         response => response,
         error => {
             const statusCode = error?.response?.status as number | undefined
-            if (statusCode === 401) {
-                cookieStore.remove('saunah-token')
-                setUser(null)
-            }
+            if (statusCode === 401) logout()
             return Promise.reject(error)
         }
     )
