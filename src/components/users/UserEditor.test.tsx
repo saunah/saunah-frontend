@@ -77,7 +77,6 @@ describe('<UserEditor>', () => {
 
     const exampleUser: User.Request = {
         password: 'Password123',
-        repeatPassword: 'Password123',
         lastName: 'Meier',
         firstName: 'Max',
         email: 'example@mail.com',
@@ -96,7 +95,6 @@ describe('<UserEditor>', () => {
         { testId: 'input-zip', label: 'PLZ', value: exampleUser.zip },
         { testId: 'input-place', label: 'Ort', value: exampleUser.place },
         { testId: 'input-password', label: 'Passwort', value: exampleUser.password },
-        { testId: 'input-repeat-password', label: 'Passwort', value: exampleUser.repeatPassword },
     ]
 
     const changeInputs = [
@@ -108,7 +106,6 @@ describe('<UserEditor>', () => {
         { testId: 'input-zip', newValue: '1111', changedProperty: 'zip' },
         { testId: 'input-place', newValue: 'new placename', changedProperty: 'place' },
         { testId: 'input-password', newValue: 'newPassword789?', changedProperty: 'password' },
-        { testId: 'input-repeat-password', newValue: 'newPassword789?', changedProperty: 'repeatPassword' },
     ]
 
     const getLabelOfInput = (testId: string) => {

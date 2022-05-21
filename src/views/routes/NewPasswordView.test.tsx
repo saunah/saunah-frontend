@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { ReactNode } from 'react'
-import { BrowserRouter, MemoryRouter, Route, Routes } from 'react-router-dom'
+import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { NewPassword } from '../../entities/NewPassword'
 import { mockUserAPI } from '../../networking/api'
 import { UserMock } from '../../networking/api/user.mock'

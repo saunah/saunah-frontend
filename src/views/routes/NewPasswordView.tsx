@@ -13,16 +13,19 @@ const NewPasswordView = () => {
     const { success } = useAlert()
     const navigate = useNavigate()
 
-    const onSubmit = () => {
-        api.user.newPassword(token, request).then(() => {
+    const onSubmit = async () => {
+        await api.user.newPassword(token, request).then(() => {
             success('Neues Passwort gesetzt.')
-            navigate('/')
+            navigate('/login')
         })
     }
 
     return (
         <div data-testid={'new-password-view'}>
             <PageTitle>Neues Passwort setzen</PageTitle>
+            <p className="text-primary-500 mb-6">
+                <span>Geben Sie Ihr neues Passwort im untenstehenden Textfeld und speichern Sie die Eingabe.</span>
+            </p>
             <NewPasswordForm value={request} onChange={setRequest} onSubmit={onSubmit} />
         </div>
     )

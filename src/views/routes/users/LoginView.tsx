@@ -15,12 +15,11 @@ const LoginView = () => {
     const [queryParams] = useSearchParams()
     const redirect = queryParams.get('redirect')
 
-    const onSubmit = () => {
-        return login(user).then(() => {
-            success('Login erfolgreich')
-            if (redirect) navigate(decodeURIComponent(redirect))
-            else navigate('/')
-        })
+    const onSubmit = async () => {
+        await login(user)
+        success('Login erfolgreich')
+        if (redirect) navigate(decodeURIComponent(redirect))
+        else navigate('/')
     }
 
     return (

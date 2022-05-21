@@ -112,7 +112,6 @@ export namespace UserMock {
         place: 'Winterthur',
         zip: '8400',
         password: '',
-        repeatPassword: '',
     }
 
     export const sampleRemoteRequest1: User.RemoteRequest = {

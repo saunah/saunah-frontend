@@ -2,13 +2,12 @@ import { Link } from 'react-router-dom'
 import Input from './../base/Input'
 import { LoginCredentials } from '../../entities/LoginCredentials'
 
-// eslint-disable-next-line
-export type LoginCredentials = {
+export type LoginFormProps = {
     user: LoginCredentials.Request
     onChange?: (user: LoginCredentials.Request) => void
 }
 
-const LoginForm = (props: LoginCredentials) => {
+const LoginForm = (props: LoginFormProps) => {
     return (
         <div>
             <div className="space-y-2">
@@ -31,7 +30,7 @@ const LoginForm = (props: LoginCredentials) => {
                 />
             </div>
             <div className="flex justify-end">
-                <Link to="/forgot-password" className="font-semibold text-sm mt-2">
+                <Link to="/reset-password" className="font-semibold text-sm mt-2">
                     Passwort vergessen?
                 </Link>
             </div>

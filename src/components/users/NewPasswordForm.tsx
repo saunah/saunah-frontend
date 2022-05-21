@@ -10,7 +10,7 @@ export type NewPasswordFormProps = {
 
 const NewPasswordForm = (props: NewPasswordFormProps) => {
     return (
-        <div data-testid="new-password-form" className="space-y-2">
+        <div data-testid="new-password-form">
             <div className="space-y-2">
                 <Input
                     data-testid="input-new-password"
@@ -24,7 +24,7 @@ const NewPasswordForm = (props: NewPasswordFormProps) => {
             </div>
             <div className="flex justify-between">
                 <Button className="mt-6" data-testid="button-submit" onClick={props.onSubmit}>
-                    Passwort zurücksetzen
+                    Speichern
                 </Button>
             </div>
         </div>

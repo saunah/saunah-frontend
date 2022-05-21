@@ -60,7 +60,7 @@ const UserApi: UserAPI = {
     },
     async newPassword(token: string, credentials: NewPassword.Request): Promise<void> {
         const requestData = NewPassword.mapOut(credentials)
-        await axios.post(apiRoutes.user.resetPasswordSubmit(token), requestData)
+        await axios.put(apiRoutes.user.resetPasswordSubmit(token), requestData)
     },
 }
 

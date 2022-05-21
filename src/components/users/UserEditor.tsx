@@ -77,17 +77,6 @@ const UserEditor = (props: UserEditorProps) => {
                         //how to check if password is valid?
                     />
                 )}
-                {isCreate && (
-                    <Input
-                        name="Passwort wiederholen"
-                        placeholder="Passwort"
-                        data-testid="input-repeat-password"
-                        value={user.repeatPassword}
-                        type="password"
-                        onChange={repeatPassword => props.onChange?.({ ...user, repeatPassword })}
-                        //how to see if it's the same password?
-                    />
-                )}
                 <Input
                     name="Strasse"
                     placeholder="Strasse"

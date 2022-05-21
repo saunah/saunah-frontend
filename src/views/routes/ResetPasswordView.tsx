@@ -11,16 +11,20 @@ const ResetPasswordView = () => {
     const navigate = useNavigate()
     const [request, setRequest] = useState<ResetPassword.Request>(ResetPassword.emptyRequest())
 
-    const onSubmit = () => {
-        api.user.resetPassword(request).then(() => {
-            success('Email wurde versendet')
-            navigate('/')
-        })
+    const onSubmit = async () => {
+        await api.user.resetPassword(request)
+        success('Email wurde versendet')
+        navigate('/')
     }
 
     return (
         <div data-testid={'reset-password-view'}>
-            <PageTitle>Passwort zurücksetzen</PageTitle>
+            <PageTitle>Passwort vergessen</PageTitle>
+            <p className="text-primary-500 mb-6">
+                <span>
+                    Geben Sie Ihre Email-Adresse an, um einen Link zum Zurücksetzen Ihres Passwortes zu erlhalten.
+                </span>
+            </p>
             <ResetPasswordForm value={request} onChange={setRequest} onSubmit={onSubmit} />
         </div>
     )

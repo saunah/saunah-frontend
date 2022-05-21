@@ -5,7 +5,7 @@ import Input from '../base/Input'
 export type ResetPasswordFormProps = {
     value: ResetPassword.Request
     onChange?: (newValue: ResetPassword.Request) => void
-    onSubmit?: () => void
+    onSubmit?: () => Promise<void>
 }
 
 const ResetPasswordForm = ({ value, onChange, onSubmit }: ResetPasswordFormProps) => {
@@ -23,7 +23,7 @@ const ResetPasswordForm = ({ value, onChange, onSubmit }: ResetPasswordFormProps
             </div>
             <div className="flex justify-between">
                 <Button className="mt-6" data-testid="button-submit" onClick={onSubmit}>
-                    Anfordern
+                    Link senden
                 </Button>
             </div>
         </div>
