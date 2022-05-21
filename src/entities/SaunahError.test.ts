@@ -2,8 +2,9 @@ import { SaunahError } from './SaunahError'
 
 const testRemoteResponse: SaunahError.RemoteResponse = {
     timestamp: '2022-05-18T10:20:00.000+00:00',
-    status: 401,
-    error: 'Völlig falsch',
+    status: 'oops',
+    code: 401,
+    message: 'Völlig falsch',
 }
 
 describe('SaunahError', () => {

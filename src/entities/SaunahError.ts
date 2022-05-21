@@ -4,24 +4,20 @@ import moment, { Moment } from 'moment'
 export namespace SaunahError {
     export type Response = {
         timestamp: Moment
-        status: number
         message: string
     }
 
     export type RemoteResponse = {
         timestamp: string
-        status: number
-        error: string
+        status?: string
+        code?: number
+        message?: string
+        error?: string
     }
 
     export function isRemoteResponse(object: unknown): object is RemoteResponse {
         const error = object as RemoteResponse
-        return (
-            error != null &&
-            typeof error.timestamp === 'string' &&
-            typeof error.status === 'number' &&
-            typeof error.error === 'string'
-        )
+        return error != null && typeof error.timestamp === 'string'
     }
 
     export function mapIn(error: unknown): Response {
@@ -30,8 +26,7 @@ export namespace SaunahError {
 
         return {
             timestamp: moment(error.timestamp),
-            status: error.status,
-            message: error.error,
+            message: error.message || error.error || 'Unknown error',
         }
     }
 }
