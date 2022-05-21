@@ -34,10 +34,9 @@ const AuthProvider = (props: AuthProviderProps) => {
 
     useEffect(() => {
         fetchMe()
+            // catch 401 and ignore
             .catch(error => {
-                if (isAxiosSaunahError(error) && error.response?.status !== 401) {
-                    logout()
-                } else throw error
+                if (!isAxiosSaunahError(error) || error.response?.status !== 401) throw error
             })
             .finally(() => setInitialized(true))
     }, [])
