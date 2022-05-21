@@ -3,7 +3,7 @@ export namespace LoginCredentials {
         username: string
         password: string
     }
-    
+
     export type RemoteRequest = {
         email: string
         password: string
@@ -21,5 +21,5 @@ export namespace LoginCredentials {
             email: credentials.username,
             password: credentials.password,
         }
-    } 
+    }
 }

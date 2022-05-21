@@ -13,8 +13,6 @@ describe('<NewPasswordView>', () => {
     test('is in the document', async () => {
         render(<NewPasswordView />, { wrapper: wrapper })
         expect(screen.getByTestId('new-password-form')).toBeInTheDocument()
-
-        await screen.findByTestId('new-password-view')
     })
 
     test('data gets sent on submit', async () => {
@@ -27,7 +25,7 @@ describe('<NewPasswordView>', () => {
         expect(mock.newPassword).toBeCalledTimes(1)
         expect(mock.newPassword).toBeCalledWith(token, NewPassword.emptyRequest())
 
-        await screen.findByTestId('home-view')
+        await screen.findByTestId('login-view')
     })
 
     const wrapper = (props: { children?: ReactNode }) => {
@@ -37,7 +35,7 @@ describe('<NewPasswordView>', () => {
                     <Routes>
                         <Route path="/reset-password" element={<div data-testid="reset-password-view"></div>} />
                         <Route path="/reset-password/:token" element={props.children} />
-                        <Route path="/" element={<div data-testid="home-view"></div>} />
+                        <Route path="/login" element={<div data-testid="login-view"></div>} />
                     </Routes>
                 </AlertProvider>
             </MemoryRouter>
