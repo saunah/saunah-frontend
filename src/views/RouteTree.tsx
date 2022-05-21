@@ -21,6 +21,8 @@ import BookingListView from './routes/booking/BookingListView'
 import BookingEditorView from './routes/booking/BookingEditorView'
 import BookingDetailView from './routes/booking/BookingDetailView'
 import ProfileView from './routes/users/ProfileView'
+import ResetPasswordView from './routes/ResetPasswordView'
+import NewPasswordView from './routes/NewPasswordView'
 
 const RouteTree = () => {
     return (
@@ -29,11 +31,10 @@ const RouteTree = () => {
                 <Route index element={<Home />} />
                 <Route path="/showroom" breadcrumb="Showroom" element={<Showroom />} />
                 <Route path="/login" breadcrumb="Login" element={<LoginView />} />
-                <Route
-                    path="/forgot-password"
-                    breadcrumb={'Passwort vergessen'}
-                    element={<div>Passwort vergessen</div>}
-                />
+                <Route path="/reset-password" breadcrumb="Password vergessen">
+                    <Route index element={<ResetPasswordView />} />
+                    <Route path=":token" breadcrumb="Passwort setzen" element={<NewPasswordView />} />
+                </Route>
                 <Route path="/saunas" breadcrumb="Saunas">
                     <Route index element={<Overview />} />
                     <Route

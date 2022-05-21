@@ -1,3 +1,5 @@
+import { NewPassword } from '../../entities/NewPassword'
+import { ResetPassword } from '../../entities/ResetPassword'
 import { Token } from '../../entities/Token'
 import { User } from '../../entities/User'
 import { UserRole } from '../../entities/UserRole'
@@ -19,6 +21,8 @@ export namespace UserMock {
             edit: jest.fn(() => Promise.resolve(config?.edit || sampleResponse1)),
             remove: jest.fn(() => Promise.resolve()),
             whoami: jest.fn(() => Promise.resolve(config?.whoami || sampleResponse1)),
+            resetPassword: jest.fn(() => Promise.resolve()),
+            newPassword: jest.fn(() => Promise.resolve()),
         }
     }
 
@@ -31,6 +35,8 @@ export namespace UserMock {
         const editDefer = deferred<User.Response>()
         const removeDefer = deferred<void>()
         const whoamiDefer = deferred<User.Response>()
+        const resetPasswordDefer = deferred<void>()
+        const newPasswordDefer = deferred<void>()
 
         const mock = {
             signup: jest.fn(() => signupDefer.promise),
@@ -41,6 +47,8 @@ export namespace UserMock {
             edit: jest.fn(() => editDefer.promise),
             remove: jest.fn(() => removeDefer.promise),
             whoami: jest.fn(() => whoamiDefer.promise),
+            resetPassword: jest.fn(() => resetPasswordDefer.promise),
+            newPassword: jest.fn(() => newPasswordDefer.promise),
         }
 
         return {
@@ -53,6 +61,8 @@ export namespace UserMock {
             editDefer,
             removeDefer,
             whoamiDefer,
+            resetPasswordDefer,
+            newPasswordDefer,
         }
     }
 
@@ -102,7 +112,6 @@ export namespace UserMock {
         place: 'Winterthur',
         zip: '8400',
         password: '',
-        repeatPassword: '',
     }
 
     export const sampleRemoteRequest1: User.RemoteRequest = {
@@ -115,5 +124,13 @@ export namespace UserMock {
         place: 'Winterthur',
         zip: '8400',
         password: '',
+    }
+
+    export const sampleResetRequest: ResetPassword.Request = {
+        email: 'eins@test.com',
+    }
+
+    export const sampleNewPasswordRequest: NewPassword.Request = {
+        newPassword: 'the-new-passwprd',
     }
 }

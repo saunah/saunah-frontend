@@ -5,6 +5,8 @@ import apiRoutes from '../apiRoutes'
 import { LoginCredentials } from '../../entities/LoginCredentials'
 import { Token } from '../../entities/Token'
 import { mapInArray } from '../../utils/mapping'
+import { ResetPassword } from '../../entities/ResetPassword'
+import { NewPassword } from '../../entities/NewPassword'
 
 export type UserAPI = DeepReadonly<{
     signup(user: User.Request): Promise<void>
@@ -15,6 +17,8 @@ export type UserAPI = DeepReadonly<{
     edit(userId: number, user: User.Request): Promise<User.Response>
     remove(userId: number): Promise<void>
     whoami(): Promise<User.Response>
+    resetPassword(credentials: ResetPassword.Request): Promise<void>
+    newPassword(token: string, credentials: NewPassword.Request): Promise<void>
 }>
 
 const UserApi: UserAPI = {
@@ -49,6 +53,14 @@ const UserApi: UserAPI = {
     async whoami(): Promise<User.Response> {
         const response = await axios.get(apiRoutes.user.whoami)
         return User.mapIn(response.data)
+    },
+    async resetPassword(credentials: ResetPassword.Request): Promise<void> {
+        const requestData = ResetPassword.mapOut(credentials)
+        await axios.post(apiRoutes.user.resetPasswordRequest, requestData)
+    },
+    async newPassword(token: string, credentials: NewPassword.Request): Promise<void> {
+        const requestData = NewPassword.mapOut(credentials)
+        await axios.put(apiRoutes.user.resetPasswordSubmit(token), requestData)
     },
 }
 
