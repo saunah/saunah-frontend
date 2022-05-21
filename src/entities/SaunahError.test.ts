@@ -1,4 +1,3 @@
-import { Sauna } from './Sauna'
 import { SaunahError } from './SaunahError'
 
 const testRemoteResponse: SaunahError.RemoteResponse = {
