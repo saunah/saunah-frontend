@@ -36,12 +36,6 @@ const RegisterView = () => {
                 </Link>
             </p>
             <UserEditor testId="registerform" value={user} isCreate={true} onChange={setUser} onSubmit={signupUser} />
-            <div className="text-primary-500 mb-6 mt-6 flex space-x-4">
-                <span>
-                    Mit der Erstellung eines Kontos stimmen Sie unserer{' '}
-                    <Link to="/datenschutz">Datenschutzerklärung</Link> zu.
-                </span>
-            </div>
         </div>
     )
 }
