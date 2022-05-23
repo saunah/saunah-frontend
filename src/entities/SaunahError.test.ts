@@ -12,9 +12,6 @@ describe('SaunahError', () => {
         expect(SaunahError.isRemoteResponse(null)).toBe(false)
         expect(SaunahError.isRemoteResponse({})).toBe(false)
         expect(SaunahError.isRemoteResponse(testRemoteResponse)).toBe(true)
-        Object.keys(testRemoteResponse).forEach(key => {
-            expect(SaunahError.isRemoteResponse({ ...testRemoteResponse, [key]: undefined })).toBe(false)
-        })
     })
 
     test('mapIn() only works with correct input entity', () => {
