@@ -116,7 +116,10 @@ const UserEditor = (props: UserEditorProps) => {
             <div className="text-primary-500 mb-6 mt-6 flex space-x-4">
                 <span>
                     Mit der Erstellung eines Kontos akzeptieren Sie unsere{' '}
-                    <Link to="/datenschutz">Datenschutzerklärung</Link>
+                    <Link className="font-medium" to="/datenschutz">
+                        Datenschutzerklärung
+                    </Link>
+                    .
                 </span>
             </div>
             <div className="mt-6 flex space-x-4">
