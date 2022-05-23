@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { ReactNode, useEffect, useState } from 'react'
 import { LoginCredentials } from '../../entities/LoginCredentials'
+import { isAxiosSaunahError } from '../../entities/SaunahError'
 import { User } from '../../entities/User'
 import { UserRole } from '../../entities/UserRole'
 import api from '../../networking/api'
@@ -32,7 +33,12 @@ const AuthProvider = (props: AuthProviderProps) => {
     const fetchMe = () => api.user.whoami().then(setUser)
 
     useEffect(() => {
-        fetchMe().finally(() => setInitialized(true))
+        fetchMe()
+            // catch 401 and ignore
+            .catch(error => {
+                if (!isAxiosSaunahError(error) || error.response?.status !== 401) throw error
+            })
+            .finally(() => setInitialized(true))
     }, [])
 
     const login = (credentials: LoginCredentials.Request) =>
@@ -50,10 +56,7 @@ const AuthProvider = (props: AuthProviderProps) => {
         response => response,
         error => {
             const statusCode = error?.response?.status as number | undefined
-            if (statusCode === 401) {
-                cookieStore.remove('saunah-token')
-                setUser(null)
-            }
+            if (statusCode === 401) logout()
             return Promise.reject(error)
         }
     )

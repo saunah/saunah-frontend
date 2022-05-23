@@ -32,9 +32,8 @@ const Button = (props: ButtonProps) => {
         if (maybePromise) {
             setLoading(true)
             const minPromise = new Promise(r => setTimeout(r, 1000))
-            Promise.allSettled([maybePromise, minPromise]).finally(() => {
-                setLoading(false)
-            })
+            Promise.allSettled([maybePromise, minPromise]).then(() => setLoading(false))
+            maybePromise.catch(error => Promise.reject(error))
         }
     }
 
