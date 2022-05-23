@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { User } from '../../entities/User'
 import { UserRole } from '../../entities/UserRole'
 import Button from '../base/Button'
@@ -112,12 +111,6 @@ const UserEditor = (props: UserEditorProps) => {
                         onChange={newValue => props.onChange?.({ ...user, role: newValue })}
                     />
                 )}
-            </div>
-            <div className="mt-6 flex space-x-4">
-                <h2>
-                    Mit der Erstellung eines Kontos stimmen Sie unserer{' '}
-                    <Link to="/datenschutz">Datenschutzerklärung</Link> zu.
-                </h2>
             </div>
             <div className="mt-6 flex space-x-4">
                 <Button

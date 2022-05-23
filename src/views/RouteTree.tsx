@@ -123,7 +123,7 @@ const RouteTree = () => {
                 />
                 <Route path="/register" breadcrumb="Registrieren" element={<RegisterView />} />
                 <Route path="/verify/:token" element={<ActivationView />} breadcrumb="Account aktivieren" />
-                <Route path="/datenschutz" element={<Datenschutz />} />
+                <Route path="/datenschutz" breadcrumb="Datenschutz" element={<Datenschutz />} />
             </Route>
             <Route path="*" element={<Navigate to={'/'} />}></Route>
         </BreadcrumbRoutes>
