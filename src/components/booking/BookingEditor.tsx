@@ -4,6 +4,7 @@ import { CheckableNumber } from '../../entities/CheckableNumber'
 import CheckboxLabel from '../base/CheckboxLabel'
 import Input from '../base/Input'
 import { ModifiableDate } from '../../entities/ModifiableDate'
+import Subtitle from '../base/Subtitle'
 
 export type BookingEditorProps = {
     value: Booking.Request
@@ -23,7 +24,7 @@ const BookingEditor = (props: BookingEditorProps) => {
     }
 
     function updateNumber(newValue: string, key: keyof CheckableNumber.Extract<Booking.Request>) {
-        onChange({ ...booking, [key]: { checked: booking[key].checked, number: +newValue } })
+        onChange({ ...booking, [key]: { checked: booking[key].checked, number: newValue } })
     }
 
     function updateDate(newValue: string, key: keyof ModifiableDate.Extract<Booking.Request>) {
@@ -79,13 +80,8 @@ const BookingEditor = (props: BookingEditorProps) => {
                         <Input
                             name="Preisreduktion"
                             type="number"
-                            value={'' + booking.discount}
-                            onChange={newValue => {
-                                // this ugly logic is somehow needed to deal with negative values (if the user start to type the minus first)
-                                if (newValue.length === 0)
-                                    props.onChange?.({ ...booking, discount: newValue as any as number })
-                                else props.onChange?.({ ...booking, discount: +newValue })
-                            }}
+                            value={booking.discount}
+                            onChange={newValue => props.onChange?.({ ...booking, discount: newValue })}
                         />
                         <Input
                             name="Bemerkung zur Preisanpassung"
@@ -96,7 +92,7 @@ const BookingEditor = (props: BookingEditorProps) => {
                 )}
             </div>
             <div>
-                <h2 className="text-primary-600 text-2xl font-semibold mb-4"> Extras hinzufügen </h2>
+                <Subtitle className="mb-4"> Extras hinzufügen </Subtitle>
                 <div className="grid gap-x-4 gap-y-2 grid-cols-1 md:grid-cols-2">
                     <CheckboxLabel
                         label="Transportservice"
@@ -110,7 +106,7 @@ const BookingEditor = (props: BookingEditorProps) => {
                             type="number"
                             min="0"
                             disabled={!booking.transportService.checked}
-                            value={booking.transportService.number + ''}
+                            value={booking.transportService.number}
                             onChange={newValue => updateNumber(newValue, 'transportService')}
                         />
                         <p
@@ -141,7 +137,7 @@ const BookingEditor = (props: BookingEditorProps) => {
                         type="number"
                         min="0"
                         disabled={!booking.handTowel.checked}
-                        value={booking.handTowel.number + ''}
+                        value={booking.handTowel.number}
                         onChange={newValue => updateNumber(newValue, 'handTowel')}
                     />
                     <CheckboxLabel
@@ -155,7 +151,7 @@ const BookingEditor = (props: BookingEditorProps) => {
                         type="number"
                         min="0"
                         disabled={!booking.wood.checked}
-                        value={booking.wood.number + ''}
+                        value={booking.wood.number}
                         onChange={newValue => updateNumber(newValue, 'wood')}
                     />
                     <CheckboxLabel
@@ -169,7 +165,7 @@ const BookingEditor = (props: BookingEditorProps) => {
                         type="number"
                         min="0"
                         disabled={!booking.saunahImp.checked}
-                        value={booking.saunahImp.number + ''}
+                        value={booking.saunahImp.number}
                         onChange={newValue => updateNumber(newValue, 'saunahImp')}
                     />
                     <div className="md:col-span-2">

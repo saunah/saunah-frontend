@@ -28,17 +28,17 @@ function UserEditorView() {
     }, [userId])
 
     const { success } = useAlert()
-    const submit = () => {
+    const submit = async () => {
         if (userId)
-            api.user.edit(userId, user).then(() => {
+            await api.user.edit(userId, user).then(() => {
                 success('Der Benutzer wurde erfolgreich gespeichert.')
                 navigate(`/users`)
             })
     }
 
-    const deleteUser = () => {
+    const deleteUser = async () => {
         if (userId)
-            api.user.remove(userId).then(() => {
+            await api.user.remove(userId).then(() => {
                 success('Der Benutzer wurde gelöscht.')
                 navigate('/users')
             })
@@ -47,7 +47,14 @@ function UserEditorView() {
     return (
         <div data-testid="sauna-editor-view">
             <PageTitle>Benutzer bearbeiten</PageTitle>
-            <UserEditor value={user} onChange={setUser} onSubmit={submit} isAdmin={true} onDelete={deleteUser} />
+            <UserEditor
+                value={user}
+                onChange={setUser}
+                onSubmit={submit}
+                showRole={true}
+                showDelete={true}
+                onDelete={deleteUser}
+            />
         </div>
     )
 }

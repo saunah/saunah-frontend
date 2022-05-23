@@ -85,6 +85,7 @@ const defaultAuthState = (isAuthenticated?: boolean, user?: User.Response): Auth
         logout: () => {
             // Ignore logout
         },
+        fetchMe: () => Promise.resolve(),
         me: user || null,
     }
 }
@@ -119,6 +120,7 @@ const createWrapper = (isAuthenticated?: boolean, user?: User.Response) => (prop
 const TestRoutes = () => (
     <Routes>
         <Route index element={<span data-testid="parent"> home </span>} />
+        <Route path="/login" element={<span data-testid="parent"> home </span>} />
         <Route
             path="/unprotected"
             element={

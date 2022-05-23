@@ -1,4 +1,3 @@
-import { MissingPropertyError } from '../utils/Error'
 import { Identifiable, MaybeIdentifiable } from '../utils/identifiable'
 import { Editable } from '../utils/object'
 
@@ -97,11 +96,11 @@ export namespace Sauna {
             id: null,
             name: '',
             description: '',
-            price: null,
-            maxTemp: null,
-            numberOfPeople: null,
+            price: '',
+            maxTemp: '',
+            numberOfPeople: '',
             street: '',
-            zip: null,
+            zip: '',
             location: '',
             type: '',
             mobile: false,
@@ -115,7 +114,20 @@ export namespace Sauna {
      * @returns the mapped Sauna.Request
      */
     export function mapToRequest(sauna: Response): Request {
-        return sauna
+        return {
+            id: sauna.id,
+            name: sauna.name,
+            description: sauna.description,
+            price: '' + sauna.price,
+            maxTemp: '' + sauna.maxTemp,
+            numberOfPeople: '' + sauna.numberOfPeople,
+            street: sauna.street,
+            zip: '' + sauna.zip,
+            location: sauna.location,
+            type: sauna.type,
+            mobile: sauna.mobile,
+            googleCalendarId: sauna.googleCalendarId,
+        }
     }
 
     /**
@@ -124,21 +136,15 @@ export namespace Sauna {
      * @returns the mapped out Sauna.RemoteRequest
      */
     export function mapOut(sauna: Request): RemoteRequest {
-        if (sauna.price == null) throw new MissingPropertyError('Sauna.Request', 'Sauna.RemoteRequest', 'price')
-        if (sauna.maxTemp == null) throw new MissingPropertyError('Sauna.Request', 'Sauna.RemoteRequest', 'maxTemp')
-        if (sauna.numberOfPeople == null)
-            throw new MissingPropertyError('Sauna.Request', 'Sauna.RemoteRequest', 'numberOfPeople')
-        if (sauna.zip == null) throw new MissingPropertyError('Sauna.Request', 'Sauna.RemoteRequest', 'zip')
-
         return {
             id: sauna.id,
             name: sauna.name,
             description: sauna.description,
-            price: sauna.price,
-            maxTemp: sauna.maxTemp,
-            numberOfPeople: sauna.numberOfPeople,
+            price: +sauna.price,
+            maxTemp: +sauna.maxTemp,
+            numberOfPeople: +sauna.numberOfPeople,
             street: sauna.street,
-            zip: sauna.zip,
+            zip: +sauna.zip,
             location: sauna.location,
             type: sauna.type,
             mobile: sauna.mobile,

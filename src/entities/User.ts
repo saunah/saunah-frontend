@@ -31,7 +31,6 @@ export namespace User {
      */
     export type Request = {
         password: string
-        repeatPassword: string
     } & Base
 
     /**
@@ -96,7 +95,6 @@ export namespace User {
             place: '',
             zip: '',
             password: '',
-            repeatPassword: '',
         }
     }
 
@@ -145,7 +143,6 @@ export namespace User {
             zip: user.zip,
             role: user.role,
             password: '',
-            repeatPassword: '',
         }
     }
 

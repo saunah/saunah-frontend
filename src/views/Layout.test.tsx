@@ -9,6 +9,7 @@ import AuthProvider from './shared/AuthProvider'
 describe('<Layout>', () => {
     beforeEach(() => {
         mockUserAPI(UserMock.simpleMock())
+        window.scrollTo = jest.fn()
     })
 
     test('Renders AppContainer', async () => {

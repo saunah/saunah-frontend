@@ -9,6 +9,7 @@ import SaunaImageEditor from '../../../components/saunas/SaunaImageEditor'
 import SaunaImageUploader from '../../../components/saunas/SaunaImageUploader'
 import { SaunaImage } from '../../../entities/SaunaImage'
 import PageTitle from '../../../components/base/PageTitle'
+import Subtitle from '../../../components/base/Subtitle'
 
 const SaunaEditorView = () => {
     const params = useParams()
@@ -71,8 +72,8 @@ const SaunaEditorView = () => {
         <div data-testid="sauna-editor-view">
             <PageTitle>{saunaId == null ? 'Sauna erstellen' : 'Sauna bearbeiten'}</PageTitle>
             <div className={'grid gap-8 grid-cols-1 ' + (saunaId ? 'lg:grid-cols-2' : '')}>
-                <div>
-                    <h2 className="text-xl font-medium text-primary-700 mb-4"> Informationen </h2>
+                <div className="space-y-4">
+                    <Subtitle>Informationen</Subtitle>
                     <SaunaEditor
                         value={sauna}
                         onChange={setSauna}
@@ -82,8 +83,8 @@ const SaunaEditorView = () => {
                     />
                 </div>
                 {saunaId && (
-                    <div>
-                        <h2 className="text-xl font-medium text-primary-700 mb-4"> Bilder </h2>
+                    <div className="space-y-4">
+                        <Subtitle>Bilder</Subtitle>
                         {images.length > 0 && (
                             <SaunaImageEditor className="mb-4" images={images} onRemove={removeImage} />
                         )}

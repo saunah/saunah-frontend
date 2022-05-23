@@ -35,4 +35,6 @@ export namespace PriceMock {
         handTowel: 55,
         wood: 66,
     }
+
+    export const sampleRequest1 = Price.mapToRequest(sampleResponse1)
 }

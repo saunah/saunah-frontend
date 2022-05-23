@@ -24,64 +24,75 @@ const SaunaEditor = (props: SaunaEditorProps) => {
             <div className="space-y-2">
                 <Input
                     name="Name"
+                    placeholder="Name"
                     data-testid="input-name"
                     value={sauna.name}
                     onChange={newValue => props.onChange?.({ ...sauna, name: newValue })}
                 />
                 <Input
                     name="Beschreibung"
+                    placeholder="Beschreibung"
                     data-testid="input-description"
                     value={sauna.description}
                     onChange={newValue => props.onChange?.({ ...sauna, description: newValue })}
                 />
                 <Input
                     name="Art"
+                    placeholder="Art"
                     data-testid="input-type"
                     value={sauna.type}
                     onChange={newValue => props.onChange?.({ ...sauna, type: newValue })}
                 />
                 <Input
-                    name="Preis"
+                    name="Preis / Stunde"
+                    placeholder="Preis / Stunde"
                     data-testid="input-price"
-                    value={'' + sauna.price}
+                    value={sauna.price}
                     type="number"
-                    onChange={newValue => props.onChange?.({ ...sauna, price: +newValue })}
+                    step={0.1}
+                    onChange={newValue => props.onChange?.({ ...sauna, price: newValue })}
                 />
                 <Input
                     name="Maximale Temperatur"
+                    placeholder="Maximale Temperatur"
                     data-testid="input-maxTemp"
-                    value={'' + sauna.maxTemp}
+                    value={sauna.maxTemp}
                     type="number"
-                    onChange={newValue => props.onChange?.({ ...sauna, maxTemp: +newValue })}
+                    onChange={newValue => props.onChange?.({ ...sauna, maxTemp: newValue })}
                 />
                 <Input
                     name="Anzahl Personen"
+                    placeholder="Anzahl Personen"
                     data-testid="input-numberOfPeople"
-                    value={'' + sauna.numberOfPeople}
+                    value={sauna.numberOfPeople}
                     type="number"
-                    onChange={newValue => props.onChange?.({ ...sauna, numberOfPeople: +newValue })}
+                    onChange={newValue => props.onChange?.({ ...sauna, numberOfPeople: newValue })}
                 />
                 <Input
                     name="Adresse"
+                    placeholder="Adresse"
                     data-testid="input-street"
                     value={sauna.street}
                     onChange={newValue => props.onChange?.({ ...sauna, street: newValue })}
                 />
                 <Input
                     name="PLZ"
+                    placeholder="PLZ"
                     data-testid="input-zip"
-                    value={'' + sauna.zip}
+                    value={sauna.zip}
                     type="number"
-                    onChange={newValue => props.onChange?.({ ...sauna, zip: +newValue })}
+                    onChange={newValue => props.onChange?.({ ...sauna, zip: newValue })}
                 />
                 <Input
                     name="Ort"
+                    placeholder="Ort"
                     data-testid="input-location"
                     value={sauna.location}
                     onChange={newValue => props.onChange?.({ ...sauna, location: newValue })}
                 />
                 <Input
                     name="Google Calendar ID"
+                    placeholder="Google Calendar ID"
                     data-testid="input-googleCalendarId"
                     value={sauna.googleCalendarId}
                     onChange={newValue => props.onChange?.({ ...sauna, googleCalendarId: newValue })}

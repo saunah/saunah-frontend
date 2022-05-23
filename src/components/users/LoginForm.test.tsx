@@ -26,7 +26,7 @@ describe('<LoginForm>', () => {
             </BrowserRouter>
         )
         const label = getLabelOfInput('username-input')
-        expect(label).toHaveTextContent('Benutzername')
+        expect(label).toHaveTextContent('Email')
 
         const input = getFieldOfInput('username-input')
         expect(input).toHaveValue(testUser.username)

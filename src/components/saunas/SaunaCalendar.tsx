@@ -3,16 +3,19 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import googleCalendarPlugin from '@fullcalendar/google-calendar'
 import deLocale from '@fullcalendar/core/locales/de'
 import './SaunaCalendar.css'
+import { useMemo } from 'react'
 
 function SaunaCalendar({ googleCalendarId }: SaunaCalendarProps) {
+    const memorizedEvents = useMemo(() => {
+        return { googleCalendarId }
+    }, [])
+
     return (
-        <div data-testid="sauna-calendar" className="sauna-calendar py-4">
+        <div data-testid="sauna-calendar" className="sauna-calendar">
             <FullCalendar
                 plugins={[dayGridPlugin, googleCalendarPlugin]}
                 googleCalendarApiKey={process.env.REACT_APP_GOOGLE_CALENDAR_API_KEY}
-                events={{
-                    googleCalendarId,
-                }}
+                events={memorizedEvents}
                 eventDataTransform={function (event) {
                     event.url = ''
                     return event
