@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Button from '../../../components/base/Button'
 import PageTitle from '../../../components/base/PageTitle'
 import Subtitle from '../../../components/base/Subtitle'
@@ -51,6 +51,15 @@ const BookingView = () => {
                 Der angezeigte Preis ist eine Schätzung. Der genaue Preis wird bei der bestätigten Buchung angezeigt.{' '}
             </p>
             {receipt && <div className="mt-6">{<ReceiptTable receipt={receipt} />}</div>}
+            <div className="text-primary-500 mt-6 flex space-x-4">
+                <span>
+                    Mit der Anfrage dieser Buchung akzeptieren Sie unsere{' '}
+                    <Link className="font-medium" to="/datenschutz">
+                        Datenschutzerklärung
+                    </Link>
+                    .
+                </span>
+            </div>
             <Button className="mt-6" data-testid="submit-button" onClick={onSubmit}>
                 Buchung anfragen
             </Button>

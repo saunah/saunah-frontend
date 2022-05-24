@@ -23,6 +23,7 @@ import BookingDetailView from './routes/booking/BookingDetailView'
 import ProfileView from './routes/users/ProfileView'
 import ResetPasswordView from './routes/ResetPasswordView'
 import NewPasswordView from './routes/NewPasswordView'
+import Datenschutz from '../components/users/Datenschutz'
 
 const RouteTree = () => {
     return (
@@ -122,6 +123,7 @@ const RouteTree = () => {
                 />
                 <Route path="/register" breadcrumb="Registrieren" element={<RegisterView />} />
                 <Route path="/verify/:token" element={<ActivationView />} breadcrumb="Account aktivieren" />
+                <Route path="/datenschutz" breadcrumb="Datenschutz" element={<Datenschutz />} />
             </Route>
             <Route path="*" element={<Navigate to={'/'} />}></Route>
         </BreadcrumbRoutes>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { User } from '../../entities/User'
 import { UserRole } from '../../entities/UserRole'
 import Button from '../base/Button'
@@ -111,6 +112,15 @@ const UserEditor = (props: UserEditorProps) => {
                         onChange={newValue => props.onChange?.({ ...user, role: newValue })}
                     />
                 )}
+            </div>
+            <div className="text-primary-500 mb-6 mt-6 flex space-x-4">
+                <span>
+                    Mit der Erstellung eines Kontos akzeptieren Sie unsere{' '}
+                    <Link className="font-medium" to="/datenschutz">
+                        Datenschutzerklärung
+                    </Link>
+                    .
+                </span>
             </div>
             <div className="mt-6 flex space-x-4">
                 <Button
