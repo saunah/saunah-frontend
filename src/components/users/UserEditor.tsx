@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { User } from '../../entities/User'
 import { UserRole } from '../../entities/UserRole'
 import Button from '../base/Button'
@@ -10,7 +11,8 @@ export type UserEditorProps = {
     onSubmit?: () => void
     onDelete?: () => void
     isCreate?: boolean
-    isAdmin?: boolean
+    showRole?: boolean
+    showDelete?: boolean
     testId?: string
 }
 
@@ -21,7 +23,6 @@ export type UserEditorProps = {
 const UserEditor = (props: UserEditorProps) => {
     const user = props.value
     const isCreate = props.isCreate || false
-    const isAdmin = props.isAdmin || true
 
     const onDelete = () => {
         const confirm = window.confirm('Möchten Sie den Benutzer wirklich unwiderruflich löschen?')
@@ -77,17 +78,6 @@ const UserEditor = (props: UserEditorProps) => {
                         //how to check if password is valid?
                     />
                 )}
-                {isCreate && (
-                    <Input
-                        name="Passwort wiederholen"
-                        placeholder="Passwort"
-                        data-testid="input-repeat-password"
-                        value={user.repeatPassword}
-                        type="password"
-                        onChange={repeatPassword => props.onChange?.({ ...user, repeatPassword })}
-                        //how to see if it's the same password?
-                    />
-                )}
                 <Input
                     name="Strasse"
                     placeholder="Strasse"
@@ -113,7 +103,7 @@ const UserEditor = (props: UserEditorProps) => {
                     autoComplete={isCreate ? 'country-name' : undefined}
                     onChange={newValue => props.onChange?.({ ...user, place: newValue })}
                 />
-                {!isCreate && isAdmin && (
+                {!isCreate && props.showRole && (
                     <Select
                         name="Rolle"
                         values={[UserRole.Local.ADMIN, UserRole.Local.USER]}
@@ -123,13 +113,24 @@ const UserEditor = (props: UserEditorProps) => {
                     />
                 )}
             </div>
+            <div className="text-primary-500 mb-6 mt-6 flex space-x-4">
+                <span>
+                    Mit der Erstellung eines Kontos akzeptieren Sie unsere{' '}
+                    <Link className="font-medium" to="/datenschutz">
+                        Datenschutzerklärung
+                    </Link>
+                    .
+                </span>
+            </div>
             <div className="mt-6 flex space-x-4">
                 <Button
-                    title={isCreate ? 'Benutzer registrieren' : 'Speichern'}
+                    title={isCreate ? 'Registrieren' : 'Speichern'}
                     data-testid="submit-button"
                     onClick={props.onSubmit}
                 />
-                {!isCreate && <Button title="Löschen" data-testid="delete-button" onClick={onDelete} color="red" />}
+                {!isCreate && props.showDelete && (
+                    <Button title="Löschen" data-testid="delete-button" onClick={onDelete} color="red" />
+                )}
             </div>
         </div>
     )

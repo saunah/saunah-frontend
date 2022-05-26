@@ -1,11 +1,16 @@
 import { render, screen, within, fireEvent } from '@testing-library/react'
+import { BrowserRouter } from 'react-router-dom'
 import { User } from '../../entities/User'
 import { UserRole } from '../../entities/UserRole'
 import UserEditor from './UserEditor'
 
 describe('<UserEditor>', () => {
     test('show input correctly', () => {
-        render(<UserEditor value={exampleUser} isCreate={true} />)
+        render(
+            <BrowserRouter>
+                <UserEditor value={exampleUser} isCreate={true} />
+            </BrowserRouter>
+        )
 
         inputs.forEach(input => {
             const label = getLabelOfInput(input.testId)
@@ -18,7 +23,11 @@ describe('<UserEditor>', () => {
 
     test('input changes correctly', () => {
         const onChange = jest.fn()
-        render(<UserEditor value={exampleUser} onChange={onChange} isCreate={true} />)
+        render(
+            <BrowserRouter>
+                <UserEditor value={exampleUser} onChange={onChange} isCreate={true} />
+            </BrowserRouter>
+        )
 
         changeInputs.forEach(input => {
             const inputValue = getFieldOfInput(input.testId)
@@ -33,7 +42,11 @@ describe('<UserEditor>', () => {
 
     test('onClick event is called on click submit', () => {
         const onClick = jest.fn()
-        render(<UserEditor value={exampleUser} onSubmit={onClick} />)
+        render(
+            <BrowserRouter>
+                <UserEditor value={exampleUser} onSubmit={onClick} />
+            </BrowserRouter>
+        )
 
         const button = screen.getByTestId('submit-button')
         fireEvent.click(button)
@@ -44,7 +57,11 @@ describe('<UserEditor>', () => {
         global.confirm = () => true // stub window.confirm call
         const onDelete = jest.fn()
 
-        render(<UserEditor value={exampleUser} onDelete={onDelete} />)
+        render(
+            <BrowserRouter>
+                <UserEditor value={exampleUser} onDelete={onDelete} showDelete={true} />
+            </BrowserRouter>
+        )
 
         const deleteButton = screen.getByTestId('delete-button')
         fireEvent.click(deleteButton)
@@ -55,7 +72,11 @@ describe('<UserEditor>', () => {
         global.confirm = () => false // stub window.confirm call
         const onDelete = jest.fn()
 
-        render(<UserEditor value={exampleUser} onDelete={onDelete} />)
+        render(
+            <BrowserRouter>
+                <UserEditor value={exampleUser} onDelete={onDelete} showDelete={true} />
+            </BrowserRouter>
+        )
 
         const deleteButton = screen.getByTestId('delete-button')
         fireEvent.click(deleteButton)
@@ -64,7 +85,11 @@ describe('<UserEditor>', () => {
 
     test('Role is updated on change', () => {
         const onChange = jest.fn()
-        render(<UserEditor value={exampleUser} onChange={onChange} isAdmin={true} />)
+        render(
+            <BrowserRouter>
+                <UserEditor value={exampleUser} onChange={onChange} showRole={true} showDelete={true} />
+            </BrowserRouter>
+        )
 
         const selectComponent = screen.getByTestId('select-role')
         const select = within(selectComponent).getByTestId('select')
@@ -77,7 +102,6 @@ describe('<UserEditor>', () => {
 
     const exampleUser: User.Request = {
         password: 'Password123',
-        repeatPassword: 'Password123',
         lastName: 'Meier',
         firstName: 'Max',
         email: 'example@mail.com',
@@ -96,7 +120,6 @@ describe('<UserEditor>', () => {
         { testId: 'input-zip', label: 'PLZ', value: exampleUser.zip },
         { testId: 'input-place', label: 'Ort', value: exampleUser.place },
         { testId: 'input-password', label: 'Passwort', value: exampleUser.password },
-        { testId: 'input-repeat-password', label: 'Passwort', value: exampleUser.repeatPassword },
     ]
 
     const changeInputs = [
@@ -108,7 +131,6 @@ describe('<UserEditor>', () => {
         { testId: 'input-zip', newValue: '1111', changedProperty: 'zip' },
         { testId: 'input-place', newValue: 'new placename', changedProperty: 'place' },
         { testId: 'input-password', newValue: 'newPassword789?', changedProperty: 'password' },
-        { testId: 'input-repeat-password', newValue: 'newPassword789?', changedProperty: 'repeatPassword' },
     ]
 
     const getLabelOfInput = (testId: string) => {

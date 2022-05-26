@@ -46,7 +46,7 @@ export namespace Receipt {
                 wood: CheckableNumber.mapToNumber(booking.wood) || 0,
                 washService: booking.washService,
                 deposit: booking.deposit,
-                discount: booking.discount || 0,
+                discount: booking.discount ? +booking.discount : 0,
             },
             prices: {
                 hourlyRate: sauna.price,

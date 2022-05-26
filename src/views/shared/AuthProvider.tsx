@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { ReactNode, useEffect, useState } from 'react'
 import { LoginCredentials } from '../../entities/LoginCredentials'
+import { isAxiosSaunahError } from '../../entities/SaunahError'
 import { User } from '../../entities/User'
 import { UserRole } from '../../entities/UserRole'
 import api from '../../networking/api'
@@ -11,6 +12,7 @@ export type AuthState = {
     isAuthenticated: () => boolean
     isAdmin: () => boolean
     me: User.Response | null
+    fetchMe: () => Promise<void>
     login: (credentials: LoginCredentials.Request) => Promise<void>
     logout: () => void
 }
@@ -28,17 +30,21 @@ const AuthProvider = (props: AuthProviderProps) => {
     const isAuthenticated = () => user !== null
     const isAdmin = () => user?.role === UserRole.Local.ADMIN
 
+    const fetchMe = () => api.user.whoami().then(setUser)
+
     useEffect(() => {
-        api.user
-            .whoami()
-            .then(setUser)
+        fetchMe()
+            // catch 401 and ignore
+            .catch(error => {
+                if (!isAxiosSaunahError(error) || error.response?.status !== 401) throw error
+            })
             .finally(() => setInitialized(true))
     }, [])
 
     const login = (credentials: LoginCredentials.Request) =>
         api.user.login(credentials).then(token => {
             cookieStore.set('saunah-token', token.token)
-            return api.user.whoami().then(setUser)
+            return fetchMe()
         })
 
     const logout = () => {
@@ -50,10 +56,7 @@ const AuthProvider = (props: AuthProviderProps) => {
         response => response,
         error => {
             const statusCode = error?.response?.status as number | undefined
-            if (statusCode === 401) {
-                cookieStore.remove('saunah-token')
-                setUser(null)
-            }
+            if (statusCode === 401) logout()
             return Promise.reject(error)
         }
     )
@@ -63,6 +66,7 @@ const AuthProvider = (props: AuthProviderProps) => {
         isAdmin,
         isInitialized,
         me: user,
+        fetchMe,
         login,
         logout,
     }

@@ -5,7 +5,7 @@ const priceFormatter = Intl.NumberFormat('en', {
 
 export function formatPrice(price: number): string {
     if (price >= 0) return `CHF ${priceFormatter.format(price)}`
-    else return `- CHF ${priceFormatter.format(price)}`
+    else return `- CHF ${priceFormatter.format(Math.abs(price))}`
 }
 
 const minuteFormatter = Intl.NumberFormat('en', {

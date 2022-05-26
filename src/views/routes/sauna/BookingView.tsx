@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Button from '../../../components/base/Button'
 import PageTitle from '../../../components/base/PageTitle'
+import Subtitle from '../../../components/base/Subtitle'
 import BookingEditor from '../../../components/booking/BookingEditor'
 import ReceiptTable from '../../../components/booking/ReceiptTable'
+import SaunaCalendar from '../../../components/saunas/SaunaCalendar'
 import { Booking } from '../../../entities/Booking'
 import { Price } from '../../../entities/Price'
 import { Receipt } from '../../../entities/Receipt'
@@ -31,20 +33,33 @@ const BookingView = () => {
     }, [])
 
     const onSubmit = async () => {
-        await api.booking.add(booking)
+        const newBooking = await api.booking.add(booking)
         success('Die Buchungsanfrage wurde gesendet.')
-        navigate('..')
+        navigate(`/bookings/${newBooking.id}`)
     }
 
     return (
         <div data-testid="booking-view">
             <PageTitle>Buchung anfragen</PageTitle>
-            <BookingEditor value={booking} sauna={sauna} onChange={setBooking} />
-            <h2 className="text-primary-600 text-2xl font-semibold mt-6"> Voraussichtlicher Preis </h2>
+            {sauna?.googleCalendarId && <SaunaCalendar googleCalendarId={sauna.googleCalendarId} />}
+            <div className="mt-4">
+                <Subtitle className="mb-4"> Datum auswählen </Subtitle>
+                <BookingEditor value={booking} sauna={sauna} onChange={setBooking} />
+            </div>
+            <Subtitle className="mt-4"> Voraussichtlicher Preis </Subtitle>
             <p className="text-primary-500 mb-4">
                 Der angezeigte Preis ist eine Schätzung. Der genaue Preis wird bei der bestätigten Buchung angezeigt.{' '}
             </p>
             {receipt && <div className="mt-6">{<ReceiptTable receipt={receipt} />}</div>}
+            <div className="text-primary-500 mt-6 flex space-x-4">
+                <span>
+                    Mit der Anfrage dieser Buchung akzeptieren Sie unsere{' '}
+                    <Link className="font-medium" to="/datenschutz">
+                        Datenschutzerklärung
+                    </Link>
+                    .
+                </span>
+            </div>
             <Button className="mt-6" data-testid="submit-button" onClick={onSubmit}>
                 Buchung anfragen
             </Button>

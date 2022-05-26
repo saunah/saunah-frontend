@@ -71,4 +71,6 @@ export namespace SaunaMock {
         mobile: true,
         googleCalendarId: '',
     }
+
+    export const sampleRequest = Sauna.mapToRequest(sampleResponse1)
 }
