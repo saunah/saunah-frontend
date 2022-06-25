@@ -41,14 +41,17 @@ describe('<Dropdown>', () => {
         expect(onClick).toBeCalledTimes(1)
         expect(onClick).toBeCalledWith('Item 1')
 
+        fireEvent.click(getDropdownButton())
         fireEvent.click(getDropdownItem(0, 1))
         expect(onClick).toBeCalledTimes(2)
         expect(onClick).toBeCalledWith('Item 2')
 
+        fireEvent.click(getDropdownButton())
         fireEvent.click(getDropdownItem(1, 0))
         expect(onClick).toBeCalledTimes(3)
         expect(onClick).toBeCalledWith('Item 3')
 
+        fireEvent.click(getDropdownButton())
         fireEvent.click(getDropdownItem(1, 1))
         expect(onClick).toBeCalledTimes(3)
     })
@@ -63,9 +66,9 @@ describe('<Dropdown>', () => {
                 <Outlet />
             </Wrapper>
         )
-        fireEvent.click(getDropdownButton())
 
         expect(queryTestRoute()).not.toBeInTheDocument()
+        fireEvent.click(getDropdownButton())
         fireEvent.click(getDropdownItem(0, 1))
         expect(getTestRoute()).toBeInTheDocument()
         // make sure that the mock fn was not called (route should be displayed instead of button)
@@ -73,6 +76,7 @@ describe('<Dropdown>', () => {
 
         fireEvent.click(screen.getByTestId('home-link'))
         expect(queryTestRoute()).not.toBeInTheDocument()
+        fireEvent.click(getDropdownButton())
         fireEvent.click(getDropdownItem(1, 1))
         expect(getTestRoute()).toBeInTheDocument()
     })
@@ -87,9 +91,9 @@ describe('<Dropdown>', () => {
                 <Outlet />
             </Wrapper>
         )
-        fireEvent.click(getDropdownButton())
 
         // Test that disabled items do nothing
+        fireEvent.click(getDropdownButton())
         fireEvent.click(getDropdownItem(0, 0))
         expect(onClick).toBeCalledTimes(0)
 
@@ -101,6 +105,7 @@ describe('<Dropdown>', () => {
         expect(onClick).toBeCalledTimes(1)
         expect(onClick).toBeCalledWith('Item 3')
 
+        fireEvent.click(getDropdownButton())
         fireEvent.click(getDropdownItem(0, 1))
         expect(getTestRoute()).toBeInTheDocument()
     })
