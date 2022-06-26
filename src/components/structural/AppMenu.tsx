@@ -15,9 +15,9 @@ const secondaryElementActiveTextColor = 'text-accent-200'
 function AppMenu(props: AppMenuProps) {
     return (
         <div className="p-4 w-full fixed top-0 left-0 z-50" data-testid="app-menu">
-            <div className="h-14 w-full bg-primary-100 rounded-3xl flex flex-row justify-center shrink-0 shadow-xl shadow-primary-900/[0.1]">
+            <div className="min-h-[3.5rem] w-full bg-primary-100 rounded-3xl flex flex-row justify-center shrink-0 shadow-xl shadow-primary-900/[0.1]">
                 <nav
-                    className="flex flex-row px-4 py-2 justify-start grow items-center space-x-2 overflow-x-scroll"
+                    className="flex flex-row px-4 py-2 justify-start grow items-center space-x-2 overflow-x-auto"
                     data-testid="app-menu-primary-items"
                 >
                     <PrimaryMenu {...props} />
